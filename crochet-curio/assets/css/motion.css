@@ -1,0 +1,267 @@
+/* ============================================================
+   Crochet Curio — motion layer
+
+   Two rules govern everything here:
+
+   1. Nothing is hidden by CSS alone. The `.js-motion` class is added
+      by motion.js, so if scripting fails every element is visible.
+   2. Every effect collapses under prefers-reduced-motion. Not
+      "slower" — off, with content in its final position.
+   ============================================================ */
+
+/* ---------- Timing tokens ---------- */
+:root {
+  --ease-out-soft: cubic-bezier(.22, .61, .36, 1);
+  --ease-spring:   cubic-bezier(.34, 1.36, .64, 1);
+  --dur-fast:   .25s;
+  --dur-mid:    .55s;
+  --dur-slow:   .85s;
+  --reveal-shift: 40px;
+}
+
+/* ============================================================
+   Scroll reveal
+   ============================================================ */
+.js-motion [data-reveal] {
+  opacity: 0;
+  transition:
+    opacity var(--dur-mid) var(--ease-out-soft),
+    transform var(--dur-slow) var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.js-motion [data-reveal="up"]    { transform: translateY(var(--reveal-shift)); }
+.js-motion [data-reveal="left"]  { transform: translateX(calc(var(--reveal-shift) * -1.6)); }
+.js-motion [data-reveal="right"] { transform: translateX(calc(var(--reveal-shift) * 1.6)); }
+.js-motion [data-reveal="zoom"]  { transform: scale(.94); }
+
+.js-motion [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* Once revealed, drop the hint so long pages stay cheap to paint */
+.js-motion [data-reveal].is-revealed { will-change: auto; }
+
+/* ============================================================
+   Hero entrance — runs on load rather than on scroll
+   ============================================================ */
+.js-motion .hero [data-enter] {
+  opacity: 0;
+  transform: translateX(-32px);
+  transition:
+    opacity var(--dur-mid) var(--ease-out-soft),
+    transform var(--dur-slow) var(--ease-out-soft);
+  transition-delay: var(--enter-delay, 0ms);
+}
+.js-motion .hero .hero__art[data-enter] {
+  transform: translateX(28px) scale(.96);
+}
+.js-motion .hero [data-enter].is-entered {
+  opacity: 1;
+  transform: none;
+}
+
+/* A slow drift on the hero artwork, so the page is never quite still */
+@media (prefers-reduced-motion: no-preference) {
+  .hero__art svg { animation: drift 14s var(--ease-out-soft) infinite alternate; }
+}
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(0, -10px, 0) scale(1.02); }
+}
+
+/* ============================================================
+   Flowing text ticker
+   Auto-moving content, so WCAG 2.2.2 requires a way to stop it.
+   The button below is that mechanism — it is not decorative.
+   ============================================================ */
+.ticker {
+  position: relative;
+  overflow: hidden;
+  background: var(--background-inverse);
+  color: var(--content-primary-inverse);
+  padding-block: var(--space-l);
+  border-radius: var(--radius-l);
+}
+
+.ticker__track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 32s linear infinite;
+}
+.ticker.is-paused .ticker__track { animation-play-state: paused; }
+
+.ticker__group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4xl);
+  padding-right: var(--space-4xl);
+  white-space: nowrap;
+  font-size: var(--heading-m-size);
+  line-height: var(--heading-m-line);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+}
+.ticker__group span { display: inline-flex; align-items: center; gap: var(--space-4xl); }
+.ticker__dot { color: var(--brand-accent-500); }
+
+@keyframes ticker-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+.ticker__toggle {
+  position: absolute;
+  top: 50%;
+  right: var(--space-l);
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-s) var(--space-l);
+  border: var(--stroke-width-xs) solid var(--border-inverse);
+  border-radius: var(--radius-pill);
+  background: var(--background-inverse);
+  color: var(--content-primary-inverse);
+  font-size: var(--text-m-size);
+  cursor: pointer;
+}
+.ticker__toggle:hover { background: var(--brand-700); }
+.ticker__toggle:focus-visible { outline-color: var(--primary-white); }
+
+/* Reduced motion: no scroll, no reason for a pause control */
+@media (prefers-reduced-motion: reduce) {
+  .ticker__track { animation: none; }
+  .ticker__toggle { display: none; }
+  .ticker__group { flex-wrap: wrap; white-space: normal; }
+}
+
+/* ============================================================
+   Shop grid — staggered reveal and a little lift
+   ============================================================ */
+.shop-card { transition: transform var(--dur-fast) var(--ease-out-soft); }
+@media (prefers-reduced-motion: no-preference) {
+  .shop-card:hover, .shop-card:focus-within { transform: translateY(-6px); }
+}
+
+/* The tile tint deepens fractionally on approach */
+.shop-card__media { transition: background-color var(--dur-mid) var(--ease-out-soft); }
+
+/* ============================================================
+   Buttons and interaction feedback
+   ============================================================ */
+@media (prefers-reduced-motion: no-preference) {
+  .btn { transition: background-color .18s ease, border-color .18s ease,
+                     color .18s ease, transform var(--dur-fast) var(--ease-spring); }
+  .btn:hover  { transform: translateY(-2px); }
+  .btn:active { transform: translateY(0); }
+}
+
+/* Add-to-basket confirmation pulse */
+@keyframes basket-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.28); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cart-count.is-bumped { animation: basket-pop .45s var(--ease-spring); }
+}
+
+/* Numbers in the summary tick over rather than snapping */
+.summary dd, .checkout-totals dd { transition: color var(--dur-fast) var(--ease-out-soft); }
+@keyframes flash-value {
+  from { color: var(--content-brand); }
+  to   { color: var(--content-primary); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .summary dd.is-updated { animation: flash-value .7s var(--ease-out-soft); }
+}
+
+/* ============================================================
+   Section headings — a rule that draws itself in
+   ============================================================ */
+.section-head h2, .page-head h1 { position: relative; }
+.js-motion .section-head h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  height: 3px;
+  width: 0;
+  background: var(--content-brand);
+  border-radius: var(--radius-pill);
+  transition: width var(--dur-slow) var(--ease-out-soft) 250ms;
+}
+.js-motion .section-head h2.is-underlined::after { width: 72px; }
+
+/* ============================================================
+   Steps — the numbered circles land one after another
+   ============================================================ */
+.js-motion .step__num {
+  transition: transform var(--dur-mid) var(--ease-spring),
+              background-color var(--dur-mid) var(--ease-out-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion .step[data-reveal] .step__num { transform: scale(.5) rotate(-25deg); }
+  .js-motion .step[data-reveal].is-revealed .step__num { transform: none; }
+}
+
+/* ============================================================
+   Back to top — appears once the page has been scrolled
+   ============================================================ */
+.to-top {
+  position: fixed;
+  right: var(--space-2xl);
+  bottom: var(--space-2xl);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  background: var(--background-primary);
+  color: var(--content-primary);
+  box-shadow: var(--shadow-l3);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity var(--dur-fast) var(--ease-out-soft),
+              transform var(--dur-fast) var(--ease-out-soft),
+              visibility var(--dur-fast);
+}
+.to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.to-top:hover { background: var(--background-hover); border-color: var(--border-primary); }
+
+@media (prefers-reduced-motion: reduce) {
+  .to-top { transition: none; transform: none; }
+}
+
+@media (max-width: 620px) {
+  .to-top { right: var(--space-l); bottom: var(--space-l); }
+  .ticker__group { font-size: var(--heading-s-size); line-height: var(--heading-s-line); }
+  .ticker__toggle { right: var(--space-s); }
+}
+
+/* ============================================================
+   The global off switch
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .js-motion [data-reveal],
+  .js-motion .hero [data-enter] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hero__art svg { animation: none; }
+  .shop-card, .btn { transition: none; }
+}

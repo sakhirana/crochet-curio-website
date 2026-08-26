@@ -20,11 +20,121 @@ Then open <http://localhost:4173>. No build step, no dependencies.
 
 | Path | What it holds |
 | --- | --- |
-| `index.html` | The whole site — hero, shop, story, process, newsletter, contact, footer |
+| `index.html` | Home — hero, shop grid, story, process, newsletter, contact |
+| `product-*.html` | One page per piece (6). **Generated — edit the catalogue, not these** |
+| `cart.html` | Basket: quantities, removal, running totals |
+| `checkout.html` | Delivery details, order summary, confirmation |
+| `build-products.js` | Product catalogue + page generator. `node build-products.js` |
 | `assets/css/tokens.css` | Every design token, translated 1:1 from Figma variables |
 | `assets/css/styles.css` | Layout and components, built only from those tokens |
+| `assets/css/shop.css` | Shop grid, product, basket and checkout |
 | `assets/js/site.js` | Mobile nav disclosure and accessible form validation |
+| `assets/js/shop.js` | Basket state and checkout flow |
+| `assets/js/catalogue.js` | Generated product data — do not edit by hand |
+| `assets/img/` | **Product photography goes here** — see below |
 | `serve.js` | Minimal static preview server |
+
+## Product photography
+
+All six photos are in `assets/img/` and loading (verified 200 OK, no 404s):
+
+| File | Photo |
+| --- | --- |
+| `Bluebell.png` | Blue + white checkerboard shoulder bag |
+| `Frosty.png` | Blue cardigan, white bobble clouds |
+| `dune-bikini.png` | Tan + black striped bikini set |
+| `Valentine.png` | Cream cardigan, red strawberries |
+| `Poppy.png` | Red + pink checkerboard bucket hat |
+| `rosewater-set.png` | Pink bikini top + mini skirt |
+
+**All six now have transparent backgrounds**, which makes the white tile
+essential rather than cosmetic — without it they would pick up whatever sits
+behind them, and on the shop section that is grey. The tile paints white under
+every image, with a hairline border so a white tile still reads as a card on a
+white page.
+
+The first image is `loading="eager" fetchpriority="high"` since it is above the
+fold; the rest are lazy.
+
+The basket resolves each image **by product slug from the catalogue**, not from
+the filename stored in `localStorage`. A basket saved before a photo was
+renamed still shows the right picture instead of a broken one.
+
+### Alt text
+
+Alt text exists for screen readers. That is its job here, and nothing about
+the layout depends on it.
+
+Every image carries a written description of what the piece actually looks
+like — colour, construction, how it is photographed — rather than a repeat of
+the product name. Someone hearing "eight raised red strawberries each topped by
+a green leaf — two on each front panel and two on each balloon sleeve" learns
+something the product title does not tell them.
+
+**Descriptions were checked against the photographs**, not written from the
+product names. Details that must stay true if a photo is swapped:
+
+- The tote is **sky blue and white**, not lime — the earlier alt text was wrong
+  after the reshoot and was corrected along with the tagline and body copy.
+- Both cardigans really do carry **eight** motifs, counted off the images: two
+  per front panel, two per sleeve.
+- The bucket hat is red on pink with a **flat-topped** crown, shot at an angle;
+  it is the only piece not photographed flat.
+
+An automated check confirms all 12 product images across the site have a
+substantive `alt`, and that no filename is referenced without existing on disk.
+
+**On hover, the browser draws its own native tooltip.** Each `<img>` has a
+`title` matching its `alt`, so the description appears in the plain OS tooltip
+style — small, off to the side, nothing painted over the photo. There is no
+custom tooltip element, no positioning script, and no CSS for it.
+
+One trade-off worth knowing: with both `alt` and `title` set to the same
+sentence, a few screen readers in verbose modes may read it twice. `alt` is
+what supplies the accessible name; `title` is only exposed as a description.
+Removing the `title` attributes is the one-line fix if that ever bothers you.
+
+## The Daisy Cardigan is gone
+
+Replaced by the **Gingham Bucket Hat** (₹2,200) — its own product page, its own
+copy and details, in the same grid slot. `product-daisy-cardigan.html` was
+deleted and every link across the home page, basket and checkout footers now
+points at `product-bucket-hat.html`. No references remain.
+
+## Shop and checkout
+
+**Shop grid** is deliberately uneven rather than a uniform 3-up: the bag runs
+as a wide feature, the Cloud cardigan as a tall portrait beside it, three
+square tiles below, and the Rosewater set as a full-width banner. Tiles
+alternate between the neutral and brand-accent backgrounds, and images lift
+slightly on hover and on keyboard focus (suppressed under
+`prefers-reduced-motion`).
+
+**Product pages** carry a description, a details list (materials, fit,
+dimensions, care, hours to make), size selection, quantity, and add-to-basket,
+plus previous/next links around the collection.
+
+**Sizes** are the three bands you asked for — `XS–S`, `M–L`, `XL–XXL` — as
+radio buttons styled as pills. Selection shows as fill *and* weight, never
+colour alone. The Checkerboard Bag is the exception: it is a bag, so it shows
+"One size" rather than a garment size band.
+
+**Basket** stacks the same piece in the same size instead of duplicating the
+line, keeps quantities between 1 and 10, and persists in `localStorage`. Every
+read is wrapped in `try/catch` so a private window or blocked site data still
+renders a working page.
+
+**Checkout** validates name, email, address, city and a 6-digit PIN, moves
+focus to the first invalid field, and announces failures through a live region.
+
+> **The checkout is a front-end demonstration.** Nothing is transmitted and no
+> payment is taken — the page says so plainly to anyone using it. Connect a
+> payment provider before accepting real orders.
+
+One thing to be aware of: the free-shipping threshold is ₹2,500 and the
+cheapest piece is ₹2,800, so shipping currently reads "Free" on every order.
+The ₹150 charge and the "spend X more" prompt work — they just never trigger.
+Raise the threshold or lower a price if you want that mechanic to do anything.
 
 ---
 
@@ -115,6 +225,48 @@ at every size tested — measured, not eyeballed:
 
 On mobile and tablet the artwork sits *below* the buttons, so the words are
 what you land on. On desktop it sits alongside.
+
+## Motion
+
+Files: `assets/css/motion.css`, `assets/js/motion.js`.
+
+| Effect | Where |
+| --- | --- |
+| Hero entrance — eyebrow, heading, lede, buttons slide in from the left in sequence; artwork drifts in from the right | Home, on load |
+| Slow ambient drift on the hero artwork | Home |
+| Scroll reveals — content fades and slides in as it enters view | Every page |
+| Directional reveals — story text from the left, its artwork from the right; product image from the left, details from the right | Story, product pages |
+| Staggered reveals — shop cards, process steps and footer columns arrive one after another | Home |
+| Process numbers scale and rotate into place | Home |
+| Flowing text ticker — a continuous scrolling band | Home, between shop and story |
+| Section headings draw a short sage underline | Every page |
+| Cards lift on hover and on keyboard focus; images scale gently | Shop grid |
+| Buttons lift on hover with a slight spring | Every page |
+| Basket count pops when it changes | Every page |
+| Summary figures flash sage when they update | Basket, checkout |
+| Back-to-top button appears after 600px of scroll | Every page |
+
+**Two rules govern all of it.**
+
+*Nothing is hidden by CSS alone.* The reveal styles only apply under a
+`.js-motion` class that JavaScript adds. If scripting fails, every element is
+visible and the page is fully usable — no blank sections.
+
+*Reduced motion means off, not slower.* Under `prefers-reduced-motion: reduce`
+the script adds nothing at all — no observers, no reveals, no ticker scroll —
+and the CSS forces final positions with `!important`. The ticker becomes a
+static wrapped list and its pause button is removed, since there is nothing
+left to pause.
+
+There is also a **safety net**: if the tab has been visible for 2.5 seconds and
+anything is still waiting to be revealed, it is shown regardless. This covers
+prerendered loads, background tabs, and browsers where IntersectionObserver
+misbehaves. Visitors whose observers work never reach it.
+
+**The ticker has a real pause button.** WCAG 2.2.2 requires a mechanism to stop
+content that moves automatically for more than five seconds. It is a genuine
+`aria-pressed` toggle at 97×44px that swaps between Pause and Play, and the
+ticker also pauses on hover unless you have explicitly pressed play.
 
 ## Accessibility
 

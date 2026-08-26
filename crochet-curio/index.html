@@ -10,6 +10,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/shop.css">
+<link rel="stylesheet" href="assets/css/motion.css">
 </head>
 <body>
 
@@ -51,6 +53,7 @@
         <li><a href="#story">Our story</a></li>
         <li><a href="#process">How it is made</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a class="cart-link" href="cart.html">Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 items</span></a></li>
       </ul>
     </nav>
   </div>
@@ -102,83 +105,89 @@
         <p class="muted">Six styles, restocked as they sell out.</p>
       </div>
 
-      <ul class="product-grid">
-
-        <li class="product-card">
-          <div class="product-card__media">
-            <svg viewBox="0 0 300 300" role="img" aria-label="Marigold Bucket Hat, worked in warm ochre shell stitch.">
-              <rect width="300" height="300" fill="#ffe6cc"/>
-              <g color="#cc6600" opacity="0.8"><rect width="300" height="300" fill="url(#stitch-shell)"/></g>
-            </svg>
+      <ul class="shop-grid">
+        <li class="shop-card shop-card--feature">
+          <div class="shop-card__media">
+            <span class="shop-card__badge">Best seller</span>
+            <img src="assets/img/Bluebell.png" alt="A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it." title="A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it." width="1000" height="1000" loading="eager" fetchpriority="high">
           </div>
-          <span class="badge">Best seller</span>
-          <h3><a href="#contact">Marigold Bucket Hat</a></h3>
-          <p class="muted">Organic cotton, wide brim, packs flat.</p>
-          <p class="product-card__meta"><span class="price">&#8377;2,400</span> <span class="muted">3 colours</span></p>
+          <h3><a href="product-checkerboard-bag.html">Checkerboard Shoulder Bag</a></h3>
+          <p class="shop-card__meta"><span class="price">&#8377;2,800</span> <span class="muted">One size</span></p>
         </li>
 
-        <li class="product-card">
-          <div class="product-card__media">
-            <svg viewBox="0 0 300 300" role="img" aria-label="Sage Stripe Bralette, worked in sage green banded stitch.">
-              <rect width="300" height="300" fill="#98a69b"/>
-              <g color="#203826" opacity="0.75"><rect width="300" height="300" fill="url(#stitch-chain)"/></g>
-            </svg>
+        <li class="shop-card shop-card--tall">
+          <div class="shop-card__media">
+            <img src="assets/img/Frosty.png" alt="A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." title="A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." width="1000" height="1000" loading="lazy">
           </div>
-          <h3><a href="#contact">Sage Stripe Bralette</a></h3>
-          <p class="muted">Cotton blend, adjustable ties, lined.</p>
-          <p class="product-card__meta"><span class="price">&#8377;2,900</span> <span class="muted">XS&ndash;XL</span></p>
+          <h3><a href="product-cloud-cardigan.html">Cloud Cropped Cardigan</a></h3>
+          <p class="shop-card__meta"><span class="price">&#8377;4,200</span> <span class="muted">XS–XXL</span></p>
         </li>
 
-        <li class="product-card">
-          <div class="product-card__media">
-            <svg viewBox="0 0 300 300" role="img" aria-label="Dishcloth Check Beanie in a soft grey and cream check.">
-              <rect width="300" height="300" fill="#e5e5e5"/>
-              <g color="#666666" opacity="0.8"><rect width="300" height="300" fill="url(#stitch-grid)"/></g>
-            </svg>
+        <li class="shop-card shop-card--normal">
+          <div class="shop-card__media">
+            <img src="assets/img/dune-bikini.png" alt="A two-piece crochet bikini in tan and black stripes: a triangle top with braided halter ties and matching tie-side bottoms with tasselled ends, laid flat." title="A two-piece crochet bikini in tan and black stripes: a triangle top with braided halter ties and matching tie-side bottoms with tasselled ends, laid flat." width="1000" height="1000" loading="lazy">
           </div>
-          <h3><a href="#contact">Dishcloth Check Beanie</a></h3>
-          <p class="muted">Merino wool, double-brim, holds shape.</p>
-          <p class="product-card__meta"><span class="price">&#8377;1,990</span> <span class="muted">One size</span></p>
+          <h3><a href="product-dune-bikini.html">Dune Stripe Bikini Set</a></h3>
+          <p class="shop-card__meta"><span class="price">&#8377;3,100</span> <span class="muted">XS–XXL</span></p>
         </li>
 
-        <li class="product-card">
-          <div class="product-card__media">
-            <svg viewBox="0 0 300 300" role="img" aria-label="Daisy Chain Tote in dusty pink with an open chain-stitch mesh.">
-              <rect width="300" height="300" fill="#d9a6ad"/>
-              <g color="#a6737a" opacity="0.9"><rect width="300" height="300" fill="url(#stitch-chain)"/></g>
-            </svg>
+        <li class="shop-card shop-card--normal">
+          <div class="shop-card__media">
+            <span class="shop-card__badge">New</span>
+            <img src="assets/img/Valentine.png" alt="A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." title="A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." width="1000" height="1000" loading="lazy">
           </div>
-          <span class="badge">New</span>
-          <h3><a href="#contact">Daisy Chain Tote</a></h3>
-          <p class="muted">Cotton twine, leather handles, lined base.</p>
-          <p class="product-card__meta"><span class="price">&#8377;3,300</span> <span class="muted">2 colours</span></p>
+          <h3><a href="product-strawberry-cardigan.html">Strawberry Cropped Cardigan</a></h3>
+          <p class="shop-card__meta"><span class="price">&#8377;4,400</span> <span class="muted">XS–XXL</span></p>
         </li>
 
-        <li class="product-card">
-          <div class="product-card__media">
-            <svg viewBox="0 0 300 300" role="img" aria-label="Cloudwash Neck Warmer in pale cream ribbing.">
-              <rect width="300" height="300" fill="#f2f2f2"/>
-              <g color="#b2b2b2" opacity="0.95"><rect width="300" height="300" fill="url(#stitch-shell)"/></g>
-            </svg>
+        <li class="shop-card shop-card--normal">
+          <div class="shop-card__media">
+            <img src="assets/img/Poppy.png" alt="A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle." title="A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle." width="1000" height="1000" loading="lazy">
           </div>
-          <h3><a href="#contact">Cloudwash Neck Warmer</a></h3>
-          <p class="muted">Alpaca blend, pull-on, no fastenings.</p>
-          <p class="product-card__meta"><span class="price">&#8377;1,750</span> <span class="muted">One size</span></p>
+          <h3><a href="product-bucket-hat.html">Gingham Bucket Hat</a></h3>
+          <p class="shop-card__meta"><span class="price">&#8377;2,200</span> <span class="muted">XS–XXL</span></p>
         </li>
 
-        <li class="product-card">
-          <div class="product-card__media">
-            <svg viewBox="0 0 300 300" role="img" aria-label="Pebble Crossbody Bag in deep sage with a dense grid stitch.">
-              <rect width="300" height="300" fill="#536b59"/>
-              <g color="#98a69b" opacity="0.9"><rect width="300" height="300" fill="url(#stitch-grid)"/></g>
-            </svg>
+        <li class="shop-card shop-card--banner">
+          <div class="shop-card__media">
+            <img src="assets/img/rosewater-set.png" alt="A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist." title="A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist." width="1000" height="1000" loading="lazy">
           </div>
-          <h3><a href="#contact">Pebble Crossbody Bag</a></h3>
-          <p class="muted">Waxed cotton, adjustable strap, zip top.</p>
-          <p class="product-card__meta"><span class="price">&#8377;2,800</span> <span class="muted">4 colours</span></p>
+          <h3><a href="product-rosewater-set.html">Rosewater Bikini &amp; Skirt Set</a></h3>
+          <p class="shop-card__meta"><span class="price">&#8377;3,800</span> <span class="muted">XS–XXL</span></p>
         </li>
-
       </ul>
+    </div>
+  </section>
+
+
+  <!-- ============ Flowing ticker ============ -->
+  <section class="section section--tight" aria-labelledby="ticker-title">
+    <div class="container">
+      <h2 id="ticker-title" class="visually-hidden">What we stand for</h2>
+      <div class="ticker">
+        <div class="ticker__track">
+        <div class="ticker__group">
+          <span>Hand-crocheted <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>Small batch <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>Made to order <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>One stitch at a time <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>Never mass produced <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>Made in our studio <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+        </div>
+        <div class="ticker__group" aria-hidden="true">
+          <span>Hand-crocheted <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>Small batch <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>Made to order <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>One stitch at a time <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>Never mass produced <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+          <span>Made in our studio <span class="ticker__dot" aria-hidden="true">&#10022;</span></span>
+        </div>
+        </div>
+        <button class="ticker__toggle" type="button" aria-pressed="false">
+          <span aria-hidden="true">&#10074;&#10074;</span>
+          <span data-label>Pause</span><span class="visually-hidden"> the scrolling text</span>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -353,10 +362,12 @@
       <nav aria-labelledby="footer-shop">
         <h2 id="footer-shop">Shop</h2>
         <ul>
-          <li><a href="#shop">Hats</a></li>
-          <li><a href="#shop">Bags</a></li>
-          <li><a href="#shop">Knitwear</a></li>
-          <li><a href="#shop">All pieces</a></li>
+          <li><a href="product-checkerboard-bag.html">Checkerboard Shoulder Bag</a></li>
+          <li><a href="product-cloud-cardigan.html">Cloud Cropped Cardigan</a></li>
+          <li><a href="product-dune-bikini.html">Dune Stripe Bikini Set</a></li>
+          <li><a href="product-strawberry-cardigan.html">Strawberry Cropped Cardigan</a></li>
+          <li><a href="product-bucket-hat.html">Gingham Bucket Hat</a></li>
+          <li><a href="product-rosewater-set.html">Rosewater Bikini &amp; Skirt Set</a></li>
         </ul>
       </nav>
 
@@ -387,6 +398,9 @@
   </div>
 </footer>
 
+<script src="assets/js/catalogue.js"></script>
 <script src="assets/js/site.js"></script>
+<script src="assets/js/shop.js"></script>
+<script src="assets/js/motion.js"></script>
 </body>
 </html>
