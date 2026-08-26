@@ -1,0 +1,636 @@
+/* ============================================================
+   Crochet Curio — Site styles
+   Built entirely on the tokens in tokens.css.
+   Target: WCAG 2.2 Level AA.
+   ============================================================ */
+
+/* Sticky header height — announcement bar + nav bar. Used by the hero to
+   size itself against the visible viewport, and by scroll-margin-top. */
+:root { --header-h: 106px; }
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body, h1, h2, h3, h4, p, figure, blockquote, ul, ol, dl, dd { margin: 0; }
+ul[class], ol[class] { list-style: none; padding: 0; }
+img, svg { max-width: 100%; display: block; }
+button, input, textarea, select { font: inherit; color: inherit; }
+
+/* Smooth scroll only when reduced motion has not been requested */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* ---------- Base ---------- */
+body {
+  font-family: var(--family-poppins);
+  font-size: var(--text-l-size);
+  line-height: var(--text-l-line);
+  font-weight: var(--text-regular);
+  color: var(--content-secondary);
+  background: var(--background-primary);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  color: var(--content-primary);
+  text-wrap: balance;
+}
+
+p { text-wrap: pretty; }
+
+/* ---------- Focus: 2px ring in Border/Focus, offset outside the control,
+     exactly as the Figma Button component specifies (2.4.7, 1.4.11) ---------- */
+:focus-visible {
+  outline: var(--stroke-width-m) solid var(--border-focus);
+  outline-offset: var(--space-xs);
+  border-radius: var(--radius-xs);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+/* 2.4.11 Focus Not Obscured — keep anchor targets clear of the sticky header */
+[id] { scroll-margin-top: calc(var(--header-h) + var(--space-xl)); }
+
+/* ---------- Skip link (2.4.1) ---------- */
+.skip-link {
+  position: absolute;
+  left: var(--space-l);
+  top: var(--space-l);
+  z-index: 100;
+  transform: translateY(-200%);
+  background: var(--background-brand);
+  color: var(--content-primary-inverse);
+  padding: var(--space-m) var(--space-xl);
+  border-radius: var(--radius-xs);
+  text-decoration: none;
+  font-size: var(--text-m-size);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* ---------- Layout ---------- */
+.container {
+  width: 100%;
+  max-width: calc(var(--layout-max) + (var(--layout-gutter) * 2));
+  margin-inline: auto;
+  padding-inline: var(--layout-gutter);
+}
+
+.section { padding-block: var(--layout-section); }
+.section--tight { padding-block: var(--space-7xl); }
+.section--tinted { background: var(--background-hover); }
+
+.stack > * + * { margin-top: var(--space-xl); }
+
+/* Visually hidden but available to screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Type utilities ---------- */
+.eyebrow {
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--content-brand);
+  font-weight: var(--text-semibold);
+  margin-bottom: var(--space-l);
+}
+.lede {
+  font-size: var(--text-xl-size);
+  line-height: var(--text-xl-line);
+  color: var(--content-secondary);
+  max-width: 60ch;
+}
+.muted { color: var(--content-tertiary); }
+
+/* ---------- Buttons — translated from the Figma Button component ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  padding: var(--space-m) var(--space-xl);
+  min-height: 48px;          /* Size=L */
+  min-width: 48px;           /* 2.5.8 Target Size — well past the 24px floor */
+  font-size: var(--text-l-size);
+  line-height: var(--text-l-line);
+  border-radius: var(--radius-xs);
+  border: var(--stroke-width-xs) solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+@media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
+
+.btn--primary {
+  background: var(--background-brand);
+  color: var(--content-primary-inverse);
+}
+.btn--primary:hover  { background: var(--background-brand-hover); }
+.btn--primary:active { background: var(--background-brand-pressed); }
+
+.btn--secondary {
+  background: var(--background-primary);
+  color: var(--content-secondary);
+  border-color: var(--border-secondary);
+}
+.btn--secondary:hover  { background: var(--background-hover);   border-color: var(--border-primary); }
+.btn--secondary:active { background: var(--background-pressed); border-color: var(--border-primary); }
+
+.btn--small {
+  min-height: 32px;
+  padding: var(--space-xs) var(--space-s);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+}
+
+/* ---------- Text links ---------- */
+.link {
+  color: var(--content-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.link:hover   { color: var(--content-link-hover); }
+.link:active  { color: var(--content-link-pressed); }
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--background-primary);
+  border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+}
+.announcement {
+  background: var(--background-brand);
+  color: var(--content-primary-inverse);
+  text-align: center;
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  padding: var(--space-s) var(--space-l);
+}
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  min-height: 72px;
+  position: relative;
+}
+.brand {
+  font-size: var(--heading-s-size);
+  line-height: var(--heading-s-line);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  color: var(--content-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand:hover { color: var(--content-brand); }
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xl);
+  margin: 0;
+  list-style: none;
+  padding: 0;
+}
+.nav-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;               /* 2.5.8 Target Size */
+  padding-inline: var(--space-xs);
+  color: var(--content-secondary);
+  text-decoration: none;
+  font-size: var(--text-l-size);
+}
+.nav-list a:hover { color: var(--content-brand); text-decoration: underline; text-underline-offset: 4px; }
+.nav-list a[aria-current="page"] { color: var(--content-primary); font-weight: var(--text-semibold); }
+
+.nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-s);
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-s) var(--space-m);
+  background: var(--background-primary);
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  border-radius: var(--radius-xs);
+  color: var(--content-secondary);
+  font-size: var(--text-m-size);
+  cursor: pointer;
+}
+.nav-toggle:hover { background: var(--background-hover); }
+
+/* ---------- Hero ----------
+   The heading, lede and both buttons must all be visible on landing, so the
+   hero is sized against the viewport minus the header rather than padded
+   down the page. svh (not vh) keeps this honest on mobile, where browser
+   chrome eats into the viewport.
+--------------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-4xl) var(--space-7xl);
+}
+.hero > .container { width: 100%; }
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: var(--space-8xl);
+  /* start, not center — the words sit at the top of the fold rather than
+     drifting to the middle of a tall image */
+  align-items: start;
+}
+.hero h1 {
+  font-size: var(--heading-3xl-size);
+  line-height: var(--heading-3xl-line);
+  margin-bottom: var(--space-xl);
+}
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-l);
+  margin-top: var(--space-2xl);
+}
+.hero__art {
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background: var(--background-accent-subtle);
+  aspect-ratio: 4 / 5;
+  /* never let the artwork alone drive the hero past one screen */
+  max-height: calc(100svh - var(--header-h) - var(--space-9xl));
+  margin-inline-start: auto;
+}
+.hero__art svg { width: 100%; height: 100%; }
+
+/* ---------- Section heads ---------- */
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  margin-bottom: var(--space-6xl);
+}
+.section-head h2 {
+  font-size: var(--heading-xl-size);
+  line-height: var(--heading-xl-line);
+}
+
+/* ---------- Product grid ---------- */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6xl) var(--space-2xl);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.product-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.product-card__media {
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  margin-bottom: var(--space-l);
+}
+.product-card__media svg { width: 100%; height: 100%; }
+.product-card h3 {
+  font-size: var(--heading-s-size);
+  line-height: var(--heading-s-line);
+  margin-bottom: var(--space-xs);
+}
+/* The whole card is clickable, but the link text is the product name,
+   so the accessible name is meaningful on its own (2.4.4) */
+.product-card h3 a { color: inherit; text-decoration: none; }
+.product-card h3 a::after { content: ""; position: absolute; inset: 0; }
+.product-card h3 a:hover { color: var(--content-brand); text-decoration: underline; text-underline-offset: 4px; }
+.product-card__meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-m);
+  margin-top: auto;
+  padding-top: var(--space-s);
+}
+.price { font-weight: var(--text-semibold); color: var(--content-primary); }
+.badge {
+  display: inline-block;
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
+  padding: var(--space-xs) var(--space-s);
+  border-radius: var(--radius-pill);
+  background: var(--background-accent-subtle);
+  color: var(--content-primary);   /* 8.2:1 on the accent — see README */
+  margin-bottom: var(--space-s);
+  align-self: flex-start;
+}
+
+/* ---------- Story / split ---------- */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8xl);
+  align-items: center;
+}
+.split h2 {
+  font-size: var(--heading-xl-size);
+  line-height: var(--heading-xl-line);
+  margin-bottom: var(--space-xl);
+}
+.split__art {
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+.split__art svg { width: 100%; height: 100%; }
+
+/* ---------- Process steps ---------- */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4xl);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: step;
+}
+.step { counter-increment: step; }
+.step__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-pill);
+  border: var(--stroke-width-m) solid var(--content-brand);
+  color: var(--content-brand);
+  font-weight: var(--text-semibold);
+  margin-bottom: var(--space-l);
+}
+.step__num::before { content: counter(step); }
+.step h3 {
+  font-size: var(--heading-s-size);
+  line-height: var(--heading-s-line);
+  margin-bottom: var(--space-s);
+}
+
+/* ---------- Newsletter ---------- */
+.newsletter {
+  background: var(--background-brand);
+  color: var(--content-primary-inverse);
+  border-radius: var(--radius-l);
+  padding: var(--space-8xl) var(--space-7xl);
+}
+.newsletter h2 {
+  color: var(--content-primary-inverse);
+  font-size: var(--heading-l-size);
+  line-height: var(--heading-l-line);
+  margin-bottom: var(--space-m);
+}
+.newsletter p { color: var(--content-secondary-inverse); max-width: 52ch; }
+/* On the dark brand panel the blue focus ring would drop to 1.6:1,
+   so the ring switches to white (8.5:1) — 1.4.11 */
+.newsletter :focus-visible { outline-color: var(--primary-white); }
+
+/* ---------- Forms ---------- */
+.field { display: flex; flex-direction: column; gap: var(--space-s); }
+.field label { font-size: var(--text-m-size); font-weight: var(--text-semibold); }
+.field .hint { font-size: var(--text-m-size); color: var(--content-tertiary); }
+.field input, .field textarea {
+  min-height: 48px;
+  padding: var(--space-m) var(--space-l);
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  border-radius: var(--radius-xs);
+  background: var(--background-primary);
+  color: var(--content-primary);
+  width: 100%;
+}
+.field textarea { min-height: 140px; resize: vertical; }
+.field input::placeholder, .field textarea::placeholder { color: var(--content-tertiary); }
+.field .error {
+  font-size: var(--text-m-size);
+  color: var(--content-negative);
+  font-weight: var(--text-semibold);
+}
+.field:not(.is-invalid) .error { display: none; }
+.field.is-invalid input, .field.is-invalid textarea {
+  border-color: var(--content-negative);
+  border-width: var(--stroke-width-m);
+}
+
+.newsletter-form {
+  display: flex;
+  gap: var(--space-l);
+  align-items: flex-start;
+  margin-top: var(--space-2xl);
+  flex-wrap: wrap;
+}
+.newsletter-form .field { flex: 1 1 280px; }
+.newsletter-form label { color: var(--content-primary-inverse); }
+.newsletter-form .hint { color: var(--content-tertiary-inverse); }
+.newsletter-form .btn {
+  background: var(--primary-white);
+  color: var(--content-primary);
+  margin-top: 28px; /* aligns the control with the input, below its label */
+}
+.newsletter-form .btn:hover { background: var(--neutral-100); }
+.newsletter-form .error { color: #ffd7d7; }
+
+.form-status {
+  margin-top: var(--space-l);
+  font-size: var(--text-m-size);
+  font-weight: var(--text-semibold);
+}
+
+/* ---------- Contact ---------- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8xl);
+  align-items: start;
+}
+.contact-form { display: grid; gap: var(--space-xl); }
+.contact-list { display: grid; gap: var(--space-xl); }
+.contact-list dt { font-weight: var(--text-semibold); color: var(--content-primary); }
+.contact-list dd { margin: 0; color: var(--content-secondary); }
+/* 2.5.8 Target Size — this link stands alone rather than sitting inside a
+   sentence, so it does not get the inline exception. Give it real height. */
+.contact-list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: var(--stroke-width-xs) solid var(--neutral-100);
+  padding-block: var(--space-7xl) var(--space-4xl);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: var(--space-4xl);
+}
+.footer-grid h2 {
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--content-tertiary);
+  font-weight: var(--text-semibold);
+  margin-bottom: var(--space-l);
+}
+.footer-grid ul { display: grid; gap: var(--space-s); }
+.footer-grid a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  color: var(--content-secondary);
+  text-decoration: none;
+  font-size: var(--text-m-size);
+}
+.footer-grid a:hover { color: var(--content-brand); text-decoration: underline; text-underline-offset: 3px; }
+.footer-bottom {
+  margin-top: var(--space-6xl);
+  padding-top: var(--space-xl);
+  border-top: var(--stroke-width-xs) solid var(--neutral-100);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-l);
+  justify-content: space-between;
+  font-size: var(--text-m-size);
+  color: var(--content-tertiary);
+}
+
+/* ============================================================
+   Responsive — Figma breakpoints: Desktop/Tablet 1440, Mobile 393.
+   1.4.10 Reflow: no horizontal scrolling down to 320px.
+   ============================================================ */
+
+/* ---- Small desktop / tablet landscape ---- */
+@media (max-width: 1100px) {
+  :root { --layout-gutter: var(--space-6xl); --layout-section: var(--space-8xl); }
+  .hero__grid, .split, .contact-grid { gap: var(--space-6xl); }
+  .hero h1 { font-size: var(--heading-2xl-size); line-height: var(--heading-2xl-line); }
+  .product-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4xl); }
+}
+
+/* ---- Tablet portrait (Figma tablet frame ~768) ----
+   Nav collapses to the disclosure here; the hero goes single column with the
+   words first, so heading, lede and buttons are what you land on.
+------------------------------------------------------------------ */
+@media (max-width: 900px) {
+  :root { --layout-gutter: var(--space-2xl); --layout-section: var(--space-7xl); }
+
+  .nav-toggle { display: inline-flex; }
+  .nav-list {
+    display: none;
+    position: absolute;
+    left: 0; right: 0;
+    top: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--background-primary);
+    border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+    box-shadow: var(--shadow-l2);
+    padding: var(--space-s) var(--layout-gutter) var(--space-xl);
+  }
+  .nav-list.is-open { display: flex; }
+  .nav-list a {
+    min-height: 48px;
+    border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+  }
+
+  /* Text first, artwork after — the opposite of the desktop visual order */
+  .hero {
+    min-height: 0;
+    padding-block: var(--space-4xl) var(--space-7xl);
+  }
+  .hero__grid, .split, .contact-grid { grid-template-columns: 1fr; }
+  .hero__grid { gap: var(--space-4xl); }
+  .hero__art {
+    order: 1;
+    aspect-ratio: 16 / 10;
+    max-height: 46svh;
+    margin-inline: 0;
+    width: 100%;
+  }
+  .hero h1 { font-size: var(--heading-xl-size); line-height: var(--heading-xl-line); }
+
+  .section-head h2, .split h2 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
+  .section-head { margin-bottom: var(--space-4xl); }
+  .split__art { max-height: 60svh; }
+  .steps { grid-template-columns: repeat(3, 1fr); gap: var(--space-2xl); }
+  .newsletter { padding: var(--space-6xl) var(--space-4xl); }
+  .newsletter-form .btn { margin-top: 0; }
+}
+
+/* ---- Mobile (Figma mobile frame 393) ---- */
+@media (max-width: 620px) {
+  :root { --layout-gutter: var(--space-xl); --layout-section: var(--space-6xl); }
+
+  .announcement { font-size: var(--text-s-size); line-height: var(--text-s-line); }
+
+  .hero { padding-block: var(--space-2xl) var(--space-6xl); }
+  .hero__grid { gap: var(--space-2xl); }
+  .hero h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
+  .hero__art { aspect-ratio: 3 / 2; max-height: 38svh; }
+  .lede { font-size: var(--text-l-size); line-height: var(--text-l-line); }
+  .hero__actions { margin-top: var(--space-xl); gap: var(--space-m); }
+  .hero__actions .btn { width: 100%; }
+
+  .product-grid { grid-template-columns: 1fr; gap: var(--space-4xl); }
+  .steps { grid-template-columns: 1fr; gap: var(--space-2xl); }
+  .footer-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
+  .newsletter { padding: var(--space-4xl) var(--space-xl); }
+  .newsletter-form .btn { width: 100%; }
+  .newsletter-form .field { flex-basis: 100%; }
+  .footer-bottom { margin-top: var(--space-4xl); }
+}
+
+/* ---- Short viewports (landscape phones, small laptops, 4:3 tablets) ----
+   Height, not width, is the constraint here: tighten the hero's vertical
+   spend so the call to action stays on the first screen. */
+@media (max-height: 720px) {
+  .hero { padding-block: var(--space-l) var(--space-6xl); }
+  .hero h1 {
+    font-size: var(--heading-m-size);
+    line-height: var(--heading-m-line);
+    margin-bottom: var(--space-m);
+  }
+  .hero .lede { font-size: var(--text-l-size); line-height: var(--text-l-line); }
+  .hero .eyebrow { margin-bottom: var(--space-s); }
+  .hero__actions { margin-top: var(--space-l); }
+  .hero__art { max-height: 56svh; }
+  .announcement { padding-block: var(--space-xs); }
+}
+
+/* Landscape phones: two short labels sit side by side rather than stacking */
+@media (max-height: 560px) and (orientation: landscape) {
+  .hero__grid { grid-template-columns: 1fr; }
+  .hero__art { display: none; }   /* decorative only — nothing is lost */
+  .hero__actions .btn { width: auto; }
+}
+
+/* ---------- Print ---------- */
+@media print {
+  .site-header, .newsletter, .nav-toggle, .skip-link { display: none; }
+  body { color: #000; }
+}

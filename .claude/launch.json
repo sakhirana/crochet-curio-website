@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "crochet-curio",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["crochet-curio/serve.js", "4173"],
+      "port": 4173
+    }
+  ]
+}

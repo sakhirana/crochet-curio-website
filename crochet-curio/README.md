@@ -1,0 +1,182 @@
+# Crochet Curio — website
+
+A small-business site built directly on the **Crochet Curio Design System**
+Figma file, targeting **WCAG 2.2 Level AA**.
+
+Source of truth: `figma.com/design/uz4VizxZpPffThiHds891s/Crochet-Curio-Design-System`
+Tokens come from the *FurGo design tokens* library attached to that file.
+
+---
+
+## Run it
+
+```bash
+node crochet-curio/serve.js
+```
+
+Then open <http://localhost:4173>. No build step, no dependencies.
+
+## Files
+
+| Path | What it holds |
+| --- | --- |
+| `index.html` | The whole site — hero, shop, story, process, newsletter, contact, footer |
+| `assets/css/tokens.css` | Every design token, translated 1:1 from Figma variables |
+| `assets/css/styles.css` | Layout and components, built only from those tokens |
+| `assets/js/site.js` | Mobile nav disclosure and accessible form validation |
+| `serve.js` | Minimal static preview server |
+
+---
+
+## What came from the design system
+
+Nothing here is invented. Values were read out of the Figma file with
+`get_variable_defs` and `get_design_context`.
+
+**Colour** — the full semantic set: `Content/*` (primary `#1a1a1a`,
+secondary `#333333`, tertiary `#666666`, inverse, disabled, brand, link),
+`Background/*`, `Border/*`, `Surface/*`, `Overlay/*`, plus the primitives
+behind them. Brand is sage `#536b59` with `#3a5240` / `#203826` / `#071f0d`
+for button rest, hover and pressed. Brand accent is dusty pink `#d9a6ad`.
+
+**Typography** — Poppins. Headings XS→5XL (16/24 up to 72/80, tracking −1px,
+weight 600) and body XS→XL (10/14 up to 20/28, tracking 0). Sizes are
+expressed in `rem` so browser text scaling works (1.4.4).
+
+**Spacing** — the `Space/*` scale on a 4px grid. Confirmed from the file:
+XS 4, S 8, M 12, L 16, XL 24, 2XL 32, 5XL 56. The MCP API would not return
+2XS, 3XL, 4XL and 6XL–9XL; those follow the confirmed progression and are
+marked `(inferred)` in `tokens.css`. **Worth a glance** — if the real values
+differ, correcting those seven lines updates the whole site.
+
+**Radius / stroke / elevation** — Radius XS 4, L 16, Pill 999 (S and M
+inferred). Stroke XS 1px, M 2px. Shadows L1–L6 exactly as specified.
+
+**Buttons** — translated from your Button component: 4 types × 2 sizes
+(L 48px, S 32px) × 4 states. The focus state matters most: your component
+puts a **2px `Border/Focus` ring outside the control**, and the CSS does the
+same via `outline` + `outline-offset`.
+
+---
+
+## Reference site
+
+You asked me to take cues from itsmemorialday.com without copying it. What I
+measured there and carried over is the **whitespace discipline**, not the
+layout:
+
+- content capped around 1045px → here `--layout-max: 1200px`
+- ~91px side gutters → here 96px (`Space/8XL`), stepping to 64/32/24 as the
+  viewport narrows
+- very tall sections → here 120px (`Space/9XL`) of vertical rhythm
+- white ground, imagery doing the work, a three-or-four item nav
+
+The palette, type, structure and voice are your design system's, not theirs.
+
+---
+
+## Currency
+
+Prices are in **Indian rupees** (`&#8377;`). The pound amounts were not swapped
+symbol-for-symbol — `₹38` for a hat would not read as a real price — so they
+were converted to plausible INR: ₹1,750–₹3,300, with free shipping over ₹2,500.
+**These are placeholders. Set your real prices.**
+
+The announcement bar now reads "Free shipping across India"; change it if you
+ship elsewhere.
+
+## Responsive behaviour
+
+Breakpoints follow the Figma frames (Desktop/Tablet 1440, Mobile 393):
+
+| Width | Layout |
+| --- | --- |
+| > 1100px | 2-column hero, 3-up products, full nav |
+| ≤ 1100px | 2-up products, tighter gutters |
+| ≤ 900px | Nav collapses to a menu button; hero stacks **text first, artwork after** |
+| ≤ 620px | Single-column products and footer, full-width buttons |
+
+There is also a **height-based** rule. Short viewports — landscape phones,
+600px laptops, 4:3 tablets — get a tighter hero so the buttons stay on the
+first screen regardless of width. Below 560px tall in landscape the decorative
+hero artwork is hidden; nothing informational is lost.
+
+**Above the fold.** The heading, lede and both buttons are visible on landing
+at every size tested — measured, not eyeballed:
+
+| Viewport | Headroom below the buttons |
+| --- | --- |
+| 1440 × 900 | 326px |
+| 1024 × 600 | 218px |
+| 768 × 1024 | 546px |
+| 393 × 852 | 288px |
+| 375 × 667 | 179px |
+| 320 × 568 | 56px |
+
+On mobile and tablet the artwork sits *below* the buttons, so the words are
+what you land on. On desktop it sits alongside.
+
+## Accessibility
+
+Target: WCAG 2.2 AA. What was actually verified, and how:
+
+**Contrast** — every pairing computed against the WCAG formula. Body text
+12.6:1, headings 17.4:1, muted text 5.7:1, sage eyebrow 5.8:1, primary button
+label 8.5:1, links 7.5:1, input borders 3.4:1, focus ring 5.4:1.
+
+Two pairings in your palette fail, and both are designed around rather than
+silently altered:
+
+1. **Brand accent `#d9a6ad` as text on white is 2.1:1** — far below the 4.5:1
+   floor. It is therefore never used as a text colour, only as a background,
+   always carrying `#1a1a1a` text (8.3:1) — see the badges and hero panel.
+2. **The blue focus ring on the dark brand panel is 1.6:1.** Inside the
+   newsletter block the ring switches to white (8.5:1). One CSS rule,
+   `.newsletter :focus-visible`.
+
+Your tokens were not changed. If you want brand accent usable as text, it
+needs a darker variant in Figma — `#a6737a` (`Brand accent/700`) still only
+reaches 3.6:1, so it would need to go darker still.
+
+**WCAG 2.2's new criteria specifically:**
+
+- **2.4.11 Focus Not Obscured** — the header is sticky, so every `[id]` carries
+  `scroll-margin-top: 120px`; the mobile menu closes on navigation so it cannot
+  cover the thing you just moved to.
+- **2.5.7 Dragging Movements** — there is no drag anywhere. No carousel, no
+  slider, no reorder.
+- **2.5.8 Target Size** — measured in the browser: smallest interactive target
+  is 32×32, buttons are 48px tall, nav links 44px. The standalone email link
+  was 22px and was given `min-height: 24px`.
+- **3.2.6 Consistent Help** — Contact sits in the same place in the header and
+  the footer throughout.
+- **3.3.7 Redundant Entry** — nothing is asked for twice; `autocomplete` is set
+  on name and email.
+- **3.3.8 Accessible Authentication** — no accounts, no login, no puzzles.
+
+**Also verified in the browser:** one `h1` with no heading levels skipped
+(18 headings), all 4 form controls labelled, all 8 illustrations carry
+`role="img"` with a description, no duplicate `id`s, four landmarks, no
+console errors, and **no horizontal scrolling at 320px** (1.4.10) — checked by
+measuring every element against the viewport.
+
+Forms announce errors through a `role="status"` live region, prefix them with
+"Error:", set `aria-invalid`, and move focus to the first invalid field. Error
+state is never colour alone — there is always text.
+
+`prefers-reduced-motion` disables smooth scrolling and button transitions.
+
+---
+
+## Before this goes live
+
+1. **Swap in real photography.** The illustrations are CSS/SVG stitch patterns
+   standing in for product shots. They are deliberate placeholders, not
+   pretend photos. Replace them with `<img>` and write real `alt` text.
+2. **Wire the forms.** Both are client-side only — validation runs, nothing is
+   sent. Point them at your mail service or form endpoint.
+3. **Replace the placeholder details** — `hello@crochetcurio.example`, the
+   prices, the studio hours, the 2026 copyright.
+4. **Confirm the seven inferred spacing values** against Figma.
+5. **Test with a real screen reader.** Automated checks catch structure, not
+   whether the page actually makes sense read aloud.

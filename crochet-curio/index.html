@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crochet Curio — Hand-crocheted hats, bags and knitwear</title>
+<meta name="description" content="Crochet Curio makes small-batch, hand-crocheted hats, bags and knitwear in natural fibres. Made slowly, made to last.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============ Shared SVG motifs (crochet stitch patterns) ============ -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <pattern id="stitch-shell" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M0 30 Q10 10 20 30 Q30 10 40 30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M-20 10 Q-10 -10 0 10 Q10 -10 20 10 Q30 -10 40 10 Q50 -10 60 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </pattern>
+    <pattern id="stitch-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <circle cx="8" cy="8" r="5" fill="none" stroke="currentColor" stroke-width="2"/>
+      <circle cx="24" cy="24" r="5" fill="none" stroke="currentColor" stroke-width="2"/>
+    </pattern>
+    <pattern id="stitch-chain" width="36" height="24" patternUnits="userSpaceOnUse">
+      <ellipse cx="18" cy="12" rx="14" ry="7" fill="none" stroke="currentColor" stroke-width="2"/>
+      <ellipse cx="0"  cy="12" rx="14" ry="7" fill="none" stroke="currentColor" stroke-width="2"/>
+      <ellipse cx="36" cy="12" rx="14" ry="7" fill="none" stroke="currentColor" stroke-width="2"/>
+    </pattern>
+  </defs>
+</svg>
+
+<!-- ============ Header ============ -->
+<header class="site-header">
+  <p class="announcement">Free shipping across India on orders over &#8377;2,500 &middot; Every piece made by hand</p>
+
+  <div class="container">
+    <nav class="nav-bar" aria-label="Primary">
+      <a class="brand" href="#main">Crochet&nbsp;Curio</a>
+
+      <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="navList">
+        <span aria-hidden="true">&#9776;</span> Menu
+      </button>
+
+      <ul class="nav-list" id="navList">
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#story">Our story</a></li>
+        <li><a href="#process">How it is made</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero__grid">
+        <div>
+          <p class="eyebrow">Small batch &middot; Made by hand</p>
+          <h1 id="hero-title">Slow-made crochet for people who notice the details.</h1>
+          <p class="lede">
+            Every hat, bag and bralette in the Curio is worked stitch by stitch in
+            natural cotton and merino. No factory runs, no filler &mdash; just a few
+            good pieces at a time.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#shop">Shop the collection</a>
+            <a class="btn btn--secondary" href="#story">Read our story</a>
+          </div>
+        </div>
+
+        <div class="hero__art">
+          <svg viewBox="0 0 400 500" role="img" aria-label="Illustration of layered crochet shell stitches in sage green on a dusty pink ground.">
+            <rect width="400" height="500" fill="#d9a6ad"/>
+            <g color="#3a5240" opacity="0.85">
+              <rect width="400" height="500" fill="url(#stitch-shell)"/>
+            </g>
+            <g color="#536b59" opacity="0.5">
+              <rect y="260" width="400" height="240" fill="url(#stitch-chain)"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Shop ============ -->
+  <section class="section section--tinted" id="shop" aria-labelledby="shop-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">The collection</p>
+          <h2 id="shop-title">This season&rsquo;s pieces</h2>
+        </div>
+        <p class="muted">Six styles, restocked as they sell out.</p>
+      </div>
+
+      <ul class="product-grid">
+
+        <li class="product-card">
+          <div class="product-card__media">
+            <svg viewBox="0 0 300 300" role="img" aria-label="Marigold Bucket Hat, worked in warm ochre shell stitch.">
+              <rect width="300" height="300" fill="#ffe6cc"/>
+              <g color="#cc6600" opacity="0.8"><rect width="300" height="300" fill="url(#stitch-shell)"/></g>
+            </svg>
+          </div>
+          <span class="badge">Best seller</span>
+          <h3><a href="#contact">Marigold Bucket Hat</a></h3>
+          <p class="muted">Organic cotton, wide brim, packs flat.</p>
+          <p class="product-card__meta"><span class="price">&#8377;2,400</span> <span class="muted">3 colours</span></p>
+        </li>
+
+        <li class="product-card">
+          <div class="product-card__media">
+            <svg viewBox="0 0 300 300" role="img" aria-label="Sage Stripe Bralette, worked in sage green banded stitch.">
+              <rect width="300" height="300" fill="#98a69b"/>
+              <g color="#203826" opacity="0.75"><rect width="300" height="300" fill="url(#stitch-chain)"/></g>
+            </svg>
+          </div>
+          <h3><a href="#contact">Sage Stripe Bralette</a></h3>
+          <p class="muted">Cotton blend, adjustable ties, lined.</p>
+          <p class="product-card__meta"><span class="price">&#8377;2,900</span> <span class="muted">XS&ndash;XL</span></p>
+        </li>
+
+        <li class="product-card">
+          <div class="product-card__media">
+            <svg viewBox="0 0 300 300" role="img" aria-label="Dishcloth Check Beanie in a soft grey and cream check.">
+              <rect width="300" height="300" fill="#e5e5e5"/>
+              <g color="#666666" opacity="0.8"><rect width="300" height="300" fill="url(#stitch-grid)"/></g>
+            </svg>
+          </div>
+          <h3><a href="#contact">Dishcloth Check Beanie</a></h3>
+          <p class="muted">Merino wool, double-brim, holds shape.</p>
+          <p class="product-card__meta"><span class="price">&#8377;1,990</span> <span class="muted">One size</span></p>
+        </li>
+
+        <li class="product-card">
+          <div class="product-card__media">
+            <svg viewBox="0 0 300 300" role="img" aria-label="Daisy Chain Tote in dusty pink with an open chain-stitch mesh.">
+              <rect width="300" height="300" fill="#d9a6ad"/>
+              <g color="#a6737a" opacity="0.9"><rect width="300" height="300" fill="url(#stitch-chain)"/></g>
+            </svg>
+          </div>
+          <span class="badge">New</span>
+          <h3><a href="#contact">Daisy Chain Tote</a></h3>
+          <p class="muted">Cotton twine, leather handles, lined base.</p>
+          <p class="product-card__meta"><span class="price">&#8377;3,300</span> <span class="muted">2 colours</span></p>
+        </li>
+
+        <li class="product-card">
+          <div class="product-card__media">
+            <svg viewBox="0 0 300 300" role="img" aria-label="Cloudwash Neck Warmer in pale cream ribbing.">
+              <rect width="300" height="300" fill="#f2f2f2"/>
+              <g color="#b2b2b2" opacity="0.95"><rect width="300" height="300" fill="url(#stitch-shell)"/></g>
+            </svg>
+          </div>
+          <h3><a href="#contact">Cloudwash Neck Warmer</a></h3>
+          <p class="muted">Alpaca blend, pull-on, no fastenings.</p>
+          <p class="product-card__meta"><span class="price">&#8377;1,750</span> <span class="muted">One size</span></p>
+        </li>
+
+        <li class="product-card">
+          <div class="product-card__media">
+            <svg viewBox="0 0 300 300" role="img" aria-label="Pebble Crossbody Bag in deep sage with a dense grid stitch.">
+              <rect width="300" height="300" fill="#536b59"/>
+              <g color="#98a69b" opacity="0.9"><rect width="300" height="300" fill="url(#stitch-grid)"/></g>
+            </svg>
+          </div>
+          <h3><a href="#contact">Pebble Crossbody Bag</a></h3>
+          <p class="muted">Waxed cotton, adjustable strap, zip top.</p>
+          <p class="product-card__meta"><span class="price">&#8377;2,800</span> <span class="muted">4 colours</span></p>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ Story ============ -->
+  <section class="section" id="story" aria-labelledby="story-title">
+    <div class="container">
+      <div class="split">
+        <div>
+          <p class="eyebrow">Our story</p>
+          <h2 id="story-title">It started with one very stubborn hat.</h2>
+          <div class="stack">
+            <p>
+              Crochet Curio began at a kitchen table in 2021, with a half-finished
+              bucket hat and a lot of unpicking. What was meant to be a winter
+              project turned into a waiting list, and the waiting list turned into
+              this small studio.
+            </p>
+            <p>
+              We still work the same way: one maker, one piece at a time, in yarn
+              we would happily wear ourselves. Nothing is mass produced, and
+              nothing is rushed &mdash; a bag takes about nine hours, a bralette
+              closer to five.
+            </p>
+            <p>
+              If a stitch is wrong, it comes out. That is the whole business model.
+            </p>
+          </div>
+        </div>
+
+        <div class="split__art">
+          <svg viewBox="0 0 400 400" role="img" aria-label="Detail of an open crochet mesh in sage green over a cream ground.">
+            <rect width="400" height="400" fill="#f2f2f2"/>
+            <g color="#536b59" opacity="0.85"><rect width="400" height="400" fill="url(#stitch-grid)"/></g>
+            <g color="#d9a6ad" opacity="0.9"><rect y="200" width="400" height="200" fill="url(#stitch-shell)"/></g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Process ============ -->
+  <section class="section section--tinted" id="process" aria-labelledby="process-title">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">How it is made</p>
+          <h2 id="process-title">Three steps, no shortcuts</h2>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li class="step">
+          <p class="step__num" aria-hidden="true"></p>
+          <h3>Yarn is chosen</h3>
+          <p>Undyed cotton, British merino and alpaca, bought in small lots from
+             two suppliers we have used since the beginning.</p>
+        </li>
+        <li class="step">
+          <p class="step__num" aria-hidden="true"></p>
+          <h3>The piece is worked</h3>
+          <p>Every stitch by hand, start to finish, by one maker. No panels are
+             outsourced and no seams are machine-joined.</p>
+        </li>
+        <li class="step">
+          <p class="step__num" aria-hidden="true"></p>
+          <h3>It is blocked and checked</h3>
+          <p>Washed, pinned, dried flat, then checked against the original sample
+             before it is wrapped and sent.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Newsletter ============ -->
+  <section class="section" aria-labelledby="news-title">
+    <div class="container">
+      <div class="newsletter">
+        <h2 id="news-title">Know when a restock lands</h2>
+        <p>
+          Pieces sell out in small numbers and come back slowly. One email when
+          something new is listed &mdash; nothing else.
+        </p>
+
+        <form class="newsletter-form" id="newsletterForm" novalidate>
+          <div class="field" id="emailField">
+            <label for="newsletterEmail">Email address</label>
+            <input type="email" id="newsletterEmail" name="email"
+                   autocomplete="email" placeholder="you@example.com"
+                   aria-describedby="newsletterHint newsletterError">
+            <p class="hint" id="newsletterHint">We send about one email a month. Unsubscribe any time.</p>
+            <p class="error" id="newsletterError"></p>
+          </div>
+          <button class="btn" type="submit">Join the list</button>
+        </form>
+
+        <p class="form-status" id="newsletterStatus" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Contact ============ -->
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="eyebrow">Get in touch</p>
+          <h2 id="contact-title">Commissions, sizing, or just a question</h2>
+          <p class="lede" style="margin-bottom: var(--space-2xl)">
+            Custom colours and sizes are welcome. Tell us what you have in mind and
+            we will come back within two working days.
+          </p>
+
+          <dl class="contact-list">
+            <div>
+              <dt>Email</dt>
+              <dd><a class="link" href="mailto:hello@crochetcurio.example">hello@crochetcurio.example</a></dd>
+            </div>
+            <div>
+              <dt>Studio hours</dt>
+              <dd>Tuesday to Saturday, 10am &ndash; 5pm</dd>
+            </div>
+            <div>
+              <dt>Returns</dt>
+              <dd>30 days on unworn pieces. Commissions are final sale.</dd>
+            </div>
+          </dl>
+        </div>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div class="field" id="nameField">
+            <label for="contactName">Your name</label>
+            <input type="text" id="contactName" name="name" autocomplete="name"
+                   aria-describedby="nameError">
+            <p class="error" id="nameError"></p>
+          </div>
+
+          <div class="field" id="contactEmailField">
+            <label for="contactEmail">Email address</label>
+            <input type="email" id="contactEmail" name="email" autocomplete="email"
+                   aria-describedby="contactEmailError">
+            <p class="error" id="contactEmailError"></p>
+          </div>
+
+          <div class="field" id="messageField">
+            <label for="contactMessage">What can we help with?</label>
+            <textarea id="contactMessage" name="message"
+                      aria-describedby="messageHint messageError"></textarea>
+            <p class="hint" id="messageHint">Include sizing or colour preferences if you have them.</p>
+            <p class="error" id="messageError"></p>
+          </div>
+
+          <button class="btn btn--primary" type="submit">Send message</button>
+          <p class="form-status" id="contactStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ Footer ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="brand" style="margin-bottom: var(--space-m)">Crochet&nbsp;Curio</p>
+        <p class="muted" style="font-size: var(--text-m-size); max-width: 32ch">
+          Hand-crocheted hats, bags and knitwear. Made slowly in small batches.
+        </p>
+      </div>
+
+      <nav aria-labelledby="footer-shop">
+        <h2 id="footer-shop">Shop</h2>
+        <ul>
+          <li><a href="#shop">Hats</a></li>
+          <li><a href="#shop">Bags</a></li>
+          <li><a href="#shop">Knitwear</a></li>
+          <li><a href="#shop">All pieces</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="footer-help">
+        <h2 id="footer-help">Help</h2>
+        <ul>
+          <li><a href="#contact">Contact us</a></li>
+          <li><a href="#contact">Size guide</a></li>
+          <li><a href="#contact">Care and washing</a></li>
+          <li><a href="#contact">Returns</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="footer-studio">
+        <h2 id="footer-studio">Studio</h2>
+        <ul>
+          <li><a href="#story">Our story</a></li>
+          <li><a href="#process">How it is made</a></li>
+          <li><a href="#contact">Commissions</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Crochet Curio. All rights reserved.</p>
+      <p>Built on the Crochet Curio design system.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/site.js"></script>
+</body>
+</html>

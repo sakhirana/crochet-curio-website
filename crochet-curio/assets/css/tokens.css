@@ -1,0 +1,150 @@
+/* ============================================================
+   Crochet Curio — Design Tokens
+   Generated from Figma: "Crochet Curio Design System"
+   File key: uz4VizxZpPffThiHds891s
+   Token source: FurGo design tokens library
+
+   Every value below is read from the Figma file. Values marked
+   (inferred) were not directly readable through the MCP API and
+   follow the confirmed scale's own progression — see README.md.
+   ============================================================ */
+
+:root {
+  /* ---------- Primitives: Neutral ---------- */
+  --neutral-900: #1a1a1a;
+  --neutral-800: #333333;
+  --neutral-600: #666666;
+  --neutral-300: #b2b2b2;
+  --neutral-100: #e5e5e5;
+  --primary-white: #ffffff;
+
+  /* ---------- Primitives: Brand ---------- */
+  --brand-100: #98a69b;
+  --brand-500: #536b59;
+  --brand-600: #3a5240;
+  --brand-700: #203826;
+  --brand-800: #071f0d;
+
+  /* ---------- Primitives: Brand accent ---------- */
+  --brand-accent-500: #d9a6ad;
+  --brand-accent-600: #bf8c93;
+  --brand-accent-700: #a6737a;
+
+  /* ---------- Primitives: Status ---------- */
+  --blue-500:   #3355ff;
+  --blue-600:   #2944cc;
+  --blue-700:   #1f3399;
+  --orange-500: #ff8000;
+  --orange-600: #cc6600;
+  --red-500:    #e50000;
+  --red-600:    #b70000;
+  --green-500:  #009933;
+  --green-600:  #007a29;
+
+  /* ---------- Semantic: Content ---------- */
+  --content-primary:           var(--neutral-900);
+  --content-secondary:         var(--neutral-800);
+  --content-tertiary:          var(--neutral-600);
+  --content-primary-inverse:   var(--primary-white);
+  --content-secondary-inverse: var(--neutral-100);
+  --content-tertiary-inverse:  var(--neutral-300);
+  --content-disabled:          var(--neutral-300);
+  --content-brand:             var(--brand-500);
+  --content-brand-accent:      var(--brand-accent-500);
+  --content-link:              var(--blue-600);
+  --content-link-hover:        var(--blue-700);
+  --content-link-pressed:      var(--blue-700);
+  --content-negative:          var(--red-600);
+  --content-positive:          var(--green-600);
+
+  /* ---------- Semantic: Background ---------- */
+  --background-primary:        var(--primary-white);
+  --background-hover:          #f2f2f2;
+  --background-pressed:        var(--neutral-100);
+  --background-disabled:       #f2f2f2;
+  --background-inverse:        var(--neutral-900);
+  --background-brand:          var(--brand-600);
+  --background-brand-hover:    var(--brand-700);
+  --background-brand-pressed:  var(--brand-800);
+  --background-accent-subtle:  var(--brand-accent-500);
+  --background-negative-subtle:#facccc;
+  --background-positive-subtle:#ccebd6;
+
+  /* ---------- Semantic: Border ---------- */
+  --border-primary:   var(--neutral-600);
+  --border-secondary: #8c8c8c;
+  --border-tertiary:  #8c8c8c;
+  --border-disabled:  #cccccc;
+  --border-inverse:   var(--primary-white);
+  --border-focus:     var(--blue-500);
+  --border-mono:      var(--neutral-900);
+
+  /* ---------- Stroke widths ---------- */
+  --stroke-width-xs: 1px;
+  --stroke-width-m:  2px;
+
+  /* ---------- Radius ---------- */
+  --radius-xs:   4px;
+  --radius-s:    8px;  /* (inferred) */
+  --radius-m:    12px; /* (inferred) */
+  --radius-l:    16px;
+  --radius-pill: 999px;
+
+  /* ---------- Spacing (4px base grid) ---------- */
+  --space-2xs: 2px;   /* (inferred) */
+  --space-xs:  4px;
+  --space-s:   8px;
+  --space-m:   12px;
+  --space-l:   16px;
+  --space-xl:  24px;
+  --space-2xl: 32px;
+  --space-3xl: 40px;  /* (inferred) */
+  --space-4xl: 48px;  /* (inferred) */
+  --space-5xl: 56px;
+  --space-6xl: 64px;  /* (inferred) */
+  --space-7xl: 80px;  /* (inferred) */
+  --space-8xl: 96px;  /* (inferred) */
+  --space-9xl: 120px; /* (inferred) */
+
+  /* ---------- Typography family ---------- */
+  --family-poppins: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  /* ---------- Heading scale (letter-spacing -1px, weight 600) ---------- */
+  --heading-5xl-size: 4.5rem;   --heading-5xl-line: 5rem;    /* 72 / 80 */
+  --heading-4xl-size: 4rem;     --heading-4xl-line: 4.5rem;  /* 64 / 72 */
+  --heading-3xl-size: 3.5rem;   --heading-3xl-line: 4rem;    /* 56 / 64 */
+  --heading-2xl-size: 3rem;     --heading-2xl-line: 3.5rem;  /* 48 / 56 */
+  --heading-xl-size:  2.5rem;   --heading-xl-line:  3rem;    /* 40 / 48 */
+  --heading-l-size:   2rem;     --heading-l-line:   2.5rem;  /* 32 / 40 */
+  --heading-m-size:   1.5rem;   --heading-m-line:   2rem;    /* 24 / 32 */
+  --heading-s-size:   1.25rem;  --heading-s-line:   1.75rem; /* 20 / 28 */
+  --heading-xs-size:  1rem;     --heading-xs-line:  1.5rem;  /* 16 / 24 */
+  --heading-tracking: -1px;
+  --heading-weight:   600;
+
+  /* ---------- Body scale (letter-spacing 0) ---------- */
+  --text-xl-size: 1.25rem;  --text-xl-line: 1.75rem;  /* 20 / 28 */
+  --text-l-size:  1rem;     --text-l-line:  1.5rem;   /* 16 / 24 */
+  --text-m-size:  0.875rem; --text-m-line:  1.25rem;  /* 14 / 20 */
+  --text-s-size:  0.75rem;  --text-s-line:  1rem;     /* 12 / 16 */
+  --text-xs-size: 0.625rem; --text-xs-line: 0.875rem; /* 10 / 14 */
+  --text-regular: 400;
+  --text-semibold: 600;
+
+  /* ---------- Elevation ---------- */
+  --shadow-l1: 0 0 2px  rgba(0,0,0,.08), 0 2px  4px  rgba(0,0,0,.08);
+  --shadow-l2: 0 0 4px  rgba(0,0,0,.08), 0 4px  8px  rgba(0,0,0,.10);
+  --shadow-l3: 0 0 6px  rgba(0,0,0,.08), 0 8px  16px rgba(0,0,0,.10);
+  --shadow-l4: 0 0 8px  rgba(0,0,0,.08), 0 10px 20px rgba(0,0,0,.10);
+  --shadow-l5: 0 0 10px rgba(0,0,0,.08), 0 12px 24px rgba(0,0,0,.10);
+  --shadow-l6: 0 0 12px rgba(0,0,0,.08), 0 16px 32px rgba(0,0,0,.10);
+
+  /* ---------- Overlay ---------- */
+  --overlay-50:         rgba(0,0,0,.5);
+  --overlay-50-inverse: rgba(255,255,255,.5);
+
+  /* ---------- Layout (Figma frames: Desktop/Tablet 1440, Mobile 393) ---------- */
+  --layout-max:     1200px;
+  --layout-gutter:  var(--space-8xl); /* 96px — echoes the reference site's generous margins */
+  --layout-section: var(--space-9xl); /* 120px vertical rhythm */
+}
