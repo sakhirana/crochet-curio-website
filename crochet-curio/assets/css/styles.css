@@ -45,8 +45,8 @@ p { text-wrap: pretty; }
      exactly as the Figma Button component specifies (2.4.7, 1.4.11) ---------- */
 :focus-visible {
   outline: var(--stroke-width-m) solid var(--border-focus);
-  outline-offset: var(--space-xs);
-  border-radius: var(--radius-xs);
+  /* The Figma focus ring sits 2px clear of the control, not 4px */
+  outline-offset: var(--stroke-width-m);
 }
 :focus:not(:focus-visible) { outline: none; }
 
@@ -63,7 +63,6 @@ p { text-wrap: pretty; }
   background: var(--background-brand);
   color: var(--content-primary-inverse);
   padding: var(--space-m) var(--space-xl);
-  border-radius: var(--radius-xs);
   text-decoration: none;
   font-size: var(--text-m-size);
 }
@@ -111,18 +110,33 @@ p { text-wrap: pretty; }
 }
 .muted { color: var(--content-tertiary); }
 
-/* ---------- Buttons — translated from the Figma Button component ---------- */
+/* ---------- Buttons — the Figma "Button" component set ----------
+   Read from the design file (page Button, 53:7343): Size L/S, Type Primary /
+   Secondary / Tertiary / Tertiary mono, states Default / Hover / Pressed /
+   Focus. Two things worth naming because they are easy to get wrong:
+
+   • No corner radius. The component is square on every variant.
+   • The label is Regular (400), not Semibold, at Text/L on size L.
+
+   Padding is the frame's 12px plus the Label node's own 4px inline padding,
+   so a size-L button is 48px tall and its text sits 16px from each edge. */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--space-s);
-  padding: var(--space-m) var(--space-xl);
+  /* The 1px border is on every variant so the four types stay the same size;
+     the padding is pulled in by that 1px so the box still measures 48px, the
+     height the component is drawn at in Figma. */
+  padding: calc(var(--space-m) - var(--stroke-width-xs))
+           calc(var(--space-m) + var(--space-xs) - var(--stroke-width-xs));
+  /* min-height, not height: fixed heights clip the label under user text
+     spacing or at 200% zoom (1.4.12, 1.4.4) */
   min-height: 48px;          /* Size=L */
   min-width: 48px;           /* 2.5.8 Target Size — well past the 24px floor */
   font-size: var(--text-l-size);
   line-height: var(--text-l-line);
-  border-radius: var(--radius-xs);
+  font-weight: var(--text-regular);
   border: var(--stroke-width-xs) solid transparent;
   text-decoration: none;
   cursor: pointer;
@@ -130,6 +144,7 @@ p { text-wrap: pretty; }
 }
 @media (prefers-reduced-motion: reduce) { .btn { transition: none; } }
 
+/* Type=Primary */
 .btn--primary {
   background: var(--background-brand);
   color: var(--content-primary-inverse);
@@ -137,19 +152,54 @@ p { text-wrap: pretty; }
 .btn--primary:hover  { background: var(--background-brand-hover); }
 .btn--primary:active { background: var(--background-brand-pressed); }
 
+/* Type=Secondary — the label darkens to Content/Primary on hover and press */
 .btn--secondary {
   background: var(--background-primary);
   color: var(--content-secondary);
   border-color: var(--border-secondary);
 }
-.btn--secondary:hover  { background: var(--background-hover);   border-color: var(--border-primary); }
-.btn--secondary:active { background: var(--background-pressed); border-color: var(--border-primary); }
+.btn--secondary:hover  { background: var(--background-hover);   border-color: var(--border-primary); color: var(--content-primary); }
+.btn--secondary:active { background: var(--background-pressed); border-color: var(--border-primary); color: var(--content-primary); }
 
+/* Type=Tertiary — link-coloured, no fill until it is interacted with */
+.btn--tertiary {
+  background: var(--background-primary);
+  color: var(--content-link);
+}
+.btn--tertiary:hover  { background: var(--background-hover);   color: var(--content-link-hover); }
+.btn--tertiary:active { background: var(--background-pressed); color: var(--content-link-pressed); }
+
+/* Type=Tertiary mono */
+.btn--tertiary-mono {
+  background: var(--background-primary);
+  color: var(--content-secondary);
+}
+.btn--tertiary-mono:hover  { background: var(--background-hover);   color: var(--content-primary); }
+.btn--tertiary-mono:active { background: var(--background-pressed); color: var(--content-primary); }
+
+/* Size=S */
 .btn--small {
   min-height: 32px;
-  padding: var(--space-xs) var(--space-s);
+  padding: calc(var(--space-xs) - var(--stroke-width-xs))
+           calc(var(--space-s) + var(--space-xs) - var(--stroke-width-xs));
   font-size: var(--text-m-size);
   line-height: var(--text-m-line);
+}
+
+/* The component set has no disabled variant, but the tokens for one exist and
+   the shop disables the buy button once a pattern is owned — see README. */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  background: var(--background-disabled);
+  border-color: var(--border-disabled);
+  color: var(--content-disabled);
+  cursor: not-allowed;
+}
+.btn:disabled:hover,
+.btn[aria-disabled="true"]:hover {
+  background: var(--background-disabled);
+  border-color: var(--border-disabled);
+  color: var(--content-disabled);
 }
 
 /* ---------- Text links ---------- */
@@ -226,12 +276,11 @@ p { text-wrap: pretty; }
   padding: var(--space-s) var(--space-m);
   background: var(--background-primary);
   border: var(--stroke-width-xs) solid var(--border-secondary);
-  border-radius: var(--radius-xs);
   color: var(--content-secondary);
   font-size: var(--text-m-size);
   cursor: pointer;
 }
-.nav-toggle:hover { background: var(--background-hover); }
+.nav-toggle:hover { background: var(--background-hover); border-color: var(--border-primary); color: var(--content-primary); }
 
 /* ---------- Hero ----------
    The heading, lede and both buttons must all be visible on landing, so the
@@ -246,16 +295,18 @@ p { text-wrap: pretty; }
 
 .hero__grid {
   display: grid;
-  grid-template-columns: 1.05fr .95fr;
+  /* one column since the artwork came out — capped so the heading keeps a
+     readable measure instead of running the full container width */
+  grid-template-columns: minmax(0, 52rem);
   gap: var(--space-8xl);
-  /* start, not center — the words sit at the top of the fold rather than
-     drifting to the middle of a tall image */
-  align-items: start;
 }
 .hero h1 {
   font-size: var(--heading-3xl-size);
   line-height: var(--heading-3xl-line);
   margin-bottom: var(--space-xl);
+  /* even up the two lines rather than leaving a stub — ignored where
+     unsupported, which just falls back to the normal greedy break */
+  text-wrap: balance;
 }
 .hero__actions {
   display: flex;
@@ -263,17 +314,6 @@ p { text-wrap: pretty; }
   gap: var(--space-l);
   margin-top: var(--space-2xl);
 }
-.hero__art {
-  border-radius: var(--radius-l);
-  overflow: hidden;
-  background: var(--background-accent-subtle);
-  aspect-ratio: 4 / 5;
-  /* never let the artwork alone drive the hero past one screen */
-  max-height: calc(100svh - var(--header-h) - var(--space-9xl));
-  margin-inline-start: auto;
-}
-.hero__art svg { width: 100%; height: 100%; }
-
 /* ---------- Section heads ---------- */
 .section-head {
   display: flex;
@@ -411,11 +451,10 @@ p { text-wrap: pretty; }
 .field { display: flex; flex-direction: column; gap: var(--space-s); }
 .field label { font-size: var(--text-m-size); font-weight: var(--text-semibold); }
 .field .hint { font-size: var(--text-m-size); color: var(--content-tertiary); }
-.field input, .field textarea {
+.field input, .field textarea, .field select {
   min-height: 48px;
   padding: var(--space-m) var(--space-l);
   border: var(--stroke-width-xs) solid var(--border-secondary);
-  border-radius: var(--radius-xs);
   background: var(--background-primary);
   color: var(--content-primary);
   width: 100%;
@@ -558,20 +597,12 @@ p { text-wrap: pretty; }
     border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
   }
 
-  /* Text first, artwork after — the opposite of the desktop visual order */
   .hero {
     min-height: 0;
     padding-block: var(--space-4xl) var(--space-7xl);
   }
   .hero__grid, .split, .contact-grid { grid-template-columns: 1fr; }
   .hero__grid { gap: var(--space-4xl); }
-  .hero__art {
-    order: 1;
-    aspect-ratio: 16 / 10;
-    max-height: 46svh;
-    margin-inline: 0;
-    width: 100%;
-  }
   .hero h1 { font-size: var(--heading-xl-size); line-height: var(--heading-xl-line); }
 
   .section-head h2, .split h2 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
@@ -591,7 +622,6 @@ p { text-wrap: pretty; }
   .hero { padding-block: var(--space-2xl) var(--space-6xl); }
   .hero__grid { gap: var(--space-2xl); }
   .hero h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
-  .hero__art { aspect-ratio: 3 / 2; max-height: 38svh; }
   .lede { font-size: var(--text-l-size); line-height: var(--text-l-line); }
   .hero__actions { margin-top: var(--space-xl); gap: var(--space-m); }
   .hero__actions .btn { width: 100%; }
@@ -618,14 +648,11 @@ p { text-wrap: pretty; }
   .hero .lede { font-size: var(--text-l-size); line-height: var(--text-l-line); }
   .hero .eyebrow { margin-bottom: var(--space-s); }
   .hero__actions { margin-top: var(--space-l); }
-  .hero__art { max-height: 56svh; }
   .announcement { padding-block: var(--space-xs); }
 }
 
 /* Landscape phones: two short labels sit side by side rather than stacking */
 @media (max-height: 560px) and (orientation: landscape) {
-  .hero__grid { grid-template-columns: 1fr; }
-  .hero__art { display: none; }   /* decorative only — nothing is lost */
   .hero__actions .btn { width: auto; }
 }
 
@@ -634,3 +661,45 @@ p { text-wrap: pretty; }
   .site-header, .newsletter, .nav-toggle, .skip-link { display: none; }
   body { color: #000; }
 }
+
+/* ---------- Full-bleed hero banner ----------
+   Sits outside .container so it spans the viewport edge to edge, with the
+   copy laid over the photograph rather than beneath it. */
+.hero-banner {
+  position: relative;
+  isolation: isolate;
+  background: #E8CACE;
+  /* The band's established proportions, expressed as a floor rather than a
+     ratio: the copy sets the height wherever it needs more room than the
+     photograph's shape gives it (narrow viewports, mostly), and the
+     photograph stretches to cover whatever height that turns out to be. */
+  min-height: calc(100vw * 793 / 1983);
+}
+
+/* Photograph fills the band; only the copy is in flow. */
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-banner .hero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  min-height: inherit;
+  padding-block: var(--space-3xl);
+}
+.hero-banner .hero .eyebrow { color: var(--content-brand); }
+.hero-banner .hero h1      { color: var(--content-brand); }
+.hero-banner .hero .lede   { color: var(--content-primary); }
+.hero-banner .hero__grid   { grid-template-columns: minmax(0, 38rem); justify-content: center; text-align: center; }
+.hero-banner .hero__actions { justify-content: center; }
+/* Border/Focus is 1.6:1 against the scrim, so the ring turns inverse here for
+   the same reason it does on the newsletter panel — 1.4.11 */
+.hero-banner :focus-visible { outline-color: var(--primary-white); }
+

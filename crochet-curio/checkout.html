@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Checkout — Crochet Curio</title>
-<meta name="description" content="Enter your delivery details to complete your Crochet Curio order.">
+<title>Get your patterns — Crochet Curio</title>
+<meta name="description" content="Unlock your Crochet Curio pattern PDFs. Digital download — no address, no postage, no waiting.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -18,7 +18,7 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site-header">
-  <p class="announcement">Free shipping across India on orders over &#8377;2,500 &middot; Every piece made by hand</p>
+  <p class="announcement">Instant PDF download &middot; Written rows, charts and step photos &middot; Yours to keep</p>
 
   <div class="container">
     <nav class="nav-bar" aria-label="Primary">
@@ -29,11 +29,12 @@
       </button>
 
       <ul class="nav-list" id="navList">
-        <li><a href="index.html#shop">Shop</a></li>
+        <li><a href="index.html#patterns">Patterns</a></li>
         <li><a href="index.html#story">Our story</a></li>
-        <li><a href="index.html#process">How it is made</a></li>
+        <li><a href="index.html#process">How it works</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-        <li><a class="cart-link" href="cart.html">Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 items</span></a></li>
+        <li><a href="library.html">My patterns</a></li>
+        <li><a class="cart-link" href="cart.html">Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
   </div>
@@ -46,29 +47,41 @@
       <ol>
         <li><a href="index.html">Home</a></li>
         <li><a href="cart.html">Basket</a></li>
-        <li><span aria-current="page">Checkout</span></li>
+        <li><span aria-current="page">Get your patterns</span></li>
       </ol>
     </nav>
 
     <div class="page-head">
-      <h1>Checkout</h1>
-      <p class="muted">Two working days to make, three to five to arrive.</p>
+      <h1>Get your patterns</h1>
+      <p class="muted">
+        Two fields, then the files are yours. No delivery address &mdash; nothing
+        physical is being sent.
+      </p>
     </div>
 
     <p class="demo-note">
-      <strong>Demonstration checkout.</strong> Nothing is transmitted and no
-      payment is taken &mdash; this is the front-end flow only. Connect a payment
-      provider before accepting real orders.
+      <strong>Demonstration checkout.</strong> Nothing is transmitted and no payment
+      is taken &mdash; this is the front-end flow only, and the download hands over a
+      stand-in text file rather than the studio's real PDF. Connect a payment
+      provider and a file store before selling patterns for money.
     </p>
 
     <div class="order-placed" id="orderPlaced" hidden>
-      <h2>Order placed</h2>
+      <p class="kicker">Pattern unlocked</p>
+      <h2>Happy making</h2>
       <p>
-        Thank you. <span data-count>0 pieces</span> totalling
-        <strong data-total>&#8377;0</strong> &mdash; a confirmation is on its way to
-        the email address you gave us.
+        <span data-count>0 patterns</span> unlocked for
+        <strong data-total>&#8377;0</strong> &mdash; order <strong data-ref>CC-00000</strong>.
+        The files are in your library now, and a copy of this receipt is on its way
+        to the email address you gave us.
       </p>
-      <p><a class="btn btn--primary" href="index.html#shop">Back to the collection</a></p>
+
+      <ul class="unlocked-list" data-unlocked></ul>
+
+      <p class="order-placed__actions">
+        <a class="btn btn--primary" href="library.html">Open My patterns</a>
+        <a class="btn btn--secondary" href="index.html#patterns">Find another project</a>
+      </p>
     </div>
 
     <div class="checkout-layout">
@@ -76,65 +89,55 @@
       <form class="checkout-form" id="checkoutForm" novalidate>
 
         <fieldset>
-          <legend>Your details</legend>
+          <legend>Where your patterns go</legend>
 
           <div class="field" id="coField-name">
             <label for="co-name">Full name</label>
-            <input type="text" id="co-name" name="name" autocomplete="name" aria-describedby="coError-name">
+            <input type="text" id="co-name" name="name" autocomplete="name" aria-describedby="coHint-name coError-name">
+            <p class="hint" id="coHint-name">Goes on the pattern licence inside the file.</p>
             <p class="error" id="coError-name"></p>
           </div>
 
           <div class="field" id="coField-email">
             <label for="co-email">Email address</label>
             <input type="email" id="co-email" name="email" autocomplete="email" aria-describedby="coHint-email coError-email">
-            <p class="hint" id="coHint-email">Your order confirmation goes here.</p>
+            <p class="hint" id="coHint-email">Your download link and receipt go here. Nothing is posted.</p>
             <p class="error" id="coError-email"></p>
-          </div>
-
-          <div class="field" id="coField-phone">
-            <label for="co-phone">Phone number <span class="muted">(optional)</span></label>
-            <input type="tel" id="co-phone" name="phone" autocomplete="tel" aria-describedby="coHint-phone">
-            <p class="hint" id="coHint-phone">Only used if the courier cannot find your address.</p>
           </div>
         </fieldset>
 
         <fieldset>
-          <legend>Delivery address</legend>
+          <legend>Before you download</legend>
 
-          <div class="field" id="coField-address">
-            <label for="co-address">Street address</label>
-            <input type="text" id="co-address" name="address" autocomplete="street-address" aria-describedby="coError-address">
-            <p class="error" id="coError-address"></p>
-          </div>
-
-          <div class="field-row">
-            <div class="field" id="coField-city">
-              <label for="co-city">Town or city</label>
-              <input type="text" id="co-city" name="city" autocomplete="address-level2" aria-describedby="coError-city">
-              <p class="error" id="coError-city"></p>
-            </div>
-
-            <div class="field" id="coField-pin">
-              <label for="co-pin">PIN code</label>
-              <input type="text" id="co-pin" name="pin" inputmode="numeric" autocomplete="postal-code" maxlength="6" aria-describedby="coHint-pin coError-pin">
-              <p class="hint" id="coHint-pin">6 digits.</p>
-              <p class="error" id="coError-pin"></p>
-            </div>
+          <div class="field" id="coField-level">
+            <label for="co-level">How long have you been crocheting? <span class="muted">(optional)</span></label>
+            <select id="co-level" name="level" aria-describedby="coHint-level">
+              <option value="">Rather not say</option>
+              <option value="new">This is my first project</option>
+              <option value="some">A few finished pieces</option>
+              <option value="lots">Years of it</option>
+            </select>
+            <p class="hint" id="coHint-level">Only used to decide which pattern we write next.</p>
           </div>
 
           <div class="field" id="coField-notes">
-            <label for="co-notes">Delivery notes <span class="muted">(optional)</span></label>
+            <label for="co-notes">Anything you would like help with? <span class="muted">(optional)</span></label>
             <textarea id="co-notes" name="notes" aria-describedby="coHint-notes"></textarea>
-            <p class="hint" id="coHint-notes">Landmarks, gate codes, a safe place to leave it.</p>
+            <p class="hint" id="coHint-notes">A technique you are nervous about, a yarn you already own.</p>
           </div>
         </fieldset>
 
-        <button class="btn btn--primary btn--block" type="submit">Place order</button>
+        <p class="checkout-terms">
+          Your pattern is for your own making. Crochet it as often as you like and
+          sell the pieces you make &mdash; please do not resell or share the file itself.
+        </p>
+
+        <button class="btn btn--primary btn--block" type="submit">Unlock my patterns</button>
         <p class="form-status" id="checkoutStatus" role="status" aria-live="polite"></p>
       </form>
 
       <aside class="summary" id="checkoutSummary" aria-labelledby="coSummaryTitle">
-        <h2 id="coSummaryTitle">Your order</h2>
+        <h2 id="coSummaryTitle">Your patterns</h2>
       </aside>
 
     </div>
@@ -148,11 +151,11 @@
       <div>
         <p class="brand" style="margin-bottom: var(--space-m)">Crochet&nbsp;Curio</p>
         <p class="muted" style="font-size: var(--text-m-size); max-width: 32ch">
-          Hand-crocheted hats, bags and knitwear. Made slowly in small batches.
+          Digital crochet patterns, written and tested by hand. Make the piece yourself.
         </p>
       </div>
       <nav aria-labelledby="footer-shop">
-        <h2 id="footer-shop">Shop</h2>
+        <h2 id="footer-shop">Patterns</h2>
         <ul>
           <li><a href="product-checkerboard-bag.html">Checkerboard Shoulder Bag</a></li>
           <li><a href="product-cloud-cardigan.html">Cloud Cropped Cardigan</a></li>
@@ -165,23 +168,23 @@
       <nav aria-labelledby="footer-help">
         <h2 id="footer-help">Help</h2>
         <ul>
-          <li><a href="index.html#contact">Contact us</a></li>
-          <li><a href="index.html#contact">Size guide</a></li>
-          <li><a href="index.html#contact">Care and washing</a></li>
-          <li><a href="index.html#contact">Returns</a></li>
+          <li><a href="library.html">My patterns</a></li>
+          <li><a href="index.html#process">How patterns are delivered</a></li>
+          <li><a href="index.html#levels">Skill levels explained</a></li>
+          <li><a href="index.html#contact">Stuck on a row?</a></li>
         </ul>
       </nav>
       <nav aria-labelledby="footer-studio">
         <h2 id="footer-studio">Studio</h2>
         <ul>
           <li><a href="index.html#story">Our story</a></li>
-          <li><a href="index.html#process">How it is made</a></li>
-          <li><a href="index.html#contact">Commissions</a></li>
+          <li><a href="index.html#process">How a pattern is written</a></li>
+          <li><a href="index.html#contact">Pattern testing</a></li>
         </ul>
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Crochet Curio. All rights reserved.</p>
+      <p>&copy; 2026 Crochet Curio. Patterns are for your own use; the pieces you make from them are yours to sell.</p>
       <p>Built on the Crochet Curio design system.</p>
     </div>
   </div>

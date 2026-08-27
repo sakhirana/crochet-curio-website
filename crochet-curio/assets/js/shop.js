@@ -1,18 +1,25 @@
 /* ============================================================
-   Crochet Curio — basket and checkout
-   State lives in localStorage under one key. Every read is
+   Crochet Curio — pattern basket, checkout and pattern library
+
+   Everything sold here is a digital PDF pattern. That shapes the
+   rules: one copy of a pattern per basket (no quantity), no size
+   choice at purchase (every size is written into the file), and no
+   shipping — the file lands in the buyer's library.
+
+   State lives in localStorage under two keys. Every read is
    defensive: a private window, cleared storage or a browser that
    blocks site data must still render a working page.
    ============================================================ */
 (function () {
   "use strict";
 
-  var KEY = "crochet-curio-basket";
+  var BASKET_KEY  = "crochet-curio-basket";
+  var LIBRARY_KEY = "crochet-curio-library";
 
   /* ---------- storage ---------- */
-  function readBasket() {
+  function read(key) {
     try {
-      var raw = window.localStorage.getItem(KEY);
+      var raw = window.localStorage.getItem(key);
       var parsed = raw ? JSON.parse(raw) : [];
       return Array.isArray(parsed) ? parsed : [];
     } catch (e) {
@@ -20,13 +27,22 @@
     }
   }
 
-  function writeBasket(items) {
+  function write(key, value) {
     try {
-      window.localStorage.setItem(KEY, JSON.stringify(items));
+      window.localStorage.setItem(key, JSON.stringify(value));
     } catch (e) {
       /* storage unavailable — the page still works for this visit */
     }
-    paintCount();
+  }
+
+  function readBasket() { return read(BASKET_KEY); }
+  function writeBasket(items) { write(BASKET_KEY, items); paintCount(); }
+
+  function readLibrary() { return read(LIBRARY_KEY); }
+  function writeLibrary(items) { write(LIBRARY_KEY, items); }
+
+  function ownsPattern(slug) {
+    return readLibrary().some(function (p) { return p.slug === slug; });
   }
 
   /* ---------- formatting ---------- */
@@ -34,23 +50,33 @@
     return "₹" + Number(n).toLocaleString("en-IN");
   }
 
-  function lineTotal(item) { return item.price * item.qty; }
-
   function basketTotal(items) {
-    return items.reduce(function (sum, i) { return sum + lineTotal(i); }, 0);
+    return items.reduce(function (sum, i) { return sum + i.price; }, 0);
   }
 
-  function shipping(subtotal) {
-    return subtotal >= 2500 || subtotal === 0 ? 0 : 150;
+  function patternWord(n) {
+    return n === 1 ? "pattern" : "patterns";
   }
 
-  function countItems(items) {
-    return items.reduce(function (n, i) { return n + i.qty; }, 0);
+  function catalogueEntry(slug) {
+    return (window.CATALOGUE || []).filter(function (c) {
+      return c.slug === slug;
+    })[0];
+  }
+
+  function orderRef() {
+    return "CC-" + Math.random().toString(36).slice(2, 7).toUpperCase();
+  }
+
+  function today() {
+    return new Date().toLocaleDateString("en-IN", {
+      day: "numeric", month: "long", year: "numeric"
+    });
   }
 
   /* ---------- header count ---------- */
   function paintCount() {
-    var n = countItems(readBasket());
+    var n = readBasket().length;
     var badge = document.getElementById("cartCount");
     var label = document.getElementById("cartCountLabel");
     if (badge) {
@@ -58,49 +84,107 @@
       badge.classList.toggle("is-empty", n === 0);
     }
     if (label) {
-      label.textContent = ", " + n + (n === 1 ? " item" : " items");
+      label.textContent = ", " + n + " " + patternWord(n);
     }
   }
 
-  /* ---------- add to basket (product pages) ---------- */
+  /* ---------- the stand-in pattern file ----------
+     No PDF is generated here. The download hands over a plain-text
+     receipt describing the pattern the buyer now owns, so the flow is
+     complete end to end without pretending a file exists that does
+     not. Swap this for the real PDF when the studio's files are wired
+     up to a backend.
+  ------------------------------------------------- */
+  function patternFileText(entry, item) {
+    var lines = [
+      "CROCHET CURIO — " + (entry ? entry.name : item.name),
+      "Digital crochet pattern",
+      "",
+      "Skill level : " + (entry && entry.difficulty ? entry.difficulty : "—"),
+      "Length      : " + (entry && entry.pages ? entry.pages + " pages" : "—"),
+      "Sizes       : " + (entry && entry.sizes ? entry.sizes : "—"),
+      "Time to make: " + (entry && entry.time ? entry.time : "—"),
+      "",
+      "Yarn  : " + (entry && entry.yarn ? entry.yarn : "—"),
+      "Hook  : " + (entry && entry.hook ? entry.hook : "—"),
+      "Gauge : " + (entry && entry.gauge ? entry.gauge : "—"),
+      "",
+      "Unlocked on " + (item.purchasedAt || today()) +
+        (item.ref ? "  ·  order " + item.ref : ""),
+      "",
+      "This is a placeholder for the full illustrated PDF. The written",
+      "rows, stitch charts and step photos are delivered from the studio",
+      "once the pattern library is connected to a file store.",
+      "",
+      "The pattern is for your own making. Sell the pieces you crochet",
+      "from it if you like — please do not resell or share the file."
+    ];
+    return lines.join("\n");
+  }
+
+  function downloadPattern(slug) {
+    var owned = readLibrary().filter(function (p) { return p.slug === slug; })[0];
+    if (!owned) { return false; }
+
+    var entry = catalogueEntry(slug);
+    var blob = new Blob([patternFileText(entry, owned)], { type: "text/plain" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "crochet-curio-" + slug + "-pattern.txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    return true;
+  }
+
+  /* ---------- add a pattern to the basket (pattern pages) ---------- */
   var buyForm = document.getElementById("buyForm");
   if (buyForm) {
+    var slug = buyForm.dataset.slug;
+    var status = document.getElementById("buyStatus");
+    var button = buyForm.querySelector("button[type=submit]");
+
+    /* Already owned? The page says so and points at the library
+       instead of selling the same file twice. */
+    if (ownsPattern(slug) && button) {
+      button.textContent = "You already own this pattern";
+      button.disabled = true;
+      buyForm.insertAdjacentHTML("beforeend",
+        '<p class="owned-note">In your library since you bought it. ' +
+        '<a class="link" href="library.html">Open My patterns</a> to download it again.</p>');
+    }
+
     buyForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      var sizeInput = buyForm.querySelector('input[name="size"]:checked');
-      var size = sizeInput ? sizeInput.value : "One size";
-      var qtyField = document.getElementById("qty");
-      var qty = Math.max(1, Math.min(10, parseInt(qtyField.value, 10) || 1));
-      qtyField.value = qty;
-
-      var slug = buyForm.dataset.slug;
       var items = readBasket();
+      var already = items.some(function (i) { return i.slug === slug; });
 
-      /* same piece in the same size stacks rather than duplicating */
-      var existing = items.filter(function (i) {
-        return i.slug === slug && i.size === size;
-      })[0];
-
-      if (existing) {
-        existing.qty = Math.min(10, existing.qty + qty);
-      } else {
-        items.push({
-          slug: slug,
-          name: buyForm.dataset.name,
-          price: Number(buyForm.dataset.price),
-          image: buyForm.dataset.image,
-          size: size,
-          qty: qty
-        });
+      if (already) {
+        if (status) {
+          status.textContent = buyForm.dataset.name +
+            " is already in your basket — one copy is all you need. " +
+            "Go to your basket to check out.";
+        }
+        return;
       }
+
+      items.push({
+        slug: slug,
+        name: buyForm.dataset.name,
+        price: Number(buyForm.dataset.price),
+        image: buyForm.dataset.image,
+        pages: Number(buyForm.dataset.pages) || null,
+        difficulty: buyForm.dataset.difficulty || ""
+      });
 
       writeBasket(items);
 
-      var status = document.getElementById("buyStatus");
       if (status) {
-        status.textContent = buyForm.dataset.name + " (" + size + ") added to your basket. " +
-          countItems(items) + " item" + (countItems(items) === 1 ? "" : "s") + " total.";
+        status.textContent = buyForm.dataset.name + " pattern added to your basket. " +
+          items.length + " " + patternWord(items.length) + " ready to download after checkout.";
       }
     });
   }
@@ -115,9 +199,9 @@
     if (!items.length) {
       basketRoot.innerHTML =
         '<div class="basket-empty">' +
-          "<h2>Your basket is empty</h2>" +
-          "<p class=\"muted\">Nothing here yet. The collection is six pieces deep.</p>" +
-          '<p><a class="btn btn--primary" href="index.html#shop">Browse the collection</a></p>' +
+          "<h2>No patterns picked yet</h2>" +
+          '<p class="muted">Six projects in the library, from a first bucket hat to a graded cardigan.</p>' +
+          '<p><a class="btn btn--primary" href="index.html#patterns">Browse the patterns</a></p>' +
         "</div>";
       var sum = document.getElementById("basketSummary");
       if (sum) { sum.hidden = true; }
@@ -125,14 +209,14 @@
     }
 
     var rows = items.map(function (item, index) {
-      /* Resolve the image from the catalogue by slug rather than trusting the
-         stored filename — a basket saved before a photo was renamed would
-         otherwise point at a file that no longer exists. */
-      var entry = (window.CATALOGUE || []).filter(function (c) {
-        return c.slug === item.slug;
-      })[0];
+      /* Resolve the image and specs from the catalogue by slug rather than
+         trusting what was stored — a basket saved before a photo was renamed
+         would otherwise point at a file that no longer exists. */
+      var entry = catalogueEntry(item.slug);
       var image = entry ? entry.image : item.image;
       var description = entry ? entry.alt : item.name;
+      var difficulty = (entry && entry.difficulty) || item.difficulty || "";
+      var pages = (entry && entry.pages) || item.pages;
 
       return '<li class="basket-row">' +
         '<div class="basket-row__media">' +
@@ -140,16 +224,13 @@
         "</div>" +
         '<div class="basket-row__info">' +
           "<h3>" + item.name + "</h3>" +
-          '<p class="muted">Size: ' + item.size + "</p>" +
-          '<p class="basket-row__unit muted">' + rupees(item.price) + " each</p>" +
+          '<p class="muted">PDF pattern' + (pages ? " · " + pages + " pages" : "") +
+            (difficulty ? " · " + difficulty : "") + "</p>" +
+          '<p class="basket-row__unit muted">Instant download after checkout</p>' +
         "</div>" +
-        '<div class="basket-row__qty">' +
-          '<label class="visually-hidden" for="qty-' + index + '">Quantity of ' + item.name + ", size " + item.size + "</label>" +
-          '<input type="number" id="qty-' + index + '" value="' + item.qty + '" min="1" max="10" step="1" inputmode="numeric" data-index="' + index + '">' +
-        "</div>" +
-        '<p class="basket-row__total">' + rupees(lineTotal(item)) + "</p>" +
+        '<p class="basket-row__total">' + rupees(item.price) + "</p>" +
         '<button type="button" class="basket-row__remove" data-remove="' + index + '">' +
-          "Remove<span class=\"visually-hidden\"> " + item.name + ", size " + item.size + "</span>" +
+          'Remove<span class="visually-hidden"> the ' + item.name + " pattern</span>" +
         "</button>" +
       "</li>";
     }).join("");
@@ -163,19 +244,14 @@
     if (!sum) { return; }
     sum.hidden = false;
     var subtotal = basketTotal(items);
-    var ship = shipping(subtotal);
 
     var el = function (id) { return document.getElementById(id); };
+    if (el("sumCount")) {
+      el("sumCount").textContent = items.length + " " + patternWord(items.length);
+    }
     if (el("sumSubtotal")) { el("sumSubtotal").textContent = rupees(subtotal); }
-    if (el("sumShipping")) {
-      el("sumShipping").textContent = ship === 0 ? "Free" : rupees(ship);
-    }
-    if (el("sumTotal")) { el("sumTotal").textContent = rupees(subtotal + ship); }
-    if (el("sumNote")) {
-      el("sumNote").textContent = ship === 0
-        ? "Shipping is on us."
-        : "Spend " + rupees(2500 - subtotal) + " more for free shipping.";
-    }
+    if (el("sumDelivery")) { el("sumDelivery").textContent = "Instant download"; }
+    if (el("sumTotal")) { el("sumTotal").textContent = rupees(subtotal); }
   }
 
   if (basketRoot) {
@@ -191,28 +267,11 @@
 
       var live = document.getElementById("basketStatus");
       if (live && removed) {
-        live.textContent = removed.name + " removed from your basket.";
+        live.textContent = "The " + removed.name + " pattern was removed from your basket.";
       }
       var focusTarget = document.querySelector(".basket-row__remove") ||
                         document.querySelector(".basket-empty a");
       if (focusTarget) { focusTarget.focus(); }
-    });
-
-    basketRoot.addEventListener("change", function (event) {
-      var field = event.target.closest("input[data-index]");
-      if (!field) { return; }
-      var index = Number(field.dataset.index);
-      var items = readBasket();
-      if (!items[index]) { return; }
-      items[index].qty = Math.max(1, Math.min(10, parseInt(field.value, 10) || 1));
-      writeBasket(items);
-      renderBasket();
-
-      var live = document.getElementById("basketStatus");
-      if (live) {
-        live.textContent = "Quantity updated. Basket total " +
-          rupees(basketTotal(items) + shipping(basketTotal(items))) + ".";
-      }
     });
 
     renderBasket();
@@ -222,30 +281,34 @@
   var checkoutRoot = document.getElementById("checkoutSummary");
 
   if (checkoutRoot) {
-    var items = readBasket();
+    var checkoutItems = readBasket();
 
-    if (!items.length) {
+    if (!checkoutItems.length) {
       checkoutRoot.innerHTML =
+        '<h2 id="coSummaryTitle">Your patterns</h2>' +
         '<p class="muted">Your basket is empty. ' +
-        '<a class="link" href="index.html#shop">Pick something first</a>.</p>';
-      var form = document.getElementById("checkoutForm");
-      if (form) { form.hidden = true; }
+        '<a class="link" href="index.html#patterns">Pick a pattern first</a>.</p>';
+      var emptyForm = document.getElementById("checkoutForm");
+      if (emptyForm) { emptyForm.hidden = true; }
     } else {
-      var subtotal = basketTotal(items);
-      var ship = shipping(subtotal);
+      var subtotal = basketTotal(checkoutItems);
       checkoutRoot.innerHTML =
+        '<h2 id="coSummaryTitle">Your patterns</h2>' +
         '<ul class="checkout-lines">' +
-          items.map(function (i) {
-            return "<li><span>" + i.name + " &middot; " + i.size +
-              (i.qty > 1 ? " &times; " + i.qty : "") +
-              "</span><span>" + rupees(lineTotal(i)) + "</span></li>";
+          checkoutItems.map(function (i) {
+            var entry = catalogueEntry(i.slug);
+            var pages = (entry && entry.pages) || i.pages;
+            return "<li><span>" + i.name +
+              (pages ? ' <span class="muted">&middot; ' + pages + "-page PDF</span>" : "") +
+              "</span><span>" + rupees(i.price) + "</span></li>";
           }).join("") +
         "</ul>" +
         '<dl class="checkout-totals">' +
           "<div><dt>Subtotal</dt><dd>" + rupees(subtotal) + "</dd></div>" +
-          "<div><dt>Shipping</dt><dd>" + (ship === 0 ? "Free" : rupees(ship)) + "</dd></div>" +
-          '<div class="is-total"><dt>Total</dt><dd>' + rupees(subtotal + ship) + "</dd></div>" +
-        "</dl>";
+          "<div><dt>Delivery</dt><dd>Instant download</dd></div>" +
+          '<div class="is-total"><dt>Total</dt><dd>' + rupees(subtotal) + "</dd></div>" +
+        "</dl>" +
+        '<p class="summary__note">Digital files. Nothing is posted, so there is no address to give and no shipping to pay.</p>';
     }
   }
 
@@ -273,11 +336,12 @@
       event.preventDefault();
 
       var checks = [
-        ["coField-name", "coError-name", "co-name", document.getElementById("co-name").value.trim(), "Enter the name for this order."],
-        ["coField-email", "coError-email", "co-email", document.getElementById("co-email").value.trim(), "Enter an email address for the order confirmation."],
-        ["coField-address", "coError-address", "co-address", document.getElementById("co-address").value.trim(), "Enter the street address for delivery."],
-        ["coField-city", "coError-city", "co-city", document.getElementById("co-city").value.trim(), "Enter the town or city."],
-        ["coField-pin", "coError-pin", "co-pin", document.getElementById("co-pin").value.trim(), "Enter a 6-digit PIN code."]
+        ["coField-name", "coError-name", "co-name",
+         document.getElementById("co-name").value.trim(),
+         "Enter the name to put on the pattern licence."],
+        ["coField-email", "coError-email", "co-email",
+         document.getElementById("co-email").value.trim(),
+         "Enter an email address — your download link goes there."]
       ];
 
       var firstInvalid = null;
@@ -290,8 +354,6 @@
           problem = message;
         } else if (inputId === "co-email" && !EMAIL_RE.test(value)) {
           problem = "That email address is missing an @ or a domain. Check it and try again.";
-        } else if (inputId === "co-pin" && !/^\d{6}$/.test(value)) {
-          problem = "A PIN code is exactly 6 digits.";
         }
 
         setError(fieldId, errorId, inputId, problem);
@@ -302,15 +364,37 @@
 
       if (firstInvalid) {
         firstInvalid.focus();
-        if (status) { status.textContent = "Your order was not placed. Check the highlighted fields."; }
+        if (status) {
+          status.textContent = "Your patterns were not unlocked. Check the highlighted fields.";
+        }
         return;
       }
 
-      /* Nothing is transmitted — this is a front-end demonstration of the
-         flow. Wire it to a real payment provider before taking money. */
-      var placed = readBasket();
-      var total = basketTotal(placed) + shipping(basketTotal(placed));
-      try { window.localStorage.removeItem(KEY); } catch (e) {}
+      /* Nothing is transmitted and no payment is taken — this is a
+         front-end demonstration of the flow. Wire it to a payment
+         provider and a real file store before taking money. */
+      var bought = readBasket();
+      var total = basketTotal(bought);
+      var ref = orderRef();
+      var stamp = today();
+
+      var library = readLibrary();
+      bought.forEach(function (item) {
+        if (library.some(function (p) { return p.slug === item.slug; })) { return; }
+        library.push({
+          slug: item.slug,
+          name: item.name,
+          price: item.price,
+          image: item.image,
+          pages: item.pages,
+          difficulty: item.difficulty,
+          purchasedAt: stamp,
+          ref: ref
+        });
+      });
+      writeLibrary(library);
+
+      try { window.localStorage.removeItem(BASKET_KEY); } catch (e) {}
       paintCount();
 
       var done = document.getElementById("orderPlaced");
@@ -318,15 +402,100 @@
         done.hidden = false;
         done.querySelector("[data-total]").textContent = rupees(total);
         done.querySelector("[data-count]").textContent =
-          countItems(placed) + (countItems(placed) === 1 ? " piece" : " pieces");
+          bought.length + " " + patternWord(bought.length);
+        done.querySelector("[data-ref]").textContent = ref;
+
+        var list = done.querySelector("[data-unlocked]");
+        if (list) {
+          list.innerHTML = bought.map(function (i) {
+            var entry = catalogueEntry(i.slug);
+            var image = entry ? entry.image : i.image;
+            var pages = (entry && entry.pages) || i.pages;
+            return '<li class="unlocked-row">' +
+              '<img src="assets/img/' + image + '" alt="" width="72" height="72">' +
+              '<div class="unlocked-row__info"><h3>' + i.name + "</h3>" +
+              '<p class="muted">' + (pages ? pages + "-page PDF" : "PDF pattern") + "</p></div>" +
+              '<button type="button" class="btn btn--secondary" data-download="' + i.slug + '">Download</button>' +
+              "</li>";
+          }).join("");
+        }
+
         checkoutForm.hidden = true;
-        var summary = document.getElementById("checkoutSummary");
-        if (summary) { summary.hidden = true; }
+        if (checkoutRoot) { checkoutRoot.hidden = true; }
         done.setAttribute("tabindex", "-1");
         done.focus();
       }
     });
   }
+
+  /* ---------- pattern library page ---------- */
+  var libraryRoot = document.getElementById("libraryRoot");
+
+  function renderLibrary() {
+    if (!libraryRoot) { return; }
+    var owned = readLibrary();
+
+    if (!owned.length) {
+      libraryRoot.innerHTML =
+        '<div class="basket-empty">' +
+          "<h2>Nothing unlocked yet</h2>" +
+          '<p class="muted">Patterns you buy land here, and stay here. ' +
+          "Download them as often as you like — a new hook, a new laptop, a lost file.</p>" +
+          '<p><a class="btn btn--primary" href="index.html#patterns">Find your first pattern</a></p>' +
+        "</div>";
+      return;
+    }
+
+    libraryRoot.innerHTML =
+      '<ul class="library-list">' +
+      owned.map(function (item) {
+        var entry = catalogueEntry(item.slug);
+        var image = entry ? entry.image : item.image;
+        var description = entry ? entry.alt : item.name;
+        var difficulty = (entry && entry.difficulty) || item.difficulty || "";
+        var pages = (entry && entry.pages) || item.pages;
+
+        return '<li class="library-card">' +
+          '<div class="library-card__media">' +
+            '<img src="assets/img/' + image + '" alt="' + description + '" width="240" height="240">' +
+          "</div>" +
+          '<div class="library-card__info">' +
+            "<h3>" + item.name + "</h3>" +
+            '<p class="muted">' +
+              (pages ? pages + "-page PDF" : "PDF pattern") +
+              (difficulty ? " · " + difficulty : "") +
+            "</p>" +
+            '<p class="library-card__meta muted">Unlocked ' + (item.purchasedAt || "") +
+              (item.ref ? " · order " + item.ref : "") + "</p>" +
+            '<div class="library-card__actions">' +
+              '<button type="button" class="btn btn--primary" data-download="' + item.slug + '">' +
+                "Download pattern<span class=\"visually-hidden\">: " + item.name + "</span>" +
+              "</button>" +
+              '<a class="link" href="product-' + item.slug + '.html">See the finished piece</a>' +
+            "</div>" +
+          "</div>" +
+        "</li>";
+      }).join("") +
+      "</ul>";
+  }
+
+  if (libraryRoot) { renderLibrary(); }
+
+  /* One delegated handler covers the library page and the
+     just-unlocked list on the checkout confirmation. */
+  document.addEventListener("click", function (event) {
+    var btn = event.target.closest("[data-download]");
+    if (!btn) { return; }
+    var wanted = btn.dataset.download;
+    var ok = downloadPattern(wanted);
+    var live = document.getElementById("libraryStatus") ||
+               document.getElementById("checkoutStatus");
+    if (live) {
+      live.textContent = ok
+        ? "Your pattern file is downloading. It stays in My patterns — come back for it any time."
+        : "That pattern is not in your library yet.";
+    }
+  });
 
   paintCount();
 })();

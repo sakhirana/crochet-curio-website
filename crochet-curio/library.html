@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your basket — Crochet Curio</title>
-<meta name="description" content="Review the crochet patterns in your Crochet Curio basket before you download them.">
+<title>My patterns — Crochet Curio</title>
+<meta name="description" content="Every Crochet Curio pattern you own, ready to download again whenever you need it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -33,8 +33,8 @@
         <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#process">How it works</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="library.html">My patterns</a></li>
-        <li><a class="cart-link" href="cart.html" aria-current="page">Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
+        <li><a href="library.html" aria-current="page">My patterns</a></li>
+        <li><a class="cart-link" href="cart.html">Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
   </div>
@@ -43,35 +43,52 @@
 <main id="main">
   <div class="container">
 
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="index.html">Home</a></li>
+        <li><span aria-current="page">My patterns</span></li>
+      </ol>
+    </nav>
+
     <div class="page-head">
-      <h1>Your basket</h1>
+      <h1>My patterns</h1>
       <p class="muted">
-        Digital crochet patterns. One copy of each is all you need &mdash; every
-        size and both terminologies are written into the file.
+        Everything you have unlocked, ready to download again &mdash; a new laptop,
+        a lost file, a second go at the same cardigan.
       </p>
     </div>
 
-    <p class="form-status visually-hidden" id="basketStatus" role="status" aria-live="polite"></p>
+    <p class="demo-note">
+      <strong>Demonstration library.</strong> Your patterns are remembered in this
+      browser only, and the download hands over a stand-in text file rather than the
+      studio's real PDF. Connect an account system and a file store to make this
+      permanent across devices.
+    </p>
 
-    <div class="basket-layout">
-      <div id="basketRoot"></div>
+    <p class="form-status" id="libraryStatus" role="status" aria-live="polite"></p>
 
-      <aside class="summary" id="basketSummary" aria-labelledby="summaryTitle" hidden>
-        <h2 id="summaryTitle">Order summary</h2>
-        <dl>
-          <div><dt>Patterns</dt><dd id="sumCount">0 patterns</dd></div>
-          <div><dt>Subtotal</dt><dd id="sumSubtotal">&#8377;0</dd></div>
-          <div><dt>Delivery</dt><dd id="sumDelivery">Instant download</dd></div>
-          <div class="is-total"><dt>Total</dt><dd id="sumTotal">&#8377;0</dd></div>
-        </dl>
-        <a class="btn btn--primary btn--block" href="checkout.html">Get these patterns</a>
-        <p class="summary__note">
-          Nothing is posted to you. Your files appear in
-          <a class="link" href="library.html">My&nbsp;patterns</a> as soon as you check out,
-          and stay there for good.
-        </p>
-      </aside>
-    </div>
+    <div id="libraryRoot"></div>
+
+    <section class="library-help" aria-labelledby="library-help-title">
+      <h2 id="library-help-title">While you are making</h2>
+      <div class="library-help__grid">
+        <div>
+          <h3>Swatch first</h3>
+          <p>Every pattern gives a gauge over 10cm. Ten minutes on a swatch saves a
+             cardigan that comes out two sizes off.</p>
+        </div>
+        <div>
+          <h3>UK or US terms</h3>
+          <p>Both are written into each file, side by side. Pick one at the start and
+             stay with it.</p>
+        </div>
+        <div>
+          <h3>Stuck on a row?</h3>
+          <p>Send the row number and a photo. <a class="link" href="index.html#contact">Pattern support</a>
+             is part of what you paid for.</p>
+        </div>
+      </div>
+    </section>
 
   </div>
 </main>

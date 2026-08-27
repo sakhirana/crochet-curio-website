@@ -3,49 +3,85 @@ window.CATALOGUE = [
   {
     "slug": "checkerboard-bag",
     "name": "Checkerboard Shoulder Bag",
-    "price": 2800,
+    "price": 380,
     "image": "Bluebell.png",
     "alt": "A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it.",
-    "oneSize": true
+    "difficulty": "Confident beginner",
+    "pages": 16,
+    "time": "About 11 hours",
+    "sizes": "One size — 34cm wide by 38cm deep, strap drop 30cm",
+    "yarn": "Mercerised cotton, DK weight. About 320g in blue, 180g in white.",
+    "hook": "4mm hook. A 3.5mm for the strap edging if you work loosely.",
+    "gauge": "18 stitches and 20 rows to 10cm in double crochet, after blocking."
   },
   {
     "slug": "cloud-cardigan",
     "name": "Cloud Cropped Cardigan",
-    "price": 4200,
+    "price": 620,
     "image": "Frosty.png",
     "alt": "A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
-    "oneSize": false
+    "difficulty": "Intermediate",
+    "pages": 32,
+    "time": "About 22 hours",
+    "sizes": "XS to XXL — six graded sizes, full measurement table included",
+    "yarn": "Cotton-acrylic blend, aran weight. 600–950g depending on size, plus 80g brushed white for the clouds.",
+    "hook": "5mm for the body, 4.5mm for the ribbing, 4mm for the clouds.",
+    "gauge": "14 stitches and 16 rows to 10cm in half treble, after blocking."
   },
   {
     "slug": "dune-bikini",
     "name": "Dune Stripe Bikini Set",
-    "price": 3100,
+    "price": 450,
     "image": "dune-bikini.png",
     "alt": "A two-piece crochet bikini in tan and black stripes: a triangle top with braided halter ties and matching tie-side bottoms with tasselled ends, laid flat.",
-    "oneSize": false
+    "difficulty": "Confident beginner",
+    "pages": 20,
+    "time": "About 9 hours",
+    "sizes": "XS to XXL — the ties set the final fit at four points",
+    "yarn": "Cotton-nylon blend, 4ply. 150–220g in tan, 90g in black.",
+    "hook": "3mm hook. 2.5mm for the braided cords.",
+    "gauge": "24 stitches and 28 rows to 10cm in double crochet, worked firmly."
   },
   {
     "slug": "strawberry-cardigan",
     "name": "Strawberry Cropped Cardigan",
-    "price": 4400,
+    "price": 650,
     "image": "Valentine.png",
     "alt": "A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
-    "oneSize": false
+    "difficulty": "Intermediate",
+    "pages": 34,
+    "time": "About 24 hours",
+    "sizes": "XS to XXL — six graded sizes, full measurement table included",
+    "yarn": "Undyed cotton, aran weight. 600–950g. Plus 60g red and 20g green in DK.",
+    "hook": "5mm for the body, 4.5mm ribbing, 3.5mm for the strawberries.",
+    "gauge": "14 stitches and 16 rows to 10cm in half treble, after blocking."
   },
   {
     "slug": "bucket-hat",
     "name": "Gingham Bucket Hat",
-    "price": 2200,
+    "price": 320,
     "image": "Poppy.png",
     "alt": "A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle.",
-    "oneSize": false
+    "difficulty": "Beginner",
+    "pages": 14,
+    "time": "About 8 hours",
+    "sizes": "Three head sizes — 54, 57 and 60cm circumference",
+    "yarn": "Mercerised cotton, DK weight. About 130g red, 110g pink.",
+    "hook": "3.5mm hook — deliberately tight, for the brim.",
+    "gauge": "20 stitches and 22 rounds to 10cm in double crochet, worked firmly."
   },
   {
     "slug": "rosewater-set",
     "name": "Rosewater Bikini & Skirt Set",
-    "price": 3800,
+    "price": 540,
     "image": "rosewater-set.png",
     "alt": "A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist.",
-    "oneSize": false
+    "difficulty": "Confident beginner",
+    "pages": 26,
+    "time": "About 14 hours",
+    "sizes": "XS to XXL — top ties to fit, skirt graded across five sizes",
+    "yarn": "Cotton-nylon blend, 4ply. 180g for the top, 260–340g for the skirt.",
+    "hook": "3mm hook. 2.5mm for the braided ties.",
+    "gauge": "24 stitches and 28 rows to 10cm in double crochet, worked firmly."
   }
 ];

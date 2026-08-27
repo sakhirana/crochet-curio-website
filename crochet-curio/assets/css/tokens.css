@@ -83,7 +83,10 @@
   --stroke-width-xs: 1px;
   --stroke-width-m:  2px;
 
-  /* ---------- Radius ---------- */
+  /* ---------- Radius ----------
+     The names are real (Border collection, FurGo design tokens); the values
+     below are not confirmed — the API returns names and types, not numbers.
+     Note the Button component uses no radius at all. */
   --radius-xs:   4px;
   --radius-s:    8px;  /* (inferred) */
   --radius-m:    12px; /* (inferred) */
@@ -131,7 +134,10 @@
   --text-regular: 400;
   --text-semibold: 600;
 
-  /* ---------- Elevation ---------- */
+  /* ---------- Elevation ----------
+     NOT IN THE FIGMA FILE. The library has no shadow variables and no effect
+     styles; these six were invented before the file could be read. Add them
+     to the design system or drop them from the CSS — see README. */
   --shadow-l1: 0 0 2px  rgba(0,0,0,.08), 0 2px  4px  rgba(0,0,0,.08);
   --shadow-l2: 0 0 4px  rgba(0,0,0,.08), 0 4px  8px  rgba(0,0,0,.10);
   --shadow-l3: 0 0 6px  rgba(0,0,0,.08), 0 8px  16px rgba(0,0,0,.10);

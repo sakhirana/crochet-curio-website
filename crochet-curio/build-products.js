@@ -1,140 +1,234 @@
 /* ------------------------------------------------------------------
-   Generates one product page per item, plus assets/js/catalogue.js
-   which the cart and checkout read from.
+   Generates one pattern page per project, plus assets/js/catalogue.js
+   which the basket, checkout and pattern library read from.
+
+   Every listing on this site is a DIGITAL CROCHET PATTERN. The photo
+   shows the finished piece; what is sold is the instructions for
+   making it. Nothing physical ships.
 
    Run after editing the catalogue below:   node build-products.js
 ------------------------------------------------------------------ */
 const fs = require("fs");
 const path = require("path");
 
-const SIZES = ["XS–S", "M–L", "XL–XXL"];
+/* What every pattern in the studio includes, regardless of project. */
+const INCLUDED = [
+  "Written instructions, row by row, in UK and US terms",
+  "Stitch charts for every motif and panel",
+  "Step photos for the joins and the shaping",
+  "A yarn substitution guide and a gauge swatch checklist",
+  "Lifetime access — re-download whenever an update lands"
+];
 
-const PRODUCTS = [
+const PATTERNS = [
   {
     slug: "checkerboard-bag",
     name: "Checkerboard Shoulder Bag",
-    price: 2800,
-    badge: "Best seller",
+    price: 380,
+    badge: "Most made",
     tile: "accent",
     span: "wide",
     image: "Bluebell.png",
     alt: "A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it.",
-    tagline: "A sky blue checkerboard, carried on a long single strap.",
-    oneSize: true,
-    body: [
-      "Worked square by square in mercerised cotton, so the checkerboard stays crisp rather than blurring at the edges the way a looser stitch would. The blue is dyed in small lots — expect a little variation between bags, which is the point.",
-      "The strap is crocheted in one continuous piece with the body, not sewn on afterwards, so there is no seam to work loose under weight. It sits at the hip on most people and carries a laptop, a book and the usual pocket debris without sagging."
+    tagline: "A sky blue checkerboard on a long single strap — and the pattern behind it.",
+    difficulty: "Confident beginner",
+    difficultyNote: "If you can chain, double crochet and carry a second colour along a row, you can make this.",
+    time: "About 11 hours",
+    sizes: "One size — 34cm wide by 38cm deep, strap drop 30cm",
+    pages: 16,
+    yarn: "Mercerised cotton, DK weight. About 320g in blue, 180g in white.",
+    hook: "4mm hook. A 3.5mm for the strap edging if you work loosely.",
+    notions: "Cotton drill for the lining (40 by 90cm), tapestry needle, stitch markers.",
+    gauge: "18 stitches and 20 rows to 10cm in double crochet, after blocking.",
+    skills: [
+      "Chain, slip stitch and double crochet",
+      "Changing colour mid-row without a join",
+      "Working in continuous rounds",
+      "Hand-sewing a simple lining"
     ],
-    details: [
-      ["Materials", "100% mercerised cotton. Cotton-drill lining."],
-      ["Dimensions", "34cm wide × 38cm deep. Strap drop 30cm."],
-      ["Care", "Hand wash cool, reshape damp, dry flat. Do not tumble."],
-      ["Made", "By hand in our studio. About 11 hours per bag."]
+    extras: ["A printable checkerboard grid you can recolour before you start"],
+    body: [
+      "The checkerboard is worked square by square in mercerised cotton, and the pattern spends real time on the part most tutorials skip: how to carry the resting colour so the blocks stay crisp rather than blurring at the edges. Chart and written rows sit side by side, so you can follow whichever you read faster.",
+      "The strap is crocheted in one continuous piece with the body rather than sewn on afterwards, so there is no seam to work loose under weight. The pattern walks through that transition stitch by stitch, with photos at the two rows where it is easy to lose count."
+    ],
+    notes: [
+      ["Sizing it up", "Add stitches in multiples of 8 to keep the checkerboard square. The maths is written out."],
+      ["Yarn swaps", "Any smooth DK cotton works. Avoid fluffy yarns — they soften the colour edges."]
     ]
   },
   {
     slug: "cloud-cardigan",
     name: "Cloud Cropped Cardigan",
-    price: 4200,
+    price: 620,
     badge: null,
     tile: "neutral",
     span: "tall",
     image: "Frosty.png",
     alt: "A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
-    tagline: "Bobble clouds on a very good blue.",
-    body: [
-      "The clouds are worked separately as dense bobble clusters and stitched on by hand, which is why they stand proud of the surface instead of lying flat. Eight per cardigan, placed by eye — no two land in exactly the same spot.",
-      "Cropped at the natural waist with balloon sleeves and a deep ribbed cuff. It is designed to be worn open over a tee; the front bands are ribbed firmly so they hang straight rather than curling."
+    tagline: "Bobble clouds on a very good blue. Graded XS to XXL.",
+    difficulty: "Intermediate",
+    difficultyNote: "Garment shaping plus a separate bobble motif. Be comfortable with increases and decreases before you start.",
+    time: "About 22 hours",
+    sizes: "XS to XXL — six graded sizes, full measurement table included",
+    pages: 32,
+    yarn: "Cotton-acrylic blend, aran weight. 600–950g depending on size, plus 80g brushed white for the clouds.",
+    hook: "5mm for the body, 4.5mm for the ribbing, 4mm for the clouds.",
+    notions: "Tapestry needle, stitch markers, blocking pins and a flat towel.",
+    gauge: "14 stitches and 16 rows to 10cm in half treble, after blocking.",
+    skills: [
+      "Increasing and decreasing for armhole shaping",
+      "Bobble clusters worked as separate motifs",
+      "Front-post ribbing for the bands and cuffs",
+      "Setting in a balloon sleeve"
     ],
-    details: [
-      ["Materials", "80% cotton, 20% acrylic. Bobbles in brushed white acrylic."],
-      ["Fit", "Relaxed and cropped. Size down for a closer fit through the body."],
-      ["Care", "Hand wash cool. Dry flat — hanging will stretch the sleeves."],
-      ["Made", "By hand in our studio. About 22 hours per cardigan."]
+    extras: ["A cloud placement map for every size, so the eight clouds land right on yours"],
+    body: [
+      "The clouds are worked separately as dense bobble clusters and stitched on by hand, which is why they stand proud of the surface instead of lying flat. The pattern gives the cluster in both chart and written form and shows exactly where to anchor each one so it does not sag with wear.",
+      "Cropped at the natural waist with balloon sleeves and a deep ribbed cuff, graded across six sizes with a full measurement table. The front bands are ribbed firmly so they hang straight rather than curling — there is a whole page on getting that tension right."
+    ],
+    notes: [
+      ["Fit", "Written for 10cm of positive ease. Choose by finished bust, not body bust — the table shows both."],
+      ["Yarn swaps", "Any aran-weight blend with a little stretch. Pure cotton will grow; the pattern says how to allow for it."]
     ]
   },
   {
     slug: "dune-bikini",
     name: "Dune Stripe Bikini Set",
-    price: 3100,
+    price: 450,
     badge: null,
     tile: "neutral",
     span: "normal",
     image: "dune-bikini.png",
     alt: "A two-piece crochet bikini in tan and black stripes: a triangle top with braided halter ties and matching tie-side bottoms with tasselled ends, laid flat.",
-    tagline: "Tan and black, tied at four points.",
-    body: [
-      "Both pieces tie — at the neck, the back and each hip — so the fit is yours to set rather than ours to guess. The braided cords are worked long deliberately and finished with tassels; trim them if you prefer them shorter.",
-      "Crocheted in a tight stitch that holds its shape wet, and fully lined in the top and gusset. The stripe is carried through the cord as well as the body, which is a slow way to do it and worth it."
+    tagline: "Tan and black, tied at four points. A weekend project.",
+    difficulty: "Confident beginner",
+    difficultyNote: "Small pieces, simple shaping, plenty of ties. A good first garment.",
+    time: "About 9 hours",
+    sizes: "XS to XXL — the ties set the final fit at four points",
+    pages: 20,
+    yarn: "Cotton-nylon blend, 4ply. 150–220g in tan, 90g in black.",
+    hook: "3mm hook. 2.5mm for the braided cords.",
+    notions: "Swimwear lining fabric, tapestry needle, a fork or card for the tassels.",
+    gauge: "24 stitches and 28 rows to 10cm in double crochet, worked firmly.",
+    skills: [
+      "Working a triangle by decreasing on both edges",
+      "Carrying a stripe through a cord",
+      "Braiding and finishing tassels",
+      "Attaching a swimwear lining by hand"
     ],
-    details: [
-      ["Materials", "Cotton-nylon blend. Fully lined."],
-      ["Fit", "Adjustable at four ties. Cheeky-cut bottoms."],
-      ["Care", "Rinse in cool fresh water after swimming. Dry flat in shade."],
-      ["Made", "By hand in our studio. About 9 hours per set."]
+    extras: ["A fit-adjustment sheet for lengthening or shortening every tie"],
+    body: [
+      "Both pieces tie — at the neck, the back and each hip — so the fit is set by the person wearing it rather than guessed by the pattern. The braided cords are written long on purpose, with a note on where to trim.",
+      "Crocheted in a tight stitch that holds its shape wet. The pattern is firm about tension here and includes a wet-stretch test, so your gauge swatch tells you the truth before you commit to a whole set. The stripe carries through the cord as well as the body, which is a slow way to do it and worth it — that method is charted."
+    ],
+    notes: [
+      ["Sizing", "Cup shaping is written as a stitch count you adjust, not a fixed size. The maths is on page 6."],
+      ["Yarn swaps", "Needs nylon content. Pure cotton sags when wet — the pattern explains why."]
     ]
   },
   {
     slug: "strawberry-cardigan",
     name: "Strawberry Cropped Cardigan",
-    price: 4400,
-    badge: "New",
+    price: 650,
+    badge: "New pattern",
     tile: "accent",
     span: "normal",
     image: "Valentine.png",
     alt: "A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
-    tagline: "Eight strawberries, hand-stitched, slightly three-dimensional.",
-    body: [
-      "Each strawberry is crocheted as its own small piece — body, then leaves — and attached by hand, so they sit raised off the cream ground. The green tops are worked in a separate finer yarn to keep the leaves sharp.",
-      "The cream is undyed, so it will soften rather than fade with washing. Cropped, with balloon sleeves and ribbed cuffs and hem."
+    tagline: "Eight strawberries, each worked as its own small piece.",
+    difficulty: "Intermediate",
+    difficultyNote: "Garment shaping plus a three-part appliqué motif in a finer yarn.",
+    time: "About 24 hours",
+    sizes: "XS to XXL — six graded sizes, full measurement table included",
+    pages: 34,
+    yarn: "Undyed cotton, aran weight. 600–950g. Plus 60g red and 20g green in DK.",
+    hook: "5mm for the body, 4.5mm ribbing, 3.5mm for the strawberries.",
+    notions: "Toy stuffing for the berries, tapestry needle, blocking pins.",
+    gauge: "14 stitches and 16 rows to 10cm in half treble, after blocking.",
+    skills: [
+      "Increasing and decreasing for armhole shaping",
+      "Small amigurumi-style shaping for the berries",
+      "Working leaves in a finer yarn",
+      "Front-post ribbing for the bands and cuffs"
     ],
-    details: [
-      ["Materials", "100% undyed cotton. Strawberries in cotton and merino."],
-      ["Fit", "Relaxed and cropped. True to size."],
-      ["Care", "Hand wash cool and separately for the first wash. Dry flat."],
-      ["Made", "By hand in our studio. About 24 hours per cardigan."]
+    extras: ["A strawberry placement map for every size, and a chart for the leaves"],
+    body: [
+      "Each strawberry is crocheted as its own small piece — body, then leaves — and attached by hand, so they sit raised off the cream ground. The pattern writes the berry as a standalone mini-project you can practise once before committing it to the cardigan.",
+      "The green tops are worked in a separate finer yarn to keep the leaves sharp; the pattern explains the hook change and gives the leaf as a chart. The body is the same cropped, balloon-sleeved shape as the Cloud Cardigan, so making one teaches you the other."
+    ],
+    notes: [
+      ["Fit", "Written for 10cm of positive ease. Choose by finished bust — the table gives both."],
+      ["Make it plain", "The cardigan stands on its own without the berries. Skip pages 22 to 30 to leave it undecorated."]
     ]
   },
   {
     slug: "bucket-hat",
     name: "Gingham Bucket Hat",
-    price: 2200,
+    price: 320,
     badge: null,
     tile: "neutral",
     span: "normal",
     image: "Poppy.png",
     alt: "A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle.",
-    tagline: "Red on pink, with a brim that will not flop.",
-    body: [
-      "The brim is worked at a tighter tension than the crown and finished with a rolled red edge, which is what keeps it standing up instead of collapsing after a season. The crown is flat-topped rather than rounded, so it holds its shape when packed.",
-      "Two shades of cotton carried in a checkerboard, changed colour mid-row rather than worked in blocks and sewn — no joins inside, nothing to rub. The red is the strong one; the pink softens it just enough to wear in daylight."
+    tagline: "Red on pink, with a brim that will not flop. Start here.",
+    difficulty: "Beginner",
+    difficultyNote: "Worked in the round from the crown down. No shaping beyond even increases.",
+    time: "About 8 hours",
+    sizes: "Three head sizes — 54, 57 and 60cm circumference",
+    pages: 14,
+    yarn: "Mercerised cotton, DK weight. About 130g red, 110g pink.",
+    hook: "3.5mm hook — deliberately tight, for the brim.",
+    notions: "Stitch marker, tapestry needle.",
+    gauge: "20 stitches and 22 rounds to 10cm in double crochet, worked firmly.",
+    skills: [
+      "Working in continuous rounds",
+      "Even increases for a flat crown",
+      "Changing colour mid-round",
+      "Working a rolled edge"
     ],
-    details: [
-      ["Materials", "100% mercerised cotton."],
-      ["Fit", "Three bands. Crown depth 12cm, brim 5cm."],
-      ["Care", "Hand wash cool, reshape damp over a bowl, dry flat."],
-      ["Made", "By hand in our studio. About 8 hours per hat."]
+    extras: ["A beginner's round-counting sheet you can print and tick off"],
+    body: [
+      "This is the pattern to start with. The brim is worked at a tighter tension than the crown and finished with a rolled red edge, which is what keeps it standing up instead of collapsing after a season — the pattern is specific about the tension change and shows both rounds in photos.",
+      "Two shades of cotton are carried in a checkerboard, changed mid-round rather than worked in blocks and sewn, so there are no joins inside and nothing to rub. The colour-carry method is charted and written, and it is the same technique the Checkerboard Bag uses at a larger scale."
+    ],
+    notes: [
+      ["Sizing", "Three head circumferences, with a note on adding rounds for anything in between."],
+      ["Yarn swaps", "Must be a firm DK cotton. Soft or fluffy yarn will not hold the brim up."]
     ]
   },
   {
     slug: "rosewater-set",
     name: "Rosewater Bikini & Skirt Set",
-    price: 3800,
+    price: 540,
     badge: null,
     tile: "accent",
     span: "wide",
     image: "rosewater-set.png",
     alt: "A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist.",
-    tagline: "A ruffled top and a skirt that goes over everything.",
-    body: [
-      "Sold as a pair. The top has a gathered ruffle along the underband — worked at roughly twice the stitch count of the band itself, which is what gives it the flounce — and long braided ties at the neck and back.",
-      "The skirt is a straightforward tube with a drawstring, meant to be pulled on over swimwear and worn damp. It is crocheted densely enough not to be sheer, in a pink that reads bright in sun and soft indoors."
+    tagline: "A ruffled top and a skirt that goes over everything. Two patterns, one file.",
+    difficulty: "Confident beginner",
+    difficultyNote: "Two straightforward pieces. The ruffle is the only new technique.",
+    time: "About 14 hours",
+    sizes: "XS to XXL — top ties to fit, skirt graded across five sizes",
+    pages: 26,
+    yarn: "Cotton-nylon blend, 4ply. 180g for the top, 260–340g for the skirt.",
+    hook: "3mm hook. 2.5mm for the braided ties.",
+    notions: "Swimwear lining for the top, drawstring cord, tapestry needle.",
+    gauge: "24 stitches and 28 rows to 10cm in double crochet, worked firmly.",
+    skills: [
+      "Gathering a ruffle by stitch count rather than by eye",
+      "Working a straight tube skirt",
+      "Braiding long halter ties",
+      "Threading and finishing a drawstring"
     ],
-    details: [
-      ["Materials", "Cotton-nylon blend. Top fully lined; skirt unlined."],
-      ["Fit", "Top ties to fit. Skirt sits at the natural waist, 38cm long."],
-      ["Care", "Rinse in cool fresh water after swimming. Dry flat in shade."],
-      ["Made", "By hand in our studio. About 14 hours per set."]
+    extras: ["Both garments in one file — buy once, make either or both"],
+    body: [
+      "Written as a pair. The top has a gathered ruffle along the underband, worked at roughly twice the stitch count of the band itself — that ratio is the whole trick, and the pattern gives it as a formula so it holds at every size. The long braided ties at the neck and back are charted separately.",
+      "The skirt is a straightforward tube with a drawstring, meant to be pulled on over swimwear and worn damp. The pattern specifies a density that will not go sheer when wet, and includes the wet test to prove it before you make the whole thing."
+    ],
+    notes: [
+      ["Make one or both", "The two garments are written as independent sections. Neither depends on the other."],
+      ["Yarn swaps", "Needs nylon content for wet recovery. The substitution guide lists three alternatives."]
     ]
   }
 ];
@@ -142,10 +236,11 @@ const PRODUCTS = [
 /* ---------------- helpers ---------------- */
 const rupee = n => "&#8377;" + n.toLocaleString("en-IN");
 const esc = s => s.replace(/&(?!#?\w+;)/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const levelClass = d => d.toLowerCase().replace(/\s+/g, "-");
 
-function header(activeCart) {
+function header(activeBasket, activeLibrary) {
   return `<header class="site-header">
-  <p class="announcement">Free shipping across India on orders over &#8377;2,500 &middot; Every piece made by hand</p>
+  <p class="announcement">Instant PDF download &middot; Written rows, charts and step photos &middot; Yours to keep</p>
 
   <div class="container">
     <nav class="nav-bar" aria-label="Primary">
@@ -156,11 +251,12 @@ function header(activeCart) {
       </button>
 
       <ul class="nav-list" id="navList">
-        <li><a href="index.html#shop">Shop</a></li>
+        <li><a href="index.html#patterns">Patterns</a></li>
         <li><a href="index.html#story">Our story</a></li>
-        <li><a href="index.html#process">How it is made</a></li>
+        <li><a href="index.html#process">How it works</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-        <li><a class="cart-link" href="cart.html"${activeCart ? ' aria-current="page"' : ""}>Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 items</span></a></li>
+        <li><a href="library.html"${activeLibrary ? ' aria-current="page"' : ""}>My patterns</a></li>
+        <li><a class="cart-link" href="cart.html"${activeBasket ? ' aria-current="page"' : ""}>Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
   </div>
@@ -174,42 +270,42 @@ function footer() {
       <div>
         <p class="brand" style="margin-bottom: var(--space-m)">Crochet&nbsp;Curio</p>
         <p class="muted" style="font-size: var(--text-m-size); max-width: 32ch">
-          Hand-crocheted hats, bags and knitwear. Made slowly in small batches.
+          Digital crochet patterns, written and tested by hand. Make the piece yourself.
         </p>
       </div>
       <nav aria-labelledby="footer-shop">
-        <h2 id="footer-shop">Shop</h2>
+        <h2 id="footer-shop">Patterns</h2>
         <ul>
-${PRODUCTS.map(p => `          <li><a href="product-${p.slug}.html">${esc(p.name)}</a></li>`).join("\n")}
+${PATTERNS.map(p => `          <li><a href="product-${p.slug}.html">${esc(p.name)}</a></li>`).join("\n")}
         </ul>
       </nav>
       <nav aria-labelledby="footer-help">
         <h2 id="footer-help">Help</h2>
         <ul>
-          <li><a href="index.html#contact">Contact us</a></li>
-          <li><a href="index.html#contact">Size guide</a></li>
-          <li><a href="index.html#contact">Care and washing</a></li>
-          <li><a href="index.html#contact">Returns</a></li>
+          <li><a href="library.html">My patterns</a></li>
+          <li><a href="index.html#process">How patterns are delivered</a></li>
+          <li><a href="index.html#levels">Skill levels explained</a></li>
+          <li><a href="index.html#contact">Stuck on a row?</a></li>
         </ul>
       </nav>
       <nav aria-labelledby="footer-studio">
         <h2 id="footer-studio">Studio</h2>
         <ul>
           <li><a href="index.html#story">Our story</a></li>
-          <li><a href="index.html#process">How it is made</a></li>
-          <li><a href="index.html#contact">Commissions</a></li>
+          <li><a href="index.html#process">How a pattern is written</a></li>
+          <li><a href="index.html#contact">Pattern testing</a></li>
         </ul>
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Crochet Curio. All rights reserved.</p>
+      <p>&copy; 2026 Crochet Curio. Patterns are for your own use; the pieces you make from them are yours to sell.</p>
       <p>Built on the Crochet Curio design system.</p>
     </div>
   </div>
 </footer>`;
 }
 
-function head(title, description, extraCss) {
+function head(title, description) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -231,32 +327,17 @@ function head(title, description, extraCss) {
 `;
 }
 
-/* ---------------- product page ---------------- */
-function productPage(p, index) {
-  const prev = PRODUCTS[(index - 1 + PRODUCTS.length) % PRODUCTS.length];
-  const next = PRODUCTS[(index + 1) % PRODUCTS.length];
-
-  const sizeControl = p.oneSize
-    ? `<div class="size-block">
-            <p class="size-label" id="sizeLabel">Size</p>
-            <p class="one-size" role="note">One size &mdash; 34cm &times; 38cm</p>
-          </div>`
-    : `<fieldset class="size-block">
-            <legend class="size-label">Choose a size</legend>
-            <div class="size-options">
-${SIZES.map((s, i) => `              <label class="size-option">
-                <input type="radio" name="size" value="${s}"${i === 0 ? " checked" : ""}>
-                <span>${s}</span>
-              </label>`).join("\n")}
-            </div>
-            <p class="size-hint">Not sure? <a class="link" href="index.html#contact">Ask us for measurements</a> before you order.</p>
-          </fieldset>`;
+/* ---------------- pattern page ---------------- */
+function patternPage(p, index) {
+  const prev = PATTERNS[(index - 1 + PATTERNS.length) % PATTERNS.length];
+  const next = PATTERNS[(index + 1) % PATTERNS.length];
+  const includes = INCLUDED.concat(p.extras || []);
 
   return head(
-    `${p.name} — Crochet Curio`,
-    `${p.tagline} Hand-crocheted by Crochet Curio.`
+    `${p.name} — crochet pattern — Crochet Curio`,
+    `Digital crochet pattern. ${p.tagline} ${p.difficulty} level, ${p.pages}-page PDF, instant download.`
   ) + `
-${header(false)}
+${header(false, false)}
 
 <main id="main">
   <div class="container">
@@ -264,55 +345,99 @@ ${header(false)}
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol>
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#shop">Shop</a></li>
+        <li><a href="index.html#patterns">Patterns</a></li>
         <li><span aria-current="page">${esc(p.name)}</span></li>
       </ol>
     </nav>
 
     <div class="product">
-      <div class="product__media">
-        <img src="assets/img/${p.image}" alt="${esc(p.alt)}" title="${esc(p.alt)}" width="1000" height="1000">
+      <div class="product__mediaCol">
+        <div class="product__media">
+          <img src="assets/img/${p.image}" alt="${esc(p.alt)}" title="${esc(p.alt)}" width="1000" height="1000">
+        </div>
+        <p class="product__mediaNote">
+          The finished piece, made from this pattern. What you buy is the written pattern for it &mdash; not the item shown.
+        </p>
       </div>
 
       <div class="product__info">
+        <p class="kicker">Digital crochet pattern</p>
         ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ""}
         <h1>${esc(p.name)}</h1>
         <p class="product__tagline">${esc(p.tagline)}</p>
-        <p class="product__price">${rupee(p.price)}<span class="visually-hidden"> rupees</span></p>
+        <p class="product__price">${rupee(p.price)}<span class="visually-hidden"> rupees</span>
+          <span class="product__priceNote">PDF pattern &middot; instant download</span>
+        </p>
+
+        <ul class="spec-strip">
+          <li>
+            <span class="spec-strip__label">Skill level</span>
+            <span class="level level--${levelClass(p.difficulty)}">${esc(p.difficulty)}</span>
+          </li>
+          <li>
+            <span class="spec-strip__label">Time to make</span>
+            <span class="spec-strip__value">${esc(p.time)}</span>
+          </li>
+          <li>
+            <span class="spec-strip__label">Sizes written</span>
+            <span class="spec-strip__value">${esc(p.sizes)}</span>
+          </li>
+          <li>
+            <span class="spec-strip__label">Pattern length</span>
+            <span class="spec-strip__value">${p.pages}-page PDF</span>
+          </li>
+        </ul>
 
         <form class="buy-form" id="buyForm"
               data-slug="${p.slug}" data-name="${esc(p.name)}"
-              data-price="${p.price}" data-image="${p.image}">
+              data-price="${p.price}" data-image="${p.image}"
+              data-pages="${p.pages}" data-difficulty="${esc(p.difficulty)}">
 
-          ${sizeControl}
-
-          <div class="qty-block">
-            <label class="size-label" for="qty">Quantity</label>
-            <input type="number" id="qty" name="qty" value="1" min="1" max="10" step="1" inputmode="numeric">
-          </div>
-
-          <button class="btn btn--primary btn--block" type="submit">Add to basket</button>
+          <button class="btn btn--primary btn--block" type="submit">Get the pattern &mdash; ${rupee(p.price)}</button>
+          <p class="buy-form__note">
+            You are buying instructions, not the finished piece. Nothing is posted to you &mdash;
+            the file appears in <a class="link" href="library.html">My&nbsp;patterns</a> the moment you check out.
+          </p>
           <p class="form-status" id="buyStatus" role="status" aria-live="polite"></p>
         </form>
+
+        <h2 class="product__detailsTitle">What is in the file</h2>
+        <ul class="includes">
+${includes.map(t => `          <li>${esc(t)}</li>`).join("\n")}
+        </ul>
+
+        <h2 class="product__detailsTitle">Before you cast on</h2>
+        <dl class="product__details">
+          <div><dt>Yarn</dt><dd>${esc(p.yarn)}</dd></div>
+          <div><dt>Hook</dt><dd>${esc(p.hook)}</dd></div>
+          <div><dt>Other bits</dt><dd>${esc(p.notions)}</dd></div>
+          <div><dt>Gauge</dt><dd>${esc(p.gauge)}</dd></div>
+        </dl>
+
+        <h2 class="product__detailsTitle">Stitches you will use</h2>
+        <ul class="skills">
+${p.skills.map(s => `          <li>${esc(s)}</li>`).join("\n")}
+        </ul>
+        <p class="muted skills__note">${esc(p.difficultyNote)}</p>
 
         <div class="product__body">
 ${p.body.map(t => `          <p>${esc(t)}</p>`).join("\n")}
         </div>
 
-        <h2 class="product__detailsTitle">Details</h2>
+        <h2 class="product__detailsTitle">Notes from the studio</h2>
         <dl class="product__details">
-${p.details.map(([k, v]) => `          <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("\n")}
+${p.notes.map(([k, v]) => `          <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("\n")}
         </dl>
       </div>
     </div>
 
-    <nav class="product-nav" aria-label="More pieces">
+    <nav class="product-nav" aria-label="More patterns">
       <a class="product-nav__link" href="product-${prev.slug}.html">
-        <span class="muted">Previous</span>
+        <span class="muted">Previous pattern</span>
         <span>${esc(prev.name)}</span>
       </a>
       <a class="product-nav__link product-nav__link--next" href="product-${next.slug}.html">
-        <span class="muted">Next</span>
+        <span class="muted">Next pattern</span>
         <span>${esc(next.name)}</span>
       </a>
     </nav>
@@ -334,22 +459,25 @@ ${footer()}
 /* ---------------- write everything ---------------- */
 const root = __dirname;
 
-PRODUCTS.forEach((p, i) => {
-  fs.writeFileSync(path.join(root, `product-${p.slug}.html`), productPage(p, i));
+PATTERNS.forEach((p, i) => {
+  fs.writeFileSync(path.join(root, `product-${p.slug}.html`), patternPage(p, i));
 });
 
 const catalogue =
   "/* Generated by build-products.js — do not edit by hand. */\n" +
   "window.CATALOGUE = " +
   JSON.stringify(
-    PRODUCTS.map(p => ({
+    PATTERNS.map(p => ({
       slug: p.slug, name: p.name, price: p.price,
-      image: p.image, alt: p.alt, oneSize: !!p.oneSize
+      image: p.image, alt: p.alt,
+      difficulty: p.difficulty, pages: p.pages,
+      time: p.time, sizes: p.sizes,
+      yarn: p.yarn, hook: p.hook, gauge: p.gauge
     })),
     null, 2
   ) + ";\n";
 
 fs.writeFileSync(path.join(root, "assets/js/catalogue.js"), catalogue);
 
-console.log("Wrote " + PRODUCTS.length + " product pages + assets/js/catalogue.js");
-module.exports = { PRODUCTS, SIZES, header, footer, head, rupee, esc };
+console.log("Wrote " + PATTERNS.length + " pattern pages + assets/js/catalogue.js");
+module.exports = { PATTERNS, INCLUDED, header, footer, head, rupee, esc };

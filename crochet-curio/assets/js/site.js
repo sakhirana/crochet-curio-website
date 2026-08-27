@@ -84,7 +84,7 @@
 
       if (!value) {
         setError("emailField", "newsletterError", "newsletterEmail",
-                 "Enter your email address so we know where to send the restock note.");
+                 "Enter your email address so we know where to send new pattern releases.");
         input.focus();
         return;
       }
@@ -97,7 +97,7 @@
 
       setError("emailField", "newsletterError", "newsletterEmail", null);
       newsletter.reset();
-      announce("newsletterStatus", "Thank you — you are on the list. Watch for the next restock.");
+      announce("newsletterStatus", "Thank you — you are on the list. We will write when the next pattern is ready.");
     });
   }
 

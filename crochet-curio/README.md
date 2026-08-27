@@ -1,7 +1,11 @@
 # Crochet Curio — website
 
-A small-business site built directly on the **Crochet Curio Design System**
-Figma file, targeting **WCAG 2.2 Level AA**.
+A **digital crochet pattern studio**: the six projects on the site are sold as
+downloadable PDF patterns, not as finished pieces. The photographs show what
+you will have made; what changes hands is the instructions.
+
+Built directly on the **Crochet Curio Design System** Figma file, targeting
+**WCAG 2.2 Level AA**.
 
 Source of truth: `figma.com/design/uz4VizxZpPffThiHds891s/Crochet-Curio-Design-System`
 Tokens come from the *FurGo design tokens* library attached to that file.
@@ -20,23 +24,26 @@ Then open <http://localhost:4173>. No build step, no dependencies.
 
 | Path | What it holds |
 | --- | --- |
-| `index.html` | Home — hero, shop grid, story, process, newsletter, contact |
-| `product-*.html` | One page per piece (6). **Generated — edit the catalogue, not these** |
-| `cart.html` | Basket: quantities, removal, running totals |
-| `checkout.html` | Delivery details, order summary, confirmation |
-| `build-products.js` | Product catalogue + page generator. `node build-products.js` |
+| `index.html` | Home — hero, pattern library, story, how it works, skill levels, newsletter, contact |
+| `product-*.html` | One page per pattern (6). **Generated — edit the catalogue, not these** |
+| `cart.html` | Basket: the patterns picked, removal, running total |
+| `checkout.html` | Name and email, order summary, pattern-unlocked confirmation |
+| `library.html` | My patterns — every pattern owned, re-downloadable |
+| `build-products.js` | Pattern catalogue + page generator. `node build-products.js` |
 | `assets/css/tokens.css` | Every design token, translated 1:1 from Figma variables |
 | `assets/css/styles.css` | Layout and components, built only from those tokens |
-| `assets/css/shop.css` | Shop grid, product, basket and checkout |
+| `assets/css/shop.css` | Pattern grid, pattern page, basket, checkout and library |
 | `assets/js/site.js` | Mobile nav disclosure and accessible form validation |
-| `assets/js/shop.js` | Basket state and checkout flow |
-| `assets/js/catalogue.js` | Generated product data — do not edit by hand |
-| `assets/img/` | **Product photography goes here** — see below |
+| `assets/js/shop.js` | Basket, checkout and pattern-library state |
+| `assets/js/catalogue.js` | Generated pattern data — do not edit by hand |
+| `assets/img/` | **Photography of the finished pieces goes here** — see below |
 | `serve.js` | Minimal static preview server |
 
-## Product photography
+## Photography
 
-All six photos are in `assets/img/` and loading (verified 200 OK, no 404s):
+Each photo shows the **finished piece a pattern produces**, and every pattern
+page says so in as many words directly under the image. All six are in
+`assets/img/` and loading (verified 200 OK, no 404s):
 
 | File | Photo |
 | --- | --- |
@@ -96,45 +103,64 @@ Removing the `title` attributes is the one-line fix if that ever bothers you.
 
 ## The Daisy Cardigan is gone
 
-Replaced by the **Gingham Bucket Hat** (₹2,200) — its own product page, its own
-copy and details, in the same grid slot. `product-daisy-cardigan.html` was
-deleted and every link across the home page, basket and checkout footers now
+Replaced by the **Gingham Bucket Hat** — its own pattern page, its own copy and
+details, in the same grid slot. `product-daisy-cardigan.html` was deleted and
+every link across the home page, basket, checkout and library footers now
 points at `product-bucket-hat.html`. No references remain.
 
-## Shop and checkout
+## Patterns, basket and pattern access
 
-**Shop grid** is deliberately uneven rather than a uniform 3-up: the bag runs
-as a wide feature, the Cloud cardigan as a tall portrait beside it, three
-square tiles below, and the Rosewater set as a full-width banner. Tiles
-alternate between the neutral and brand-accent backgrounds, and images lift
-slightly on hover and on keyboard focus (suppressed under
+Selling a file rather than an object changes the mechanics, not the design.
+Everything below is the same design system doing a different job.
+
+**Pattern grid** is deliberately uneven rather than a uniform 3-up: the bag
+runs as a wide feature, the Cloud cardigan as a tall portrait beside it, three
+square tiles below, and the Rosewater set as a full-width banner. Each card
+carries the pattern price, a skill-level pill and an invitation to make it
+yourself. Images lift slightly on hover and on keyboard focus (suppressed under
 `prefers-reduced-motion`).
 
-**Product pages** carry a description, a details list (materials, fit,
-dimensions, care, hours to make), size selection, quantity, and add-to-basket,
-plus previous/next links around the collection.
+The card's call to action is a **styled `<span>`, not a second link** — the
+heading link already stretches across the whole card via `h3 a::after`, so a
+real link there would give keyboard and screen reader users two tab stops to
+the same destination.
 
-**Sizes** are the three bands you asked for — `XS–S`, `M–L`, `XL–XXL` — as
-radio buttons styled as pills. Selection shows as fill *and* weight, never
-colour alone. The Checkerboard Bag is the exception: it is a bag, so it shows
-"One size" rather than a garment size band.
+**Pattern pages** lead with the finished piece and a line under it saying
+plainly that the pattern is what is for sale. Then: a spec strip (skill level,
+time to make, sizes written, page count), a single **Get the pattern** button,
+what is inside the file, the yarn/hook/notions/gauge you need before casting
+on, the stitches used, the studio's notes, and previous/next links.
 
-**Basket** stacks the same piece in the same size instead of duplicating the
-line, keeps quantities between 1 and 10, and persists in `localStorage`. Every
-read is wrapped in `try/catch` so a private window or blocked site data still
-renders a working page.
+If a pattern is already owned, its button says so, is disabled, and points at
+the library instead of selling the same file twice.
 
-**Checkout** validates name, email, address, city and a 6-digit PIN, moves
-focus to the first invalid field, and announces failures through a live region.
+**Skill levels** are `Beginner`, `Confident beginner` and `Intermediate`. The
+pill carries the level as a word first; the tint and dot are a second cue, not
+the only one (1.4.1). `index.html#levels` explains what each level assumes.
 
-> **The checkout is a front-end demonstration.** Nothing is transmitted and no
-> payment is taken — the page says so plainly to anyone using it. Connect a
-> payment provider before accepting real orders.
+**Basket** holds one copy of each pattern — no quantity field, because a second
+copy of a PDF buys nothing — and persists in `localStorage`. Every read is
+wrapped in `try/catch` so a private window or blocked site data still renders a
+working page.
 
-One thing to be aware of: the free-shipping threshold is ₹2,500 and the
-cheapest piece is ₹2,800, so shipping currently reads "Free" on every order.
-The ₹150 charge and the "spend X more" prompt work — they just never trigger.
-Raise the threshold or lower a price if you want that mechanic to do anything.
+**Checkout** asks for a name and an email and nothing else. There is no
+address, no PIN code and no shipping line, because nothing is posted. On
+submit the basket empties into the pattern library and the confirmation lists
+each unlocked file with its own Download button.
+
+**My patterns** (`library.html`) is the permanent shelf: every pattern owned,
+re-downloadable as often as you like, with a link back to the finished piece.
+
+> **The checkout and library are a front-end demonstration.** Nothing is
+> transmitted, no payment is taken, and the Download button hands over a
+> plain-text stand-in describing the pattern rather than the studio's real PDF
+> — see `patternFileText()` in `assets/js/shop.js`. Both pages say so plainly
+> to anyone using them. Connect a payment provider and a file store before
+> selling patterns for money.
+
+Two storage keys, both in `localStorage`: `crochet-curio-basket` for what is
+picked and `crochet-curio-library` for what is owned. Ownership is per browser,
+which is exactly the limitation an account system would remove.
 
 ---
 
@@ -159,13 +185,77 @@ XS 4, S 8, M 12, L 16, XL 24, 2XL 32, 5XL 56. The MCP API would not return
 marked `(inferred)` in `tokens.css`. **Worth a glance** — if the real values
 differ, correcting those seven lines updates the whole site.
 
-**Radius / stroke / elevation** — Radius XS 4, L 16, Pill 999 (S and M
-inferred). Stroke XS 1px, M 2px. Shadows L1–L6 exactly as specified.
+**Stroke** — Stroke XS 1px, M 2px, L 4px. Confirmed from the file.
 
-**Buttons** — translated from your Button component: 4 types × 2 sizes
-(L 48px, S 32px) × 4 states. The focus state matters most: your component
-puts a **2px `Border/Focus` ring outside the control**, and the CSS does the
-same via `outline` + `outline-offset`.
+**Radius** — `Radius/XS · S · M · L · Pill · Circle` exist, in the *Border*
+collection of the FurGo design tokens library. The names are real; the values
+in `tokens.css` are not confirmed — the API returns variable names and types
+but not the numbers. **The Button component uses none of them.** It is square
+on all 32 variants, so the buttons here are square too.
+
+**Elevation** — no shadow or elevation variables and no effect styles in the
+library. The `--shadow-l1`…`l6` tokens in `tokens.css` are **invented** and
+should either be added to the file or dropped from the CSS.
+
+**Buttons** — the Button component set, read node by node:
+
+| | Size L | Size S |
+|---|---|---|
+| Box | 48px tall, 12px frame padding | 32px tall, 8/4px frame padding |
+| Label | Text/L Regular 16/24 | Text/M Regular 14/20 |
+| Inset | 16px (12px frame + 4px on the Label node) | 12px |
+| Radius | none | none |
+
+Types: **Primary** `Background/Brand` → `Brand hover` → `Brand pressed`,
+label `Content/Primary inverse`. **Secondary** white, 1px `Border/Secondary`,
+label `Content/Secondary` that darkens to `Content/Primary` on hover and
+press. **Tertiary** link-coloured, fill only on hover and press.
+**Tertiary mono** the same shape in `Content/Secondary`.
+
+The focus state matters most: the component puts a **2px `Border/Focus` ring
+2px outside the control**, and the CSS does the same via `outline` +
+`outline-offset`.
+
+---
+
+## Design system issues
+
+Four things in the Figma file will fail an audit or trip a user. None of them
+are fixed here — they need fixing in the file, or every consumer of the
+library inherits them. The site works around the first two.
+
+**1. `Border/Focus` is unusable on brand surfaces — 1.4.11 Non-text Contrast.**
+`#3355ff` is 5.4:1 against white, which is fine, but 1.6:1 against
+`Background/Brand` `#3a5240` and 1.2:1 against `Background/Brand Pressed`.
+Any focused control on a brand panel has a ring nobody can see, and 3:1 is the
+floor. *Fix:* add a `Border/Focus Inverse` variable (`Primary/White`) and a
+Focus-on-dark variant, or make the ring two-tone — 2px `Border/Focus` with a
+2px white outer ring, which then works on any ground. The site does the first
+of these by hand on the hero band and the newsletter panel.
+
+**2. `Content/Link Hover` and `Content/Link Pressed` are the same colour**
+(`#1f3399`). A Tertiary button looks identical whether you are hovering it or
+holding it down, so press is unacknowledged. Not a contrast failure — both are
+7:1+ — but it costs the feedback 3.2.x expects. *Fix:* move pressed down to
+`Blue/800`, keeping hover at `Blue/700`.
+
+**3. The Button set has no Disabled variant**, though `Content/Disabled`,
+`Background/Disabled` and `Border/Disabled` all exist. The shop disables the
+buy button once you own a pattern, so the state is real. *Fix:* add
+State=Disabled using those three tokens. Note that disabled controls are
+exempt from 1.4.3, so the low contrast of `#b2b2b2` on `#f2f2f2` is allowed —
+but pair it with `aria-disabled` rather than `disabled` anywhere the user
+needs to be able to reach the control and read why it is off (3.3.1).
+
+**4. Button frames are fixed-height with `nowrap` labels.** At 48px and 32px
+exactly, a label clips as soon as a user applies their own text spacing
+(1.4.12) or zooms to 200% (1.4.4). *Fix:* hug the content vertically with a
+minimum height instead of a fixed one. The CSS uses `min-height` for this
+reason.
+
+Two more that pass, but with no margin worth spending: `Border/Secondary`
+`#8c8c8c` is 3.36:1 on white against a 3:1 floor, and the Secondary focus ring
+sits at a 5px offset where every other type uses 4px.
 
 ---
 
@@ -187,13 +277,16 @@ The palette, type, structure and voice are your design system's, not theirs.
 
 ## Currency
 
-Prices are in **Indian rupees** (`&#8377;`). The pound amounts were not swapped
-symbol-for-symbol — `₹38` for a hat would not read as a real price — so they
-were converted to plausible INR: ₹1,750–₹3,300, with free shipping over ₹2,500.
-**These are placeholders. Set your real prices.**
+Prices are in **Indian rupees** (`&#8377;`) and are **pattern prices, not piece
+prices** — ₹320 for the bucket hat pattern up to ₹650 for the graded
+Strawberry Cardigan, scaled roughly to page count and grading effort.
+**These are placeholders. Set your real prices** in the catalogue at the top of
+`build-products.js`, then re-run it.
 
-The announcement bar now reads "Free shipping across India"; change it if you
-ship elsewhere.
+The announcement bar reads "Instant PDF download · Written rows, charts and
+step photos · Yours to keep". It is repeated verbatim in `build-products.js`
+and in the four hand-written pages (`index`, `cart`, `checkout`, `library`) —
+change it in all of them together.
 
 ## Responsive behaviour
 
@@ -235,12 +328,12 @@ Files: `assets/css/motion.css`, `assets/js/motion.js`.
 | Hero entrance — eyebrow, heading, lede, buttons slide in from the left in sequence; artwork drifts in from the right | Home, on load |
 | Slow ambient drift on the hero artwork | Home |
 | Scroll reveals — content fades and slides in as it enters view | Every page |
-| Directional reveals — story text from the left, its artwork from the right; product image from the left, details from the right | Story, product pages |
-| Staggered reveals — shop cards, process steps and footer columns arrive one after another | Home |
+| Directional reveals — story text from the left, its artwork from the right; the finished piece from the left, the pattern details from the right | Story, pattern pages |
+| Staggered reveals — pattern cards, process steps and footer columns arrive one after another | Home |
 | Process numbers scale and rotate into place | Home |
-| Flowing text ticker — a continuous scrolling band | Home, between shop and story |
+| Scroll manifesto — three phrases arrive in turn, shapes drifting behind | Home, between the pattern grid and the story |
 | Section headings draw a short sage underline | Every page |
-| Cards lift on hover and on keyboard focus; images scale gently | Shop grid |
+| Cards lift on hover and on keyboard focus; images scale gently | Pattern grid |
 | Buttons lift on hover with a slight spring | Every page |
 | Basket count pops when it changes | Every page |
 | Summary figures flash sage when they update | Basket, checkout |
@@ -263,10 +356,36 @@ anything is still waiting to be revealed, it is shown regardless. This covers
 prerendered loads, background tabs, and browsers where IntersectionObserver
 misbehaves. Visitors whose observers work never reach it.
 
-**The ticker has a real pause button.** WCAG 2.2.2 requires a mechanism to stop
-content that moves automatically for more than five seconds. It is a genuine
-`aria-pressed` toggle at 97×44px that swaps between Pause and Play, and the
-ticker also pauses on hover unless you have explicitly pressed play.
+### The scroll manifesto
+
+The old auto-scrolling ticker is gone, replaced by a section you move through
+yourself. A 300vh track (260vh on tablet, ~2.5 screens on mobile) holds a
+sticky full-height stage. As the track passes, three phrases cross-fade in
+turn — **Written row by row → Tested before it is sold → Made by you** — while
+four decorative shapes drift in from the sides behind them.
+
+The shapes are inline SVG in brand colours: a paper-wrapped yarn ball and a
+bucket hat in sage, a crochet hook in the dusty-pink accent, and a granny
+square combining both. They are sized 148/74/132/164px on desktop, roughly
+halved on mobile, and capped at **0.42 opacity** so they stay texture rather
+than becoming the subject.
+
+They sit at `z-index: 1` against the text's `z-index: 2` — **behind the words,
+never over them** — and are tucked toward the edges so the centre stays clear.
+The whole group is `aria-hidden`, since it carries no information.
+
+Scrolling is **not** hijacked. The page scrolls at its normal rate and the
+stage only reads its own position, so the section can be scrolled straight
+past. That also means WCAG 2.2.2 no longer applies — nothing moves on its own,
+so no pause control is needed.
+
+Verified across the scroll: at least one phrase is fully readable at every
+point, so the stage is never blank. Shapes start off-stage at ±173–213px and
+opacity 0, ramp in, then hold. Under reduced motion the driver **does not run
+at all** — deliberately, because it writes inline opacity onto the phrases,
+which would hide text from exactly the people who opted out. Without it the CSS
+fallback stands: no sticky, no track height, all three phrases stacked and
+visible, shapes hidden.
 
 ## Accessibility
 
@@ -322,13 +441,26 @@ state is never colour alone — there is always text.
 
 ## Before this goes live
 
-1. **Swap in real photography.** The illustrations are CSS/SVG stitch patterns
-   standing in for product shots. They are deliberate placeholders, not
-   pretend photos. Replace them with `<img>` and write real `alt` text.
-2. **Wire the forms.** Both are client-side only — validation runs, nothing is
+1. **Check the pattern photography carries its weight.** The six project photos
+   are real; the hero and story illustrations are SVG stitch patterns, and are
+   deliberate decoration rather than pretend photos. Consider adding
+   in-progress and detail shots — pattern buyers want to see the stitch.
+2. **Write the actual patterns.** Six PDFs, one per project. The site promises
+   written rows in UK and US terms, stitch charts, step photos, a yarn
+   substitution guide and a gauge checklist — the page counts in the catalogue
+   assume all of it. Deliver what the listing claims.
+3. **Wire the money and the files.** Checkout takes no payment and the library
+   downloads a text stand-in. You need a payment provider, somewhere to host
+   the PDFs, and accounts so a pattern follows its owner between browsers.
+   Replace `patternFileText()` in `assets/js/shop.js` with the real file.
+4. **Decide the licence properly.** The footer currently says patterns are for
+   personal use and finished pieces may be sold. That is a real commitment —
+   make sure it is the one you want, then say it somewhere fuller than a
+   footer line.
+5. **Wire the forms.** Both are client-side only — validation runs, nothing is
    sent. Point them at your mail service or form endpoint.
-3. **Replace the placeholder details** — `hello@crochetcurio.example`, the
-   prices, the studio hours, the 2026 copyright.
-4. **Confirm the seven inferred spacing values** against Figma.
-5. **Test with a real screen reader.** Automated checks catch structure, not
+6. **Replace the placeholder details** — `hello@crochetcurio.example`, the
+   pattern prices, the studio hours, the 2026 copyright.
+7. **Confirm the seven inferred spacing values** against Figma.
+8. **Test with a real screen reader.** Automated checks catch structure, not
    whether the page actually makes sense read aloud.

@@ -55,91 +55,153 @@
     transform var(--dur-slow) var(--ease-out-soft);
   transition-delay: var(--enter-delay, 0ms);
 }
-.js-motion .hero .hero__art[data-enter] {
-  transform: translateX(28px) scale(.96);
-}
 .js-motion .hero [data-enter].is-entered {
   opacity: 1;
   transform: none;
 }
 
-/* A slow drift on the hero artwork, so the page is never quite still */
-@media (prefers-reduced-motion: no-preference) {
-  .hero__art svg { animation: drift 14s var(--ease-out-soft) infinite alternate; }
+/* ============================================================
+   Scroll manifesto
+
+   A tall track with a sticky stage. Three phrases cross-fade as the
+   track passes, and four decorative shapes drift in from the sides
+   behind them. Scrolling is never hijacked — the page scrolls
+   normally and the stage simply reads its own position.
+
+   Without JavaScript the track collapses to its natural height and
+   all three phrases are visible, stacked.
+   ============================================================ */
+.manifesto {
+  /* Same pink the hero copy sits on, so the two full-bleed bands that carry
+     the big brand-green type are the same ground. */
+  background: #E8CACE;
+  overflow: clip;
 }
-@keyframes drift {
-  from { transform: translate3d(0, 0, 0) scale(1); }
-  to   { transform: translate3d(0, -10px, 0) scale(1.02); }
+
+/* No-JS / no-motion fallback: a plain, readable stack */
+.manifesto__stage {
+  display: grid;
+  gap: var(--space-2xl);
+  justify-items: center;
+  padding-block: var(--space-8xl);
+  padding-inline: var(--layout-gutter);
+}
+.manifesto__line {
+  margin: 0;
+  max-width: 16ch;
+  text-align: center;
+  font-size: clamp(2.5rem, 9vw, 6rem);
+  line-height: 1.02;
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  color: var(--content-brand);
+  text-wrap: balance;
+}
+.manifesto__shapes { display: none; }
+
+/* ---------- Active version, once JS is running ---------- */
+.js-motion .manifesto__track { height: 300vh; }
+
+.js-motion .manifesto__stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 0 var(--layout-gutter);
+}
+
+/* every phrase occupies the same cell, so they cross-fade in place */
+.js-motion .manifesto__line {
+  grid-area: 1 / 1;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(24px);
+  will-change: opacity, transform;
+}
+
+.js-motion .manifesto__shapes {
+  display: block;
+  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
+  z-index: 1;              /* behind the words, never over them */
+  pointer-events: none;
+}
+
+.js-motion .shape {
+  position: absolute;
+  opacity: 0;
+  height: auto;
+  will-change: transform, opacity;
+}
+
+/* Modest sizes, tucked toward the edges so the centre stays clear. The
+   photographs replaced the drawn shapes, so the widths below are set from
+   each one's own proportions: what is held steady is the longest edge, a
+   little larger than the drawing it stands in for. */
+.js-motion .shape--coaster { width: 230px; left: 4%;  top: 16%; }
+.js-motion .shape--bikini  { width: 248px; right: 7%; top: 22%; }
+.js-motion .shape--bag     { width: 136px; right: 5%; bottom: 15%; }
+.js-motion .shape--hat     { width: 232px; left: 7%;  bottom: 12%; }
+
+/* A slow idle float on top of the scroll-driven position */
+@media (prefers-reduced-motion: no-preference) {
+  .js-motion .shape--coaster { animation: float-a 11s ease-in-out infinite alternate; }
+  .js-motion .shape--bikini  { animation: float-b 9s  ease-in-out infinite alternate; }
+  .js-motion .shape--bag     { animation: float-a 13s ease-in-out infinite alternate; }
+  .js-motion .shape--hat     { animation: float-b 10s ease-in-out infinite alternate; }
+}
+@keyframes float-a {
+  from { translate: 0 0; rotate: -4deg; }
+  to   { translate: 0 -18px; rotate: 4deg; }
+}
+@keyframes float-b {
+  from { translate: 0 8px; rotate: 5deg; }
+  to   { translate: 0 -14px; rotate: -3deg; }
+}
+
+@media (max-width: 900px) {
+  .js-motion .manifesto__track { height: 260vh; }
+  .js-motion .shape--coaster { width: 150px; left: 2%;  top: 14%; }
+  .js-motion .shape--bikini  { width: 170px; right: 4%; top: 20%; }
+  .js-motion .shape--bag     { width: 89px;  right: 2%; bottom: 14%; }
+  .js-motion .shape--hat     { width: 148px; left: 3%;  bottom: 11%; }
+}
+
+@media (max-width: 620px) {
+  .manifesto__line { font-size: clamp(2rem, 13vw, 3.25rem); }
+  .js-motion .shape--coaster { width: 108px; }
+  .js-motion .shape--bikini  { width: 120px; }
+  .js-motion .shape--bag     { width: 65px; }
+  .js-motion .shape--hat     { width: 108px; }
 }
 
 /* ============================================================
-   Flowing text ticker
-   Auto-moving content, so WCAG 2.2.2 requires a way to stop it.
-   The button below is that mechanism — it is not decorative.
+   The bucket hat's tilt
+
+   The hat tips right over as the page scrolls and ends up sitting on
+   the "Our story" heading. It is one photograph the whole way — a
+   single rotation carried across the two sections, which is the only
+   version of this that can be genuinely smooth.
+
+   Two things here make that possible; the rest is in motion.js.
+
+   * The image is `fixed`. Its resting spot is bottom-left of the
+     sticky stage, and while the stage is stuck that is the same place
+     as bottom-left of the viewport — so nothing moves when the
+     position scheme changes, but the hat can now outlive the stage and
+     carry on down to the story.
+   * It turns about its own left edge, the side it tips from, measured
+     off the photograph: the hat starts 20.85% into the frame, and its
+     middle is 48.4% down. Everything else is proportional to the width
+     the breakpoints above already set, so no size is repeated here.
    ============================================================ */
-.ticker {
-  position: relative;
-  overflow: hidden;
-  background: var(--background-inverse);
-  color: var(--content-primary-inverse);
-  padding-block: var(--space-l);
-  border-radius: var(--radius-l);
-}
-
-.ticker__track {
-  display: flex;
-  width: max-content;
-  animation: ticker-scroll 32s linear infinite;
-}
-.ticker.is-paused .ticker__track { animation-play-state: paused; }
-
-.ticker__group {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4xl);
-  padding-right: var(--space-4xl);
-  white-space: nowrap;
-  font-size: var(--heading-m-size);
-  line-height: var(--heading-m-line);
-  font-weight: var(--heading-weight);
-  letter-spacing: var(--heading-tracking);
-}
-.ticker__group span { display: inline-flex; align-items: center; gap: var(--space-4xl); }
-.ticker__dot { color: var(--brand-accent-500); }
-
-@keyframes ticker-scroll {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
-}
-
-.ticker__toggle {
-  position: absolute;
-  top: 50%;
-  right: var(--space-l);
-  transform: translateY(-50%);
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-s);
-  min-height: 44px;
-  min-width: 44px;
-  padding: var(--space-s) var(--space-l);
-  border: var(--stroke-width-xs) solid var(--border-inverse);
-  border-radius: var(--radius-pill);
-  background: var(--background-inverse);
-  color: var(--content-primary-inverse);
-  font-size: var(--text-m-size);
-  cursor: pointer;
-}
-.ticker__toggle:hover { background: var(--brand-700); }
-.ticker__toggle:focus-visible { outline-color: var(--primary-white); }
-
-/* Reduced motion: no scroll, no reason for a pause control */
-@media (prefers-reduced-motion: reduce) {
-  .ticker__track { animation: none; }
-  .ticker__toggle { display: none; }
-  .ticker__group { flex-wrap: wrap; white-space: normal; }
+.js-motion .shape--hat {
+  position: fixed;
+  transform-origin: 20.85% 48.4%;
+  animation: none;         /* the idle float is folded into the scroll driver */
 }
 
 /* ============================================================
@@ -248,8 +310,6 @@
 
 @media (max-width: 620px) {
   .to-top { right: var(--space-l); bottom: var(--space-l); }
-  .ticker__group { font-size: var(--heading-s-size); line-height: var(--heading-s-line); }
-  .ticker__toggle { right: var(--space-s); }
 }
 
 /* ============================================================
@@ -262,6 +322,5 @@
     transform: none !important;
     transition: none !important;
   }
-  .hero__art svg { animation: none; }
   .shop-card, .btn { transition: none; }
 }
