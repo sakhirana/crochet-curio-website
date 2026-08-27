@@ -23,7 +23,7 @@ const INCLUDED = [
 const PATTERNS = [
   {
     slug: "checkerboard-bag",
-    name: "Checkerboard Shoulder Bag",
+    name: "Marina Tote Bag",
     price: 380,
     badge: "Most made",
     tile: "accent",
@@ -58,7 +58,7 @@ const PATTERNS = [
   },
   {
     slug: "cloud-cardigan",
-    name: "Cloud Cropped Cardigan",
+    name: "Lumi Cardigan",
     price: 620,
     badge: null,
     tile: "neutral",
@@ -93,7 +93,7 @@ const PATTERNS = [
   },
   {
     slug: "dune-bikini",
-    name: "Dune Stripe Bikini Set",
+    name: "Sienna Bikini Set",
     price: 450,
     badge: null,
     tile: "neutral",
@@ -128,7 +128,7 @@ const PATTERNS = [
   },
   {
     slug: "strawberry-cardigan",
-    name: "Strawberry Cropped Cardigan",
+    name: "Sweetheart Cardigan",
     price: 650,
     badge: "New pattern",
     tile: "accent",
@@ -163,7 +163,7 @@ const PATTERNS = [
   },
   {
     slug: "bucket-hat",
-    name: "Gingham Bucket Hat",
+    name: "Poppy Hat",
     price: 320,
     badge: null,
     tile: "neutral",
@@ -189,7 +189,7 @@ const PATTERNS = [
     extras: ["A beginner's round-counting sheet you can print and tick off"],
     body: [
       "This is the pattern to start with. The brim is worked at a tighter tension than the crown and finished with a rolled red edge, which is what keeps it standing up instead of collapsing after a season — the pattern is specific about the tension change and shows both rounds in photos.",
-      "Two shades of cotton are carried in a checkerboard, changed mid-round rather than worked in blocks and sewn, so there are no joins inside and nothing to rub. The colour-carry method is charted and written, and it is the same technique the Checkerboard Bag uses at a larger scale."
+      "Two shades of cotton are carried in a checkerboard, changed mid-round rather than worked in blocks and sewn, so there are no joins inside and nothing to rub. The colour-carry method is charted and written, and it is the same technique the Marina Tote Bag uses at a larger scale."
     ],
     notes: [
       ["Sizing", "Three head circumferences, with a note on adding rounds for anything in between."],
@@ -198,7 +198,7 @@ const PATTERNS = [
   },
   {
     slug: "rosewater-set",
-    name: "Rosewater Bikini & Skirt Set",
+    name: "Ariel Set",
     price: 540,
     badge: null,
     tile: "accent",

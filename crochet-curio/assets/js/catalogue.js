@@ -2,7 +2,7 @@
 window.CATALOGUE = [
   {
     "slug": "checkerboard-bag",
-    "name": "Checkerboard Shoulder Bag",
+    "name": "Marina Tote Bag",
     "price": 380,
     "image": "Bluebell.png",
     "alt": "A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it.",
@@ -16,7 +16,7 @@ window.CATALOGUE = [
   },
   {
     "slug": "cloud-cardigan",
-    "name": "Cloud Cropped Cardigan",
+    "name": "Lumi Cardigan",
     "price": 620,
     "image": "Frosty.png",
     "alt": "A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
@@ -30,7 +30,7 @@ window.CATALOGUE = [
   },
   {
     "slug": "dune-bikini",
-    "name": "Dune Stripe Bikini Set",
+    "name": "Sienna Bikini Set",
     "price": 450,
     "image": "dune-bikini.png",
     "alt": "A two-piece crochet bikini in tan and black stripes: a triangle top with braided halter ties and matching tie-side bottoms with tasselled ends, laid flat.",
@@ -44,7 +44,7 @@ window.CATALOGUE = [
   },
   {
     "slug": "strawberry-cardigan",
-    "name": "Strawberry Cropped Cardigan",
+    "name": "Sweetheart Cardigan",
     "price": 650,
     "image": "Valentine.png",
     "alt": "A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
@@ -58,7 +58,7 @@ window.CATALOGUE = [
   },
   {
     "slug": "bucket-hat",
-    "name": "Gingham Bucket Hat",
+    "name": "Poppy Hat",
     "price": 320,
     "image": "Poppy.png",
     "alt": "A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle.",
@@ -72,7 +72,7 @@ window.CATALOGUE = [
   },
   {
     "slug": "rosewater-set",
-    "name": "Rosewater Bikini & Skirt Set",
+    "name": "Ariel Set",
     "price": 540,
     "image": "rosewater-set.png",
     "alt": "A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist.",

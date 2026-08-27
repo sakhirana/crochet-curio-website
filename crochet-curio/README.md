@@ -103,7 +103,7 @@ Removing the `title` attributes is the one-line fix if that ever bothers you.
 
 ## The Daisy Cardigan is gone
 
-Replaced by the **Gingham Bucket Hat** — its own pattern page, its own copy and
+Replaced by the **Poppy Hat** — its own pattern page, its own copy and
 details, in the same grid slot. `product-daisy-cardigan.html` was deleted and
 every link across the home page, basket, checkout and library footers now
 points at `product-bucket-hat.html`. No references remain.
@@ -115,7 +115,7 @@ Everything below is the same design system doing a different job.
 
 **Pattern grid** is deliberately uneven rather than a uniform 3-up: the bag
 runs as a wide feature, the Cloud cardigan as a tall portrait beside it, three
-square tiles below, and the Rosewater set as a full-width banner. Each card
+square tiles below, and the Ariel set as a full-width banner. Each card
 carries the pattern price, a skill-level pill and an invitation to make it
 yourself. Images lift slightly on hover and on keyboard focus (suppressed under
 `prefers-reduced-motion`).
@@ -279,7 +279,7 @@ The palette, type, structure and voice are your design system's, not theirs.
 
 Prices are in **Indian rupees** (`&#8377;`) and are **pattern prices, not piece
 prices** — ₹320 for the bucket hat pattern up to ₹650 for the graded
-Strawberry Cardigan, scaled roughly to page count and grading effort.
+Sweetheart Cardigan, scaled roughly to page count and grading effort.
 **These are placeholders. Set your real prices** in the catalogue at the top of
 `build-products.js`, then re-run it.
 
