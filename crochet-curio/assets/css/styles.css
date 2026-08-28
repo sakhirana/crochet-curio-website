@@ -764,3 +764,34 @@ p { text-wrap: pretty; }
 :root[data-theme="dark"] .hero-banner .hero .eyebrow,
 :root[data-theme="dark"] .hero-banner .hero h1 { color: var(--brand-700); }
 :root[data-theme="dark"] .hero-banner .hero .lede { color: var(--content-primary-inverse); }
+
+/* ---------- Language control ----------
+   Sits in the primary nav as its own list item, so it is reachable by
+   keyboard in the same run as the links and needs no extra markup in
+   the ten pages: i18n.js appends it. */
+.lang {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+}
+.lang__label {
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  color: var(--content-secondary);
+  white-space: nowrap;
+}
+.lang__select {
+  min-height: 40px;               /* 2.5.8 Target Size */
+  padding: var(--space-xs) var(--space-s);
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  background: var(--background-primary);
+  color: var(--content-primary);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  cursor: pointer;
+}
+.lang__select:hover { border-color: var(--border-primary); }
+
+@media (max-width: 900px) {
+  .lang { padding-block: var(--space-s); }
+}
