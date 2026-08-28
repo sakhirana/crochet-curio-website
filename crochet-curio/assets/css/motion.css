@@ -97,6 +97,10 @@
   color: var(--content-brand);
   text-wrap: balance;
 }
+/* The three words the phrase turns on, held a couple of steps darker than
+   the rest of the line. Colour only — nothing here touches the type. */
+.manifesto__accent { color: var(--brand-700); }
+
 .manifesto__shapes { display: none; }
 
 /* ---------- Active version, once JS is running ---------- */
@@ -182,7 +186,7 @@
    The bucket hat's tilt
 
    The hat tips right over as the page scrolls and ends up sitting on
-   the "Our story" heading. It is one photograph the whole way — a
+   the "How it works" heading. It is one photograph the whole way — a
    single rotation carried across the two sections, which is the only
    version of this that can be genuinely smooth.
 
@@ -192,7 +196,7 @@
      sticky stage, and while the stage is stuck that is the same place
      as bottom-left of the viewport — so nothing moves when the
      position scheme changes, but the hat can now outlive the stage and
-     carry on down to the story.
+     carry on down to the heading.
    * It turns about its own left edge, the side it tips from, measured
      off the photograph: the hat starts 20.85% into the frame, and its
      middle is 48.4% down. Everything else is proportional to the width

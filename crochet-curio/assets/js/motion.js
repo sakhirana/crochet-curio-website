@@ -42,7 +42,7 @@
   /* ---------- The bucket hat's tilt ----------
      The hat starts bottom-left of the big phrases, tips down onto its left
      until the brim is level, tips further into a slant, and glides up to sit
-     above the "Our story" heading — as if the words had put it on.
+     above the "How it works" heading — as if the words had put it on.
 
      It stays one photograph turning on one axis the whole way. Two
      progressions drive it, back to back:
@@ -66,7 +66,7 @@
   ------------------------------------------------------------------- */
   function buildHatTilt(track, clamp) {
     var box = track.querySelector(".shape--hat");
-    var target = document.querySelector("#story .eyebrow");
+    var target = document.querySelector("#process .eyebrow");
     if (!box || !target) { return null; }
 
     /* Read off the photograph, as fractions of the box: where the hat's
@@ -93,7 +93,7 @@
 
     /* Where the heading is, in viewport pixels. Walking offsetParents rather
        than asking for a client rect deliberately ignores transforms: the
-       story column slides in on a reveal of its own, and the hat must aim at
+       section slides in on a reveal of its own, and the hat must aim at
        where the words are coming to rest, not where they are passing. */
     var headingAt = function () {
       var x = 0, y = 0, node = target;
