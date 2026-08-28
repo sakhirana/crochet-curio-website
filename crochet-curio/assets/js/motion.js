@@ -422,13 +422,17 @@
     watchBasketCount();
     watchSummary();
 
-    /* Under reduced motion we stop here. Crucially the manifesto driver does
-       NOT run: it writes inline opacity onto the phrases, which would hide
-       text for exactly the people who opted out of movement. Without it the
-       CSS fallback stands and all three phrases are simply stacked. */
-    if (reduced.matches) { return; }
+    /* Under reduced motion we stop here — whether that came from the system
+       setting or from the switch in the accessibility panel, which sets
+       `no-motion` on <html> before this file runs. Crucially the manifesto
+       driver does NOT run: it writes inline opacity onto the phrases, which
+       would hide text for exactly the people who opted out of movement.
+       Without it the CSS fallback stands and all three phrases are simply
+       stacked. */
+    if (reduced.matches || document.documentElement.classList.contains("no-motion")) { return; }
 
     document.documentElement.classList.add("js-motion");
+    window.__ccMotionReady = true;   /* the panel checks this before reloading */
     markReveals();
     observeReveals();
     observeHeadings();

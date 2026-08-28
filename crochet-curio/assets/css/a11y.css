@@ -1,0 +1,237 @@
+/* ============================================================
+   Crochet Curio — accessibility controls
+
+   A small floating panel, present on every page, that lets a visitor
+   turn the site's movement off and on for themselves. It is the same
+   switch the operating system's "reduce motion" setting throws, only
+   reachable by people who cannot or do not want to change a system
+   preference — a borrowed laptop, a shared machine, a phone whose
+   owner has never opened that settings screen.
+
+   Two halves live here:
+
+   1. `.a11y*` — the launcher, the panel and the switch inside it.
+      Built by a11y.js, so a page without scripting simply has no
+      control; it also has no movement, which is the same result.
+   2. `.no-motion` — the off state itself, mirroring the block
+      motion.css already applies under prefers-reduced-motion.
+
+   Nothing else on the page is touched by this file.
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   Launcher
+   Top left, tucked just under the sticky header — a11y.js measures
+   that header and writes its height into --a11y-top, so the button
+   clears the brand at every width instead of sitting on top of it.
+   ------------------------------------------------------------ */
+.a11y {
+  position: fixed;
+  top: calc(var(--a11y-top, 96px) + var(--space-l));
+  left: var(--space-2xl);
+  z-index: 45;
+}
+
+.a11y__launch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: var(--radius-pill);
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  background: var(--background-brand);
+  color: var(--content-primary-inverse);
+  box-shadow: var(--shadow-l3);
+  cursor: pointer;
+}
+.a11y__launch svg { width: 26px; height: 26px; display: block; }
+.a11y__launch:hover { background: var(--background-brand-hover); }
+
+/* ------------------------------------------------------------
+   Panel
+   ------------------------------------------------------------ */
+.a11y__panel {
+  position: absolute;
+  left: 0;
+  top: calc(100% + var(--space-m));
+  width: min(20rem, calc(100vw - 2 * var(--space-l)));
+  padding: var(--space-l);
+  border-radius: var(--radius-m);
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  background: var(--background-primary);
+  box-shadow: var(--shadow-l5);
+}
+.a11y__panel[hidden] { display: none; }
+
+.a11y__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-m);
+  margin-bottom: var(--space-m);
+}
+.a11y__title {
+  margin: 0;
+  font-size: var(--text-l-size);
+  line-height: var(--text-l-line);
+  font-weight: var(--text-semibold);
+  color: var(--content-primary);
+}
+.a11y__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--content-secondary);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.a11y__close:hover { background: var(--background-hover); color: var(--content-primary); }
+
+/* One row per control, so more can be added underneath without
+   touching anything above. */
+.a11y__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-l);
+  padding-block: var(--space-s);
+}
+.a11y__label {
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  color: var(--content-primary);
+}
+
+/* The switch is a real button with role="switch"; the track and knob
+   below are only its skin. */
+.a11y__switch {
+  flex: none;
+  position: relative;
+  width: 46px;
+  height: 26px;
+  padding: 0;
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  border-radius: var(--radius-pill);
+  background: var(--neutral-100);
+  cursor: pointer;
+}
+.a11y__knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-pill);
+  background: var(--primary-white);
+  box-shadow: var(--shadow-l1);
+}
+.a11y__switch[aria-checked="true"] {
+  background: var(--background-brand);
+  border-color: var(--background-brand);
+}
+.a11y__switch[aria-checked="true"] .a11y__knob { left: auto; right: 2px; }
+
+.a11y__note {
+  margin: var(--space-s) 0 0;
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
+  color: var(--content-secondary);
+}
+
+@media (max-width: 620px) {
+  .a11y { left: var(--space-l); }
+}
+
+/* ============================================================
+   The off state
+
+   Same shape as the prefers-reduced-motion block in motion.css, but
+   driven by a class so a visitor can reach it themselves. The
+   `!important` flags are here because the manifesto driver writes
+   opacity and transform inline: if the switch is thrown while that
+   driver is already running, these have to win.
+   ============================================================ */
+.no-motion *,
+.no-motion *::before,
+.no-motion *::after {
+  animation-duration: .001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .001ms !important;
+}
+.no-motion { scroll-behavior: auto !important; }
+
+/* Anything the reveal system had hidden comes back, in place. */
+.no-motion [data-reveal],
+.no-motion .hero [data-enter],
+.no-motion .manifesto__line {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* The manifesto returns to the plain stacked version motion.css already
+   defines for a page without scripting: no tall track, no sticky stage,
+   no drifting pieces — and so no travelling bucket hat. */
+.no-motion .manifesto__track { height: auto !important; }
+.no-motion .manifesto__stage {
+  position: static !important;
+  height: auto !important;
+  place-items: initial;
+  justify-items: center;
+  gap: var(--space-2xl);
+  padding-block: var(--space-8xl);
+}
+.no-motion .manifesto__line { grid-area: auto !important; }
+.no-motion .manifesto__shapes { display: none !important; }
+
+/* ------------------------------------------------------------
+   The three phrases, with movement off
+
+   Scrolling normally deals them out one at a time. With the switch
+   thrown there is no scroll to read them out, so they sit side by
+   side instead — same order the scroll used: what you need, then
+   yarn to hook size, then skill level.
+
+   Two WCAG 2.2 notes on the sizing:
+
+   * The green on this pink measures 3.81:1, which carries only at
+     large-text size. The floor of the clamp below is therefore
+     1.5rem (24px), the point where that threshold applies — the
+     type gets smaller to fit three across, but never smaller than
+     the contrast allows. The darker phrases run 8.3:1 and are safe
+     at any size (1.4.3).
+   * Below 900px three columns would force the type under that
+     floor, so the phrases stack again at full size rather than
+     shrink (1.4.10).
+
+   The columns are told apart by a rule between them, not by colour
+   alone (1.4.1), and the gap is the same 32px the shop grid uses.
+   Reading order is the DOM order, so the sequence a screen reader
+   announces matches the sequence on screen (1.3.2).
+   ------------------------------------------------------------ */
+@media (min-width: 901px) {
+  .no-motion .manifesto__stage {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    column-gap: var(--space-2xl);
+  }
+  .no-motion .manifesto__line {
+    max-width: none;
+    font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+    line-height: 1.12;
+  }
+  /* One rule between neighbours — the divider is a shape, so it reads
+     without relying on the colour difference. */
+  .no-motion .manifesto__line + .manifesto__line {
+    border-inline-start: var(--stroke-width-xs) solid var(--content-brand);
+    padding-inline-start: var(--space-2xl);
+  }
+}
