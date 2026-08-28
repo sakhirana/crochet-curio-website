@@ -75,11 +75,11 @@
     var CENTRE_X = 0.596, CENTRE_Y = 0.484, PIVOT_X = 0.2085;
 
     /* In the photograph the hat lies over on its side with the brim down the
-       left. Both angles were read back off the screen: at -115 the brim comes
-       level and the crown is straight up, and carrying on past that lifts the
-       right of the brim into the slant it is wearing when it lands. */
+       left. -115 was read back off the screen: there the brim comes level and
+       the crown is straight up. It lands on the words at that same angle, so
+       the hat sits upright rather than slanted. */
     var TILT_LEVEL   = -115;   /* degrees by the time the brim is level */
-    var TILT_LANDED  = -150;   /* and by the time it is sitting on the words */
+    var TILT_LANDED  = -115;   /* and by the time it is sitting on the words */
     var LANDED_SCALE = 0.72;   /* it settles smaller, in proportion to a label */
 
     var base = {};
