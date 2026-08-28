@@ -485,7 +485,9 @@ p { text-wrap: pretty; }
 .newsletter-form .btn {
   background: var(--primary-white);
   color: var(--content-primary);
-  margin-top: 28px; /* aligns the control with the input, below its label */
+  /* Drops the control to the input's own top edge: the label's line box
+     (it inherits the body line-height) plus the gap .field puts under it. */
+  margin-top: calc(var(--text-l-line) + var(--space-s));
 }
 .newsletter-form .btn:hover { background: var(--neutral-100); }
 .newsletter-form .error { color: #ffd7d7; }
