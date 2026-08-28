@@ -751,3 +751,17 @@
   .field-row { grid-template-columns: 1fr; }
   .page-head h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
 }
+
+/* ============================================================
+   Dark theme — skill level pills
+   Brand accent/700 falls to 3.1:1 on the dark page; the dark ramp's
+   own Brand accent/400 reads 8.8:1 at the same 12px (1.4.3).
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .level--intermediate { color: var(--brand-accent-400); }
+}
+
+/* The same values again, for a reader who chose dark in the accessibility
+   panel rather than in their operating system. */
+:root[data-theme="dark"] .level--intermediate { color: var(--brand-accent-400); }
+

@@ -74,7 +74,7 @@
 .manifesto {
   /* Same pink the hero copy sits on, so the two full-bleed bands that carry
      the big brand-green type are the same ground. */
-  background: #E8CACE;
+  background: var(--surface-band-accent);
   overflow: clip;
 }
 
@@ -328,3 +328,21 @@
   }
   .shop-card, .btn { transition: none; }
 }
+
+/* ============================================================
+   Dark theme — the manifesto band
+
+   The band keeps its pink, so the phrases darken rather than lighten:
+   Brand/600 reads 4.33:1 on it and Brand/800 8.79:1, holding the same
+   two-step separation the light theme has between phrase and accent.
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .manifesto__line { color: var(--brand-600); }
+  :root:not([data-theme="light"]) .manifesto__accent { color: var(--brand-800); }
+}
+
+/* The same values again, for a reader who chose dark in the accessibility
+   panel rather than in their operating system. */
+:root[data-theme="dark"] .manifesto__line { color: var(--brand-600); }
+:root[data-theme="dark"] .manifesto__accent { color: var(--brand-800); }
+

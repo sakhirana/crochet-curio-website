@@ -68,6 +68,9 @@
   --background-brand-pressed:  var(--brand-800);
   --background-accent-subtle:  var(--brand-accent-500);
   --background-negative-subtle:#facccc;
+  /* The full-bleed pink band behind the hero copy and the manifesto. Named
+     here so the dark theme can restate it; the value is unchanged. */
+  --surface-band-accent:       #E8CACE;
   --background-positive-subtle:#ccebd6;
 
   /* ---------- Semantic: Border ---------- */
@@ -154,3 +157,186 @@
   --layout-gutter:  var(--space-8xl); /* 96px — echoes the reference site's generous margins */
   --layout-section: var(--space-9xl); /* 120px vertical rhythm */
 }
+
+/* ============================================================
+   Dark theme
+   Read from the same Figma file, page "Colour, Typography, Layout",
+   frame "Dark Mode" (4:540) and the Colour Swatch Semantics dark
+   symbol. Every value below is the file's own, except the four
+   marked DEVIATION, where the file's pairing fails WCAG 2.2 contrast
+   at the size the site actually uses it — each one steps to another
+   colour from the same ramp rather than to an invented value.
+
+   It follows the reader's system setting. Nothing else about the
+   site changes: same layout, same type, same spacing.
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* ---------- Primitives the dark collection adds ---------- */
+    --brand-400: #647a6a;
+    --brand-300: #75897a;
+    --brand-200: #87978b;
+    --brand-accent-400: #ddafb5;
+    --brand-accent-300: #e1b8bd;
+    --brand-accent-200: #e4c1c6;
+
+    /* Surfaces — the file's Surface/L0 to L6 */
+    --surface-l0: #0d0d0d;
+    --surface-l1: #1a1a1a;
+    --surface-l2: #262626;
+    --surface-l3: #333333;
+    --surface-l4: #404040;
+    --surface-l5: #4d4d4d;
+    --surface-l6: #595959;
+    --system-inverse-static: #000000;  /* the file's Background/System Inverse Static */
+
+    /* Hairlines. The stylesheets reach for --neutral-100 directly wherever
+       a 1px rule is drawn (25 places); at #e5e5e5 those would glare on a
+       dark page, so the primitive carries the file's Border/Tertiary value
+       here. Its two non-border uses — the empty basket chip and the switch
+       track — want the same dark grey anyway. */
+    --neutral-100: #333333;
+
+    /* ---------- Semantic: Content ---------- */
+    --content-primary:           #ffffff;
+    --content-secondary:         #e5e5e5;
+    --content-tertiary:          #b2b2b2;
+    --content-primary-inverse:   #1a1a1a;
+    --content-secondary-inverse: #333333;
+    --content-tertiary-inverse:  #666666;
+    --content-disabled:          #4d4d4d;
+    /* DEVIATION — the file's dark Content/Brand is Brand/400 (#647a6a),
+       which measures 3.76:1 on Background/Primary and 2.73:1 on the tinted
+       sections: below the 4.5:1 body-text floor in both. Brand/100 from the
+       same ramp reads 6.85:1 and 4.97:1 (1.4.3). */
+    --content-brand:             var(--brand-100);
+    --content-brand-accent:      var(--brand-accent-400);
+    --content-link:              #5c77ff;
+    --content-link-hover:        #617bff;
+    --content-link-pressed:      #adbbff;
+    /* DEVIATION — Content/Negative (#ea3333) lands at 4.16:1 on the page
+       background, so the file's own Content/Negative Bold is used, at
+       5.61:1. Positive (#33ad5c, 6.03:1) needs no such step. */
+    --content-negative:          #ef6666;
+    /* DEVIATION — Content/Positive (#33ad5c) reads 4.38:1 on the tinted
+       sections, just under the floor for the 12px level pill, so the file's
+       own Content/Positive Bold stands in: 5.79:1 there, 7.97:1 on the page. */
+    --content-positive:          #66c285;
+
+    /* ---------- Semantic: Background ---------- */
+    --background-primary:        var(--surface-l1);
+    --background-hover:          #333333;
+    --background-pressed:        #4d4d4d;
+    --background-disabled:       #333333;
+    --background-inverse:        #ffffff;
+    --background-brand:          var(--brand-400);
+    --background-brand-hover:    var(--brand-300);
+    --background-brand-pressed:  var(--brand-200);
+    --background-accent-subtle:  var(--brand-accent-400);
+    --background-negative-subtle:#5c0000;
+    --background-positive-subtle:#003d14;
+    /* DEVIATION — the band is the file's dark Brand accent/400 rather than
+       the light #E8CACE. It stays a pink band: the ink on it moves instead,
+       and those overrides sit with the components that draw it. */
+    --surface-band-accent:       var(--brand-accent-400);
+
+    /* ---------- Semantic: Border ---------- */
+    --border-primary:   #999999;
+    --border-secondary: #666666;
+    --border-tertiary:  #333333;
+    --border-disabled:  #4d4d4d;
+    --border-inverse:   #1a1a1a;
+    --border-focus:     #5c77ff;
+    --border-mono:      #ffffff;
+  }
+}
+
+/* The same values again, for a reader who chose dark in the accessibility
+   panel rather than in their operating system. */
+:root[data-theme="dark"] {
+    /* ---------- Primitives the dark collection adds ---------- */
+    --brand-400: #647a6a;
+    --brand-300: #75897a;
+    --brand-200: #87978b;
+    --brand-accent-400: #ddafb5;
+    --brand-accent-300: #e1b8bd;
+    --brand-accent-200: #e4c1c6;
+
+    /* Surfaces — the file's Surface/L0 to L6 */
+    --surface-l0: #0d0d0d;
+    --surface-l1: #1a1a1a;
+    --surface-l2: #262626;
+    --surface-l3: #333333;
+    --surface-l4: #404040;
+    --surface-l5: #4d4d4d;
+    --surface-l6: #595959;
+    --system-inverse-static: #000000;  /* the file's Background/System Inverse Static */
+
+    /* Hairlines. The stylesheets reach for --neutral-100 directly wherever
+       a 1px rule is drawn (25 places); at #e5e5e5 those would glare on a
+       dark page, so the primitive carries the file's Border/Tertiary value
+       here. Its two non-border uses — the empty basket chip and the switch
+       track — want the same dark grey anyway. */
+    --neutral-100: #333333;
+
+    /* ---------- Semantic: Content ---------- */
+    --content-primary:           #ffffff;
+    --content-secondary:         #e5e5e5;
+    --content-tertiary:          #b2b2b2;
+    --content-primary-inverse:   #1a1a1a;
+    --content-secondary-inverse: #333333;
+    --content-tertiary-inverse:  #666666;
+    --content-disabled:          #4d4d4d;
+    /* DEVIATION — the file's dark Content/Brand is Brand/400 (#647a6a),
+       which measures 3.76:1 on Background/Primary and 2.73:1 on the tinted
+       sections: below the 4.5:1 body-text floor in both. Brand/100 from the
+       same ramp reads 6.85:1 and 4.97:1 (1.4.3). */
+    --content-brand:             var(--brand-100);
+    --content-brand-accent:      var(--brand-accent-400);
+    --content-link:              #5c77ff;
+    --content-link-hover:        #617bff;
+    --content-link-pressed:      #adbbff;
+    /* DEVIATION — Content/Negative (#ea3333) lands at 4.16:1 on the page
+       background, so the file's own Content/Negative Bold is used, at
+       5.61:1. Positive (#33ad5c, 6.03:1) needs no such step. */
+    --content-negative:          #ef6666;
+    /* DEVIATION — Content/Positive (#33ad5c) reads 4.38:1 on the tinted
+       sections, just under the floor for the 12px level pill, so the file's
+       own Content/Positive Bold stands in: 5.79:1 there, 7.97:1 on the page. */
+    --content-positive:          #66c285;
+
+    /* ---------- Semantic: Background ---------- */
+    --background-primary:        var(--surface-l1);
+    --background-hover:          #333333;
+    --background-pressed:        #4d4d4d;
+    --background-disabled:       #333333;
+    --background-inverse:        #ffffff;
+    --background-brand:          var(--brand-400);
+    --background-brand-hover:    var(--brand-300);
+    --background-brand-pressed:  var(--brand-200);
+    --background-accent-subtle:  var(--brand-accent-400);
+    --background-negative-subtle:#5c0000;
+    --background-positive-subtle:#003d14;
+    /* DEVIATION — the band is the file's dark Brand accent/400 rather than
+       the light #E8CACE. It stays a pink band: the ink on it moves instead,
+       and those overrides sit with the components that draw it. */
+    --surface-band-accent:       var(--brand-accent-400);
+
+    /* ---------- Semantic: Border ---------- */
+    --border-primary:   #999999;
+    --border-secondary: #666666;
+    --border-tertiary:  #333333;
+    --border-disabled:  #4d4d4d;
+    --border-inverse:   #1a1a1a;
+    --border-focus:     #5c77ff;
+    --border-mono:      #ffffff;
+}
+
+
+/* Tell the browser which way each theme runs, so its own furniture —
+   scrollbars, form controls, the canvas behind the page — matches. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { color-scheme: dark; }
+}
+:root[data-theme="dark"]  { color-scheme: dark; }
+:root[data-theme="light"] { color-scheme: light; }

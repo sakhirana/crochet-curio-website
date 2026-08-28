@@ -1,8 +1,8 @@
 /* ============================================================
    Crochet Curio — accessibility controls
 
-   One switch for now: movement on or off, remembered between visits
-   and across pages.
+   Two switches: movement on or off, and the dark theme on or off.
+   Both are remembered between visits and across pages.
 
    The file is loaded from <head> rather than the foot of the page on
    purpose. The class it sets has to be on <html> before the first
@@ -23,17 +23,21 @@
   "use strict";
 
   var KEY = "cc-motion";          /* "on" | "off"; absent means "not asked" */
+  var KEY_THEME = "cc-theme";     /* "dark" | "light"; absent means "not asked" */
   var root = document.documentElement;
 
   /* localStorage throws rather than returns null in a locked-down
      browser, so every touch of it is wrapped. A visitor who blocks it
      simply gets the system preference on every page. */
-  var stored = function () {
-    try { return window.localStorage.getItem(KEY); } catch (e) { return null; }
+  var read = function (key) {
+    try { return window.localStorage.getItem(key); } catch (e) { return null; }
   };
-  var remember = function (value) {
-    try { window.localStorage.setItem(KEY, value); } catch (e) { /* nothing to do */ }
+  var write = function (key, value) {
+    try { window.localStorage.setItem(key, value); } catch (e) { /* nothing to do */ }
   };
+
+  var stored   = function () { return read(KEY); };
+  var remember = function (value) { write(KEY, value); };
 
   var systemReduces = function () {
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -46,9 +50,28 @@
     return systemReduces();
   };
 
-  /* Before paint: the class motion.js reads and a11y.css acts on. */
+  /* ---------- Theme ----------
+     Same order of authority as movement: a stored choice first, the system
+     setting second. The stylesheets carry each dark rule twice — once inside
+     a prefers-color-scheme query for a visitor without scripting, once under
+     [data-theme="dark"] for the switch below — so setting the attribute on
+     every load, in both directions, is what lets the switch override the
+     system in either direction. */
+  var themeIsDark = function () {
+    var choice = read(KEY_THEME);
+    if (choice === "dark")  { return true; }
+    if (choice === "light") { return false; }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  };
+
+  var applyTheme = function (dark) {
+    root.setAttribute("data-theme", dark ? "dark" : "light");
+  };
+
+  /* Before paint: the class motion.js reads, and the theme attribute. */
   var apply = function (off) { root.classList.toggle("no-motion", off); };
   apply(motionIsOff());
+  applyTheme(themeIsDark());
 
   /* ---------- The panel ---------- */
   var ICON =
@@ -78,8 +101,14 @@
           '<button class="a11y__switch" type="button" role="switch" aria-checked="false"' +
           ' aria-labelledby="a11yMotionLabel"><span class="a11y__knob"></span></button>' +
         '</div>' +
-        '<p class="a11y__note">Stops the scrolling text, the drifting pieces and the ' +
-        'fade-ins. Your choice is remembered on every page.</p>' +
+        '<div class="a11y__row">' +
+          '<span class="a11y__label" id="a11yThemeLabel">Dark mode</span>' +
+          '<button class="a11y__switch a11y__switch--theme" type="button" role="switch"' +
+          ' aria-checked="false" aria-labelledby="a11yThemeLabel">' +
+          '<span class="a11y__knob"></span></button>' +
+        '</div>' +
+        '<p class="a11y__note">Both settings start from your device and are ' +
+        'remembered on every page.</p>' +
       '</div>';
 
     document.body.appendChild(wrap);
@@ -98,11 +127,13 @@
     var panel  = wrap.querySelector(".a11y__panel");
     var close  = wrap.querySelector(".a11y__close");
     var toggle = wrap.querySelector(".a11y__switch");
+    var theme  = wrap.querySelector(".a11y__switch--theme");
 
     /* The switch reads as the visitor's intent — "disable animations" —
        so it is on when movement is off. */
     var reflect = function () {
       toggle.setAttribute("aria-checked", motionIsOff() ? "true" : "false");
+      theme.setAttribute("aria-checked", themeIsDark() ? "true" : "false");
     };
     reflect();
 
@@ -128,6 +159,25 @@
          load can wire it in again. */
       if (!off && !window.__ccMotionReady) { window.location.reload(); }
     });
+
+    /* The theme needs no reload either way: it is only custom properties. */
+    theme.addEventListener("click", function () {
+      var dark = !themeIsDark();
+      write(KEY_THEME, dark ? "dark" : "light");
+      applyTheme(dark);
+      reflect();
+    });
+
+    /* Until the visitor states a preference of their own, the page keeps
+       following the device — including a switch made while it is open. */
+    var system = window.matchMedia("(prefers-color-scheme: dark)");
+    var followSystem = function () {
+      if (read(KEY_THEME)) { return; }
+      applyTheme(system.matches);
+      reflect();
+    };
+    if (system.addEventListener) { system.addEventListener("change", followSystem); }
+    else if (system.addListener) { system.addListener(followSystem); }
 
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && !panel.hidden) { openPanel(false); }

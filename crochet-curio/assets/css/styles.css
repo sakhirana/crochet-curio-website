@@ -670,7 +670,7 @@ p { text-wrap: pretty; }
 .hero-banner {
   position: relative;
   isolation: isolate;
-  background: #E8CACE;
+  background: var(--surface-band-accent);
   /* The band's established proportions, expressed as a floor rather than a
      ratio: the copy sets the height wherever it needs more room than the
      photograph's shape gives it (narrow viewports, mostly), and the
@@ -705,3 +705,62 @@ p { text-wrap: pretty; }
    the same reason it does on the newsletter panel — 1.4.11 */
 .hero-banner :focus-visible { outline-color: var(--primary-white); }
 
+
+/* ============================================================
+   Dark theme — component corrections
+
+   The tokens do most of the work. These are the places where a
+   token pair inverts badly: text that is white-on-brand in the
+   light theme would land dark-on-mid-green here, and the pink band
+   keeps its pink, so the ink on it has to move instead.
+
+   Each rule is written twice: once for a reader whose system asks
+   for dark, once for a reader who chose dark in the accessibility
+   panel. Ratios are measured against the surface each rule paints on.
+   ============================================================ */
+
+/* Nothing lighter clears 4.5:1 on the mid-green brand fill in every
+   state, so the label takes the file's own Background/System Inverse
+   Static: 4.53:1 default, 5.62:1 hover, 6.83:1 pressed (1.4.3). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .announcement,
+  :root:not([data-theme="light"]) .btn--primary { color: var(--system-inverse-static); }
+
+  /* The newsletter is a large filled panel rather than a control, so it
+     takes the deep Brand/800 from the dark ramp and keeps the light
+     theme's pale text: 17.3:1, 13.8:1 and 8.2:1. */
+  :root:not([data-theme="light"]) .newsletter { background: var(--brand-800); }
+  :root:not([data-theme="light"]) .newsletter,
+  :root:not([data-theme="light"]) .newsletter h2,
+  :root:not([data-theme="light"]) .newsletter-form label { color: var(--content-primary); }
+  :root:not([data-theme="light"]) .newsletter p { color: var(--content-secondary); }
+  :root:not([data-theme="light"]) .newsletter-form .hint { color: var(--content-tertiary); }
+
+  /* The Join button stays white, so its label and hover must not follow
+     Content/Primary into white as well. */
+  :root:not([data-theme="light"]) .newsletter-form .btn { color: var(--content-primary-inverse); }
+  :root:not([data-theme="light"]) .newsletter-form .btn:hover { background: var(--neutral-300); }
+
+  /* The hero band is still pink here, so its copy reads as dark ink:
+     Brand/700 at 6.42:1, Content/Primary Inverse at 8.8:1. */
+  :root:not([data-theme="light"]) .hero-banner .hero .eyebrow,
+  :root:not([data-theme="light"]) .hero-banner .hero h1 { color: var(--brand-700); }
+  :root:not([data-theme="light"]) .hero-banner .hero .lede { color: var(--content-primary-inverse); }
+}
+
+:root[data-theme="dark"] .announcement,
+:root[data-theme="dark"] .btn--primary { color: var(--system-inverse-static); }
+
+:root[data-theme="dark"] .newsletter { background: var(--brand-800); }
+:root[data-theme="dark"] .newsletter,
+:root[data-theme="dark"] .newsletter h2,
+:root[data-theme="dark"] .newsletter-form label { color: var(--content-primary); }
+:root[data-theme="dark"] .newsletter p { color: var(--content-secondary); }
+:root[data-theme="dark"] .newsletter-form .hint { color: var(--content-tertiary); }
+
+:root[data-theme="dark"] .newsletter-form .btn { color: var(--content-primary-inverse); }
+:root[data-theme="dark"] .newsletter-form .btn:hover { background: var(--neutral-300); }
+
+:root[data-theme="dark"] .hero-banner .hero .eyebrow,
+:root[data-theme="dark"] .hero-banner .hero h1 { color: var(--brand-700); }
+:root[data-theme="dark"] .hero-banner .hero .lede { color: var(--content-primary-inverse); }
