@@ -252,8 +252,8 @@ function header(activeBasket, activeLibrary) {
 
       <ul class="nav-list" id="navList">
         <li><a href="index.html#patterns">Patterns</a></li>
-        <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#process">How it works</a></li>
+        <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#contact">Contact</a></li>
         <li><a href="library.html"${activeLibrary ? ' aria-current="page"' : ""}>My patterns</a></li>
         <li><a class="cart-link" href="cart.html"${activeBasket ? ' aria-current="page"' : ""}>Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
