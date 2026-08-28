@@ -746,6 +746,10 @@ p { text-wrap: pretty; }
   :root:not([data-theme="light"]) .hero-banner .hero .eyebrow,
   :root:not([data-theme="light"]) .hero-banner .hero h1 { color: var(--brand-700); }
   :root:not([data-theme="light"]) .hero-banner .hero .lede { color: var(--content-primary-inverse); }
+
+  /* The badge pill keeps its pink fill here, so its label stays the light
+     theme's Content/Primary dark ink: 9:1 on Brand Accent/400. */
+  :root:not([data-theme="light"]) .badge { color: var(--content-primary-inverse); }
 }
 
 :root[data-theme="dark"] .announcement,
@@ -764,6 +768,8 @@ p { text-wrap: pretty; }
 :root[data-theme="dark"] .hero-banner .hero .eyebrow,
 :root[data-theme="dark"] .hero-banner .hero h1 { color: var(--brand-700); }
 :root[data-theme="dark"] .hero-banner .hero .lede { color: var(--content-primary-inverse); }
+
+:root[data-theme="dark"] .badge { color: var(--content-primary-inverse); }
 
 /* ---------- Language control ----------
    Sits in the primary nav as its own list item, so it is reachable by
