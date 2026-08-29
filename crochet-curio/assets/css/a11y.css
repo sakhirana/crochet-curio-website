@@ -50,6 +50,50 @@
 .a11y__launch:hover { background: var(--background-brand-hover); }
 
 /* ------------------------------------------------------------
+   Launcher tooltip
+
+   Names what the button does for anyone who hovers it before
+   clicking. Pointer devices only: a touch screen has no hover, so
+   the label would either never show or stay stuck after a tap. The
+   button keeps its aria-label, which is what assistive tech reads —
+   this is the sighted-mouse counterpart of that label.
+   ------------------------------------------------------------ */
+@media (hover: hover) and (pointer: fine) {
+  .a11y__launch { position: relative; }
+
+  .a11y__launch::after {
+    content: "Change website settings";
+    position: absolute;
+    left: calc(100% + var(--space-s));
+    top: 50%;
+    transform: translateY(-50%);
+    padding: var(--space-xs) var(--space-s);
+    border-radius: var(--radius-s);
+    border: var(--stroke-width-xs) solid var(--border-secondary);
+    background: var(--background-primary);
+    color: var(--content-primary);
+    font-size: var(--text-s-size);
+    line-height: var(--text-s-line);
+    white-space: nowrap;
+    box-shadow: var(--shadow-l3);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .15s ease;
+  }
+
+  .a11y__launch:hover::after,
+  .a11y__launch:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* With the panel open the label is redundant, and it would sit on
+     top of the panel's own edge. */
+  .a11y__launch[aria-expanded="true"]::after { display: none; }
+}
+
+/* ------------------------------------------------------------
    Panel
    ------------------------------------------------------------ */
 .a11y__panel {
@@ -191,6 +235,9 @@
 }
 .no-motion .manifesto__line { grid-area: auto !important; }
 .no-motion .manifesto__shapes { display: none !important; }
+/* The hat is hung off <body> by motion.js, so it is no longer inside that
+   wrapper and needs saying separately. */
+.no-motion .shape--hat { display: none !important; }
 
 /* ------------------------------------------------------------
    The three phrases, with movement off

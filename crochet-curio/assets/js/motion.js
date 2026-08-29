@@ -69,6 +69,20 @@
     var target = document.querySelector("#process .eyebrow");
     if (!box || !target) { return null; }
 
+    /* The hat leaves the manifesto's DOM and hangs off <body>.
+
+       It is `fixed`, so it is positioned against the viewport either way and
+       nothing about its geometry changes — but the band it was sitting in is
+       `overflow: clip`, and Safari (iOS in particular) applies that clip to
+       fixed descendants. There the hat was sliced off at the band's bottom
+       edge instead of carrying on down to the "How it works" heading. Out
+       here no ancestor can clip it, on any engine.
+
+       aria-hidden comes along by hand: it was inherited from the shapes
+       wrapper, which stays behind. */
+    box.setAttribute("aria-hidden", "true");
+    document.body.appendChild(box);
+
     /* Read off the photograph, as fractions of the box: where the hat's
        middle sits, and the left edge it turns about. The two share a height,
        which is what keeps the correction below to one horizontal radius. */

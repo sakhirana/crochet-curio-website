@@ -206,6 +206,12 @@
   position: fixed;
   transform-origin: 20.85% 48.4%;
   animation: none;         /* the idle float is folded into the scroll driver */
+  /* motion.js hangs the hat off <body> so no band can clip it. These two
+     restore what it had while it sat inside the shapes wrapper: the same
+     layer as the other three shapes, which is under the phrases (z-index 2),
+     and no share of the pointer. */
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* ============================================================
