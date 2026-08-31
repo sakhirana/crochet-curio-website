@@ -3,7 +3,7 @@ the product pages, so keep the names (including capitals) if you swap a photo.
 
   Bluebell.png        blue + white checkerboard shoulder bag
   Frosty.png          blue cropped cardigan, white bobble clouds
-  dune-bikini.png     tan + black striped bikini set
+  beanie.png          dusty pink ribbed beanie, fold-up brim
   Valentine.png       cream cropped cardigan, red strawberries
   Poppy.png           red + pink checkerboard bucket hat
   rosewater-set.png   pink bikini top + mini skirt

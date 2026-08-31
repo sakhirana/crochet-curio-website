@@ -37,7 +37,69 @@ Then open <http://localhost:4173>. No build step, no dependencies.
 | `assets/js/shop.js` | Basket, checkout and pattern-library state |
 | `assets/js/catalogue.js` | Generated pattern data — do not edit by hand |
 | `assets/img/` | **Photography of the finished pieces goes here** — see below |
+| `assets/patterns/` | The built pattern PDF. Generated; do not edit by hand |
+| `pattern-beanie-accessible.html` | The beanie pattern itself, and the source the PDF is built from |
+| `tools/build-pattern.js` | Builds the PDF from that page. `node tools/build-pattern.js` |
+| `tools/verify-pattern-pdf.js` | Accessibility checks the build fails on. Also runs standalone on any PDF |
+| `tools/pdf-tools.js` | Minimal PDF read/edit/write used by the two above |
 | `serve.js` | Minimal static preview server |
+
+## The pattern, in two formats
+
+The beanie pattern is written once, in `pattern-beanie-accessible.html`. The PDF is
+built from it, so the two cannot drift apart:
+
+```bash
+node tools/build-pattern.js
+```
+
+| Format | File | For |
+| --- | --- | --- |
+| Web page | `pattern-beanie-accessible.html` | Reading and zooming in a browser. A screen reader handles braille from here |
+| PDF | `assets/patterns/rosie-beanie-pattern.pdf` | Printing, keeping offline, and the Accessible Patterns Index |
+
+`node tools/build-pattern.js --check` builds and verifies without writing anything.
+
+Both are labelled on the product page by what they are — page count, type size,
+what each one does — never by who they are for. Nobody has to identify themselves
+to get a pattern, and the descriptions do the choosing.
+
+A plain text edition for braille embossing was built and then cut: a braille
+display already works from the web page, via the reader. It is in the git history
+if the embossing case ever comes up.
+
+### Why the build post-processes Chrome's PDF
+
+Chrome prints the page to a tagged PDF, which is most of the job. Two things it
+does not do, both fixed in `build-pattern.js`:
+
+1. **Word spaces at line ends.** Chrome's PDF writer draws every wrapped line as
+   its own text block and drops the space that caused the wrap. The space is in
+   the HTML; it never reaches the PDF's text layer. A screen reader then reads
+   *"Beanie, AdultMedium"* and *"forcrocheters"*. The build appends a space glyph
+   to any line that does not already end on one — invisible, no reflow.
+
+2. **An alternative description on the link.** Chrome writes the link's action but
+   no `/Contents`, which PDF/UA wants. The build copies it from the anchor's
+   `aria-label` in the HTML, so the wording lives in the source.
+
+This is worth knowing because **PAC passes a file with the spacing bug.** PAC
+checks the tag tree; the bug is one layer below, in the glyph runs. That is why
+`verify-pattern-pdf.js` exists — it reads the built file the way assistive
+technology does, walking the structure tree and pulling the text each tag owns,
+and the build fails if:
+
+- any text line does not end on a word boundary
+- the tag tree is not there, or the document language is not declared
+- reading order jumps backwards through the pages
+- any text is tagged twice
+- headings skip a level, do not start at H1, or carry no text
+- a link annotation has no description, or sits outside a `Link` element
+
+Chrome's own tagging has been checked and is sound: heading levels nest correctly,
+lists are real `L`/`LI`/`Lbl`/`LBody`, and reading order runs straight through with
+no backward jumps. If a screen reader repeats a sentence or announces pages out of
+order, that is Acrobat's page buffer, not this file.
 
 ## Photography
 
@@ -49,7 +111,7 @@ page says so in as many words directly under the image. All six are in
 | --- | --- |
 | `Bluebell.png` | Blue + white checkerboard shoulder bag |
 | `Frosty.png` | Blue cardigan, white bobble clouds |
-| `dune-bikini.png` | Tan + black striped bikini set |
+| `beanie.png` | Dusty pink ribbed beanie with a fold-up brim |
 | `Valentine.png` | Cream cardigan, red strawberries |
 | `Poppy.png` | Red + pink checkerboard bucket hat |
 | `rosewater-set.png` | Pink bikini top + mini skirt |

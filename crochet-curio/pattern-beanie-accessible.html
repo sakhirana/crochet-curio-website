@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Foldable Ribbed Beanie, Adult Medium — accessible edition — Crochet Curio</title>
+<meta name="description" content="Crochet pattern for a foldable ribbed beanie in adult medium. Accessible edition: 24 point sans serif, no charts, no abbreviations, screen reader friendly.">
+
+<!--
+  Foldable Ribbed Beanie — accessible edition
+  ==========================================
+
+  A standalone page. It deliberately loads none of the shop's stylesheets or
+  scripts: no navigation, no animation, no theme switching, no web fonts.
+  Everything a screen reader meets here is the pattern itself, and the page
+  prints to a clean PDF with nothing to strip out afterwards.
+
+  Formatting follows the Accessible Patterns Index minimum: 24 point black
+  sans serif, no italics anywhere, every direction written out in full, no
+  charts, no information carried by an image or by colour.
+
+  Structure is the part a screen reader actually uses: one h1, sections as
+  h2, steps as h3, every list a real list, and the reading order the same as
+  the visual order. When this page is exported to PDF, that structure is what
+  has to survive as tags.
+-->
+
+<style>
+  /* ---------------------------------------------------------------
+     Type
+
+     24pt is the floor the Index sets, so it is the base size here in
+     both media. Verdana first: wider letterforms and open counters,
+     which is the reason it is the most used face in the Index.
+     --------------------------------------------------------------- */
+  :root {
+    --ink: #000000;
+    --paper: #ffffff;
+    --rule: #000000;
+  }
+
+  html {
+    background: var(--paper);
+  }
+
+  body {
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    max-width: 40em;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Verdana, Geneva, Tahoma, Arial, sans-serif;
+    font-size: 24pt;
+    line-height: 1.5;
+    font-weight: 400;
+    text-align: left;      /* never justified: uneven word spacing is harder to track */
+  }
+
+  /* Headings are bold and larger, never italic, never colour-coded. */
+  h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 1.5em 0 0.5em;
+  }
+  h1 { font-size: 32pt; margin-top: 0; }
+  h2 { font-size: 28pt; }
+  h3 { font-size: 26pt; }
+
+  p, li { margin: 0 0 0.75em; }
+  ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
+  li > ul, li > ol { margin-top: 0.5em; }
+
+  /* A rule under each section start, so a sighted low-vision reader can
+     find the boundaries without relying on size alone. */
+  h2 {
+    border-top: 2px solid var(--rule);
+    padding-top: 0.6em;
+  }
+
+  a {
+    color: var(--ink);
+    text-decoration: underline;
+    /* The email address is one long unbreakable word. At 24 point on a
+       narrow phone it would push the page sideways, and a page that
+       scrolls horizontally fails WCAG 1.4.10 reflow. */
+    overflow-wrap: anywhere;
+  }
+
+  /* The contents list: plain, no bullets, generous hit areas. */
+  .contents ul { list-style: none; padding-left: 0; }
+  .contents li { margin-bottom: 0.6em; }
+
+  /* ---------------------------------------------------------------
+     Print
+
+     What the buyer saves as PDF. Same 24pt type, black on white, with
+     page breaks kept out of the middle of a step.
+     --------------------------------------------------------------- */
+  @media print {
+    body {
+      max-width: none;
+      padding: 0;
+      font-size: 24pt;
+    }
+    a { text-decoration: none; }
+    /* The contents list is a screen convenience; on paper the headings
+       do the same job and the links cannot be followed. */
+    .contents { display: none; }
+    h1, h2, h3 { break-after: avoid-page; page-break-after: avoid; }
+    p, li { break-inside: avoid-page; page-break-inside: avoid; }
+    section { break-inside: auto; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Foldable Ribbed Beanie, Adult Medium</h1>
+
+<p>A crochet pattern by Crochet Curio.</p>
+
+<p>Version 1.0. Published 29 August 2026.</p>
+
+<section aria-labelledby="statement">
+  <h2 id="statement">Accessibility statement</h2>
+
+  <p>This is the accessible edition of this pattern, written for screen reader users and for crocheters with a print disability. It covers this pattern only.</p>
+
+  <ul>
+    <li>Set in 24 point Verdana, a sans serif face, in black on a white background.</li>
+    <li>No italics are used anywhere.</li>
+    <li>Every direction is written out in full. There are no abbreviations, and there is no abbreviations list to memorise.</li>
+    <li>There are no charts, no stitch diagrams, and no photographs. Nothing in this pattern is carried by an image.</li>
+    <li>No instruction depends on colour, or on telling one side of the fabric from the other.</li>
+    <li>Every step gives both a stitch count and a measurement, so the pattern can be followed by counting or by measuring.</li>
+    <li>Headings are used in order, and lists are real lists, so a screen reader can move through the pattern by heading.</li>
+  </ul>
+
+  <p>Screen reader testing: pending. This statement will name the reader and version once the test is done.</p>
+
+  <!--
+    The aria-label is the wording that becomes the link's alternative
+    description in the PDF. Chrome writes no description of its own, so
+    build-pattern.js copies this across; keeping it here means the
+    wording lives with the pattern rather than inside a binary.
+  -->
+  <p>If anything in this pattern is wrong, unclear, or does not read properly with your screen reader, please write to <a href="mailto:crochetcurioo@gmail.com" aria-label="Email Crochet Curio at crochetcurioo@gmail.com">crochetcurioo@gmail.com</a> and it will be corrected.</p>
+</section>
+
+<nav class="contents" aria-labelledby="contents">
+  <h2 id="contents">Contents</h2>
+  <ul>
+    <li><a href="#description">Description</a></li>
+    <li><a href="#skill">Skill level</a></li>
+    <li><a href="#size">Size</a></li>
+    <li><a href="#materials">Materials</a></li>
+    <li><a href="#counts">Stitch counts and measurements</a></li>
+    <li><a href="#backloop">Working into the back loop</a></li>
+    <li><a href="#instructions">Instructions</a></li>
+    <li><a href="#terms">A note on crochet terms</a></li>
+  </ul>
+</nav>
+
+<section aria-labelledby="description">
+  <h2 id="description">Description</h2>
+
+  <p>A ribbed beanie with a fold-up brim. It is worked flat in one piece, from side to side, then seamed once down one side and gathered closed at the top.</p>
+
+  <p>The ribbing comes from working into the back loop of each stitch. There is no special rib stitch to learn.</p>
+</section>
+
+<section aria-labelledby="skill">
+  <h2 id="skill">Skill level</h2>
+
+  <p>Beginner. You need to chain, single crochet, slip stitch, and sew a gathered seam by hand.</p>
+</section>
+
+<section aria-labelledby="size">
+  <h2 id="size">Size</h2>
+
+  <p>Adult medium. One size.</p>
+
+  <ul>
+    <li>To fit a head circumference of 22 inches, 56 centimetres.</li>
+    <li>Finished height: 12 inches, 30.5 centimetres. This measurement already includes the fold, so do not add extra.</li>
+    <li>Finished flat length before seaming: approximately 20 inches, 51 centimetres.</li>
+  </ul>
+
+  <p>The fabric is very stretchy, which is why the flat length is about 2 inches, 5 centimetres, smaller than the head it fits.</p>
+</section>
+
+<section aria-labelledby="materials">
+  <h2 id="materials">Materials</h2>
+
+  <ul>
+    <li>Acrylic yarn, 100 percent, weight 4 medium. This weight is also sold as worsted, afghan, or aran.</li>
+    <li>Approximately 100 to 120 grams of that yarn, about 180 to 220 metres. One 100 gram skein is likely to fall just short, so buy two skeins, or one 150 gram skein.</li>
+    <li>Crochet hook, 5 millimetres. This size is also marked H-8.</li>
+    <li>Measuring tape.</li>
+    <li>Scissors.</li>
+    <li>Darning needle, or sewing needle.</li>
+    <li>Stitch markers, or safety pins.</li>
+  </ul>
+</section>
+
+<section aria-labelledby="counts">
+  <h2 id="counts">Stitch counts and measurements</h2>
+
+  <p>Every row in this hat has 40 stitches. The hat is 66 rows long in total.</p>
+
+  <ul>
+    <li>The starting chain of 41 chains measures approximately 12 inches, 30.5 centimetres.</li>
+    <li>40 stitches across a row measures approximately 12 inches, 30.5 centimetres.</li>
+    <li>66 rows measures approximately 20 inches, 51 centimetres.</li>
+  </ul>
+
+  <p>If your stitches come out tighter or looser than these measurements, work to the counts rather than to the measurements. The hat will still fit, because the fabric stretches.</p>
+
+  <p>If the fabric feels stiff and will not stretch, use a larger hook. If you can feel gaps between the stitches, use a smaller hook.</p>
+
+  <p>Counting 66 rows is easier if you mark your place as you go. Move a stitch marker to the first stitch of every tenth row, or use a row counter.</p>
+</section>
+
+<section aria-labelledby="backloop">
+  <h2 id="backloop">Working into the back loop</h2>
+
+  <p>Every stitch has two loops across its top: one nearer to you, and one further away. The one further away is the back loop.</p>
+
+  <p>To work into the back loop only, insert the hook under that further loop alone, and leave the nearer loop untouched. The untouched loops build up into raised ridges, and those ridges are the ribbing.</p>
+
+  <p>Row 1 is worked into the starting chain in the ordinary way, under both loops. Every row after that is worked into the back loop only.</p>
+</section>
+
+<section aria-labelledby="instructions">
+  <h2 id="instructions">Instructions</h2>
+
+  <h3 id="foundation">Foundation chain</h3>
+
+  <ol>
+    <li>Make a slip knot on the hook.</li>
+    <li>Chain 41. One of these 41 chains becomes the turning chain, so this gives 40 stitches in the first row.</li>
+  </ol>
+
+  <h3 id="row1">Row 1</h3>
+
+  <ol>
+    <li>Skip the chain nearest the hook.</li>
+    <li>Work 1 single crochet into the next chain, going under both loops of that chain in the ordinary way.</li>
+    <li>Place a stitch marker or safety pin into this first stitch.</li>
+    <li>Work 1 single crochet into each remaining chain to the end of the row, still under both loops.</li>
+  </ol>
+
+  <p>You now have 40 stitches.</p>
+
+  <h3 id="row2">Row 2</h3>
+
+  <ol>
+    <li>Chain 1, then turn your work.</li>
+    <li>Work 1 single crochet into the back loop only of each stitch across the row.</li>
+    <li>Place a stitch marker into the first stitch of this row.</li>
+  </ol>
+
+  <p>You have 40 stitches.</p>
+
+  <p>Marking the first stitch of each row, at both edges of the work, is what stops you from losing the last stitch of a row. Move both markers up as you go.</p>
+
+  <h3 id="rows">Rows 3 to 66</h3>
+
+  <p>Repeat Row 2 another 64 times, so that you have worked 66 rows in total, each of 40 stitches.</p>
+
+  <p>The piece should now measure approximately 20 inches, 51 centimetres, along its long edge, with the fabric relaxed and not stretched.</p>
+
+  <p>End after a completed row. Do not cut the yarn yet.</p>
+
+  <h3 id="seam">Seam</h3>
+
+  <ol>
+    <li>Fold the piece in half so that the two short ends meet, and line them up stitch for stitch. The long edges are now the bottom and the top of the hat.</li>
+    <li>Working through both layers together, slip stitch the two short ends together, all the way from one long edge to the other.</li>
+    <li>Turn the hat inside out, so that the seam sits on the inside.</li>
+    <li>Cut the yarn, leaving a tail of about 20 inches, 51 centimetres. Draw the tail through the last loop on the hook and pull it tight to secure it.</li>
+  </ol>
+
+  <h3 id="gather">Gather the top</h3>
+
+  <ol>
+    <li>Choose which long edge is the top of the hat. Either edge works, because both are the same.</li>
+    <li>Thread the 20 inch tail onto the darning needle.</li>
+    <li>Take running stitches all the way around that top edge: in through the fabric, out through the fabric, keeping the stitches evenly spaced and close to the edge.</li>
+    <li>When you have gone all the way around, pull the tail firmly. The top will draw together and close.</li>
+    <li>Knot the tail to hold it.</li>
+  </ol>
+
+  <h3 id="finishing">Finishing</h3>
+
+  <ol>
+    <li>Use the remaining tail to close the small hole left at the centre of the gathered top.</li>
+    <li>Weave in all ends and trim them.</li>
+    <li>Fold the bottom edge of the hat up to the depth you like.</li>
+  </ol>
+</section>
+
+<section aria-labelledby="terms">
+  <h2 id="terms">A note on crochet terms</h2>
+
+  <p>This pattern uses United States crochet terms. In United Kingdom terms, the stitch called single crochet here is called double crochet.</p>
+
+  <p>The pattern is for your own making. Sell the hats you crochet from it if you like. Please do not resell or share the file itself.</p>
+</section>
+
+</body>
+</html>

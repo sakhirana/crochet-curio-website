@@ -92,38 +92,55 @@ const PATTERNS = [
     ]
   },
   {
-    slug: "dune-bikini",
-    name: "Sienna Bikini Set",
-    price: 450,
-    badge: null,
+    slug: "beanie",
+    name: "Rosie Beanie",
+    price: 0,
+    /* The one free pattern in the studio. It is not sold and never enters the
+       basket — the PDF downloads straight from the button. It is rendered
+       from pattern-beanie-accessible.html, which stays in the repo as its
+       source: 24pt type, no charts, no abbreviations, tagged for screen
+       readers. */
+    free: true,
+    patternHref: "assets/patterns/rosie-beanie-pattern.pdf",
+    /* The same pattern as a page you can read in the browser, which is
+       where tools/build-pattern.js renders the PDF from. A pattern
+       without this simply shows the download button on its own. */
+    readHref: "pattern-beanie-accessible.html",
+    badge: "Free pattern",
     tile: "neutral",
     span: "normal",
-    image: "dune-bikini.png",
-    alt: "A two-piece crochet bikini in tan and black stripes: a triangle top with braided halter ties and matching tie-side bottoms with tasselled ends, laid flat.",
-    tagline: "Tan and black, tied at four points. A weekend project.",
-    difficulty: "Confident beginner",
-    difficultyNote: "Small pieces, simple shaping, plenty of ties. A good first garment.",
-    time: "About 9 hours",
-    sizes: "XS to XXL — the ties set the final fit at four points",
-    pages: 20,
-    yarn: "Cotton-nylon blend, 4ply. 150–220g in tan, 90g in black.",
-    hook: "3mm hook. 2.5mm for the braided cords.",
-    notions: "Swimwear lining fabric, tapestry needle, a fork or card for the tassels.",
-    gauge: "24 stitches and 28 rows to 10cm in double crochet, worked firmly.",
+    image: "beanie.png",
+    alt: "A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top.",
+    tagline: "Ribbed, folded at the brim, and free to read in full.",
+    difficulty: "Beginner",
+    difficultyNote: "Chain, single crochet, slip stitch, and one seam sewn by hand. Nothing else in it.",
+    time: "About 6 hours",
+    sizes: "Adult medium, one size — written for a 56cm head, and the rib stretches",
+    pages: 13,
+    yarn: "Acrylic, weight 4 medium — also sold as worsted, afghan or aran. 100–120g, about 180–220m.",
+    hook: "5mm hook, also marked H-8.",
+    notions: "Darning needle, stitch markers or safety pins, measuring tape, scissors.",
+    gauge: "40 stitches to about 30.5cm across a row; 66 rows to about 51cm along the long edge.",
     skills: [
-      "Working a triangle by decreasing on both edges",
-      "Carrying a stripe through a cord",
-      "Braiding and finishing tassels",
-      "Attaching a swimwear lining by hand"
+      "Working into the back loop only, which is where the ribbing comes from",
+      "Working a hat flat, from side to side, in one piece",
+      "Slip stitching a side seam through both layers",
+      "Gathering the crown closed with a running stitch"
     ],
-    extras: ["A fit-adjustment sheet for lengthening or shortening every tie"],
+    includes: [
+      "The complete pattern as a PDF or a web page, free — nothing to buy and no account to make",
+      "Every direction written out in full, with no abbreviations and no charts",
+      "24 point type, black on white, and no meaning carried by colour",
+      "Stitch counts on every row, so you can work to the counts if your gauge differs",
+      "Tagged for screen readers, so the headings and lists survive in the file"
+    ],
     body: [
-      "Both pieces tie — at the neck, the back and each hip — so the fit is set by the person wearing it rather than guessed by the pattern. The braided cords are written long on purpose, with a note on where to trim.",
-      "Crocheted in a tight stitch that holds its shape wet. The pattern is firm about tension here and includes a wet-stretch test, so your gauge swatch tells you the truth before you commit to a whole set. The stripe carries through the cord as well as the body, which is a slow way to do it and worth it — that method is charted."
+      "Worked flat from side to side in one long ribbed strip, then seamed once down the side and drawn closed at the top. Every row is 40 stitches, 66 rows in total, and the count never changes — there is no shaping to keep track of.",
+      "The ribbing is single crochet into the back loop only. The loops you leave untouched build up into the ridges, so there is no special stitch to learn. The brim folds up as deep as you like it, and the finished height already allows for the fold."
     ],
     notes: [
-      ["Sizing", "Cup shaping is written as a stitch count you adjust, not a fixed size. The maths is on page 6."],
-      ["Yarn swaps", "Needs nylon content. Pure cotton sags when wet — the pattern explains why."]
+      ["Why it is free", "A plain, accessible edition of a first hat. Read it here, print it, or make it straight off the screen."],
+      ["Gauge", "Work to the stitch counts rather than the measurements. The fabric stretches, so the hat still fits."]
     ]
   },
   {
@@ -320,6 +337,10 @@ function head(title, description) {
 <link rel="stylesheet" href="assets/css/styles.css">
 <link rel="stylesheet" href="assets/css/shop.css">
 <link rel="stylesheet" href="assets/css/motion.css">
+<link rel="stylesheet" href="assets/css/a11y.css">
+<script src="assets/js/a11y.js"></script>
+<script src="assets/js/i18n-hi.js"></script>
+<script src="assets/js/i18n.js"></script>
 </head>
 <body>
 
@@ -331,11 +352,15 @@ function head(title, description) {
 function patternPage(p, index) {
   const prev = PATTERNS[(index - 1 + PATTERNS.length) % PATTERNS.length];
   const next = PATTERNS[(index + 1) % PATTERNS.length];
-  const includes = INCLUDED.concat(p.extras || []);
+  /* A free pattern says what it actually gives you; the rest share the
+     studio's standard list. */
+  const includes = p.includes || INCLUDED.concat(p.extras || []);
 
   return head(
     `${p.name} — crochet pattern — Crochet Curio`,
-    `Digital crochet pattern. ${p.tagline} ${p.difficulty} level, ${p.pages}-page PDF, instant download.`
+    p.free
+      ? `Free crochet pattern. ${p.tagline} ${p.difficulty} level, written out in full and free to download.`
+      : `Digital crochet pattern. ${p.tagline} ${p.difficulty} level, ${p.pages}-page PDF, instant download.`
   ) + `
 ${header(false, false)}
 
@@ -356,7 +381,9 @@ ${header(false, false)}
           <img src="assets/img/${p.image}" alt="${esc(p.alt)}" title="${esc(p.alt)}" width="1000" height="1000">
         </div>
         <p class="product__mediaNote">
-          The finished piece, made from this pattern. What you buy is the written pattern for it &mdash; not the item shown.
+          ${p.free
+            ? `The finished piece, made from this pattern. The pattern itself is free to read &mdash; nothing is sold and nothing is posted to you.`
+            : `The finished piece, made from this pattern. What you buy is the written pattern for it &mdash; not the item shown.`}
         </p>
       </div>
 
@@ -365,9 +392,13 @@ ${header(false, false)}
         ${p.badge ? `<span class="badge">${esc(p.badge)}</span>` : ""}
         <h1>${esc(p.name)}</h1>
         <p class="product__tagline">${esc(p.tagline)}</p>
-        <p class="product__price">${rupee(p.price)}<span class="visually-hidden"> rupees</span>
+        ${p.free
+          ? `<p class="product__price">Free
+          <span class="product__priceNote">PDF pattern &middot; free download</span>
+        </p>`
+          : `<p class="product__price">${rupee(p.price)}<span class="visually-hidden"> rupees</span>
           <span class="product__priceNote">PDF pattern &middot; instant download</span>
-        </p>
+        </p>`}
 
         <ul class="spec-strip">
           <li>
@@ -384,11 +415,39 @@ ${header(false, false)}
           </li>
           <li>
             <span class="spec-strip__label">Pattern length</span>
-            <span class="spec-strip__value">${p.pages}-page PDF</span>
+            <span class="spec-strip__value">${p.readHref ? `${p.pages}-page PDF, or read it in your browser` : `${p.pages}-page PDF`}</span>
           </li>
         </ul>
 
-        <form class="buy-form" id="buyForm"
+        ${p.free
+          ? `<div class="buy-form">
+${p.readHref ? `
+          <!--
+            The same pattern, two ways. Each says what it is rather than
+            who it is for: nobody has to identify themselves to get a
+            pattern, and the description does the choosing.
+          -->
+          <a class="btn btn--primary btn--block" href="${p.patternHref}" download>Download the pattern &mdash; free</a>
+          <p class="formats__note">${p.pages} pages, 24 point type, black on white. For printing, or keeping on your device.</p>
+
+          <ul class="formats">
+            <li>
+              <a class="btn btn--secondary btn--block" href="${p.readHref}">Read the pattern in your browser</a>
+              <p class="formats__note">The same pattern on one page. Zooms, reflows and works with a screen reader, with nothing to download.</p>
+            </li>
+          </ul>
+
+          <p class="buy-form__note">
+            No basket, no account, nothing to pay. Both are the same pattern, written out in
+            full &mdash; take whichever suits how you like to work.
+          </p>` : `
+          <a class="btn btn--primary btn--block" href="${p.patternHref}" download>Download the pattern &mdash; free</a>
+          <p class="buy-form__note">
+            No basket, no account, nothing to pay. The PDF saves straight to your device &mdash;
+            large print, black on white, and every direction written out in full.
+          </p>`}
+        </div>`
+          : `<form class="buy-form" id="buyForm"
               data-slug="${p.slug}" data-name="${esc(p.name)}"
               data-price="${p.price}" data-image="${p.image}"
               data-pages="${p.pages}" data-difficulty="${esc(p.difficulty)}">
@@ -399,7 +458,7 @@ ${header(false, false)}
             the file appears in <a class="link" href="library.html">My&nbsp;patterns</a> the moment you check out.
           </p>
           <p class="form-status" id="buyStatus" role="status" aria-live="polite"></p>
-        </form>
+        </form>`}
 
         <h2 class="product__detailsTitle">What is in the file</h2>
         <ul class="includes">

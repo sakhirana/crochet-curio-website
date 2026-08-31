@@ -74,7 +74,7 @@ window.CC_LANG_HI = {
      in Latin, so nothing about the shop's plumbing changes. */
   "Marina Tote Bag": "मरीना टोट बैग",
   "Lumi Cardigan": "लूमी कार्डिगन",
-  "Sienna Bikini Set": "सिएना बिकिनी सेट",
+  "Rosie Beanie": "रोज़ी बीनी",
   "Sweetheart Cardigan": "स्वीटहार्ट कार्डिगन",
   "Poppy Hat": "पॉपी हैट",
   "Ariel Set": "एरियल सेट",
@@ -86,6 +86,8 @@ window.CC_LANG_HI = {
     "हर लिस्टिंग एक डाउनलोड होने वाला PDF पैटर्न है। फ़ोटो दिखाती है कि आप क्या बनाएँगे, न कि हम आपको क्या भेजते हैं।",
   "Most made": "सबसे ज़्यादा बना",
   "New pattern": "नया पैटर्न",
+  "Free pattern": "मुफ़्त पैटर्न",
+  "Free": "मुफ़्त",
   "Beginner": "बिगिनर",
   "Confident beginner": "कॉन्फ़िडेंट बिगिनर",
   "Intermediate": "इंटरमीडिएट",
@@ -259,9 +261,21 @@ window.CC_LANG_HI = {
   /* ---------- Product pages: shared furniture ---------- */
   "The finished piece, made from this pattern. What you buy is the written pattern for it — not the item shown.":
     "इसी पैटर्न से बना तैयार पीस। आप उसका लिखा हुआ पैटर्न खरीद रहे हैं — दिखाई गई चीज़ नहीं।",
+  "The finished piece, made from this pattern. The pattern itself is free to read — nothing is sold and nothing is posted to you.":
+    "इसी पैटर्न से बना तैयार पीस। पैटर्न खुद मुफ़्त में पढ़ा जा सकता है — न कुछ बिकता है, न आपको कुछ भेजा जाता है।",
   "Digital crochet pattern": "डिजिटल क्रोशे पैटर्न",
   "rupees": "रुपये",
   "PDF pattern · instant download": "PDF पैटर्न · तुरंत डाउनलोड",
+  "PDF pattern · free download": "PDF पैटर्न · मुफ़्त डाउनलोड",
+  "Download the pattern — free": "पैटर्न डाउनलोड कीजिए — मुफ़्त",
+  "No basket, no account, nothing to pay. Both are the same pattern, written out in full — take whichever suits how you like to work.":
+    "न बास्केट, न अकाउंट, न कोई पैसा। दोनों एक ही पैटर्न हैं, पूरा लिखा हुआ — जो आपके काम करने के तरीके से मेल खाए, वही लीजिए।",
+  "13 pages, 24 point type, black on white. For printing, or keeping on your device.":
+    "13 पेज, 24 पॉइंट टाइप, सफ़ेद पर काला। छापने के लिए, या अपने डिवाइस में रखने के लिए।",
+  "Read the pattern in your browser": "पैटर्न ब्राउज़र में पढ़िए",
+  "The same pattern on one page. Zooms, reflows and works with a screen reader, with nothing to download.":
+    "वही पैटर्न एक ही पेज पर। ज़ूम होता है, टेक्स्ट दोबारा सज जाता है, और स्क्रीन रीडर के साथ चलता है — कुछ डाउनलोड करने की ज़रूरत नहीं।",
+  "13-page PDF, or read it in your browser": "13 पेज की PDF, या ब्राउज़र में पढ़िए",
   "PDF pattern": "PDF पैटर्न",
   "Skill level": "स्किल लेवल",
   "Time to make": "बनाने का समय",
@@ -399,40 +413,50 @@ window.CC_LANG_HI = {
   "Any aran-weight blend with a little stretch. Pure cotton will grow; the pattern says how to allow for it.":
     "थोड़ा स्ट्रेच वाला कोई भी अरन-वेट ब्लेंड। शुद्ध कॉटन ढीला पड़ जाएगा; पैटर्न बताता है उसके लिए क्या छूट रखें।",
 
-  /* ---------- Sienna Bikini Set ---------- */
-  "Sienna Bikini Set — crochet pattern — Crochet Curio":
-    "सिएना बिकिनी सेट — क्रोशे पैटर्न — Crochet Curio",
-  "Tan and black, tied at four points. A weekend project.":
-    "टैन और काला, चार जगह बँधने वाला। एक वीकेंड का प्रोजेक्ट।",
-  "About 9 hours": "लगभग 9 घंटे",
-  "XS to XXL — the ties set the final fit at four points":
-    "XS से XXL — फ़िट चार जगह की डोरियों से तय होता है",
-  "20-page PDF": "20 पेज की PDF",
-  "Get the pattern — ₹450": "पैटर्न लीजिए — ₹450",
-  "A fit-adjustment sheet for lengthening or shortening every tie":
-    "हर डोरी को लंबा या छोटा करने के लिए फ़िट-एडजस्टमेंट शीट",
-  "Cotton-nylon blend, 4ply. 150–220g in tan, 90g in black.":
-    "कॉटन-नायलॉन ब्लेंड, 4ply। 150–220g टैन, 90g काला।",
-  "3mm hook. 2.5mm for the braided cords.": "3mm हुक। गुँथी डोरियों के लिए 2.5mm।",
-  "Swimwear lining fabric, tapestry needle, a fork or card for the tassels.":
-    "स्विमवियर लाइनिंग कपड़ा, टेपेस्ट्री सुई, फुंदनों के लिए काँटा या कार्ड।",
-  "24 stitches and 28 rows to 10cm in double crochet, worked firmly.":
-    "डबल क्रोशे में कसकर बुनने पर 10cm में 24 स्टिच और 28 रो।",
-  "Working a triangle by decreasing on both edges":
-    "दोनों किनारों पर डिक्रीज़ करके त्रिकोण बनाना",
-  "Carrying a stripe through a cord": "डोरी में धारी साथ ले चलना",
-  "Braiding and finishing tassels": "गूँथना और फुंदने पूरे करना",
-  "Attaching a swimwear lining by hand": "हाथ से स्विमवियर लाइनिंग लगाना",
-  "Small pieces, simple shaping, plenty of ties. A good first garment.":
-    "छोटे टुकड़े, आसान शेपिंग, बहुत सारी डोरियाँ। पहला गारमेंट बनाने के लिए अच्छा।",
-  "Both pieces tie — at the neck, the back and each hip — so the fit is set by the person wearing it rather than guessed by the pattern. The braided cords are written long on purpose, with a note on where to trim.":
-    "दोनों पीस बँधते हैं — गर्दन पर, पीठ पर और दोनों कूल्हों पर — इसलिए फ़िट पहनने वाला तय करता है, पैटर्न अंदाज़ा नहीं लगाता। गुँथी डोरियाँ जानबूझकर लंबी लिखी गई हैं, और कहाँ काटना है इसका नोट दिया है।",
-  "Crocheted in a tight stitch that holds its shape wet. The pattern is firm about tension here and includes a wet-stretch test, so your gauge swatch tells you the truth before you commit to a whole set. The stripe carries through the cord as well as the body, which is a slow way to do it and worth it — that method is charted.":
-    "ऐसी कसी स्टिच में बुना जाता है जो गीले में भी आकार बनाए रखती है। पैटर्न यहाँ टेंशन को लेकर सख़्त है और गीला-खिंचाव टेस्ट भी देता है, ताकि पूरा सेट बनाने से पहले आपका गेज स्वैच सच बता दे। धारी बॉडी के साथ डोरी में भी चलती है — यह धीमा तरीका है और इसके लायक है; वह तरीका चार्ट में दिया है।",
-  "Cup shaping is written as a stitch count you adjust, not a fixed size. The maths is on page 6.":
-    "कप शेपिंग तय साइज़ के बजाय स्टिच की गिनती के रूप में लिखी है, जिसे आप बदल सकते हैं। हिसाब पेज 6 पर है।",
-  "Needs nylon content. Pure cotton sags when wet — the pattern explains why.":
-    "इसमें नायलॉन होना ज़रूरी है। शुद्ध कॉटन गीला होने पर लटक जाता है — पैटर्न वजह समझाता है।",
+  /* ---------- Rosie Beanie (the free pattern) ---------- */
+  "Rosie Beanie — crochet pattern — Crochet Curio":
+    "रोज़ी बीनी — क्रोशे पैटर्न — Crochet Curio",
+  "Ribbed, folded at the brim, and free to read in full.":
+    "रिब्ड, ब्रिम पर मुड़ी हुई, और पूरी की पूरी मुफ़्त पढ़िए।",
+  "About 6 hours": "लगभग 6 घंटे",
+  "Adult medium, one size — written for a 56cm head, and the rib stretches":
+    "एडल्ट मीडियम, एक ही साइज़ — 56cm सिर के लिए लिखा गया, और रिब खिंचती है",
+  "The complete pattern as a PDF or a web page, free — nothing to buy and no account to make":
+    "पूरा पैटर्न PDF या वेब पेज में, मुफ़्त — न कुछ खरीदना है, न कोई अकाउंट बनाना",
+  "Every direction written out in full, with no abbreviations and no charts":
+    "हर निर्देश पूरा लिखा हुआ, न कोई शॉर्ट फ़ॉर्म, न कोई चार्ट",
+  "24 point type, black on white, and no meaning carried by colour":
+    "24 पॉइंट टाइप, सफ़ेद पर काला, और रंग से कोई बात नहीं कही गई",
+  "Stitch counts on every row, so you can work to the counts if your gauge differs":
+    "हर रो पर स्टिच की गिनती, ताकि गेज अलग हो तो आप गिनती के हिसाब से बुन सकें",
+  "Tagged for screen readers, so the headings and lists survive in the file":
+    "स्क्रीन रीडर के लिए टैग किया हुआ, ताकि हेडिंग और लिस्ट फ़ाइल में भी बनी रहें",
+  "Acrylic, weight 4 medium — also sold as worsted, afghan or aran. 100–120g, about 180–220m.":
+    "एक्रिलिक, वेट 4 मीडियम — इसे worsted, afghan या aran भी कहते हैं। 100–120g, लगभग 180–220m।",
+  "5mm hook, also marked H-8.": "5mm हुक, जिस पर H-8 भी लिखा होता है।",
+  "Darning needle, stitch markers or safety pins, measuring tape, scissors.":
+    "डार्निंग सुई, स्टिच मार्कर या सेफ़्टी पिन, नापने का फ़ीता, कैंची।",
+  "40 stitches to about 30.5cm across a row; 66 rows to about 51cm along the long edge.":
+    "एक रो में 40 स्टिच लगभग 30.5cm; 66 रो लंबे किनारे पर लगभग 51cm।",
+  "Working into the back loop only, which is where the ribbing comes from":
+    "सिर्फ़ बैक लूप में बुनना, रिबिंग वहीं से बनती है",
+  "Working a hat flat, from side to side, in one piece":
+    "टोपी को एक ही टुकड़े में, चपटा, एक किनारे से दूसरे किनारे तक बुनना",
+  "Slip stitching a side seam through both layers":
+    "दोनों परतों में से स्लिप स्टिच करके साइड सीम बनाना",
+  "Gathering the crown closed with a running stitch":
+    "रनिंग स्टिच से ऊपर का हिस्सा समेटकर बंद करना",
+  "Chain, single crochet, slip stitch, and one seam sewn by hand. Nothing else in it.":
+    "चेन, सिंगल क्रोशे, स्लिप स्टिच, और हाथ से सिली एक सीम। इसमें और कुछ नहीं है।",
+  "Worked flat from side to side in one long ribbed strip, then seamed once down the side and drawn closed at the top. Every row is 40 stitches, 66 rows in total, and the count never changes — there is no shaping to keep track of.":
+    "एक लंबी रिब्ड पट्टी की तरह, एक किनारे से दूसरे किनारे तक चपटा बुना जाता है, फिर साइड में एक सीम लगाकर ऊपर से समेट दिया जाता है। हर रो में 40 स्टिच, कुल 66 रो, और गिनती कभी नहीं बदलती — कोई शेपिंग याद नहीं रखनी पड़ती।",
+  "The ribbing is single crochet into the back loop only. The loops you leave untouched build up into the ridges, so there is no special stitch to learn. The brim folds up as deep as you like it, and the finished height already allows for the fold.":
+    "रिबिंग सिर्फ़ बैक लूप में सिंगल क्रोशे से बनती है। जो लूप आप छोड़ देते हैं वही उभरी हुई लकीरें बन जाते हैं, इसलिए कोई नई स्टिच सीखने की ज़रूरत नहीं। ब्रिम जितना गहरा चाहें उतना मोड़िए, और तैयार ऊँचाई में उस मोड़ की गुंजाइश पहले से रखी है।",
+  "Why it is free": "यह मुफ़्त क्यों है",
+  "A plain, accessible edition of a first hat. Read it here, print it, or make it straight off the screen.":
+    "पहली टोपी का सादा, एक्सेसिबल संस्करण। यहीं पढ़िए, प्रिंट कीजिए, या स्क्रीन से देखकर ही बना लीजिए।",
+  "Work to the stitch counts rather than the measurements. The fabric stretches, so the hat still fits.":
+    "नाप के बजाय स्टिच की गिनती के हिसाब से बुनिए। कपड़ा खिंचता है, इसलिए टोपी फिर भी फ़िट आएगी।",
 
   /* ---------- Ariel Set ---------- */
   "Ariel Set — crochet pattern — Crochet Curio": "एरियल सेट — क्रोशे पैटर्न — Crochet Curio",

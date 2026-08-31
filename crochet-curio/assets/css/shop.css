@@ -290,6 +290,25 @@
   padding-block: var(--space-2xl);
   margin-bottom: var(--space-2xl);
 }
+/* The other way to read the pattern, under the main download. A plain
+   list so a screen reader announces how many there are first. Each
+   option carries a line saying what it is, which is what does the
+   choosing — the buttons alone only name file formats. */
+.formats {
+  list-style: none;
+  margin: var(--space-l) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-l);
+}
+.formats__note {
+  margin-top: var(--space-s);
+  /* the same size as every other note on the page — shrinking the text
+     that explains the accessible option would be a poor joke */
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  color: var(--content-secondary);
+}
 .buy-form__note {
   margin-top: var(--space-l);
   font-size: var(--text-m-size);

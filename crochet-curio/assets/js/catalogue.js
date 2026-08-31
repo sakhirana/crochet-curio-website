@@ -29,18 +29,18 @@ window.CATALOGUE = [
     "gauge": "14 stitches and 16 rows to 10cm in half treble, after blocking."
   },
   {
-    "slug": "dune-bikini",
-    "name": "Sienna Bikini Set",
-    "price": 450,
-    "image": "dune-bikini.png",
-    "alt": "A two-piece crochet bikini in tan and black stripes: a triangle top with braided halter ties and matching tie-side bottoms with tasselled ends, laid flat.",
-    "difficulty": "Confident beginner",
-    "pages": 20,
-    "time": "About 9 hours",
-    "sizes": "XS to XXL — the ties set the final fit at four points",
-    "yarn": "Cotton-nylon blend, 4ply. 150–220g in tan, 90g in black.",
-    "hook": "3mm hook. 2.5mm for the braided cords.",
-    "gauge": "24 stitches and 28 rows to 10cm in double crochet, worked firmly."
+    "slug": "beanie",
+    "name": "Rosie Beanie",
+    "price": 0,
+    "image": "beanie.png",
+    "alt": "A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top.",
+    "difficulty": "Beginner",
+    "pages": 13,
+    "time": "About 6 hours",
+    "sizes": "Adult medium, one size — written for a 56cm head, and the rib stretches",
+    "yarn": "Acrylic, weight 4 medium — also sold as worsted, afghan or aran. 100–120g, about 180–220m.",
+    "hook": "5mm hook, also marked H-8.",
+    "gauge": "40 stitches to about 30.5cm across a row; 66 rows to about 51cm along the long edge."
   },
   {
     "slug": "strawberry-cardigan",
