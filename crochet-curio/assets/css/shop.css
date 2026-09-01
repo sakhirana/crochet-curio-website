@@ -303,6 +303,32 @@
 }
 .formats__title:first-child { margin-top: 0; }
 
+/* The language of the pattern file, chosen before the download.
+   Stacked rather than sat on one line: the label is a question about
+   the file, not a caption on the control, and at 200% zoom a row would
+   push the select off the side. */
+.formats__lang {
+  display: grid;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-l);
+}
+.formats__langLabel {
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  color: var(--content-secondary);
+}
+.formats__langSelect {
+  min-height: 44px;               /* 2.5.8 Target Size */
+  padding: var(--space-xs) var(--space-s);
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  background: var(--background-primary);
+  color: var(--content-primary);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  cursor: pointer;
+}
+.formats__langSelect:hover { border-color: var(--border-primary); }
+
 /* The formats within an edition. A plain list so a screen reader
    announces how many there are first. Each option carries a line
    saying what it is, which is what does the choosing — the buttons

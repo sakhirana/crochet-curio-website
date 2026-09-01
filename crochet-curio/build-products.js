@@ -114,11 +114,24 @@ const PATTERNS = [
        download button on its own. */
     standardHref: "assets/patterns/rosie-beanie-pattern-standard.pdf",
     standardPages: 5,
+    /* The same standard edition in Hindi, built from
+       pattern-beanie-standard-hi.html. Where a pattern has this, the
+       page offers a language select above the download; where it does
+       not, the download stands on its own as before. Only the standard
+       edition is translated so far — the large print edition and the
+       Word file are English until they have been read end to end in
+       Hindi with a screen reader. */
+    standardHrefHi: "assets/patterns/rosie-beanie-pattern-standard-hi.pdf",
     /* pattern-beanie-standard.html is the source this PDF is built from
        and stays in the repo, but it is not linked: the people who want
        the standard edition are mostly printing it, and a browser link
        under a download button was one option too many. */
     readHref: "pattern-beanie-accessible.html",
+    /* The same large print edition in Hindi: the page, and the Word
+       file linked from inside it. There is no Hindi large print PDF —
+       Chrome writes a broken text layer for Devanagari, so the PDF
+       link stays English and says so. */
+    readHrefHi: "pattern-beanie-accessible-hi.html",
     badge: "Free pattern",
     tile: "neutral",
     span: "normal",
@@ -460,29 +473,48 @@ ${p.standardHref ? `
             alongside them.
           -->
           <h2 class="formats__title">The pattern</h2>
-          <a class="btn btn--primary btn--block" href="${p.standardHref}" download
+${p.standardHrefHi ? `
+          <!--
+            The language is picked before the download, not after: the
+            file is a PDF, so there is no switching it once it is on
+            someone's machine.
+
+            The select carries the choice, the link below it is the
+            download, and pattern-lang.js keeps the two in step. Without
+            the script the link still points at the English PDF, which
+            is what it did before the select existed.
+          -->
+          <div class="formats__lang">
+            <label class="formats__langLabel" for="patternLang">Pattern language</label>
+            <select class="formats__langSelect" id="patternLang">
+              <option value="en" selected>English</option>
+              <option value="hi" lang="hi">हिन्दी</option>
+            </select>
+          </div>
+` : ``}
+          <a class="btn btn--primary btn--block"${p.standardHrefHi ? ` id="patternDownload"` : ``} href="${p.standardHref}" download${p.standardHrefHi ? ` hreflang="en"` : ``}
              aria-label="Download the pattern as a PDF, free">Download the PDF &mdash; free</a>
-          <p class="formats__note">${p.standardPages} pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+          <p class="formats__note"${p.standardHrefHi ? ` id="patternNote"` : ``}>${p.standardPages} pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
 
           <h2 class="formats__title">Large print edition</h2>
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block" href="${p.readHref}"
+              <a class="btn btn--secondary btn--block"${p.readHrefHi ? ` id="largePrintRead" hreflang="en"` : ``} href="${p.readHref}"
                  aria-label="Read the large print edition in your browser">Read it in your browser</a>
-              <p class="formats__note">24 point type that reflows and zooms. Read from beginning to end with NVDA.</p>
+              <p class="formats__note"${p.readHrefHi ? ` id="largePrintReadNote"` : ``}>24 point type that reflows and zooms. Read from beginning to end with NVDA. The Word file, for reading offline, is linked at the top of that page.</p>
             </li>
             <li>
               <a class="btn btn--secondary btn--block" href="${p.patternHref}" download
                  aria-label="Download the large print edition as a PDF">Download the PDF</a>
-              <p class="formats__note">${p.pages} pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up.</p>
+              <p class="formats__note">${p.pages} pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading &mdash; with a screen reader, use the web page above.</p>
             </li>
           </ul>
-
-          <p class="buy-form__note">
-            No basket, no account, nothing to pay. Same hat, same counts and the same
-            measurements in every version &mdash; take whichever suits how you like to work.
-          </p>` : `
+${p.readHrefHi ? `
+          <!-- Written by pattern-lang.js, and only when the Hindi
+               pattern is the one on offer: in English there is nothing
+               to say here. -->
+          <p class="formats__note" id="largePrintPdfNote" hidden></p>` : ``}` : `
           <a class="btn btn--primary btn--block" href="${p.patternHref}" download>Download the pattern &mdash; free</a>
           <p class="buy-form__note">
             No basket, no account, nothing to pay. The PDF saves straight to your device &mdash;
@@ -548,7 +580,8 @@ ${p.notes.map(([k, v]) => `          <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></
 
 ${footer()}
 
-<script src="assets/js/catalogue.js"></script>
+${p.standardHrefHi ? `<script src="assets/js/pattern-lang.js"></script>
+` : ``}<script src="assets/js/catalogue.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/shop.js"></script>
 <script src="assets/js/motion.js"></script>

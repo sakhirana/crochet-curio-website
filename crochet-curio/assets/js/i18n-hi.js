@@ -268,26 +268,43 @@ window.CC_LANG_HI = {
   "PDF pattern · instant download": "PDF पैटर्न · तुरंत डाउनलोड",
   "PDF pattern · free download": "PDF पैटर्न · मुफ़्त डाउनलोड",
   "Download the pattern — free": "पैटर्न डाउनलोड कीजिए — मुफ़्त",
-  "No basket, no account, nothing to pay. Same hat, same counts and the same measurements in every version — take whichever suits how you like to work.":
-    "न बास्केट, न अकाउंट, न कोई पैसा। हर वर्ज़न में वही टोपी, वही गिनती और वही माप — जो आपके काम करने के तरीके से मेल खाए, वही लीजिए।",
 
-  /* The pattern, standard edition */
+  /* The pattern, standard edition.
+
+     The language select and the note under the download are written by
+     pattern-lang.js in English and translated here like everything
+     else, so the wording lives in one place whichever language the
+     site is being read in. */
   "The pattern": "पैटर्न",
+  /* "English" and "हिन्दी" are left untranslated on purpose: a language
+     is named in its own language, in this select as in the nav one. */
+  "Pattern language": "पैटर्न की भाषा",
   "Download the PDF — free": "PDF डाउनलोड कीजिए — मुफ़्त",
   "5 pages, 12 point type, standard crochet abbreviations, with diagrams.":
     "5 पेज, 12 पॉइंट टाइप, आम क्रोशे शॉर्ट फ़ॉर्म, और डायग्राम के साथ।",
+  "5 pages in Hindi, 12 point type, crochet abbreviations kept in English, with diagrams.":
+    "हिन्दी में 5 पेज, 12 पॉइंट टाइप, क्रोशे शॉर्ट फ़ॉर्म अंग्रेज़ी में ही, और डायग्राम के साथ।",
+  "Download the pattern as a PDF, free": "पैटर्न PDF में डाउनलोड कीजिए, मुफ़्त",
+  "Download the pattern in Hindi as a PDF, free":
+    "पैटर्न हिन्दी में PDF के रूप में डाउनलोड कीजिए, मुफ़्त",
   "Read it in your browser": "ब्राउज़र में पढ़िए",
 
   /* Large print edition */
   "Large print edition": "बड़े अक्षरों वाला एडिशन",
-  "24 point type that reflows and zooms. Read from beginning to end with NVDA.":
-    "24 पॉइंट टाइप, जो ज़ूम करने पर दोबारा सज जाता है। NVDA से शुरू से आख़िर तक पढ़ा गया।",
+  "24 point type that reflows and zooms. Read from beginning to end with NVDA. The Word file, for reading offline, is linked at the top of that page.":
+    "24 पॉइंट टाइप, जो ज़ूम करने पर दोबारा सज जाता है। NVDA से शुरू से आख़िर तक पढ़ा गया। बिना इंटरनेट पढ़ने के लिए Word फ़ाइल का लिंक उसी पेज पर ऊपर दिया है।",
   "Word file": "Word फ़ाइल",
   "24 point type, opens in Word, works offline. Read from beginning to end with NVDA.":
     "24 पॉइंट टाइप, Word में खुलती है, बिना इंटरनेट भी चलती है। NVDA से शुरू से आख़िर तक पढ़ी गई।",
   "Download the PDF": "PDF डाउनलोड कीजिए",
-  "13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up.":
-    "13 पेज, 24 पॉइंट टाइप, सफ़ेद पर काला। हर निर्देश पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म देखने की ज़रूरत नहीं।",
+  "13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading — with a screen reader, use the web page above.":
+    "13 पेज, 24 पॉइंट टाइप, सफ़ेद पर काला। हर निर्देश पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म देखने की ज़रूरत नहीं। छापने और पढ़ने के लिए — स्क्रीन रीडर के साथ ऊपर वाला वेब पेज लीजिए।",
+  "The large print PDF is in English only for now.":
+    "बड़े अक्षरों वाली PDF फ़िलहाल सिर्फ़ अंग्रेज़ी में है।",
+  "24 point type that reflows and zooms. The Hindi Word file, for reading offline, is linked at the top of that page. The Hindi editions have not been listened to with a screen reader yet.":
+    "24 पॉइंट टाइप, जो ज़ूम करने पर दोबारा सज जाता है। बिना इंटरनेट पढ़ने के लिए हिन्दी Word फ़ाइल का लिंक उसी पेज पर ऊपर दिया है। हिन्दी एडिशन अभी स्क्रीन रीडर से सुने नहीं गए हैं।",
+  "Read the large print edition in Hindi in your browser":
+    "बड़े अक्षरों वाला एडिशन हिन्दी में ब्राउज़र में पढ़िए",
   "5-page PDF, or 13 pages in large print": "5 पेज की PDF, या बड़े अक्षरों में 13 पेज",
   "PDF pattern": "PDF पैटर्न",
   "Skill level": "स्किल लेवल",

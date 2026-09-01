@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम — स्टैंडर्ड एडिशन — Crochet Curio</title>
+<meta name="description" content="फोल्ड होने वाली रिब्ड बीनी का क्रोशे पैटर्न, वयस्क मीडियम साइज़ में। स्टैंडर्ड एडिशन: 12 पॉइंट टाइप, US क्रोशे शब्द और शॉर्ट फ़ॉर्म, गेज, और तीन ड्रॉइंग।">
+
+<!--
+  Foldable Ribbed Beanie — standard edition, Hindi
+  ===============================================
+
+  A translation of pattern-beanie-standard.html, not a second pattern.
+  Every count, hook size, measurement and step here matches the English
+  standard edition exactly. If one is corrected, the other has to be
+  corrected with it.
+
+  Two rules, the same ones i18n-hi.js follows for the site:
+
+  - Crochet technique words stay English written in Devanagari — सिंगल
+    क्रोशे, स्लिप स्टिच, चेन, गेज, रो. That is how the craft is taught
+    in Hindi, and a literal translation would name a stitch nobody uses.
+  - The abbreviations themselves stay in Latin script — sc, ch, sl st,
+    blo. They are what is printed in every pattern the reader will meet
+    next, including the English edition of this one, and transliterating
+    them would make this file the odd one out.
+
+  Product names, "Crochet Curio", sizes and measurements are left alone.
+
+  The font stack leads with Devanagari faces, because Verdana has no
+  Devanagari glyphs and the fallback that gets picked otherwise is
+  whatever the system happens to offer — which is also what Chrome
+  embeds when this page is rendered to PDF.
+-->
+
+<style>
+  /* ---------------------------------------------------------------
+     Type
+
+     12pt body, as in the English edition. Line height is a little
+     looser: Devanagari hangs matras above and below the line, and 1.5
+     crowds them.
+     --------------------------------------------------------------- */
+  :root {
+    --ink: #000000;
+    --paper: #ffffff;
+  }
+
+  html { background: var(--paper); }
+
+  body {
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    max-width: 38em;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Nirmala UI", "Noto Sans Devanagari", "Mangal", Verdana, Arial, sans-serif;
+    font-size: 12pt;
+    line-height: 1.7;
+    font-weight: 400;
+    text-align: left;
+  }
+
+  h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 1.4em 0 0.5em;
+  }
+  h1 { font-size: 20pt; margin-top: 0; }
+  h2 { font-size: 15pt; border-top: 1px solid var(--ink); padding-top: 0.6em; }
+  h3 { font-size: 13pt; }
+
+  p, li { margin: 0 0 0.6em; }
+  ul, ol { padding-left: 1.4em; margin: 0 0 1em; }
+
+  .lede { margin-bottom: 1.4em; }
+
+  /* The abbreviations key. A description list, because that is what it
+     is: a term and its meaning. */
+  .key {
+    margin: 0 0 1em;
+  }
+  .key div {
+    display: flex;
+    gap: 0.75em;
+    padding: 0.15em 0;
+  }
+  .key dt {
+    flex: 0 0 5.5em;
+    font-weight: 700;
+  }
+  .key dd { margin: 0; }
+
+  /* Row instructions read better with the row name held out from the
+     text that follows it. */
+  .rows dt {
+    font-weight: 700;
+    margin-top: 0.6em;
+  }
+  .rows dd { margin: 0 0 0.2em; }
+
+  .count { font-weight: 700; }
+
+  a {
+    color: var(--ink);
+    text-decoration: underline;
+    overflow-wrap: anywhere;
+  }
+
+  /* ---------------------------------------------------------------
+     Figures
+     --------------------------------------------------------------- */
+  .figure { margin: 1.2em 0 1.6em; padding: 0; }
+
+  .schematic {
+    display: block;
+    width: 100%;
+    max-width: 26em;
+    height: auto;
+    border: 1px solid var(--ink);
+    background: var(--paper);
+  }
+
+  .figcaption { margin-top: 0.5em; }
+  .figcaption b { display: block; }
+
+  /* ---------------------------------------------------------------
+     Print
+     --------------------------------------------------------------- */
+  @media print {
+    body { max-width: none; padding: 0; font-size: 12pt; }
+    a { text-decoration: none; }
+    .contents { display: none; }
+    h1, h2, h3 { break-after: avoid-page; page-break-after: avoid; }
+    p, li { break-inside: avoid-page; page-break-inside: avoid; }
+    .figure { break-inside: avoid-page; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<h1>फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम</h1>
+
+<p class="lede">Crochet Curio का क्रोशे पैटर्न। वर्ज़न 1.0. प्रकाशित 29 अगस्त 2026.<br>
+स्टैंडर्ड एडिशन। बड़े अक्षरों वाला एडिशन, जिसमें हर बात बिना शॉर्ट फ़ॉर्म के पूरी लिखी है, अंग्रेज़ी में भी उपलब्ध है।</p>
+
+<section aria-labelledby="description">
+  <h2 id="description">विवरण</h2>
+
+  <p>ऊपर की तरफ़ मोड़ने वाली ब्रिम के साथ रिब्ड बीनी। एक ही टुकड़े में, सपाट, एक किनारे से दूसरे किनारे तक बुनी जाती है, फिर एक साइड में सिलाई होती है और ऊपर से समेटकर बंद कर दी जाती है। रिब सिर्फ़ पिछले लूप में काम करने से बनती है; कोई अलग रिब स्टिच सीखने की ज़रूरत नहीं।</p>
+
+  <p><b>स्किल लेवल:</b> शुरुआती। चेन, सिंगल क्रोशे, स्लिप स्टिच, और हाथ से की गई एक समेटने वाली सिलाई।</p>
+</section>
+
+<section aria-labelledby="size">
+  <h2 id="size">साइज़</h2>
+
+  <p>वयस्क मीडियम, एक ही साइज़। 22 in (56 cm) सिर की गोलाई के लिए।</p>
+
+  <ul>
+    <li>तैयार ऊँचाई: 12 in (30.5 cm), फ़ोल्ड सहित &mdash; इसमें कुछ और मत जोड़िए।</li>
+    <li>तैयार गोलाई, बिना खींचे: 20 in (51 cm)।</li>
+  </ul>
+
+  <p>कपड़ा बहुत खिंचता है, इसीलिए तैयार गोलाई उस सिर से करीब 2 in (5 cm) छोटी है जिस पर यह आती है।</p>
+</section>
+
+<section aria-labelledby="materials">
+  <h2 id="materials">सामग्री</h2>
+
+  <ul>
+    <li><b>यार्न:</b> 100% ऐक्रेलिक, वेट 4 मीडियम (worsted, afghan, aran)। 100&ndash;120 g, करीब 180&ndash;220 m। एक 100 g की लच्छी शायद थोड़ी कम पड़ेगी &mdash; दो लीजिए, या एक 150 g की।</li>
+    <li><b>हुक:</b> 5 mm (H-8)।</li>
+    <li><b>बाकी सामान:</b> डार्निंग सुई, स्टिच मार्कर या सेफ़्टी पिन, इंची टेप, कैंची।</li>
+  </ul>
+</section>
+
+<section aria-labelledby="gauge">
+  <h2 id="gauge">गेज</h2>
+
+  <p>13 sts और 13 रो = 4 in (10 cm), sc blo में, सपाट रखकर और बिना खींचे नापा गया।</p>
+
+  <p>फ़िट के लिए गेज ज़रूरी नहीं है, क्योंकि रिब खिंच जाती है। फिर भी जाँच लेना ठीक रहता है: अगर कपड़ा सख्त लगे और खिंचे नहीं, तो बड़ा हुक लीजिए; अगर स्टिच के बीच खाली जगह दिखे, तो छोटा हुक लीजिए। अगर आपका गेज अलग आए, तो <b>नाप के बजाय स्टिच और रो की गिनती के हिसाब से काम कीजिए</b> &mdash; टोपी फिर भी आ जाएगी।</p>
+</section>
+
+<section aria-labelledby="abbreviations">
+  <h2 id="abbreviations">शॉर्ट फ़ॉर्म</h2>
+
+  <p>पूरे पैटर्न में US क्रोशे शब्द हैं। UK शब्दों में इसी sc को डबल क्रोशे कहते हैं। शॉर्ट फ़ॉर्म अंग्रेज़ी अक्षरों में ही रखे गए हैं, क्योंकि हर पैटर्न में यही छपे मिलेंगे।</p>
+
+  <dl class="key">
+    <div><dt>blo</dt><dd>सिर्फ़ पिछला लूप (back loop only)</dd></div>
+    <div><dt>ch</dt><dd>चेन</dd></div>
+    <div><dt>rep</dt><dd>दोहराएँ</dd></div>
+    <div><dt>sc</dt><dd>सिंगल क्रोशे</dd></div>
+    <div><dt>sl st</dt><dd>स्लिप स्टिच</dd></div>
+    <div><dt>st(s)</dt><dd>स्टिच</dd></div>
+  </dl>
+</section>
+
+<section aria-labelledby="special">
+  <h2 id="special">खास स्टिच</h2>
+
+  <p><b>sc blo &mdash; सिर्फ़ पिछले लूप में सिंगल क्रोशे।</b> हर स्टिच के ऊपर दो लूप होते हैं: एक आपके नज़दीक, एक दूर। हुक सिर्फ़ दूर वाले लूप के नीचे डालिए और नज़दीक वाले को छुए बिना छोड़ दीजिए, फिर sc हमेशा की तरह पूरा कीजिए। जो लूप छूटे रहते हैं, वही उभरी हुई लकीरें बनाते हैं जिनसे रिब बनती है।</p>
+
+  <p>रो 1 फ़ाउंडेशन चेन में, दोनों लूप के नीचे, आम तरीके से बुनी जाती है। उसके बाद हर रो sc blo है।</p>
+</section>
+
+<section aria-labelledby="pattern">
+  <h2 id="pattern">पैटर्न</h2>
+
+  <p>एक ही टुकड़े में, सपाट, एक किनारे से दूसरे किनारे तक। हर रो 40 sts की है; गिनती कभी नहीं बदलती।</p>
+
+  <dl class="rows">
+    <dt>फ़ाउंडेशन</dt>
+    <dd>Ch 41.</dd>
+
+    <dt>रो 1</dt>
+    <dd>हुक से दूसरी ch में और उसके बाद हर ch में sc, दोनों लूप के नीचे। <span class="count">(40 sc)</span></dd>
+
+    <dt>रो 2</dt>
+    <dd>Ch 1, पलटिए। हर st में sc blo। <span class="count">(40 sc)</span></dd>
+
+    <dt>रो 3&ndash;66</dt>
+    <dd>रो 2 दोहराएँ। <span class="count">(40 sc)</span></dd>
+  </dl>
+
+  <p>धागा बंद मत कीजिए। टुकड़ा लंबे किनारे पर, ढीला रखने पर, करीब 20 in (51 cm) का होगा।</p>
+
+  <p><b>सलाह:</b> हर 10वीं रो की पहली st पर मार्कर लगाइए, या रो काउंटर इस्तेमाल कीजिए। दोनों किनारों पर हर रो की पहली स्टिच मार्क करने से रो की आखिरी स्टिच छूटती भी नहीं।</p>
+
+  <div class="figure">
+    <svg class="schematic" viewBox="0 0 660 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="सपाट आयत की ड्रॉइंग: 66 रो चौड़ा और 40 स्टिच ऊँचा, जिसमें सिलाई वाले दोनों छोटे किनारे मोटी लाइन से बने हैं और रिब लंबे किनारों के बीच चलती है।" focusable="false">
+      <g fill="none" stroke="#000000" stroke-width="3">
+        <rect x="120" y="80" width="440" height="264"/>
+        <g stroke-width="1.5">
+          <path d="M160 80 v264 M200 80 v264 M240 80 v264 M280 80 v264
+                   M320 80 v264 M360 80 v264 M400 80 v264 M440 80 v264
+                   M480 80 v264 M520 80 v264"/>
+        </g>
+        <g stroke-width="7">
+          <path d="M120 80 v264"/>
+          <path d="M560 80 v264"/>
+        </g>
+        <g stroke-width="2">
+          <path d="M120 400 h440"/>
+          <path d="M120 392 v16 M560 392 v16"/>
+          <path d="M70 80 v264"/>
+          <path d="M62 80 h16 M62 344 h16"/>
+        </g>
+      </g>
+      <g font-family="Nirmala UI, Noto Sans Devanagari, Arial, sans-serif" font-size="26" fill="#000000">
+        <text x="340" y="52" text-anchor="middle">ऊपर का किनारा, समेटकर बंद</text>
+        <text x="340" y="382" text-anchor="middle">नीचे का किनारा, ब्रिम</text>
+        <text x="340" y="443" text-anchor="middle">66 रो &#8212; 20 in, 51 cm</text>
+        <text x="36" y="212" text-anchor="middle" transform="rotate(-90 36 212)">40 sts &#8212; 12 in, 30.5 cm</text>
+      </g>
+    </svg>
+
+    <p class="figcaption">
+      <b>चित्र 1. सपाट टुकड़ा।</b>
+      एक आयत, जो ऊँचाई से ज़्यादा चौड़ा है। दोनों लंबे किनारे बाएँ से दाएँ जाते हैं: ऊपर वाला टोपी का ऊपरी हिस्सा बनता है और समेटकर बंद किया जाता है, नीचे वाला ब्रिम बनता है। दोनों छोटे किनारे, जो मोटी लाइन से बने हैं, आपस में सिलकर सीवन बनाते हैं। पतली लाइनें एक लंबे किनारे से दूसरे तक जाती हैं: ये बैक लूप वाली लकीरें हैं, और तैयार टोपी में ये ब्रिम से ऊपर की तरफ़ चलती हैं, गोलाई में कभी नहीं। आयत एक किनारे से दूसरे किनारे तक 66 रो, करीब 20 in (51 cm), और नीचे से ऊपर तक 40 sts, करीब 12 in (30.5 cm) का है।
+    </p>
+  </div>
+</section>
+
+<section aria-labelledby="assembly">
+  <h2 id="assembly">जोड़ना</h2>
+
+  <ol>
+    <li>टुकड़े को बीच से मोड़िए ताकि दोनों छोटे सिरे मिल जाएँ, और उन्हें st दर st मिलाइए। अब लंबे किनारे टोपी के नीचे और ऊपर वाले हिस्से हैं।</li>
+    <li>दोनों परतों में से काम करते हुए, दोनों छोटे सिरों को एक लंबे किनारे से दूसरे तक sl st से जोड़िए।</li>
+    <li>टोपी को उलटा कीजिए ताकि सीवन अंदर की तरफ़ रहे।</li>
+    <li>धागा 20 in (51 cm) छोड़कर काटिए। उसे आखिरी लूप में से निकालकर कसकर खींचिए।</li>
+  </ol>
+
+  <div class="figure">
+    <svg class="schematic" viewBox="0 0 660 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="सिलाई के बाद खुली नली बने टुकड़े की ड्रॉइंग, जिसमें सीवन एक साइड में नीचे तक जाती है और रिब नीचे के किनारे से ऊपर तक चलती है।" focusable="false">
+      <defs>
+        <clipPath id="tube-std">
+          <path d="M230 120 a100 34 0 0 1 200 0 v230 a100 34 0 0 1 -200 0 z"/>
+        </clipPath>
+      </defs>
+      <g fill="none" stroke="#000000" stroke-width="3">
+        <path d="M230 120 v230"/>
+        <path d="M430 120 v230"/>
+        <ellipse cx="330" cy="120" rx="100" ry="34"/>
+        <path d="M230 350 a100 34 0 0 0 200 0"/>
+        <g stroke-width="1.5" clip-path="url(#tube-std)">
+          <path d="M250 100 v290 M275 100 v290 M305 100 v290
+                   M330 100 v290 M355 100 v290 M385 100 v290
+                   M410 100 v290"/>
+        </g>
+        <g stroke-width="7">
+          <path d="M230 120 v230"/>
+        </g>
+        <g stroke-width="2">
+          <path d="M140 235 h80"/>
+        </g>
+      </g>
+      <g font-family="Nirmala UI, Noto Sans Devanagari, Arial, sans-serif" font-size="26" fill="#000000">
+        <text x="330" y="62" text-anchor="middle">ऊपर का किनारा, अभी खुला</text>
+        <text x="134" y="245" text-anchor="end">सीवन</text>
+        <text x="330" y="430" text-anchor="middle">नीचे का किनारा</text>
+      </g>
+    </svg>
+
+    <p class="figcaption">
+      <b>चित्र 2. सिलकर बनी नली।</b>
+      वही टुकड़ा, जिसके दोनों छोटे सिरे मिलाकर सिल दिए गए हैं, जिससे एक खुली नली बनती है। सीवन एक साइड में सीधी एक लाइन है, बाकी से मोटी बनी हुई। इस समय दोनों सिरे खुले हैं: ऊपर का किनारा अभी पूरा गोल है, नीचे का किनारा ब्रिम है। रिब अब चारों तरफ़ नीचे से ऊपर तक चलती है। सिलाई के बाद नली को उलटा कर दिया जाता है, ताकि सीवन अंदर रहे।
+    </p>
+  </div>
+</section>
+
+<section aria-labelledby="gather">
+  <h2 id="gather">ऊपर का हिस्सा समेटना</h2>
+
+  <ol>
+    <li>दोनों लंबे किनारों में से किसी एक को ऊपर का किनारा मान लीजिए &mdash; दोनों एक जैसे हैं।</li>
+    <li>20 in वाला धागा डार्निंग सुई में डालिए।</li>
+    <li>ऊपर के किनारे पर, किनारे के पास, बराबर दूरी पर पूरी गोलाई में रनिंग स्टिच लगाइए।</li>
+    <li>धागे को कसकर खींचकर ऊपर का हिस्सा बंद कीजिए। गाँठ लगाकर पक्का कीजिए।</li>
+  </ol>
+</section>
+
+<section aria-labelledby="finishing">
+  <h2 id="finishing">फ़िनिशिंग</h2>
+
+  <ol>
+    <li>बचे हुए धागे से समेटे हुए ऊपरी हिस्से के बीच का छोटा छेद बंद कीजिए।</li>
+    <li>सारे धागे अंदर छिपाइए और काट दीजिए।</li>
+    <li>नीचे का किनारा जितना गहरा अच्छा लगे, उतना ऊपर मोड़ लीजिए।</li>
+  </ol>
+
+  <div class="figure">
+    <svg class="schematic" viewBox="0 0 660 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="तैयार टोपी की ड्रॉइंग: ऊपर का हिस्सा समेटकर गाँठ लगाया हुआ, ब्रिम ऊपर मुड़ी हुई, और फ़ोल्ड सहित कुल 12 इंच ऊँचाई निशान लगाकर दिखाई गई।" focusable="false">
+      <g fill="none" stroke="#000000" stroke-width="3">
+        <path d="M225 320 L225 205 C225 148 262 104 330 98"/>
+        <path d="M435 320 L435 205 C435 148 398 104 330 98"/>
+        <circle cx="330" cy="92" r="8" stroke-width="3"/>
+        <g stroke-width="1.5">
+          <path d="M258 320 L258 208 C258 158 292 116 326 103"/>
+          <path d="M288 320 L288 206 C288 160 310 122 328 103"/>
+          <path d="M330 320 L330 103"/>
+          <path d="M372 320 L372 206 C372 160 350 122 332 103"/>
+          <path d="M402 320 L402 208 C402 158 368 116 334 103"/>
+        </g>
+        <path d="M218 320 h224 v78 h-224 z"/>
+        <g stroke-width="1.5">
+          <path d="M248 320 v78 M278 320 v78 M308 320 v78 M338 320 v78
+                   M368 320 v78 M398 320 v78"/>
+        </g>
+        <g stroke-width="2">
+          <path d="M160 92 v306"/>
+          <path d="M152 92 h16 M152 398 h16"/>
+          <path d="M330 58 v22"/>
+          <path d="M450 356 h20"/>
+        </g>
+      </g>
+      <g font-family="Nirmala UI, Noto Sans Devanagari, Arial, sans-serif" font-size="26" fill="#000000">
+        <text x="330" y="44" text-anchor="middle">समेटकर गाँठ लगाया हुआ</text>
+        <text x="476" y="366" text-anchor="start">मुड़ी हुई ब्रिम</text>
+        <text x="128" y="245" text-anchor="middle" transform="rotate(-90 128 245)">12 in, 30.5 cm, फ़ोल्ड सहित</text>
+      </g>
+    </svg>
+
+    <p class="figcaption">
+      <b>चित्र 3. तैयार टोपी।</b>
+      पहनने पर टोपी ऐसी दिखती है। ऊपर का किनारा रनिंग स्टिच से खींचकर बंद और गाँठ लगाकर पक्का किया गया है, इसलिए ऊपरी हिस्सा सिमटकर एक छोटी नोक बन जाता है। शरीर वाला हिस्सा वहाँ से सीधा नीचे लटकता है। नीचे एक ज़्यादा गहरी पट्टी दिखती है, जो बाहर की तरफ़ मोड़ी हुई ब्रिम है। रिब पूरे में ऊपर-नीचे चलती है, ब्रिम पर भी, क्योंकि ब्रिम उसी कपड़े को मोड़कर बनी है। तैयार ऊँचाई करीब 12 in (30.5 cm) है, ब्रिम मोड़ने के बाद।
+    </p>
+  </div>
+</section>
+
+<section aria-labelledby="terms">
+  <h2 id="terms">शर्तें और अनुमति</h2>
+
+  <p>US क्रोशे शब्द। UK शब्दों में जिस स्टिच को यहाँ sc कहा गया है, उसे डबल क्रोशे कहते हैं।</p>
+
+  <p>यह पैटर्न आपके अपने बनाने के लिए है। इससे बनी टोपियाँ बेचना चाहें तो बेच सकते हैं। बस फ़ाइल खुद आगे मत बेचिए और न ही साझा कीजिए।</p>
+
+  <p>अगर यहाँ कुछ गलत या समझ से बाहर लगे, तो <a href="mailto:crochetcurioo@gmail.com" aria-label="Crochet Curio को crochetcurioo@gmail.com पर ईमेल कीजिए">crochetcurioo@gmail.com</a> पर लिखिए, उसे ठीक कर दिया जाएगा।</p>
+</section>
+
+</body>
+</html>

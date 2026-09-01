@@ -65,6 +65,16 @@ const TARGETS = {
     source: path.join(ROOT, "pattern-beanie-standard.html"),
     out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-standard.pdf"),
   },
+  /* The Hindi standard edition is a translation of the standard page,
+     not a second pattern: same counts, same hook, same measurements. It
+     builds through the same pipeline, so whatever the English PDF gets
+     — word spaces, tags, bookmarks, the PDF/UA identifier — this one
+     gets too. Its /Lang comes from the page's own lang="hi", which is
+     what makes a screen reader read it with a Hindi voice. */
+  "standard-hi": {
+    source: path.join(ROOT, "pattern-beanie-standard-hi.html"),
+    out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-standard-hi.pdf"),
+  },
   accessible: {
     source: path.join(ROOT, "pattern-beanie-accessible.html"),
     out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern.pdf"),

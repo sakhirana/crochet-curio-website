@@ -44,8 +44,42 @@ const {
 } = require("docx");
 
 const ROOT = path.resolve(__dirname, "..");
-const SOURCE = path.join(ROOT, "pattern-beanie-accessible.html");
-const OUT = path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-large-print.docx");
+
+/* Two editions of the same file: English by default, Hindi with --hi.
+   Both are built from their own accessible page, so the wording cannot
+   drift from the page a reader may have started on. */
+const HI = process.argv.includes("--hi");
+
+const EDITION = HI
+  ? {
+      source: path.join(ROOT, "pattern-beanie-accessible-hi.html"),
+      out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-large-print-hi.docx"),
+      /* Verdana has no Devanagari glyphs. Nirmala UI is the face Windows
+         ships for the script and the one the Hindi page asks for first,
+         so Word and the browser render the pattern the same way. */
+      font: "Nirmala UI",
+      /* hi-IN so a screen reader picks its Hindi voice, and so Word does
+         not spell-check Hindi against an English dictionary. */
+      lang: "hi-IN",
+      title: "फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम — बड़े अक्षरों वाला एडिशन",
+      description:
+        "फोल्ड होने वाली रिब्ड बीनी का क्रोशे पैटर्न, वयस्क मीडियम। बड़े अक्षरों वाला एडिशन: 24 पॉइंट टाइप, कोई शॉर्ट फ़ॉर्म नहीं, कोई चार्ट नहीं।",
+    }
+  : {
+      source: path.join(ROOT, "pattern-beanie-accessible.html"),
+      out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-large-print.docx"),
+      font: "Verdana",
+      /* en-GB, so Word does not underline "colour" and "memorise" as
+         misspellings and a screen reader gets the right pronunciation
+         rules */
+      lang: "en-GB",
+      title: "Foldable Ribbed Beanie, Adult Medium — large print edition",
+      description:
+        "Crochet pattern for a foldable ribbed beanie in adult medium. Large print edition: 24 point sans serif, no abbreviations, no charts.",
+    };
+
+const SOURCE = EDITION.source;
+const OUT = EDITION.out;
 
 const html = fs.readFileSync(SOURCE, "utf8");
 
@@ -183,11 +217,13 @@ while ((m = re.exec(body))) {
    Turn it into a document
    --------------------------------------------------------------- */
 
-const FONT = "Verdana";
+/* Named on both the ascii and the complex-script slots. Devanagari is
+   a complex script in Word's model: without the cs font and size it
+   falls back to the theme font at 10 point, which would quietly undo
+   the whole point of a large print edition. */
+const FONT = { ascii: EDITION.font, hAnsi: EDITION.font, cs: EDITION.font };
 const BLACK = "000000";
-/* en-GB, so Word does not underline "colour" and "memorise" as
-   misspellings and a screen reader gets the right pronunciation rules */
-const LANG = "en-GB";
+const LANG = EDITION.lang;
 
 /* The built-in Heading styles carry the outline level a screen reader
    navigates by, so the paragraphs still use them. Their sizes are
@@ -242,7 +278,9 @@ const children = blocks.map((b) => {
       text: b.text,
       font: FONT,
       size: h.size,
+      sizeComplexScript: h.size,
       bold: true,
+      boldComplexScript: true,
       italics: false,
       color: BLACK,
     });
@@ -281,7 +319,7 @@ const numberedLevel = (format, text, indent, hanging) => ({
   text,
   alignment: AlignmentType.LEFT,
   style: {
-    run: { font: FONT, size: 48, color: BLACK },
+    run: { font: FONT, size: 48, sizeComplexScript: 48, color: BLACK },
     paragraph: {
       indent: { left: convertInchesToTwip(indent), hanging: convertInchesToTwip(hanging) },
     },
@@ -289,9 +327,8 @@ const numberedLevel = (format, text, indent, hanging) => ({
 });
 
 const doc = new Document({
-  title: "Foldable Ribbed Beanie, Adult Medium — large print edition",
-  description:
-    "Crochet pattern for a foldable ribbed beanie in adult medium. Large print edition: 24 point sans serif, no abbreviations, no charts.",
+  title: EDITION.title,
+  description: EDITION.description,
   creator: "Crochet Curio",
   styles: {
     default: {
@@ -301,9 +338,10 @@ const doc = new Document({
         run: {
           font: FONT,
           size: 48,
+          sizeComplexScript: 48,
           color: BLACK,
           italics: false,
-          language: { value: LANG },
+          language: { value: LANG, bidirectional: LANG },
         },
         paragraph: { spacing: { line: 360, after: 200 }, alignment: AlignmentType.LEFT },
       },

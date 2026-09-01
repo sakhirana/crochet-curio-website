@@ -112,29 +112,48 @@
             alongside them.
           -->
           <h2 class="formats__title">The pattern</h2>
-          <a class="btn btn--primary btn--block" href="assets/patterns/rosie-beanie-pattern-standard.pdf" download
+
+          <!--
+            The language is picked before the download, not after: the
+            file is a PDF, so there is no switching it once it is on
+            someone's machine.
+
+            The select carries the choice, the link below it is the
+            download, and pattern-lang.js keeps the two in step. Without
+            the script the link still points at the English PDF, which
+            is what it did before the select existed.
+          -->
+          <div class="formats__lang">
+            <label class="formats__langLabel" for="patternLang">Pattern language</label>
+            <select class="formats__langSelect" id="patternLang">
+              <option value="en" selected>English</option>
+              <option value="hi" lang="hi">हिन्दी</option>
+            </select>
+          </div>
+
+          <a class="btn btn--primary btn--block" id="patternDownload" href="assets/patterns/rosie-beanie-pattern-standard.pdf" download hreflang="en"
              aria-label="Download the pattern as a PDF, free">Download the PDF &mdash; free</a>
-          <p class="formats__note">5 pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+          <p class="formats__note" id="patternNote">5 pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
 
           <h2 class="formats__title">Large print edition</h2>
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block" href="pattern-beanie-accessible.html"
+              <a class="btn btn--secondary btn--block" id="largePrintRead" hreflang="en" href="pattern-beanie-accessible.html"
                  aria-label="Read the large print edition in your browser">Read it in your browser</a>
-              <p class="formats__note">24 point type that reflows and zooms. Read from beginning to end with NVDA.</p>
+              <p class="formats__note" id="largePrintReadNote">24 point type that reflows and zooms. Read from beginning to end with NVDA. The Word file, for reading offline, is linked at the top of that page.</p>
             </li>
             <li>
               <a class="btn btn--secondary btn--block" href="assets/patterns/rosie-beanie-pattern.pdf" download
                  aria-label="Download the large print edition as a PDF">Download the PDF</a>
-              <p class="formats__note">13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up.</p>
+              <p class="formats__note">13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading &mdash; with a screen reader, use the web page above.</p>
             </li>
           </ul>
 
-          <p class="buy-form__note">
-            No basket, no account, nothing to pay. Same hat, same counts and the same
-            measurements in every version &mdash; take whichever suits how you like to work.
-          </p>
+          <!-- Written by pattern-lang.js, and only when the Hindi
+               pattern is the one on offer: in English there is nothing
+               to say here. -->
+          <p class="formats__note" id="largePrintPdfNote" hidden></p>
         </div>
 
         <h2 class="product__detailsTitle">What is in the file</h2>
@@ -235,6 +254,7 @@
   </div>
 </footer>
 
+<script src="assets/js/pattern-lang.js"></script>
 <script src="assets/js/catalogue.js"></script>
 <script src="assets/js/site.js"></script>
 <script src="assets/js/shop.js"></script>

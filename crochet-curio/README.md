@@ -40,6 +40,9 @@ Then open <http://localhost:4173>. No build step, no dependencies.
 | `assets/patterns/` | Built pattern files — PDFs and the Word edition. Generated; do not edit by hand |
 | `pattern-beanie-accessible.html` | The beanie, large print edition. Source for its PDF and Word file |
 | `pattern-beanie-standard.html` | The beanie, standard edition. Source for the 5-page PDF |
+| `pattern-beanie-standard-hi.html` | The same standard edition in Hindi. Source for the Hindi PDF |
+| `pattern-beanie-accessible-hi.html` | The same large print edition in Hindi. Source for the Hindi Word file |
+| `assets/js/pattern-lang.js` | Points the product page download at the English or the Hindi PDF |
 | `tools/build-pattern.js` | Builds a pattern PDF. `node tools/build-pattern.js standard` |
 | `tools/build-pattern-docx.js` | Builds the large print Word file. `node tools/build-pattern-docx.js` |
 | `tools/verify-pattern-pdf.js` | Accessibility checks the build fails on. Also runs standalone on any PDF |
@@ -54,8 +57,10 @@ source pages, so no two versions can drift apart.
 ```bash
 node build-products.js                    # the product page
 node tools/build-pattern.js standard      # the standard PDF
+node tools/build-pattern.js standard-hi   # the standard PDF in Hindi
 node tools/build-pattern.js accessible    # the large print PDF
 node tools/build-pattern-docx.js          # the large print Word file
+node tools/build-pattern-docx.js --hi     # the large print Word file in Hindi
 ```
 
 **The pattern** — what most crocheters want. Abbreviations, gauge over a 4in swatch,
@@ -64,18 +69,38 @@ diagrams.
 | File | Source | For |
 | --- | --- | --- |
 | `assets/patterns/rosie-beanie-pattern-standard.pdf` | `pattern-beanie-standard.html` | 5 pages, 12pt. Printing |
+| `assets/patterns/rosie-beanie-pattern-standard-hi.pdf` | `pattern-beanie-standard-hi.html` | The same 5 pages in Hindi |
 
 `pattern-beanie-standard.html` stays in the repo as the source that PDF is built
 from, but nothing links to it. This audience is mostly printing, and a browser
 link sitting under a download button was one option too many.
+
+One select governs every edition. Language is a property of the pattern, not of
+the format, so there is no second control on the large print group: the select
+moves the standard PDF, the large print page — and with it the Word file linked
+inside that page — together. The one file it cannot move is the large print PDF,
+which stays English, and a line appears under it in Hindi saying so.
+
+The language is chosen on the product page, before the download: a PDF cannot be
+switched once it is on someone's machine. Crochet abbreviations stay in Latin
+script in the Hindi file (sc, ch, sl st, blo) because that is what every other
+pattern the reader meets will print; the prose around them is Hindi.
+
+One known limit: Chrome writes a mangled text layer for Devanagari — reordered
+matras, missing conjuncts — so the Hindi PDF looks right and prints right, but
+copy, search and screen reader output from it are unreliable. The Hindi page
+itself has none of that problem. This has to be solved before a Hindi large
+print edition ships.
 
 **Large print edition** — 24pt, every direction written out, no abbreviations.
 
 | File | Source | For |
 | --- | --- | --- |
 | `pattern-beanie-accessible.html` | — | Reflows and zooms. NVDA tested |
+| `pattern-beanie-accessible-hi.html` | — | The same, in Hindi. Not yet listened to with a screen reader |
 | `assets/patterns/rosie-beanie-pattern-large-print.docx` | `pattern-beanie-accessible.html` | Offline, reflows. NVDA tested |
-| `assets/patterns/rosie-beanie-pattern.pdf` | `pattern-beanie-accessible.html` | 13 pages. Printing, and the Accessible Patterns Index. Tagged, machine-verified |
+| `assets/patterns/rosie-beanie-pattern-large-print-hi.docx` | `pattern-beanie-accessible-hi.html` | Offline, reflows, Hindi. Nirmala UI, `hi-IN`, 24pt on the complex-script slot too |
+| `assets/patterns/rosie-beanie-pattern.pdf` | `pattern-beanie-accessible.html` | 13 pages. Printing and reading, and the Accessible Patterns Index. Tagged, machine-verified. Not the screen reader path |
 
 `node tools/build-pattern.js standard --check` builds and verifies without writing.
 
@@ -126,6 +151,13 @@ everything else, and every one of its 211 text lines ends on a word boundary.
 check below — the tag tree walked, the text each tag owns pulled out and read back
 in order. The pattern says exactly that in its own accessibility statement rather
 than claiming the NVDA pass the other two editions have.
+
+So the PDF is offered for printing and reading, and the note under it on the
+product page sends screen reader users to the web page instead. That is a
+recommendation, not a claim that the file is incompatible: it is tagged, it is
+machine-verified, the Accessible Patterns Index lists it on that basis, and no
+reader other than NVDA has been tried on it. Steer people to the format that is
+known to work; do not publish a failure that was not measured.
 
 ### Why the build post-processes Chrome's PDF
 

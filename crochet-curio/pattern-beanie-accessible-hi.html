@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम — बड़े अक्षरों वाला एडिशन — Crochet Curio</title>
+<meta name="description" content="फोल्ड होने वाली रिब्ड बीनी का क्रोशे पैटर्न, वयस्क मीडियम साइज़ में। बड़े अक्षरों वाला एडिशन: 24 पॉइंट सैन्स सेरिफ़, कोई चार्ट नहीं, कोई शॉर्ट फ़ॉर्म नहीं, स्क्रीन रीडर के लिए बनाया गया।">
+
+<!--
+  Foldable Ribbed Beanie — large print edition, Hindi
+  ==================================================
+
+  A translation of pattern-beanie-accessible.html. Same hat, same
+  counts, same measurements, same section ids — if one is corrected,
+  the other has to be corrected with it.
+
+  Standalone, like the English edition: no shop stylesheets, no
+  scripts, no theme switching, no web fonts. Everything a screen
+  reader meets here is the pattern itself.
+
+  Two things are deliberately different from the English page:
+
+  1. The font stack leads with Devanagari faces. Verdana has no
+     Devanagari glyphs, so naming it first would leave the choice of
+     face to whatever the system happened to substitute.
+  2. The screen reader line in the accessibility statement says what
+     has actually been tested. The English web and Word editions have
+     been read end to end with NVDA; these Hindi ones have not yet
+     been, and the statement says so rather than inheriting a claim
+     that was made about different files.
+
+  No Hindi PDF of this edition exists on purpose. Chrome writes a
+  mangled text layer for Devanagari — reordered matras, dropped
+  conjuncts — so a Hindi PDF would look right and read wrong. The page
+  and the Word file both carry real characters, so both are sound.
+-->
+
+<style>
+  /* ---------------------------------------------------------------
+     Type
+
+     24pt is the floor the Accessible Patterns Index sets, so it is the
+     base size here in both media. Devanagari hangs matras above and
+     below the line, so the line height is looser than the English
+     edition's 1.5.
+     --------------------------------------------------------------- */
+  :root {
+    --ink: #000000;
+    --paper: #ffffff;
+    --rule: #000000;
+  }
+
+  html {
+    background: var(--paper);
+  }
+
+  body {
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    max-width: 40em;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Nirmala UI", "Noto Sans Devanagari", "Mangal", Verdana, Arial, sans-serif;
+    font-size: 24pt;
+    line-height: 1.7;
+    font-weight: 400;
+    text-align: left;      /* never justified: uneven word spacing is harder to track */
+  }
+
+  /* Headings are bold and larger, never italic, never colour-coded. */
+  h1, h2, h3 {
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 1.5em 0 0.5em;
+  }
+  h1 { font-size: 32pt; margin-top: 0; }
+  h2 { font-size: 28pt; }
+  h3 { font-size: 26pt; }
+
+  p, li { margin: 0 0 0.75em; }
+  ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
+  li > ul, li > ol { margin-top: 0.5em; }
+
+  /* A rule under each section start, so a sighted low-vision reader can
+     find the boundaries without relying on size alone. */
+  h2 {
+    border-top: 2px solid var(--rule);
+    padding-top: 0.6em;
+  }
+
+  a {
+    color: var(--ink);
+    text-decoration: underline;
+    /* The email address is one long unbreakable word. At 24 point on a
+       narrow phone it would push the page sideways, and a page that
+       scrolls horizontally fails WCAG 1.4.10 reflow. */
+    overflow-wrap: anywhere;
+  }
+
+  /* A heading given tabindex="-1" so a contents link can move focus to
+     it draws a focus ring in some browsers when it is jumped to. The
+     ring is correct on the link itself and noise on the destination. */
+  h2[tabindex]:focus { outline: none; }
+
+  /* The back link that closes every section. Held out from the last
+     line of the section by a full line. It is not made smaller or
+     greyer: this edition has one type size and one contrast, and an
+     escape hatch is the last thing to shrink. */
+  .backlink { margin: 1.5em 0 0; }
+
+  /* The contents list: plain, no bullets, generous hit areas. */
+  .contents ul { list-style: none; padding-left: 0; }
+  .contents li { margin-bottom: 0.6em; }
+
+  /* The offline link. Boxed so a low vision reader can see it is a
+     thing to act on rather than another line of the pattern. */
+  .offline {
+    border: 2px solid var(--rule);
+    padding: 1em 1em 0.5em;
+    margin: 1.5em 0;
+  }
+  .offline p:last-child { margin-bottom: 0.5em; }
+
+  /* ---------------------------------------------------------------
+     Print
+
+     What a reader saves or prints from the browser. Same 24pt type,
+     black on white, with page breaks kept out of the middle of a step.
+     --------------------------------------------------------------- */
+  @media print {
+    body {
+      max-width: none;
+      padding: 0;
+      font-size: 24pt;
+    }
+    a { text-decoration: none; }
+    /* Screen conveniences. On paper the headings do the same job as
+       the contents list, and neither link can be followed. */
+    .contents, .offline, .backlink { display: none; }
+    h1, h2, h3 { break-after: avoid-page; page-break-after: avoid; }
+    p, li { break-inside: avoid-page; page-break-inside: avoid; }
+    section { break-inside: auto; }
+  }
+</style>
+</head>
+<body>
+
+<h1>फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम</h1>
+
+<p>Crochet Curio का क्रोशे पैटर्न।</p>
+
+<p>वर्ज़न 1.0. प्रकाशित 29 अगस्त 2026.</p>
+
+<!--
+  The offline link, and why it is a Word file.
+
+  Same reasoning as the English edition, with one more reason on top:
+  a Hindi PDF built from this page would carry a broken text layer, so
+  the Word file is not merely the better offline route here, it is the
+  only sound one. Hidden in print, like the English page's box.
+-->
+<div class="offline">
+  <p>यह पैटर्न आप यहीं पढ़ सकते हैं, या अपने साथ ले जा सकते हैं।</p>
+  <p><a href="assets/patterns/rosie-beanie-pattern-large-print-hi.docx" download aria-label="इस पैटर्न को Word फ़ाइल के रूप में डाउनलोड कीजिए, बिना इंटरनेट पढ़ने के लिए">इसे Word फ़ाइल के रूप में डाउनलोड कीजिए</a> — वही पैटर्न, वही 24 पॉइंट टाइप, और यह बिना इंटरनेट के भी चलती है। यह पेज और Word फ़ाइल, दोनों स्क्रीन रीडर के साथ काम करते हैं, इसलिए जो आपको ठीक लगे वही लीजिए।</p>
+</div>
+
+<section aria-labelledby="statement">
+  <h2 id="statement">एक्सेसिबिलिटी स्टेटमेंट</h2>
+
+  <p>यह इस पैटर्न का एक्सेसिबल एडिशन है, जो स्क्रीन रीडर इस्तेमाल करने वालों और प्रिंट डिसेबिलिटी वाले क्रोशे करने वालों के लिए लिखा गया है। यह सिर्फ़ इसी पैटर्न के बारे में है।</p>
+
+  <ul>
+    <li>24 पॉइंट सैन्स सेरिफ़ टाइप में, सफ़ेद बैकग्राउंड पर काले अक्षरों में।</li>
+    <li>कहीं भी इटैलिक अक्षर इस्तेमाल नहीं किए गए हैं।</li>
+    <li>हर निर्देश पूरा लिखा गया है। कोई शॉर्ट फ़ॉर्म नहीं है, और याद करने के लिए कोई शॉर्ट फ़ॉर्म की सूची भी नहीं है।</li>
+    <li>कोई चार्ट, कोई स्टिच डायग्राम और कोई फ़ोटो नहीं है। इस पैटर्न में कोई बात तस्वीर के सहारे नहीं कही गई।</li>
+    <li>कोई निर्देश रंग पर, या कपड़े का एक तरफ़ दूसरे से पहचानने पर निर्भर नहीं है।</li>
+    <li>हर स्टेप में स्टिच की गिनती भी है और नाप भी, ताकि पैटर्न गिनकर भी और नापकर भी फ़ॉलो किया जा सके।</li>
+    <li>हेडिंग क्रम से इस्तेमाल हुई हैं और सूचियाँ असली सूचियाँ हैं, इसलिए स्क्रीन रीडर हेडिंग के सहारे पैटर्न में आगे-पीछे जा सकता है।</li>
+    <li>क्रोशे की तकनीक के नाम देवनागरी में लिखे हैं — सिंगल क्रोशे, स्लिप स्टिच, चेन — क्योंकि हिन्दी में यह कला इन्हीं नामों से सिखाई जाती है।</li>
+  </ul>
+
+  <!--
+    A claim about specific files, so it may only claim what has been
+    done. The English editions have been read end to end with NVDA;
+    these Hindi ones have not been yet, and saying otherwise would be
+    borrowing a test result from a different file.
+  -->
+  <p>स्क्रीन रीडर टेस्टिंग: इस पैटर्न के अंग्रेज़ी वेब एडिशन और अंग्रेज़ी Word एडिशन, दोनों NVDA से शुरू से आख़िर तक पढ़े गए हैं और सही पढ़े गए। हिन्दी एडिशन अभी इस तरह शुरू से आख़िर तक नहीं सुने गए हैं। हिन्दी पढ़ने के लिए आपके स्क्रीन रीडर में हिन्दी आवाज़ इंस्टॉल होनी चाहिए।</p>
+
+  <p>अगर इस पैटर्न में कुछ गलत है, समझ से बाहर है, या आपके स्क्रीन रीडर पर ठीक से नहीं पढ़ा जाता, तो कृपया <a href="mailto:crochetcurioo@gmail.com" aria-label="Crochet Curio को crochetcurioo@gmail.com पर ईमेल कीजिए">crochetcurioo@gmail.com</a> पर लिखिए, उसे ठीक कर दिया जाएगा।</p>
+</section>
+
+<nav class="contents" aria-labelledby="contents">
+  <h2 id="contents" tabindex="-1">विषय सूची</h2>
+  <ul>
+    <li><a href="#description">विवरण</a></li>
+    <li><a href="#skill">स्किल लेवल</a></li>
+    <li><a href="#size">साइज़</a></li>
+    <li><a href="#materials">सामग्री</a></li>
+    <li><a href="#counts">स्टिच की गिनती और नाप</a></li>
+    <li><a href="#backloop">पिछले लूप में काम करना</a></li>
+    <li><a href="#instructions">निर्देश</a></li>
+    <li><a href="#terms">क्रोशे के शब्दों के बारे में</a></li>
+  </ul>
+</nav>
+
+<section aria-labelledby="description">
+  <h2 id="description" tabindex="-1">विवरण</h2>
+
+  <p>ऊपर की तरफ़ मोड़ने वाली ब्रिम के साथ एक रिब्ड बीनी। यह एक ही टुकड़े में, सपाट, एक किनारे से दूसरे किनारे तक बुनी जाती है, फिर एक साइड में एक बार सिली जाती है और ऊपर से समेटकर बंद कर दी जाती है।</p>
+
+  <p>रिब हर स्टिच के पिछले लूप में काम करने से बनती है। कोई अलग रिब स्टिच सीखने की ज़रूरत नहीं है।</p>
+  <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, विवरण से">विषय सूची पर वापस</a></p>
+</section>
+
+<section aria-labelledby="skill">
+  <h2 id="skill" tabindex="-1">स्किल लेवल</h2>
+
+  <p>शुरुआती। आपको चेन बनाना, सिंगल क्रोशे करना, स्लिप स्टिच करना, और हाथ से समेटने वाली सिलाई करना आना चाहिए।</p>
+  <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, स्किल लेवल से">विषय सूची पर वापस</a></p>
+</section>
+
+<section aria-labelledby="size">
+  <h2 id="size" tabindex="-1">साइज़</h2>
+
+  <p>वयस्क मीडियम। एक ही साइज़।</p>
+
+  <ul>
+    <li>22 इंच, यानी 56 सेंटीमीटर सिर की गोलाई के लिए।</li>
+    <li>तैयार ऊँचाई: 12 इंच, यानी 30.5 सेंटीमीटर। इस नाप में फ़ोल्ड पहले से शामिल है, इसलिए इसमें कुछ और मत जोड़िए।</li>
+    <li>सिलाई से पहले सपाट टुकड़े की लंबाई: करीब 20 इंच, यानी 51 सेंटीमीटर।</li>
+  </ul>
+
+  <p>कपड़ा बहुत खिंचता है, इसीलिए सपाट लंबाई उस सिर से करीब 2 इंच, यानी 5 सेंटीमीटर छोटी है जिस पर यह टोपी आती है।</p>
+  <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, साइज़ से">विषय सूची पर वापस</a></p>
+</section>
+
+<section aria-labelledby="materials">
+  <h2 id="materials" tabindex="-1">सामग्री</h2>
+
+  <ul>
+    <li>ऐक्रेलिक यार्न, 100 प्रतिशत, वेट 4 मीडियम। यह वेट worsted, afghan या aran नाम से भी बिकता है।</li>
+    <li>उसी यार्न का करीब 100 से 120 ग्राम, यानी लगभग 180 से 220 मीटर। 100 ग्राम की एक लच्छी शायद थोड़ी कम पड़ेगी, इसलिए दो लच्छी लीजिए, या 150 ग्राम की एक।</li>
+    <li>क्रोशे हुक, 5 मिलीमीटर। यह साइज़ H-8 भी लिखा जाता है।</li>
+    <li>इंची टेप।</li>
+    <li>कैंची।</li>
+    <li>डार्निंग सुई, या सिलाई की सुई।</li>
+    <li>स्टिच मार्कर, या सेफ़्टी पिन।</li>
+  </ul>
+  <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, सामग्री से">विषय सूची पर वापस</a></p>
+</section>
+
+<section aria-labelledby="counts">
+  <h2 id="counts" tabindex="-1">स्टिच की गिनती और नाप</h2>
+
+  <p>इस टोपी की हर रो में 40 स्टिच हैं। पूरी टोपी 66 रो लंबी है।</p>
+
+  <ul>
+    <li>शुरू की 41 चेन की लंबाई करीब 12 इंच, यानी 30.5 सेंटीमीटर होती है।</li>
+    <li>एक रो की 40 स्टिच की लंबाई करीब 12 इंच, यानी 30.5 सेंटीमीटर होती है।</li>
+    <li>66 रो की लंबाई करीब 20 इंच, यानी 51 सेंटीमीटर होती है।</li>
+  </ul>
+
+  <p>अगर आपकी स्टिच इन नापों से कसी या ढीली निकलें, तो नाप के बजाय गिनती के हिसाब से काम कीजिए। टोपी फिर भी आ जाएगी, क्योंकि कपड़ा खिंचता है।</p>
+
+  <p>अगर कपड़ा सख्त लगे और खिंचे नहीं, तो बड़ा हुक लीजिए। अगर स्टिच के बीच खाली जगह महसूस हो, तो छोटा हुक लीजिए।</p>
+
+  <p>66 रो गिनना आसान रहता है अगर आप साथ-साथ निशान लगाते चलें। हर दसवीं रो की पहली स्टिच पर स्टिच मार्कर खिसकाते जाइए, या रो काउंटर इस्तेमाल कीजिए।</p>
+  <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, स्टिच की गिनती और नाप से">विषय सूची पर वापस</a></p>
+</section>
+
+<section aria-labelledby="backloop">
+  <h2 id="backloop" tabindex="-1">पिछले लूप में काम करना</h2>
+
+  <p>हर स्टिच के ऊपर दो लूप होते हैं: एक आपके नज़दीक और एक दूर। जो दूर है, वही पिछला लूप है।</p>
+
+  <p>सिर्फ़ पिछले लूप में काम करने के लिए, हुक को सिर्फ़ उसी दूर वाले लूप के नीचे डालिए, और नज़दीक वाले लूप को छुए बिना छोड़ दीजिए। जो लूप छूटे रहते हैं, वे उभरी हुई लकीरें बना देते हैं, और वही लकीरें रिब हैं।</p>
+
+  <p>रो 1 शुरू की चेन में आम तरीके से, दोनों लूप के नीचे बुनी जाती है। उसके बाद हर रो सिर्फ़ पिछले लूप में बुनी जाती है।</p>
+  <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, पिछले लूप में काम करना से">विषय सूची पर वापस</a></p>
+</section>
+
+<section aria-labelledby="instructions">
+  <h2 id="instructions" tabindex="-1">निर्देश</h2>
+
+  <h3 id="foundation">शुरू की चेन</h3>
+
+  <ol>
+    <li>हुक पर एक स्लिप नॉट बनाइए।</li>
+    <li>41 चेन बनाइए। इन 41 चेन में से एक टर्निंग चेन बन जाती है, इसलिए पहली रो में 40 स्टिच बनती हैं।</li>
+  </ol>
+
+  <h3 id="row1">रो 1</h3>
+
+  <ol>
+    <li>हुक के सबसे पास वाली चेन छोड़ दीजिए।</li>
+    <li>अगली चेन में 1 सिंगल क्रोशे बनाइए, हुक उस चेन के दोनों लूप के नीचे डालते हुए, आम तरीके से।</li>
+    <li>इस पहली स्टिच में एक स्टिच मार्कर या सेफ़्टी पिन लगाइए।</li>
+    <li>रो के आख़िर तक बची हुई हर चेन में 1 सिंगल क्रोशे बनाइए, दोनों लूप के नीचे ही।</li>
+  </ol>
+
+  <p>अब आपके पास 40 स्टिच हैं।</p>
+
+  <h3 id="row2">रो 2</h3>
+
+  <ol>
+    <li>1 चेन बनाइए, फिर अपना काम पलटिए।</li>
+    <li>रो की हर स्टिच के सिर्फ़ पिछले लूप में 1 सिंगल क्रोशे बनाइए।</li>
+    <li>इस रो की पहली स्टिच में एक स्टिच मार्कर लगाइए।</li>
+  </ol>
+
+  <p>आपके पास 40 स्टिच हैं।</p>
+
+  <p>काम के दोनों किनारों पर हर रो की पहली स्टिच मार्क करते रहने से ही रो की आख़िरी स्टिच छूटने से बचती है। दोनों मार्कर साथ-साथ ऊपर खिसकाते जाइए।</p>
+
+  <h3 id="rows">रो 3 से 66</h3>
+
+  <p>रो 2 को 64 बार और दोहराइए, ताकि कुल 66 रो बन जाएँ, और हर रो में 40 स्टिच हों।</p>
+
+  <p>अब टुकड़ा अपने लंबे किनारे पर करीब 20 इंच, यानी 51 सेंटीमीटर का होना चाहिए, कपड़े को ढीला रखकर, खींचे बिना।</p>
+
+  <p>किसी पूरी रो के बाद ही रुकिए। धागा अभी मत काटिए।</p>
+
+  <h3 id="seam">सिलाई</h3>
+
+  <ol>
+    <li>टुकड़े को बीच से मोड़िए ताकि दोनों छोटे सिरे मिल जाएँ, और उन्हें स्टिच दर स्टिच मिलाइए। अब लंबे किनारे टोपी के नीचे और ऊपर वाले हिस्से हैं।</li>
+    <li>दोनों परतों में से एक साथ काम करते हुए, दोनों छोटे सिरों को एक लंबे किनारे से दूसरे लंबे किनारे तक स्लिप स्टिच से जोड़िए।</li>
+    <li>टोपी को उलटा कीजिए, ताकि सीवन अंदर की तरफ़ रहे।</li>
+    <li>धागा काटिए, करीब 20 इंच, यानी 51 सेंटीमीटर लंबा सिरा छोड़कर। उस सिरे को हुक के आख़िरी लूप में से निकालकर कसकर खींचिए, ताकि वह पक्का हो जाए।</li>
+  </ol>
+
+  <h3 id="gather">ऊपर का हिस्सा समेटना</h3>
+
+  <ol>
+    <li>तय कीजिए कि कौन-सा लंबा किनारा टोपी का ऊपरी हिस्सा है। कोई भी किनारा चलेगा, क्योंकि दोनों एक जैसे हैं।</li>
+    <li>20 इंच वाला सिरा डार्निंग सुई में डालिए।</li>
+    <li>उस ऊपरी किनारे पर पूरी गोलाई में रनिंग स्टिच लगाइए: सुई कपड़े के अंदर, फिर बाहर, स्टिच बराबर दूरी पर और किनारे के पास रखते हुए।</li>
+    <li>पूरी गोलाई हो जाने पर सिरे को कसकर खींचिए। ऊपर का हिस्सा सिमटकर बंद हो जाएगा।</li>
+    <li>सिरे में गाँठ लगाकर उसे पक्का कीजिए।</li>
+  </ol>
+
+  <h3 id="finishing">फ़िनिशिंग</h3>
+
+  <ol>
+    <li>बचे हुए सिरे से समेटे हुए ऊपरी हिस्से के बीच बचा छोटा छेद बंद कीजिए।</li>
+    <li>सारे धागे कपड़े में छिपाइए और काट दीजिए।</li>
+    <li>टोपी का निचला किनारा जितना गहरा अच्छा लगे, उतना ऊपर मोड़ लीजिए।</li>
+  </ol>
+  <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, निर्देश से">विषय सूची पर वापस</a></p>
+</section>
+
+<section aria-labelledby="terms">
+  <h2 id="terms" tabindex="-1">क्रोशे के शब्दों के बारे में</h2>
+
+  <p>इस पैटर्न में अमेरिकी क्रोशे शब्द इस्तेमाल हुए हैं। ब्रिटिश शब्दों में, जिस स्टिच को यहाँ सिंगल क्रोशे कहा गया है, उसे डबल क्रोशे कहते हैं।</p>
+
+  <p>यह पैटर्न आपके अपने बनाने के लिए है। इससे बनी टोपियाँ बेचना चाहें तो बेच सकते हैं। बस फ़ाइल खुद आगे मत बेचिए और न ही साझा कीजिए।</p>
+  <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, क्रोशे के शब्दों के बारे में से">विषय सूची पर वापस</a></p>
+</section>
+
+</body>
+</html>
