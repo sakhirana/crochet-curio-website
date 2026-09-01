@@ -47,6 +47,11 @@ const IMAGES = [
   { file: "Poppy.png", width: 1000 },
   { file: "rosewater-set.png", width: 1000 },
 
+  /* The studio photograph in Our story. The square it fills is 552 px at
+     the widest the two-column split ever gets, and it is cropped to that
+     square by object-fit, so 1000 leaves the same headroom as above. */
+  { file: "crocheting image.png", width: 1000 },
+
   /* The floating decorations. These are the widths set in motion.css;
      the largest is 248 px, so 500 covers a 2x screen outright. They
      are transparent, and WebP keeps an alpha channel. */

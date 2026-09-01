@@ -72,6 +72,12 @@
 @media (prefers-reduced-motion: no-preference) {
   .shop-card:hover .shop-card__media img,
   .shop-card:focus-within .shop-card__media img { transform: scale(1.04); }
+
+  /* A card whose pattern is not written yet leads nowhere, so it does not
+     answer the pointer either — the lift is the promise of a page behind
+     the card, and there is none. */
+  .shop-card--soon:hover .shop-card__media img,
+  .shop-card--soon:focus-within .shop-card__media img { transform: none; }
 }
 
 .shop-card__badge {
@@ -348,6 +354,21 @@
   line-height: var(--text-m-line);
   color: var(--content-secondary);
 }
+/* A pattern that cannot be bought yet. Sized and spaced like the
+   button it stands in for, so the buy box keeps its shape, but flat
+   and unfilled: nothing here is pressable. */
+.coming-soon {
+  margin: 0;
+  padding: var(--space-m) var(--space-l);
+  border: var(--stroke-width-xs) dashed var(--border-secondary);
+  border-radius: var(--radius-pill);
+  text-align: center;
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  font-weight: var(--text-semibold);
+  color: var(--content-secondary);
+}
+
 .buy-form__note {
   margin-top: var(--space-l);
   font-size: var(--text-m-size);

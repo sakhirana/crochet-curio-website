@@ -66,26 +66,33 @@
 
 <main id="main">
 
-  <!-- ============ Hero — copy sits over the photograph ============ -->
+  <!-- ============ Hero — copy sits over the photograph ============
+       The photograph is a card inset into the pink band, so the band shows
+       as an even pink border on all four sides. -->
   <div class="hero-banner">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container">
-        <div class="hero__grid">
-          <div>
-            <p class="eyebrow">Digital patterns &middot; Written by hand</p>
-            <h1 id="hero-title">Make something beautiful, one stitch at a time.</h1>
-            <p class="lede">
-              Discover thoughtfully designed crochet patterns and bring charming
-              pieces to life with your own hands.
-            </p>
-            <div class="hero__actions">
-              <a class="btn btn--primary" href="#patterns">Browse the patterns</a>
-              <a class="btn btn--secondary" href="#process">How it works</a>
+    <div class="hero-banner__frame">
+      <img class="hero-photo" src="assets/img/hero%20image.png"
+           alt="A cream crochet cardigan dotted with dark bobble hearts, laid out on dark grass."
+           width="1774" height="887" loading="eager" fetchpriority="high">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container">
+          <div class="hero__grid">
+            <div>
+              <p class="eyebrow">Digital patterns</p>
+              <h1 id="hero-title">Make something beautiful, one stitch at a time.</h1>
+              <p class="lede">
+                Discover thoughtfully designed crochet patterns and bring charming
+                pieces to life with your own hands.
+              </p>
+              <div class="hero__actions">
+                <a class="btn btn--primary" href="#patterns">Browse the patterns</a>
+                <a class="btn btn--secondary" href="#process">How it works</a>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 
   <!-- ============ Pattern library ============ -->
@@ -102,34 +109,10 @@
         </p>
       </div>
 
-      <ul class="shop-grid">
-        <li class="shop-card shop-card--feature">
-          <div class="shop-card__media">
-            <span class="shop-card__badge">Most made</span>
-            <img src="assets/img/Bluebell.webp" alt="A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it." title="A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it." width="1000" height="1500" loading="eager" fetchpriority="high">
-          </div>
-          <h3><a href="product-checkerboard-bag.html">Marina Tote Bag</a></h3>
-          <p class="shop-card__meta">
-            <span class="price">&#8377;380</span>
-            <span class="level level--confident-beginner">Confident beginner</span>
-          </p>
-        </li>
-
-        <li class="shop-card shop-card--tall">
-          <div class="shop-card__media">
-            <img src="assets/img/Frosty.webp" alt="A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." title="A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." width="1000" height="667" loading="lazy">
-          </div>
-          <h3><a href="product-cloud-cardigan.html">Lumi Cardigan</a></h3>
-          <p class="shop-card__meta">
-            <span class="price">&#8377;620</span>
-            <span class="level level--intermediate">Intermediate</span>
-          </p>
-        </li>
-
-        <li class="shop-card shop-card--normal">
+      <ul class="shop-grid">        <li class="shop-card shop-card--normal">
           <div class="shop-card__media">
             <span class="shop-card__badge">Free pattern</span>
-            <img src="assets/img/beanie.webp" alt="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." title="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." width="1000" height="1000" loading="lazy">
+            <img src="assets/img/beanie.webp" alt="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." title="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." width="1000" height="1000" loading="eager" fetchpriority="high">
           </div>
           <h3><a href="product-beanie.html">Rosie Beanie</a></h3>
           <p class="shop-card__meta">
@@ -138,39 +121,47 @@
           </p>
         </li>
 
-        <li class="shop-card shop-card--normal">
+
+        <li class="shop-card shop-card--feature shop-card--soon">
           <div class="shop-card__media">
-            <span class="shop-card__badge">New pattern</span>
+            <span class="shop-card__badge">Pattern coming soon</span>
+            <img src="assets/img/Bluebell.webp" alt="A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it." title="A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it." width="1000" height="1500" loading="lazy">
+          </div>
+          <h3>Marina Tote Bag</h3>
+        </li>
+
+        <li class="shop-card shop-card--tall shop-card--soon">
+          <div class="shop-card__media">
+            <span class="shop-card__badge">Pattern coming soon</span>
+            <img src="assets/img/Frosty.webp" alt="A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." title="A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." width="1000" height="667" loading="lazy">
+          </div>
+          <h3>Lumi Cardigan</h3>
+        </li>
+
+        <li class="shop-card shop-card--normal shop-card--soon">
+          <div class="shop-card__media">
+            <span class="shop-card__badge">Pattern coming soon</span>
             <img src="assets/img/Valentine.webp" alt="A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." title="A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs." width="1000" height="750" loading="lazy">
           </div>
-          <h3><a href="product-strawberry-cardigan.html">Sweetheart Cardigan</a></h3>
-          <p class="shop-card__meta">
-            <span class="price">&#8377;650</span>
-            <span class="level level--intermediate">Intermediate</span>
-          </p>
+          <h3>Sweetheart Cardigan</h3>
         </li>
 
-        <li class="shop-card shop-card--normal">
+        <li class="shop-card shop-card--normal shop-card--soon">
           <div class="shop-card__media">
+            <span class="shop-card__badge">Pattern coming soon</span>
             <img src="assets/img/Poppy.webp" alt="A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle." title="A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle." width="1000" height="667" loading="lazy">
           </div>
-          <h3><a href="product-bucket-hat.html">Poppy Hat</a></h3>
-          <p class="shop-card__meta">
-            <span class="price">&#8377;320</span>
-            <span class="level level--beginner">Beginner</span>
-          </p>
+          <h3>Poppy Hat</h3>
         </li>
 
-        <li class="shop-card shop-card--banner">
+        <li class="shop-card shop-card--banner shop-card--soon">
           <div class="shop-card__media">
+            <span class="shop-card__badge">Pattern coming soon</span>
             <img src="assets/img/rosewater-set.webp" alt="A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist." title="A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist." width="1000" height="667" loading="lazy">
           </div>
-          <h3><a href="product-rosewater-set.html">Ariel Set</a></h3>
-          <p class="shop-card__meta">
-            <span class="price">&#8377;540</span>
-            <span class="level level--confident-beginner">Confident beginner</span>
-          </p>
+          <h3>Ariel Set</h3>
         </li>
+      
       </ul>
     </div>
   </section>
@@ -280,11 +271,9 @@
         </div>
 
         <div class="split__art">
-          <svg viewBox="0 0 400 400" role="img" aria-label="Detail of an open crochet mesh in sage green over a cream ground.">
-            <rect width="400" height="400" fill="#f2f2f2"/>
-            <g color="#536b59" opacity="0.85"><rect width="400" height="400" fill="url(#stitch-grid)"/></g>
-            <g color="#d9a6ad" opacity="0.9"><rect y="200" width="400" height="200" fill="url(#stitch-shell)"/></g>
-          </svg>
+          <img src="assets/img/crocheting%20image.webp"
+               alt="Seen from above: two hands working a black and cream checkerboard piece on a wooden table, a crochet hook in the right hand, balls of black and cream cotton, embroidery scissors and an open notebook headed Checkered Bag around it."
+               width="1000" height="800" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -370,13 +359,9 @@
               <dd><a class="link" href="mailto:crochetcurioo@gmail.com">crochetcurioo@gmail.com</a></dd>
             </div>
             <div>
-              <dt>Studio hours</dt>
-              <dd>Tuesday to Saturday, 10am &ndash; 5pm</dd>
-            </div>
-            <div>
               <dt>Refunds</dt>
               <dd>Digital files cannot be returned once downloaded &mdash; but if a
-                  pattern does not work, tell us and we will fix it or refund it.</dd>
+                  pattern does not work, tell us and we will fix it.</dd>
             </div>
           </dl>
         </div>
@@ -427,12 +412,12 @@
       <nav aria-labelledby="footer-shop">
         <h2 id="footer-shop">Patterns</h2>
         <ul>
-          <li><a href="product-checkerboard-bag.html">Marina Tote Bag</a></li>
-          <li><a href="product-cloud-cardigan.html">Lumi Cardigan</a></li>
+          <li>Marina Tote Bag</li>
+          <li>Lumi Cardigan</li>
           <li><a href="product-beanie.html">Rosie Beanie</a></li>
-          <li><a href="product-strawberry-cardigan.html">Sweetheart Cardigan</a></li>
-          <li><a href="product-bucket-hat.html">Poppy Hat</a></li>
-          <li><a href="product-rosewater-set.html">Ariel Set</a></li>
+          <li>Sweetheart Cardigan</li>
+          <li>Poppy Hat</li>
+          <li>Ariel Set</li>
         </ul>
       </nav>
 

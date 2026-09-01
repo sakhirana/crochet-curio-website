@@ -398,6 +398,9 @@ p { text-wrap: pretty; }
   aspect-ratio: 1 / 1;
 }
 .split__art svg { width: 100%; height: 100%; }
+/* The photograph is landscape and the frame is square, so it is cropped to
+   the middle rather than squashed — the hands and the work sit there. */
+.split__art img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- Process steps ---------- */
 .steps {
@@ -665,23 +668,30 @@ p { text-wrap: pretty; }
 }
 
 /* ---------- Full-bleed hero banner ----------
-   Sits outside .container so it spans the viewport edge to edge, with the
-   copy laid over the photograph rather than beneath it. */
+   Sits outside .container so it spans the viewport edge to edge. The pink
+   band is the page; the photograph is a card set into it, and the one
+   padding value below is what shows around that card — the same pink
+   margin on all four sides at every width. */
 .hero-banner {
   position: relative;
   isolation: isolate;
   background: var(--surface-band-accent);
-  /* The band's established proportions, expressed as a floor rather than a
-     ratio: the copy sets the height wherever it needs more room than the
-     photograph's shape gives it (narrow viewports, mostly), and the
-     photograph stretches to cover whatever height that turns out to be. */
-  min-height: calc(100vw * 793 / 1983);
+  padding: clamp(var(--space-xl), 3.2vw, var(--space-5xl));
 }
 
-/* Photograph fills the band; only the copy is in flow. */
+/* Photograph and copy share a single grid cell, so the card is as tall as
+   the taller of the two: the photograph's own 2:1 shape usually, the copy
+   wherever it needs more room (narrow viewports, mostly). */
+.hero-banner__frame {
+  position: relative;
+  display: grid;
+  isolation: isolate;
+  overflow: hidden;
+}
+.hero-banner__frame > * { grid-area: 1 / 1; }
+
 .hero-photo {
-  position: absolute;
-  inset: 0;
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -693,14 +703,39 @@ p { text-wrap: pretty; }
   z-index: 2;
   display: flex;
   align-items: center;
-  min-height: inherit;
-  padding-block: var(--space-3xl);
+  padding-block: clamp(var(--space-2xl), 4vw, var(--space-5xl));
 }
-.hero-banner .hero .eyebrow { color: var(--content-brand); }
-.hero-banner .hero h1      { color: var(--content-brand); }
-.hero-banner .hero .lede   { color: var(--content-primary); }
-.hero-banner .hero__grid   { grid-template-columns: minmax(0, 38rem); justify-content: center; text-align: center; }
-.hero-banner .hero__actions { justify-content: center; }
+/* The photograph is one fixed dark image — it does not restate itself for
+   the dark theme the way a token-painted surface does. So the ink on it is
+   the white that reads on that photograph, in both themes, rather than a
+   Content token that would invert to near-black over dark grass. */
+.hero-banner .hero .eyebrow,
+.hero-banner .hero h1,
+.hero-banner .hero .lede { color: var(--primary-white); }
+/* Heavier than the lede is set anywhere else on the site: this one stands on
+   a photograph, and the thicker stroke holds where the pale cardigan comes
+   up behind it. */
+.hero-banner .hero .lede { font-weight: var(--text-semibold); }
+/* 29rem, not the 38rem the copy takes elsewhere: it is the widest measure
+   that still breaks the lede before it reaches the cardigan's cuff, which
+   comes into the frame at 43% of its width at that height. The heading is
+   unaffected — it holds the same three lines anywhere above 29rem. */
+.hero-banner .hero__grid   { grid-template-columns: minmax(0, 29rem); justify-content: start; text-align: left; }
+.hero-banner .hero__actions { justify-content: flex-start; }
+/* Same reasoning for the outline button standing on the photograph: white
+   fill and dark ink whichever theme is running, since the ground under it
+   never changes. Primitives, not semantic tokens, so nothing flips. */
+.hero-banner .btn--secondary {
+  background: var(--primary-white);
+  color: var(--neutral-900);
+  border-color: var(--primary-white);
+}
+.hero-banner .btn--secondary:hover,
+.hero-banner .btn--secondary:active {
+  background: var(--neutral-300);
+  color: var(--neutral-900);
+  border-color: var(--neutral-300);
+}
 /* Border/Focus is 1.6:1 against the scrim, so the ring turns inverse here for
    the same reason it does on the newsletter panel — 1.4.11 */
 .hero-banner :focus-visible { outline-color: var(--primary-white); }
@@ -741,13 +776,11 @@ p { text-wrap: pretty; }
   :root:not([data-theme="light"]) .newsletter-form .btn { color: var(--content-primary-inverse); }
   :root:not([data-theme="light"]) .newsletter-form .btn:hover { background: var(--neutral-300); }
 
-  /* The hero band is still pink here, so its copy reads as dark ink:
-     Brand/700 at 6.42:1, Content/Primary Inverse at 8.8:1. */
-  :root:not([data-theme="light"]) .hero-banner .hero .eyebrow,
-  :root:not([data-theme="light"]) .hero-banner .hero h1 { color: var(--brand-700); }
-  :root:not([data-theme="light"]) .hero-banner .hero .lede { color: var(--content-primary-inverse); }
+  /* The hero copy is not corrected here: it stands on the photograph, not
+     on the pink, and that photograph is the same dark image in both themes.
+     Its white is set once in the component rules above.
 
-  /* The badge pill keeps its pink fill here, so its label stays the light
+     The badge pill keeps its pink fill here, so its label stays the light
      theme's Content/Primary dark ink: 9:1 on Brand Accent/400. */
   :root:not([data-theme="light"]) .badge { color: var(--content-primary-inverse); }
 }
@@ -764,10 +797,6 @@ p { text-wrap: pretty; }
 
 :root[data-theme="dark"] .newsletter-form .btn { color: var(--content-primary-inverse); }
 :root[data-theme="dark"] .newsletter-form .btn:hover { background: var(--neutral-300); }
-
-:root[data-theme="dark"] .hero-banner .hero .eyebrow,
-:root[data-theme="dark"] .hero-banner .hero h1 { color: var(--brand-700); }
-:root[data-theme="dark"] .hero-banner .hero .lede { color: var(--content-primary-inverse); }
 
 :root[data-theme="dark"] .badge { color: var(--content-primary-inverse); }
 

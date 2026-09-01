@@ -40,14 +40,26 @@
   height: 48px;
   padding: 0;
   border-radius: var(--radius-pill);
-  border: var(--stroke-width-xs) solid var(--border-secondary);
-  background: var(--background-brand);
+  /* Blue, not the brand green. The launcher is a control over the site
+     rather than a part of it, so it borrows the system colour the focus
+     ring already wears (Border/Focus, --background-focus) — the one hue
+     nothing else on the page fills with. A visitor scanning for the
+     settings finds the only blue thing on a green-and-pink page. */
+  border: var(--stroke-width-xs) solid var(--background-focus);
+  background: var(--background-focus);
   color: var(--content-primary-inverse);
   box-shadow: var(--shadow-l3);
   cursor: pointer;
 }
 .a11y__launch svg { width: 26px; height: 26px; display: block; }
-.a11y__launch:hover { background: var(--background-brand-hover); }
+.a11y__launch:hover {
+  background: var(--background-focus-hover);
+  border-color: var(--background-focus-hover);
+}
+/* The page-wide focus ring is this same blue, which would all but vanish
+   beside a blue button. Ink instead: near-black on the light page, white on
+   the dark one, so the ring stays visible against both button and page. */
+.a11y__launch:focus-visible { outline-color: var(--content-primary); }
 
 /* ------------------------------------------------------------
    Launcher tooltip

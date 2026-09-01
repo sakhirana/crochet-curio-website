@@ -61,7 +61,7 @@ window.CC_LANG_HI = {
   /* ---------- Home: hero ---------- */
   "Crochet Curio — crochet patterns to make yourself":
     "Crochet Curio — खुद बनाने के लिए क्रोशे पैटर्न",
-  "Digital patterns · Written by hand": "डिजिटल पैटर्न · हाथ से लिखे हुए",
+  "Digital patterns": "डिजिटल पैटर्न",
   "Make something beautiful, one stitch at a time.":
     "कुछ सुंदर बनाइए, एक स्टिच से शुरू करके।",
   "Discover thoughtfully designed crochet patterns and bring charming pieces to life with your own hands.":
@@ -87,6 +87,9 @@ window.CC_LANG_HI = {
   "Most made": "सबसे ज़्यादा बना",
   "New pattern": "नया पैटर्न",
   "Free pattern": "मुफ़्त पैटर्न",
+  "Pattern coming soon": "पैटर्न जल्द आ रहा है",
+  "This pattern is not written up yet, so there is nothing to buy. The photograph shows the finished piece.":
+    "यह पैटर्न अभी लिखा नहीं गया है, इसलिए अभी खरीदने के लिए कुछ नहीं है। फ़ोटो तैयार पीस दिखाती है।",
   "Free": "मुफ़्त",
   "Beginner": "बिगिनर",
   "Confident beginner": "कॉन्फ़िडेंट बिगिनर",
@@ -162,8 +165,8 @@ window.CC_LANG_HI = {
   "Studio hours": "स्टूडियो का समय",
   "Tuesday to Saturday, 10am – 5pm": "मंगलवार से शनिवार, सुबह 10 – शाम 5",
   "Refunds": "रिफ़ंड",
-  "Digital files cannot be returned once downloaded — but if a pattern does not work, tell us and we will fix it or refund it.":
-    "डाउनलोड हो जाने के बाद डिजिटल फ़ाइल वापस नहीं होती — लेकिन अगर पैटर्न काम न करे, तो बताइए, हम उसे ठीक करेंगे या पैसे लौटा देंगे।",
+  "Digital files cannot be returned once downloaded — but if a pattern does not work, tell us and we will fix it.":
+    "डाउनलोड हो जाने के बाद डिजिटल फ़ाइल वापस नहीं होती — लेकिन अगर पैटर्न काम न करे, तो बताइए, हम उसे ठीक कर देंगे।",
   "Your name": "आपका नाम",
   "Email address": "ईमेल पता",
   "What can we help with?": "हम किस बात में मदद करें?",
@@ -299,12 +302,14 @@ window.CC_LANG_HI = {
   "Download the PDF": "PDF डाउनलोड कीजिए",
   "13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading — with a screen reader, use the web page above.":
     "13 पेज, 24 पॉइंट टाइप, सफ़ेद पर काला। हर निर्देश पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म देखने की ज़रूरत नहीं। छापने और पढ़ने के लिए — स्क्रीन रीडर के साथ ऊपर वाला वेब पेज लीजिए।",
-  "The large print PDF is in English only for now.":
-    "बड़े अक्षरों वाली PDF फ़िलहाल सिर्फ़ अंग्रेज़ी में है।",
   "24 point type that reflows and zooms. The Hindi Word file, for reading offline, is linked at the top of that page. The Hindi editions have not been listened to with a screen reader yet.":
     "24 पॉइंट टाइप, जो ज़ूम करने पर दोबारा सज जाता है। बिना इंटरनेट पढ़ने के लिए हिन्दी Word फ़ाइल का लिंक उसी पेज पर ऊपर दिया है। हिन्दी एडिशन अभी स्क्रीन रीडर से सुने नहीं गए हैं।",
   "Read the large print edition in Hindi in your browser":
     "बड़े अक्षरों वाला एडिशन हिन्दी में ब्राउज़र में पढ़िए",
+  "Download the large print edition in Hindi as a PDF":
+    "बड़े अक्षरों वाला एडिशन हिन्दी में PDF के रूप में डाउनलोड कीजिए",
+  "13 pages in Hindi, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading — with a screen reader, use the web page above.":
+    "हिन्दी में 13 पेज, 24 पॉइंट टाइप, सफ़ेद पर काला। हर निर्देश पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म देखने की ज़रूरत नहीं। छापने और पढ़ने के लिए — स्क्रीन रीडर के साथ ऊपर वाला वेब पेज लीजिए।",
   "5-page PDF, or 13 pages in large print": "5 पेज की PDF, या बड़े अक्षरों में 13 पेज",
   "PDF pattern": "PDF पैटर्न",
   "Skill level": "स्किल लेवल",

@@ -59,6 +59,7 @@ node build-products.js                    # the product page
 node tools/build-pattern.js standard      # the standard PDF
 node tools/build-pattern.js standard-hi   # the standard PDF in Hindi
 node tools/build-pattern.js accessible    # the large print PDF
+node tools/build-pattern.js accessible-hi # the large print PDF in Hindi
 node tools/build-pattern-docx.js          # the large print Word file
 node tools/build-pattern-docx.js --hi     # the large print Word file in Hindi
 ```
@@ -78,8 +79,11 @@ link sitting under a download button was one option too many.
 One select governs every edition. Language is a property of the pattern, not of
 the format, so there is no second control on the large print group: the select
 moves the standard PDF, the large print page — and with it the Word file linked
-inside that page — together. The one file it cannot move is the large print PDF,
-which stays English, and a line appears under it in Hindi saying so.
+inside that page — and the large print PDF, together.
+
+The Devanagari text-layer bug applies to both Hindi PDFs. They are offered for
+printing and reading, and the note under each one sends screen reader users to
+the page, which is the same steer the English large print PDF carries.
 
 The language is chosen on the product page, before the download: a PDF cannot be
 switched once it is on someone's machine. Crochet abbreviations stay in Latin
@@ -101,6 +105,7 @@ print edition ships.
 | `assets/patterns/rosie-beanie-pattern-large-print.docx` | `pattern-beanie-accessible.html` | Offline, reflows. NVDA tested |
 | `assets/patterns/rosie-beanie-pattern-large-print-hi.docx` | `pattern-beanie-accessible-hi.html` | Offline, reflows, Hindi. Nirmala UI, `hi-IN`, 24pt on the complex-script slot too |
 | `assets/patterns/rosie-beanie-pattern.pdf` | `pattern-beanie-accessible.html` | 13 pages. Printing and reading, and the Accessible Patterns Index. Tagged, machine-verified. Not the screen reader path |
+| `assets/patterns/rosie-beanie-pattern-hi.pdf` | `pattern-beanie-accessible-hi.html` | The same 13 pages in Hindi. Printing and reading. Not the screen reader path |
 
 `node tools/build-pattern.js standard --check` builds and verifies without writing.
 

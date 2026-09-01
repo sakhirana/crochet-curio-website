@@ -66,6 +66,13 @@
   --background-brand:          var(--brand-600);
   --background-brand-hover:    var(--brand-700);
   --background-brand-pressed:  var(--brand-800);
+  /* The focus blue as a fill, not just a ring. Reserved for the
+     accessibility launcher: it is a control over the site rather than a
+     part of it, so it wears the system colour the focus ring already uses
+     instead of the brand green every other button wears. Same ramp as
+     Border/Focus and Content/Link — Blue/500 and Blue/600. */
+  --background-focus:          var(--blue-500);
+  --background-focus-hover:    var(--blue-600);
   --background-accent-subtle:  var(--brand-accent-500);
   --background-negative-subtle:#facccc;
   /* The full-bleed pink band behind the hero copy and the manifesto. Named
@@ -232,6 +239,11 @@
     --background-brand:          var(--brand-400);
     --background-brand-hover:    var(--brand-300);
     --background-brand-pressed:  var(--brand-200);
+    /* The dark blue ramp: Border/Focus and Content/Link Hover. White on
+       #5c77ff reads 3.78:1 — under the text floor, over the 3:1 one for a
+       26px icon and the button's own edge (1.4.11), which is all it carries. */
+    --background-focus:          #5c77ff;
+    --background-focus-hover:    #617bff;
     --background-accent-subtle:  var(--brand-accent-400);
     --background-negative-subtle:#5c0000;
     --background-positive-subtle:#003d14;
@@ -314,6 +326,11 @@
     --background-brand:          var(--brand-400);
     --background-brand-hover:    var(--brand-300);
     --background-brand-pressed:  var(--brand-200);
+    /* The dark blue ramp: Border/Focus and Content/Link Hover. White on
+       #5c77ff reads 3.78:1 — under the text floor, over the 3:1 one for a
+       26px icon and the button's own edge (1.4.11), which is all it carries. */
+    --background-focus:          #5c77ff;
+    --background-focus-hover:    #617bff;
     --background-accent-subtle:  var(--brand-accent-400);
     --background-negative-subtle:#5c0000;
     --background-positive-subtle:#003d14;

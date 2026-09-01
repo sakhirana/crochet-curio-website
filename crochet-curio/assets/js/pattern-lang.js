@@ -11,14 +11,7 @@
    * the standard PDF, English or Hindi;
    * the large print web page, which is also where the Word file for
      that language is linked;
-   * a line under the large print PDF, which appears only in Hindi,
-     because that one file has no Hindi edition.
-
-   Why the large print PDF has none: Chrome writes a mangled text
-   layer for Devanagari — matras reordered, conjuncts dropped — so a
-   Hindi PDF would look correct and read wrong. The page and the Word
-   file hold real characters, so both are sound, and they are what
-   Hindi readers are pointed at.
+   * the large print PDF, English or Hindi.
 
    Three rules this file follows:
 
@@ -81,8 +74,23 @@
     }
   };
 
-  /* Shown only in Hindi: the one edition the choice cannot move. */
-  var PDF_NOTE_HI = "The large print PDF is in English only for now.";
+  var LARGE_PRINT_PDF = {
+    link: "largePrintDownload",
+    note: "largePrintDownloadNote",
+    text: "Download the PDF",
+    en: {
+      href: "assets/patterns/rosie-beanie-pattern.pdf",
+      lang: "en",
+      label: "Download the large print edition as a PDF",
+      note: "13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading — with a screen reader, use the web page above."
+    },
+    hi: {
+      href: "assets/patterns/rosie-beanie-pattern-hi.pdf",
+      lang: "hi",
+      label: "Download the large print edition in Hindi as a PDF",
+      note: "13 pages in Hindi, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading — with a screen reader, use the web page above."
+    }
+  };
 
   /* The site's own language, written by i18n.js. Only a starting
      point — the select overrides it and nothing writes back. */
@@ -118,12 +126,7 @@
   var apply = function (code) {
     applyTo(STANDARD, code);
     applyTo(LARGE_PRINT, code);
-
-    var pdfNote = document.getElementById("largePrintPdfNote");
-    if (pdfNote) {
-      pdfNote.textContent = code === "hi" ? PDF_NOTE_HI : "";
-      pdfNote.hidden = code !== "hi";
-    }
+    applyTo(LARGE_PRINT_PDF, code);
   };
 
   if (siteLang() === "hi") { select.value = "hi"; }

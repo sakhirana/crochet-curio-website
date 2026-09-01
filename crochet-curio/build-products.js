@@ -127,11 +127,10 @@ const PATTERNS = [
        the standard edition are mostly printing it, and a browser link
        under a download button was one option too many. */
     readHref: "pattern-beanie-accessible.html",
-    /* The same large print edition in Hindi: the page, and the Word
-       file linked from inside it. There is no Hindi large print PDF —
-       Chrome writes a broken text layer for Devanagari, so the PDF
-       link stays English and says so. */
+    /* The same large print edition in Hindi: the page, the Word file
+       linked from inside it, and the printable PDF. */
     readHrefHi: "pattern-beanie-accessible-hi.html",
+    patternHrefHi: "assets/patterns/rosie-beanie-pattern-hi.pdf",
     badge: "Free pattern",
     tile: "neutral",
     span: "normal",
@@ -505,34 +504,34 @@ ${p.standardHrefHi ? `
               <p class="formats__note"${p.readHrefHi ? ` id="largePrintReadNote"` : ``}>24 point type that reflows and zooms. Read from beginning to end with NVDA. The Word file, for reading offline, is linked at the top of that page.</p>
             </li>
             <li>
-              <a class="btn btn--secondary btn--block" href="${p.patternHref}" download
+              <a class="btn btn--secondary btn--block"${p.patternHrefHi ? ` id="largePrintDownload" hreflang="en"` : ``} href="${p.patternHref}" download
                  aria-label="Download the large print edition as a PDF">Download the PDF</a>
-              <p class="formats__note">${p.pages} pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading &mdash; with a screen reader, use the web page above.</p>
+              <p class="formats__note"${p.patternHrefHi ? ` id="largePrintDownloadNote"` : ``}>${p.pages} pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading &mdash; with a screen reader, use the web page above.</p>
             </li>
           </ul>
-${p.readHrefHi ? `
-          <!-- Written by pattern-lang.js, and only when the Hindi
-               pattern is the one on offer: in English there is nothing
-               to say here. -->
-          <p class="formats__note" id="largePrintPdfNote" hidden></p>` : ``}` : `
+` : `
           <a class="btn btn--primary btn--block" href="${p.patternHref}" download>Download the pattern &mdash; free</a>
           <p class="buy-form__note">
             No basket, no account, nothing to pay. The PDF saves straight to your device &mdash;
             large print, black on white, and every direction written out in full.
           </p>`}
         </div>`
-          : `<form class="buy-form" id="buyForm"
-              data-slug="${p.slug}" data-name="${esc(p.name)}"
-              data-price="${p.price}" data-image="${p.image}"
-              data-pages="${p.pages}" data-difficulty="${esc(p.difficulty)}">
+          : `<div class="buy-form">
 
-          <button class="btn btn--primary btn--block" type="submit">Get the pattern &mdash; ${rupee(p.price)}</button>
+          <!--
+            Locked until the pattern itself is written. A statement
+            rather than a disabled button: a disabled control cannot be
+            reached by keyboard and announces nothing, so a screen
+            reader user would meet the price and never learn why there
+            is no way to act on it. This line is read in order with
+            everything around it.
+          -->
+          <p class="coming-soon">Pattern coming soon</p>
           <p class="buy-form__note">
-            You are buying instructions, not the finished piece. Nothing is posted to you &mdash;
-            the file appears in <a class="link" href="library.html">My&nbsp;patterns</a> the moment you check out.
+            This pattern is not written up yet, so there is nothing to buy. The
+            photograph shows the finished piece.
           </p>
-          <p class="form-status" id="buyStatus" role="status" aria-live="polite"></p>
-        </form>`}
+        </div>`}
 
         <h2 class="product__detailsTitle">What is in the file</h2>
         <ul class="includes">

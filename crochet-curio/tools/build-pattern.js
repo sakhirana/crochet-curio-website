@@ -79,6 +79,14 @@ const TARGETS = {
     source: path.join(ROOT, "pattern-beanie-accessible.html"),
     out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern.pdf"),
   },
+  /* The large print edition in Hindi. Same pipeline, same checks. Its
+     text layer carries Chrome's Devanagari reordering, so the page and
+     the Word file remain the formats pointed at for speech; this file
+     is the one to print. */
+  "accessible-hi": {
+    source: path.join(ROOT, "pattern-beanie-accessible-hi.html"),
+    out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-hi.pdf"),
+  },
 };
 
 const CHECK_ONLY = process.argv.includes("--check");
