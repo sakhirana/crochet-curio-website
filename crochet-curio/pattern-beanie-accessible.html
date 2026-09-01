@@ -86,9 +86,30 @@
     overflow-wrap: anywhere;
   }
 
+  /* A heading given tabindex="-1" so a contents link can move focus to
+     it draws a focus ring in some browsers when it is jumped to. The
+     ring is correct on the link itself and noise on the destination. */
+  h2[tabindex]:focus { outline: none; }
+
+  /* The back link that closes every section. Held out from the last
+     line of the section by a full line, so at 24 point it reads as a
+     way out of the section rather than as another sentence of it. It
+     is not made smaller or greyer: this edition has one type size and
+     one contrast, and an escape hatch is the last thing to shrink. */
+  .backlink { margin: 1.5em 0 0; }
+
   /* The contents list: plain, no bullets, generous hit areas. */
   .contents ul { list-style: none; padding-left: 0; }
   .contents li { margin-bottom: 0.6em; }
+
+  /* The offline link. Boxed so a low vision reader can see it is a
+     thing to act on rather than another line of the pattern. */
+  .offline {
+    border: 2px solid var(--rule);
+    padding: 1em 1em 0.5em;
+    margin: 1.5em 0;
+  }
+  .offline p:last-child { margin-bottom: 0.5em; }
 
   /* ---------------------------------------------------------------
      Print
@@ -103,9 +124,11 @@
       font-size: 24pt;
     }
     a { text-decoration: none; }
-    /* The contents list is a screen convenience; on paper the headings
-       do the same job and the links cannot be followed. */
-    .contents { display: none; }
+    /* Both are screen conveniences. On paper the headings do the same
+       job as the contents list, and neither link can be followed — and
+       this page is also what Chrome prints the PDF from, so a download
+       link left visible would be printed into the PDF itself. */
+    .contents, .offline, .backlink { display: none; }
     h1, h2, h3 { break-after: avoid-page; page-break-after: avoid; }
     p, li { break-inside: avoid-page; page-break-inside: avoid; }
     section { break-inside: auto; }
@@ -119,6 +142,28 @@
 <p>A crochet pattern by Crochet Curio.</p>
 
 <p>Version 1.0. Published 29 August 2026.</p>
+
+<!--
+  The offline link, and why it is a Word file rather than a PDF.
+
+  The large print PDF is the wrong file to send a screen reader user
+  to. It is tagged correctly and its text layer is sound — every line
+  ends on a word boundary, the tag tree and the ParentTree agree, and
+  nothing is drawn twice — but Acrobat still repeats content it has
+  already read from it. That is Acrobat rather than the file: the same
+  pattern rebuilt onto one continuous page, with no page boundaries at
+  all, repeats in the same way. A .docx has no glyph runs and no tag
+  tree to misread, and it has been listened to end to end with NVDA.
+
+  So the offline route offered here is the Word file. The PDF stays on
+  the product page for what it is genuinely good at: large print on
+  paper. Hidden in print, because this page is the source Chrome
+  prints that PDF from.
+-->
+<div class="offline">
+  <p>You can read this pattern here, or take it with you.</p>
+  <p><a href="assets/patterns/rosie-beanie-pattern-large-print.docx" download aria-label="Download this pattern as a Word file for reading offline">Download it as a Word file</a> — the same pattern, the same 24 point type, and it works offline. This page and the Word file both work with a screen reader, so take whichever suits you.</p>
+</div>
 
 <section aria-labelledby="statement">
   <h2 id="statement">Accessibility statement</h2>
@@ -135,7 +180,19 @@
     <li>Headings are used in order, and lists are real lists, so a screen reader can move through the pattern by heading.</li>
   </ul>
 
-  <p>Screen reader testing: pending. This statement will name the reader and version once the test is done.</p>
+  <!--
+    This line is a claim about a specific artefact, so it has to name
+    which one, and it may only claim what has actually been done: both
+    editions named here have been read end to end with NVDA, by a
+    person.
+
+    It says nothing about the PDF on purpose. Which format to choose
+    is a decision made on the product page, before anything is opened.
+    A reader who is already inside the pattern has made that choice,
+    and a warning about a file they are not reading is noise in the
+    middle of an accessibility statement.
+  -->
+  <p>Screen reader testing: the web edition and the Word edition have both been read from beginning to end with NVDA, and read correctly throughout.</p>
 
   <!--
     The aria-label is the wording that becomes the link's alternative
@@ -147,7 +204,7 @@
 </section>
 
 <nav class="contents" aria-labelledby="contents">
-  <h2 id="contents">Contents</h2>
+  <h2 id="contents" tabindex="-1">Contents</h2>
   <ul>
     <li><a href="#description">Description</a></li>
     <li><a href="#skill">Skill level</a></li>
@@ -161,21 +218,23 @@
 </nav>
 
 <section aria-labelledby="description">
-  <h2 id="description">Description</h2>
+  <h2 id="description" tabindex="-1">Description</h2>
 
   <p>A ribbed beanie with a fold-up brim. It is worked flat in one piece, from side to side, then seamed once down one side and gathered closed at the top.</p>
 
   <p>The ribbing comes from working into the back loop of each stitch. There is no special rib stitch to learn.</p>
+  <p class="backlink"><a href="#contents" aria-label="Back to contents, from Description">Back to contents</a></p>
 </section>
 
 <section aria-labelledby="skill">
-  <h2 id="skill">Skill level</h2>
+  <h2 id="skill" tabindex="-1">Skill level</h2>
 
   <p>Beginner. You need to chain, single crochet, slip stitch, and sew a gathered seam by hand.</p>
+  <p class="backlink"><a href="#contents" aria-label="Back to contents, from Skill level">Back to contents</a></p>
 </section>
 
 <section aria-labelledby="size">
-  <h2 id="size">Size</h2>
+  <h2 id="size" tabindex="-1">Size</h2>
 
   <p>Adult medium. One size.</p>
 
@@ -186,10 +245,11 @@
   </ul>
 
   <p>The fabric is very stretchy, which is why the flat length is about 2 inches, 5 centimetres, smaller than the head it fits.</p>
+  <p class="backlink"><a href="#contents" aria-label="Back to contents, from Size">Back to contents</a></p>
 </section>
 
 <section aria-labelledby="materials">
-  <h2 id="materials">Materials</h2>
+  <h2 id="materials" tabindex="-1">Materials</h2>
 
   <ul>
     <li>Acrylic yarn, 100 percent, weight 4 medium. This weight is also sold as worsted, afghan, or aran.</li>
@@ -200,10 +260,11 @@
     <li>Darning needle, or sewing needle.</li>
     <li>Stitch markers, or safety pins.</li>
   </ul>
+  <p class="backlink"><a href="#contents" aria-label="Back to contents, from Materials">Back to contents</a></p>
 </section>
 
 <section aria-labelledby="counts">
-  <h2 id="counts">Stitch counts and measurements</h2>
+  <h2 id="counts" tabindex="-1">Stitch counts and measurements</h2>
 
   <p>Every row in this hat has 40 stitches. The hat is 66 rows long in total.</p>
 
@@ -218,20 +279,22 @@
   <p>If the fabric feels stiff and will not stretch, use a larger hook. If you can feel gaps between the stitches, use a smaller hook.</p>
 
   <p>Counting 66 rows is easier if you mark your place as you go. Move a stitch marker to the first stitch of every tenth row, or use a row counter.</p>
+  <p class="backlink"><a href="#contents" aria-label="Back to contents, from Stitch counts and measurements">Back to contents</a></p>
 </section>
 
 <section aria-labelledby="backloop">
-  <h2 id="backloop">Working into the back loop</h2>
+  <h2 id="backloop" tabindex="-1">Working into the back loop</h2>
 
   <p>Every stitch has two loops across its top: one nearer to you, and one further away. The one further away is the back loop.</p>
 
   <p>To work into the back loop only, insert the hook under that further loop alone, and leave the nearer loop untouched. The untouched loops build up into raised ridges, and those ridges are the ribbing.</p>
 
   <p>Row 1 is worked into the starting chain in the ordinary way, under both loops. Every row after that is worked into the back loop only.</p>
+  <p class="backlink"><a href="#contents" aria-label="Back to contents, from Working into the back loop">Back to contents</a></p>
 </section>
 
 <section aria-labelledby="instructions">
-  <h2 id="instructions">Instructions</h2>
+  <h2 id="instructions" tabindex="-1">Instructions</h2>
 
   <h3 id="foundation">Foundation chain</h3>
 
@@ -297,14 +360,16 @@
     <li>Weave in all ends and trim them.</li>
     <li>Fold the bottom edge of the hat up to the depth you like.</li>
   </ol>
+  <p class="backlink"><a href="#contents" aria-label="Back to contents, from Instructions">Back to contents</a></p>
 </section>
 
 <section aria-labelledby="terms">
-  <h2 id="terms">A note on crochet terms</h2>
+  <h2 id="terms" tabindex="-1">A note on crochet terms</h2>
 
   <p>This pattern uses United States crochet terms. In United Kingdom terms, the stitch called single crochet here is called double crochet.</p>
 
   <p>The pattern is for your own making. Sell the hats you crochet from it if you like. Please do not resell or share the file itself.</p>
+  <p class="backlink"><a href="#contents" aria-label="Back to contents, from A note on crochet terms">Back to contents</a></p>
 </section>
 
 </body>

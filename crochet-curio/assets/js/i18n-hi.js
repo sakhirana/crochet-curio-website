@@ -268,14 +268,27 @@ window.CC_LANG_HI = {
   "PDF pattern · instant download": "PDF पैटर्न · तुरंत डाउनलोड",
   "PDF pattern · free download": "PDF पैटर्न · मुफ़्त डाउनलोड",
   "Download the pattern — free": "पैटर्न डाउनलोड कीजिए — मुफ़्त",
-  "No basket, no account, nothing to pay. Both are the same pattern, written out in full — take whichever suits how you like to work.":
-    "न बास्केट, न अकाउंट, न कोई पैसा। दोनों एक ही पैटर्न हैं, पूरा लिखा हुआ — जो आपके काम करने के तरीके से मेल खाए, वही लीजिए।",
-  "13 pages, 24 point type, black on white. For printing, or keeping on your device.":
-    "13 पेज, 24 पॉइंट टाइप, सफ़ेद पर काला। छापने के लिए, या अपने डिवाइस में रखने के लिए।",
-  "Read the pattern in your browser": "पैटर्न ब्राउज़र में पढ़िए",
-  "The same pattern on one page. Zooms, reflows and works with a screen reader, with nothing to download.":
-    "वही पैटर्न एक ही पेज पर। ज़ूम होता है, टेक्स्ट दोबारा सज जाता है, और स्क्रीन रीडर के साथ चलता है — कुछ डाउनलोड करने की ज़रूरत नहीं।",
-  "13-page PDF, or read it in your browser": "13 पेज की PDF, या ब्राउज़र में पढ़िए",
+  "No basket, no account, nothing to pay. Same hat, same counts and the same measurements in every version — take whichever suits how you like to work.":
+    "न बास्केट, न अकाउंट, न कोई पैसा। हर वर्ज़न में वही टोपी, वही गिनती और वही माप — जो आपके काम करने के तरीके से मेल खाए, वही लीजिए।",
+
+  /* The pattern, standard edition */
+  "The pattern": "पैटर्न",
+  "Download the PDF — free": "PDF डाउनलोड कीजिए — मुफ़्त",
+  "5 pages, 12 point type, standard crochet abbreviations, with diagrams.":
+    "5 पेज, 12 पॉइंट टाइप, आम क्रोशे शॉर्ट फ़ॉर्म, और डायग्राम के साथ।",
+  "Read it in your browser": "ब्राउज़र में पढ़िए",
+
+  /* Large print edition */
+  "Large print edition": "बड़े अक्षरों वाला एडिशन",
+  "24 point type that reflows and zooms. Read from beginning to end with NVDA.":
+    "24 पॉइंट टाइप, जो ज़ूम करने पर दोबारा सज जाता है। NVDA से शुरू से आख़िर तक पढ़ा गया।",
+  "Word file": "Word फ़ाइल",
+  "24 point type, opens in Word, works offline. Read from beginning to end with NVDA.":
+    "24 पॉइंट टाइप, Word में खुलती है, बिना इंटरनेट भी चलती है। NVDA से शुरू से आख़िर तक पढ़ी गई।",
+  "Download the PDF": "PDF डाउनलोड कीजिए",
+  "13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up.":
+    "13 पेज, 24 पॉइंट टाइप, सफ़ेद पर काला। हर निर्देश पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म देखने की ज़रूरत नहीं।",
+  "5-page PDF, or 13 pages in large print": "5 पेज की PDF, या बड़े अक्षरों में 13 पेज",
   "PDF pattern": "PDF पैटर्न",
   "Skill level": "स्किल लेवल",
   "Time to make": "बनाने का समय",

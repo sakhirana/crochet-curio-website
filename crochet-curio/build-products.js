@@ -28,7 +28,9 @@ const PATTERNS = [
     badge: "Most made",
     tile: "accent",
     span: "wide",
-    image: "Bluebell.png",
+    image: "Bluebell.webp",
+    imageW: 1000,
+    imageH: 1500,
     alt: "A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it.",
     tagline: "A sky blue checkerboard on a long single strap — and the pattern behind it.",
     difficulty: "Confident beginner",
@@ -63,7 +65,9 @@ const PATTERNS = [
     badge: null,
     tile: "neutral",
     span: "tall",
-    image: "Frosty.png",
+    image: "Frosty.webp",
+    imageW: 1000,
+    imageH: 667,
     alt: "A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
     tagline: "Bobble clouds on a very good blue. Graded XS to XXL.",
     difficulty: "Intermediate",
@@ -102,14 +106,25 @@ const PATTERNS = [
        readers. */
     free: true,
     patternHref: "assets/patterns/rosie-beanie-pattern.pdf",
-    /* The same pattern as a page you can read in the browser, which is
-       where tools/build-pattern.js renders the PDF from. A pattern
-       without this simply shows the download button on its own. */
+    /* Two editions of the same hat, and a page you can read without
+       downloading anything. `patternHref` is the large print edition:
+       the file the Accessible Patterns Index links to, and the one that
+       passes PAC. `standardHref` is the shorthand edition most
+       crocheters will want. A pattern without these simply shows the
+       download button on its own. */
+    standardHref: "assets/patterns/rosie-beanie-pattern-standard.pdf",
+    standardPages: 5,
+    /* pattern-beanie-standard.html is the source this PDF is built from
+       and stays in the repo, but it is not linked: the people who want
+       the standard edition are mostly printing it, and a browser link
+       under a download button was one option too many. */
     readHref: "pattern-beanie-accessible.html",
     badge: "Free pattern",
     tile: "neutral",
     span: "normal",
-    image: "beanie.png",
+    image: "beanie.webp",
+    imageW: 1000,
+    imageH: 1000,
     alt: "A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top.",
     tagline: "Ribbed, folded at the brim, and free to read in full.",
     difficulty: "Beginner",
@@ -150,7 +165,9 @@ const PATTERNS = [
     badge: "New pattern",
     tile: "accent",
     span: "normal",
-    image: "Valentine.png",
+    image: "Valentine.webp",
+    imageW: 1000,
+    imageH: 750,
     alt: "A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
     tagline: "Eight strawberries, each worked as its own small piece.",
     difficulty: "Intermediate",
@@ -185,7 +202,9 @@ const PATTERNS = [
     badge: null,
     tile: "neutral",
     span: "normal",
-    image: "Poppy.png",
+    image: "Poppy.webp",
+    imageW: 1000,
+    imageH: 667,
     alt: "A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle.",
     tagline: "Red on pink, with a brim that will not flop. Start here.",
     difficulty: "Beginner",
@@ -220,7 +239,9 @@ const PATTERNS = [
     badge: null,
     tile: "accent",
     span: "wide",
-    image: "rosewater-set.png",
+    image: "rosewater-set.webp",
+    imageW: 1000,
+    imageH: 667,
     alt: "A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist.",
     tagline: "A ruffled top and a skirt that goes over everything. Two patterns, one file.",
     difficulty: "Confident beginner",
@@ -378,7 +399,7 @@ ${header(false, false)}
     <div class="product">
       <div class="product__mediaCol">
         <div class="product__media">
-          <img src="assets/img/${p.image}" alt="${esc(p.alt)}" title="${esc(p.alt)}" width="1000" height="1000">
+          <img src="assets/img/${p.image}" alt="${esc(p.alt)}" title="${esc(p.alt)}" width="${p.imageW}" height="${p.imageH}">
         </div>
         <p class="product__mediaNote">
           ${p.free
@@ -415,31 +436,52 @@ ${header(false, false)}
           </li>
           <li>
             <span class="spec-strip__label">Pattern length</span>
-            <span class="spec-strip__value">${p.readHref ? `${p.pages}-page PDF, or read it in your browser` : `${p.pages}-page PDF`}</span>
+            <span class="spec-strip__value">${p.standardHref ? `${p.standardPages}-page PDF, or ${p.pages} pages in large print` : `${p.pages}-page PDF`}</span>
           </li>
         </ul>
 
         ${p.free
           ? `<div class="buy-form">
-${p.readHref ? `
+${p.standardHref ? `
           <!--
-            The same pattern, two ways. Each says what it is rather than
-            who it is for: nobody has to identify themselves to get a
-            pattern, and the description does the choosing.
+            Two editions of the same hat, each with its own formats.
+
+            Groups are named for what they are, never for who they are
+            for: nobody has to identify themselves to get a pattern, and
+            the line under each link does the choosing. Within a group
+            the most useful format leads — the PDF for the standard
+            edition, because people print patterns, and the web page for
+            large print, because it reflows and it is the one that has
+            actually passed a screen reader test.
+
+            Both "download the PDF" links carry an aria-label naming
+            their edition, so they stay distinguishable in a screen
+            reader's list of links, where the group heading is no longer
+            alongside them.
           -->
-          <a class="btn btn--primary btn--block" href="${p.patternHref}" download>Download the pattern &mdash; free</a>
-          <p class="formats__note">${p.pages} pages, 24 point type, black on white. For printing, or keeping on your device.</p>
+          <h2 class="formats__title">The pattern</h2>
+          <a class="btn btn--primary btn--block" href="${p.standardHref}" download
+             aria-label="Download the pattern as a PDF, free">Download the PDF &mdash; free</a>
+          <p class="formats__note">${p.standardPages} pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+
+          <h2 class="formats__title">Large print edition</h2>
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block" href="${p.readHref}">Read the pattern in your browser</a>
-              <p class="formats__note">The same pattern on one page. Zooms, reflows and works with a screen reader, with nothing to download.</p>
+              <a class="btn btn--secondary btn--block" href="${p.readHref}"
+                 aria-label="Read the large print edition in your browser">Read it in your browser</a>
+              <p class="formats__note">24 point type that reflows and zooms. Read from beginning to end with NVDA.</p>
+            </li>
+            <li>
+              <a class="btn btn--secondary btn--block" href="${p.patternHref}" download
+                 aria-label="Download the large print edition as a PDF">Download the PDF</a>
+              <p class="formats__note">${p.pages} pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up.</p>
             </li>
           </ul>
 
           <p class="buy-form__note">
-            No basket, no account, nothing to pay. Both are the same pattern, written out in
-            full &mdash; take whichever suits how you like to work.
+            No basket, no account, nothing to pay. Same hat, same counts and the same
+            measurements in every version &mdash; take whichever suits how you like to work.
           </p>` : `
           <a class="btn btn--primary btn--block" href="${p.patternHref}" download>Download the pattern &mdash; free</a>
           <p class="buy-form__note">

@@ -37,36 +37,95 @@ Then open <http://localhost:4173>. No build step, no dependencies.
 | `assets/js/shop.js` | Basket, checkout and pattern-library state |
 | `assets/js/catalogue.js` | Generated pattern data — do not edit by hand |
 | `assets/img/` | **Photography of the finished pieces goes here** — see below |
-| `assets/patterns/` | The built pattern PDF. Generated; do not edit by hand |
-| `pattern-beanie-accessible.html` | The beanie pattern itself, and the source the PDF is built from |
-| `tools/build-pattern.js` | Builds the PDF from that page. `node tools/build-pattern.js` |
+| `assets/patterns/` | Built pattern files — PDFs and the Word edition. Generated; do not edit by hand |
+| `pattern-beanie-accessible.html` | The beanie, large print edition. Source for its PDF and Word file |
+| `pattern-beanie-standard.html` | The beanie, standard edition. Source for the 5-page PDF |
+| `tools/build-pattern.js` | Builds a pattern PDF. `node tools/build-pattern.js standard` |
+| `tools/build-pattern-docx.js` | Builds the large print Word file. `node tools/build-pattern-docx.js` |
 | `tools/verify-pattern-pdf.js` | Accessibility checks the build fails on. Also runs standalone on any PDF |
 | `tools/pdf-tools.js` | Minimal PDF read/edit/write used by the two above |
 | `serve.js` | Minimal static preview server |
 
-## The pattern, in two formats
+## The beanie: two editions, four links
 
-The beanie pattern is written once, in `pattern-beanie-accessible.html`. The PDF is
-built from it, so the two cannot drift apart:
+The same hat, written twice. Everything downloadable is built from one of the two
+source pages, so no two versions can drift apart.
 
 ```bash
-node tools/build-pattern.js
+node build-products.js                    # the product page
+node tools/build-pattern.js standard      # the standard PDF
+node tools/build-pattern.js accessible    # the large print PDF
+node tools/build-pattern-docx.js          # the large print Word file
 ```
 
-| Format | File | For |
+**The pattern** — what most crocheters want. Abbreviations, gauge over a 4in swatch,
+diagrams.
+
+| File | Source | For |
 | --- | --- | --- |
-| Web page | `pattern-beanie-accessible.html` | Reading and zooming in a browser. A screen reader handles braille from here |
-| PDF | `assets/patterns/rosie-beanie-pattern.pdf` | Printing, keeping offline, and the Accessible Patterns Index |
+| `assets/patterns/rosie-beanie-pattern-standard.pdf` | `pattern-beanie-standard.html` | 5 pages, 12pt. Printing |
 
-`node tools/build-pattern.js --check` builds and verifies without writing anything.
+`pattern-beanie-standard.html` stays in the repo as the source that PDF is built
+from, but nothing links to it. This audience is mostly printing, and a browser
+link sitting under a download button was one option too many.
 
-Both are labelled on the product page by what they are — page count, type size,
-what each one does — never by who they are for. Nobody has to identify themselves
-to get a pattern, and the descriptions do the choosing.
+**Large print edition** — 24pt, every direction written out, no abbreviations.
+
+| File | Source | For |
+| --- | --- | --- |
+| `pattern-beanie-accessible.html` | — | Reflows and zooms. NVDA tested |
+| `assets/patterns/rosie-beanie-pattern-large-print.docx` | `pattern-beanie-accessible.html` | Offline, reflows. NVDA tested |
+| `assets/patterns/rosie-beanie-pattern.pdf` | `pattern-beanie-accessible.html` | 13 pages. Printing, and the Accessible Patterns Index. Tagged, machine-verified |
+
+`node tools/build-pattern.js standard --check` builds and verifies without writing.
+
+### Why a Word file
+
+WebAIM's screen reader user survey asks people which document format works best:
+**Word 68.9%, PDF 12.9%**. Preference runs the same way, 60.6% against 17.3%. Word
+also reflows, which is what large print actually needs — enlarging a fixed-layout
+PDF means scrolling sideways as well as down, and a quarter of low vision users
+magnify to 400% or more.
+
+It is also structurally incapable of the bug below: a `.docx` has no glyph runs and
+no tag tree, so the word spaces are just characters in the text.
+
+### How the two editions are presented
+
+Groups on the product page are named for **what they are** — "The pattern", "Large
+print edition" — never for who they are for. Nobody has to identify themselves to
+get a pattern; the line under each link does the choosing. Within a group the most
+useful format leads.
+
+Both "download the PDF" links carry an `aria-label` naming their edition, so they
+stay distinguishable in a screen reader's list of links, where the group heading
+is no longer alongside them.
 
 A plain text edition for braille embossing was built and then cut: a braille
 display already works from the web page, via the reader. It is in the git history
 if the embossing case ever comes up.
+
+### Screen reader status
+
+The web edition and the Word edition have both been read end to end with NVDA and
+read correctly.
+
+The large print PDF used to be the odd one out. The published copy was the file
+Chrome exported *before* the word-space fix, kept because it passed PAC, and a
+screen reader ran the words together in it — it said *"Beanie, AdultMedium"* out
+loud while a checker called it conformant. `build-pattern.js` refused to rebuild
+it, because at the time a rebuild lost the PDF/UA identifier.
+
+That trade is gone. `addXmpMetadata` writes the identifier itself now, so the
+freeze bought nothing, and it was in any case the wrong way round: a file a screen
+reader can follow is the point, and a checker agreeing is the evidence, not the
+goal. The edition is now built from `pattern-beanie-accessible.html` like
+everything else, and every one of its 211 text lines ends on a word boundary.
+
+**It has not been listened to end to end by a person.** What it has is the machine
+check below — the tag tree walked, the text each tag owns pulled out and read back
+in order. The pattern says exactly that in its own accessibility statement rather
+than claiming the NVDA pass the other two editions have.
 
 ### Why the build post-processes Chrome's PDF
 

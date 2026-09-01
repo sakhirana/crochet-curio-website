@@ -160,17 +160,18 @@ function decodeTextBlock(body, fonts) {
    Everything not replaced is copied byte for byte, and the result
    carries a single fresh xref table — no /Prev chain, no stale
    copies of superseded objects. */
-function save(orig, replacements, outPath) {
+function save(orig, replacements, outPath, additions) {
   const { buf, s, objs } = orig;
   const header = buf.slice(0, s.indexOf("1 0 obj"));
   const chunks = [header];
   const offsets = {};
   let pos = header.length;
 
-  const maxNum = Math.max(...Object.keys(objs).map(Number));
+  const all = Object.assign({}, objs, additions || {});
+  const maxNum = Math.max(...Object.keys(all).map(Number));
 
   for (let n = 1; n <= maxNum; n++) {
-    const o = objs[n];
+    const o = all[n];
     if (!o) continue;
     offsets[n] = pos;
 

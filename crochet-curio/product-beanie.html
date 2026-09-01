@@ -58,7 +58,7 @@
     <div class="product">
       <div class="product__mediaCol">
         <div class="product__media">
-          <img src="assets/img/beanie.png" alt="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." title="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." width="1000" height="1000">
+          <img src="assets/img/beanie.webp" alt="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." title="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." width="1000" height="1000">
         </div>
         <p class="product__mediaNote">
           The finished piece, made from this pattern. The pattern itself is free to read &mdash; nothing is sold and nothing is posted to you.
@@ -89,30 +89,51 @@
           </li>
           <li>
             <span class="spec-strip__label">Pattern length</span>
-            <span class="spec-strip__value">13-page PDF, or read it in your browser</span>
+            <span class="spec-strip__value">5-page PDF, or 13 pages in large print</span>
           </li>
         </ul>
 
         <div class="buy-form">
 
           <!--
-            The same pattern, two ways. Each says what it is rather than
-            who it is for: nobody has to identify themselves to get a
-            pattern, and the description does the choosing.
+            Two editions of the same hat, each with its own formats.
+
+            Groups are named for what they are, never for who they are
+            for: nobody has to identify themselves to get a pattern, and
+            the line under each link does the choosing. Within a group
+            the most useful format leads — the PDF for the standard
+            edition, because people print patterns, and the web page for
+            large print, because it reflows and it is the one that has
+            actually passed a screen reader test.
+
+            Both "download the PDF" links carry an aria-label naming
+            their edition, so they stay distinguishable in a screen
+            reader's list of links, where the group heading is no longer
+            alongside them.
           -->
-          <a class="btn btn--primary btn--block" href="assets/patterns/rosie-beanie-pattern.pdf" download>Download the pattern &mdash; free</a>
-          <p class="formats__note">13 pages, 24 point type, black on white. For printing, or keeping on your device.</p>
+          <h2 class="formats__title">The pattern</h2>
+          <a class="btn btn--primary btn--block" href="assets/patterns/rosie-beanie-pattern-standard.pdf" download
+             aria-label="Download the pattern as a PDF, free">Download the PDF &mdash; free</a>
+          <p class="formats__note">5 pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+
+          <h2 class="formats__title">Large print edition</h2>
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block" href="pattern-beanie-accessible.html">Read the pattern in your browser</a>
-              <p class="formats__note">The same pattern on one page. Zooms, reflows and works with a screen reader, with nothing to download.</p>
+              <a class="btn btn--secondary btn--block" href="pattern-beanie-accessible.html"
+                 aria-label="Read the large print edition in your browser">Read it in your browser</a>
+              <p class="formats__note">24 point type that reflows and zooms. Read from beginning to end with NVDA.</p>
+            </li>
+            <li>
+              <a class="btn btn--secondary btn--block" href="assets/patterns/rosie-beanie-pattern.pdf" download
+                 aria-label="Download the large print edition as a PDF">Download the PDF</a>
+              <p class="formats__note">13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up.</p>
             </li>
           </ul>
 
           <p class="buy-form__note">
-            No basket, no account, nothing to pay. Both are the same pattern, written out in
-            full &mdash; take whichever suits how you like to work.
+            No basket, no account, nothing to pay. Same hat, same counts and the same
+            measurements in every version &mdash; take whichever suits how you like to work.
           </p>
         </div>
 

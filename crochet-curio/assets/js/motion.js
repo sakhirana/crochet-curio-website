@@ -376,8 +376,15 @@
     var hero = document.querySelector(".hero");
     if (!hero) { return; }
 
+    /* The h1 is deliberately not in this list. It is the largest thing
+       on the first screen, which makes it the element Largest Contentful
+       Paint is measured against — and a fade cannot be measured as
+       painted until it has finished. Starting it at opacity 0 for a
+       200ms delay plus the transition was costing about a second of
+       LCP, on text the browser already had ready. The heading is there
+       the moment the page draws; everything around it still arrives. */
     var parts = hero.querySelectorAll(
-      ".eyebrow, h1, .lede, .hero__actions"
+      ".eyebrow, .lede, .hero__actions"
     );
 
     Array.prototype.forEach.call(parts, function (node, i) {

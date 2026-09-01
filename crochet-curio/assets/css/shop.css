@@ -290,10 +290,23 @@
   padding-block: var(--space-2xl);
   margin-bottom: var(--space-2xl);
 }
-/* The other way to read the pattern, under the main download. A plain
-   list so a screen reader announces how many there are first. Each
-   option carries a line saying what it is, which is what does the
-   choosing — the buttons alone only name file formats. */
+/* The two editions of a free pattern. The heading names the edition;
+   the note under each link names the format. Sized well below the
+   section headings further down the page, because this is a label
+   inside the buy box rather than a new part of the page. */
+.formats__title {
+  margin: var(--space-xl) 0 var(--space-m);
+  font-size: var(--text-l-size);
+  line-height: var(--text-l-line);
+  font-weight: 600;
+  color: var(--content-primary);
+}
+.formats__title:first-child { margin-top: 0; }
+
+/* The formats within an edition. A plain list so a screen reader
+   announces how many there are first. Each option carries a line
+   saying what it is, which is what does the choosing — the buttons
+   alone only name file formats. */
 .formats {
   list-style: none;
   margin: var(--space-l) 0 0;
