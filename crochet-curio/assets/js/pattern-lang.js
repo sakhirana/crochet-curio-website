@@ -11,6 +11,7 @@
    * the standard PDF, English or Hindi;
    * the large print web page, which is also where the Word file for
      that language is linked;
+   * the large print Word file, English or Hindi;
    * the large print PDF, English or Hindi.
 
    Three rules this file follows:
@@ -21,9 +22,13 @@
    * Text is written in English and left for i18n.js to translate,
      exactly like every other sentence on the site. Both wordings live
      in i18n-hi.js with the rest.
-   * hreflang and each link's aria-label follow the choice, so a screen
-     reader announces which language it is about to open rather than
-     reading the same label twice.
+   * hreflang follows the choice, and a Hindi file also gets an
+     aria-label saying so. There is no aria-label in English: the
+     visible text already names the edition and the format. The Hindi
+     label is the visible text with ", in Hindi" on the end, so the
+     visible string stays a substring of the accessible name and a
+     voice-control user can still say what they can see (2.5.3 Label
+     in Name).
 
    The starting choice is the language the site is already in. Someone
    reading the page in Hindi is offered the Hindi pattern first; the
@@ -41,17 +46,17 @@
   var STANDARD = {
     link: "patternDownload",
     note: "patternNote",
-    text: "Download the PDF — free",
+    text: "Download standard PDF",
     en: {
       href: "assets/patterns/rosie-beanie-pattern-standard.pdf",
       lang: "en",
-      label: "Download the pattern as a PDF, free",
+      label: null,
       note: "5 pages, 12 point type, standard crochet abbreviations, with diagrams."
     },
     hi: {
       href: "assets/patterns/rosie-beanie-pattern-standard-hi.pdf",
       lang: "hi",
-      label: "Download the pattern in Hindi as a PDF, free",
+      label: "Download standard PDF, in Hindi",
       note: "5 pages in Hindi, 12 point type, crochet abbreviations kept in English, with diagrams."
     }
   };
@@ -59,36 +64,54 @@
   var LARGE_PRINT = {
     link: "largePrintRead",
     note: "largePrintReadNote",
-    text: "Read it in your browser",
+    text: "Open in browser",
     en: {
       href: "pattern-beanie-accessible.html",
       lang: "en",
-      label: "Read the large print edition in your browser",
-      note: "24 point type that reflows and zooms. Read from beginning to end with NVDA. The Word file, for reading offline, is linked at the top of that page."
+      label: null,
+      note: "Pattern in your browser, compatible with screen readers."
     },
     hi: {
       href: "pattern-beanie-accessible-hi.html",
       lang: "hi",
-      label: "Read the large print edition in Hindi in your browser",
-      note: "24 point type that reflows and zooms. The Hindi Word file, for reading offline, is linked at the top of that page. The Hindi editions have not been listened to with a screen reader yet."
+      label: "Open in browser, in Hindi",
+      note: "Pattern in your browser, in Hindi. Not tested with a screen reader yet."
+    }
+  };
+
+  var LARGE_PRINT_WORD = {
+    link: "largePrintWord",
+    note: "largePrintWordNote",
+    text: "Download Word file",
+    en: {
+      href: "assets/patterns/rosie-beanie-pattern-large-print.docx",
+      lang: "en",
+      label: null,
+      note: "Word file for offline use, compatible with screen readers."
+    },
+    hi: {
+      href: "assets/patterns/rosie-beanie-pattern-large-print-hi.docx",
+      lang: "hi",
+      label: "Download Word file, in Hindi",
+      note: "Word file in Hindi for offline use. Not tested with a screen reader yet."
     }
   };
 
   var LARGE_PRINT_PDF = {
     link: "largePrintDownload",
     note: "largePrintDownloadNote",
-    text: "Download the PDF",
+    text: "Download large print PDF",
     en: {
       href: "assets/patterns/rosie-beanie-pattern.pdf",
       lang: "en",
-      label: "Download the large print edition as a PDF",
-      note: "13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading — with a screen reader, use the web page above."
+      label: null,
+      note: "24 point font, black on white."
     },
     hi: {
       href: "assets/patterns/rosie-beanie-pattern-hi.pdf",
       lang: "hi",
-      label: "Download the large print edition in Hindi as a PDF",
-      note: "13 pages in Hindi, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading — with a screen reader, use the web page above."
+      label: "Download large print PDF, in Hindi",
+      note: "24 point font in Hindi, black on white."
     }
   };
 
@@ -113,7 +136,10 @@
     next.id = link.id;
     next.setAttribute("href", file.href);
     next.setAttribute("hreflang", file.lang);
-    next.setAttribute("aria-label", file.label);
+    /* English carries no aria-label at all, so the visible text is the
+       accessible name. Setting one to the same string would only risk
+       the two drifting apart. */
+    if (file.label) { next.setAttribute("aria-label", file.label); }
     if (link.hasAttribute("download")) { next.setAttribute("download", ""); }
     next.textContent = spec.text;
     link.parentNode.replaceChild(next, link);
@@ -126,6 +152,7 @@
   var apply = function (code) {
     applyTo(STANDARD, code);
     applyTo(LARGE_PRINT, code);
+    applyTo(LARGE_PRINT_WORD, code);
     applyTo(LARGE_PRINT_PDF, code);
   };
 

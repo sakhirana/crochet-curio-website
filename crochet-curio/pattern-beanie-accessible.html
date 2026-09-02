@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Foldable Ribbed Beanie, Adult Medium — accessible edition — Crochet Curio</title>
-<meta name="description" content="Crochet pattern for a foldable ribbed beanie in adult medium. Accessible edition: 24 point sans serif, no charts, no abbreviations, screen reader friendly.">
+<meta name="description" content="Crochet pattern for a foldable ribbed beanie in adult medium. Accessible edition: sans serif, no charts, no abbreviations, screen reader friendly, and the text size is yours to set.">
 
 <!--
   Foldable Ribbed Beanie — accessible edition
@@ -15,9 +15,18 @@
   Everything a screen reader meets here is the pattern itself, and the page
   prints to a clean PDF with nothing to strip out afterwards.
 
-  Formatting follows the Accessible Patterns Index minimum: 24 point black
-  sans serif, no italics anywhere, every direction written out in full, no
-  charts, no information carried by an image or by colour.
+  Formatting follows the Accessible Patterns Index: black sans serif, no
+  italics anywhere, every direction written out in full, no charts, no
+  information carried by an image or by colour.
+
+  The Index sets a 24 point floor. That floor is a paper rule, and it is
+  kept where paper is involved — the print block below, which is what the
+  large print PDF is built from. On screen it is the wrong instrument: it
+  fixes one size for every reader, and someone who needs 40 point is no
+  better off than someone who wanted 14. So the screen type is set at the
+  same size as the standard edition and left to the reader, who raises it
+  with Ctrl and + . Everything here is in rem and em, so the page reflows
+  when they do rather than scrolling sideways.
 
   Structure is the part a screen reader actually uses: one h1, sections as
   h2, steps as h3, every list a real list, and the reading order the same as
@@ -29,9 +38,12 @@
   /* ---------------------------------------------------------------
      Type
 
-     24pt is the floor the Index sets, so it is the base size here in
-     both media. Verdana first: wider letterforms and open counters,
-     which is the reason it is the most used face in the Index.
+     Sized in rem so the reader sets it, not the page: the base is the
+     standard edition's size and Ctrl and + moves it from there. The
+     print block at the bottom is the exception, where 24pt is fixed
+     because paper cannot be zoomed. Verdana first: wider letterforms
+     and open counters, which is the reason it is the most used face in
+     the Index.
      --------------------------------------------------------------- */
   :root {
     --ink: #000000;
@@ -44,13 +56,27 @@
   }
 
   body {
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-    max-width: 40em;
+    margin: 0;
+    /* The text runs the width of the window, held off the edges by a
+       margin that grows a little on a wide screen. Everything here is set
+       in rem and em, so raising the text size — Ctrl and + , or a larger
+       default font — reflows the page instead of scrolling it sideways. */
+    /* The side padding is in px at the low end on purpose. In rem it
+       grows with the text, so a reader at 400 per cent would have had
+       96px of margin on each side of a 411px window and a column too
+       narrow to hold one word — the text then runs off the side, which
+       is the exact thing this page promises it will not do. 4vw takes
+       over on a wider window, so a comfortable margin is still there
+       for everyone who is not zoomed in. */
+    padding: 2rem clamp(16px, 4vw, 4rem) 4rem;
+    max-width: none;
     background: var(--paper);
     color: var(--ink);
     font-family: Verdana, Geneva, Tahoma, Arial, sans-serif;
-    font-size: 24pt;
+    /* rem, not pt: a reader who raises the browser's default text size
+       moves this with it, and Ctrl + + scales it either way. The print
+       block below keeps the PDF on its own absolute scale. */
+    font-size: 1rem;         /* 12pt at the default 16px root */
     line-height: 1.5;
     font-weight: 400;
     text-align: left;      /* never justified: uneven word spacing is harder to track */
@@ -62,9 +88,9 @@
     line-height: 1.25;
     margin: 1.5em 0 0.5em;
   }
-  h1 { font-size: 32pt; margin-top: 0; }
-  h2 { font-size: 28pt; }
-  h3 { font-size: 26pt; }
+  h1 { font-size: 1.667rem; margin-top: 0; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.083rem; }
 
   p, li { margin: 0 0 0.75em; }
   ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
@@ -80,7 +106,7 @@
   a {
     color: var(--ink);
     text-decoration: underline;
-    /* The email address is one long unbreakable word. At 24 point on a
+    /* The email address is one long unbreakable word. Zoomed up on a
        narrow phone it would push the page sideways, and a page that
        scrolls horizontally fails WCAG 1.4.10 reflow. */
     overflow-wrap: anywhere;
@@ -92,10 +118,11 @@
   h2[tabindex]:focus { outline: none; }
 
   /* The back link that closes every section. Held out from the last
-     line of the section by a full line, so at 24 point it reads as a
-     way out of the section rather than as another sentence of it. It
-     is not made smaller or greyer: this edition has one type size and
-     one contrast, and an escape hatch is the last thing to shrink. */
+     line of the section by a full line, so however far the reader has
+     zoomed it reads as a way out of the section rather than as another
+     sentence of it. It is not made smaller or greyer: this edition has
+     one type size and one contrast, and an escape hatch is the last
+     thing to shrink. */
   .backlink { margin: 1.5em 0 0; }
 
   /* The contents list: plain, no bullets, generous hit areas. */
@@ -114,8 +141,10 @@
   /* ---------------------------------------------------------------
      Print
 
-     What the buyer saves as PDF. Same 24pt type, black on white, with
-     page breaks kept out of the middle of a step.
+     What the buyer saves as PDF, and the only place a size is fixed:
+     paper cannot be zoomed, so the 24pt large print scale lives here
+     rather than on screen. Black on white, with page breaks kept out
+     of the middle of a step.
      --------------------------------------------------------------- */
   @media print {
     body {
@@ -123,6 +152,11 @@
       padding: 0;
       font-size: 24pt;
     }
+    /* The screen sizes above are the standard edition's. The PDF built from
+       this page is the large print one, so it keeps the 24pt scale. */
+    h1 { font-size: 32pt; }
+    h2 { font-size: 28pt; }
+    h3 { font-size: 26pt; }
     a { text-decoration: none; }
     /* Both are screen conveniences. On paper the headings do the same
        job as the contents list, and neither link can be followed — and
@@ -161,8 +195,7 @@
   prints that PDF from.
 -->
 <div class="offline">
-  <p>You can read this pattern here, or take it with you.</p>
-  <p><a href="assets/patterns/rosie-beanie-pattern-large-print.docx" download aria-label="Download this pattern as a Word file for reading offline">Download it as a Word file</a> — the same pattern, the same 24 point type, and it works offline. This page and the Word file both work with a screen reader, so take whichever suits you.</p>
+  <p><a href="assets/patterns/rosie-beanie-pattern-large-print.docx" download>Download it as a Word file for offline use</a></p>
 </div>
 
 <section aria-labelledby="statement">
@@ -171,7 +204,8 @@
   <p>This is the accessible edition of this pattern, written for screen reader users and for crocheters with a print disability. It covers this pattern only.</p>
 
   <ul>
-    <li>Set in 24 point Verdana, a sans serif face, in black on a white background.</li>
+    <li>Set in Verdana, a sans serif face, in black on a white background, at the same size as the standard edition.</li>
+    <li>The text size is yours to set — Ctrl and + in a browser, Word's zoom in the Word file. The text reflows either way.</li>
     <li>No italics are used anywhere.</li>
     <li>Every direction is written out in full. There are no abbreviations, and there is no abbreviations list to memorise.</li>
     <li>There are no charts, no stitch diagrams, and no photographs. Nothing in this pattern is carried by an image.</li>
@@ -229,7 +263,7 @@
 <section aria-labelledby="skill">
   <h2 id="skill" tabindex="-1">Skill level</h2>
 
-  <p>Beginner. You need to chain, single crochet, slip stitch, and sew a gathered seam by hand.</p>
+  <p>Beginner. You need to chain, single crochet, slip stitch, and gather the top closed with a needle.</p>
   <p class="backlink"><a href="#contents" aria-label="Back to contents, from Skill level">Back to contents</a></p>
 </section>
 

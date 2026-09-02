@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम — बड़े अक्षरों वाला एडिशन — Crochet Curio</title>
-<meta name="description" content="फोल्ड होने वाली रिब्ड बीनी का क्रोशे पैटर्न, वयस्क मीडियम साइज़ में। बड़े अक्षरों वाला एडिशन: 24 पॉइंट सैन्स सेरिफ़, कोई चार्ट नहीं, कोई शॉर्ट फ़ॉर्म नहीं, स्क्रीन रीडर के लिए बनाया गया।">
+<title>फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम — एक्सेसिबल एडिशन — Crochet Curio</title>
+<meta name="description" content="फोल्ड होने वाली रिब्ड बीनी का क्रोशे पैटर्न, वयस्क मीडियम साइज़ में। एक्सेसिबल एडिशन: सैन्स सेरिफ़, कोई चार्ट नहीं, कोई शॉर्ट फ़ॉर्म नहीं, स्क्रीन रीडर के लिए बनाया गया, और टाइप का साइज़ आप खुद तय कीजिए।">
 
 <!--
-  Foldable Ribbed Beanie — large print edition, Hindi
-  ==================================================
+  Foldable Ribbed Beanie — accessible edition, Hindi
+  =================================================
 
   A translation of pattern-beanie-accessible.html. Same hat, same
   counts, same measurements, same section ids — if one is corrected,
@@ -39,8 +39,10 @@
   /* ---------------------------------------------------------------
      Type
 
-     24pt is the floor the Accessible Patterns Index sets, so it is the
-     base size here in both media. Devanagari hangs matras above and
+     Sized in rem so the reader sets it, not the page: the base is the
+     standard edition's size and Ctrl and + moves it from there. The
+     print block at the bottom is the exception, where 24pt is fixed
+     because paper cannot be zoomed. Devanagari hangs matras above and
      below the line, so the line height is looser than the English
      edition's 1.5.
      --------------------------------------------------------------- */
@@ -55,13 +57,27 @@
   }
 
   body {
-    margin: 0 auto;
-    padding: 2rem 1.5rem 4rem;
-    max-width: 40em;
+    margin: 0;
+    /* The text runs the width of the window, held off the edges by a
+       margin that grows a little on a wide screen. Everything here is set
+       in rem and em, so raising the text size — Ctrl and + , or a larger
+       default font — reflows the page instead of scrolling it sideways. */
+    /* The side padding is in px at the low end on purpose. In rem it
+       grows with the text, so a reader at 400 per cent would have had
+       96px of margin on each side of a 411px window and a column too
+       narrow to hold one word — the text then runs off the side, which
+       is the exact thing this page promises it will not do. 4vw takes
+       over on a wider window, so a comfortable margin is still there
+       for everyone who is not zoomed in. */
+    padding: 2rem clamp(16px, 4vw, 4rem) 4rem;
+    max-width: none;
     background: var(--paper);
     color: var(--ink);
     font-family: "Nirmala UI", "Noto Sans Devanagari", "Mangal", Verdana, Arial, sans-serif;
-    font-size: 24pt;
+    /* rem, not pt: a reader who raises the browser's default text size
+       moves this with it, and Ctrl + + scales it either way. The print
+       block below keeps the PDF on its own absolute scale. */
+    font-size: 1rem;         /* 12pt at the default 16px root */
     line-height: 1.7;
     font-weight: 400;
     text-align: left;      /* never justified: uneven word spacing is harder to track */
@@ -73,9 +89,9 @@
     line-height: 1.4;
     margin: 1.5em 0 0.5em;
   }
-  h1 { font-size: 32pt; margin-top: 0; }
-  h2 { font-size: 28pt; }
-  h3 { font-size: 26pt; }
+  h1 { font-size: 1.667rem; margin-top: 0; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.083rem; }
 
   p, li { margin: 0 0 0.75em; }
   ul, ol { padding-left: 1.2em; margin: 0 0 1em; }
@@ -91,7 +107,7 @@
   a {
     color: var(--ink);
     text-decoration: underline;
-    /* The email address is one long unbreakable word. At 24 point on a
+    /* The email address is one long unbreakable word. Zoomed up on a
        narrow phone it would push the page sideways, and a page that
        scrolls horizontally fails WCAG 1.4.10 reflow. */
     overflow-wrap: anywhere;
@@ -124,8 +140,10 @@
   /* ---------------------------------------------------------------
      Print
 
-     What a reader saves or prints from the browser. Same 24pt type,
-     black on white, with page breaks kept out of the middle of a step.
+     What a reader saves or prints from the browser, and the only place
+     a size is fixed: paper cannot be zoomed, so the 24pt large print
+     scale lives here rather than on screen. Black on white, with page
+     breaks kept out of the middle of a step.
      --------------------------------------------------------------- */
   @media print {
     body {
@@ -133,6 +151,11 @@
       padding: 0;
       font-size: 24pt;
     }
+    /* The screen sizes above are the standard edition's. The PDF built from
+       this page is the large print one, so it keeps the 24pt scale. */
+    h1 { font-size: 32pt; }
+    h2 { font-size: 28pt; }
+    h3 { font-size: 26pt; }
     a { text-decoration: none; }
     /* Screen conveniences. On paper the headings do the same job as
        the contents list, and neither link can be followed. */
@@ -160,8 +183,7 @@
   only sound one. Hidden in print, like the English page's box.
 -->
 <div class="offline">
-  <p>यह पैटर्न आप यहीं पढ़ सकते हैं, या अपने साथ ले जा सकते हैं।</p>
-  <p><a href="assets/patterns/rosie-beanie-pattern-large-print-hi.docx" download aria-label="इस पैटर्न को Word फ़ाइल के रूप में डाउनलोड कीजिए, बिना इंटरनेट पढ़ने के लिए">इसे Word फ़ाइल के रूप में डाउनलोड कीजिए</a> — वही पैटर्न, वही 24 पॉइंट टाइप, और यह बिना इंटरनेट के भी चलती है। यह पेज और Word फ़ाइल, दोनों स्क्रीन रीडर के साथ काम करते हैं, इसलिए जो आपको ठीक लगे वही लीजिए।</p>
+  <p><a href="assets/patterns/rosie-beanie-pattern-large-print-hi.docx" download>बिना इंटरनेट पढ़ने के लिए इसे Word फ़ाइल के रूप में डाउनलोड कीजिए</a></p>
 </div>
 
 <section aria-labelledby="statement">
@@ -170,7 +192,8 @@
   <p>यह इस पैटर्न का एक्सेसिबल एडिशन है, जो स्क्रीन रीडर इस्तेमाल करने वालों और प्रिंट डिसेबिलिटी वाले क्रोशे करने वालों के लिए लिखा गया है। यह सिर्फ़ इसी पैटर्न के बारे में है।</p>
 
   <ul>
-    <li>24 पॉइंट सैन्स सेरिफ़ टाइप में, सफ़ेद बैकग्राउंड पर काले अक्षरों में।</li>
+    <li>सैन्स सेरिफ़ टाइप में, सफ़ेद बैकग्राउंड पर काले अक्षरों में, स्टैंडर्ड एडिशन जितने ही साइज़ में।</li>
+    <li>टाइप का साइज़ आपके हाथ में है — ब्राउज़र में Ctrl और +, Word फ़ाइल में Word का ज़ूम। दोनों में टेक्स्ट अपने आप दोबारा सज जाता है।</li>
     <li>कहीं भी इटैलिक अक्षर इस्तेमाल नहीं किए गए हैं।</li>
     <li>हर निर्देश पूरा लिखा गया है। कोई शॉर्ट फ़ॉर्म नहीं है, और याद करने के लिए कोई शॉर्ट फ़ॉर्म की सूची भी नहीं है।</li>
     <li>कोई चार्ट, कोई स्टिच डायग्राम और कोई फ़ोटो नहीं है। इस पैटर्न में कोई बात तस्वीर के सहारे नहीं कही गई।</li>
@@ -208,7 +231,7 @@
 <section aria-labelledby="description">
   <h2 id="description" tabindex="-1">विवरण</h2>
 
-  <p>ऊपर की तरफ़ मोड़ने वाली ब्रिम के साथ एक रिब्ड बीनी। यह एक ही टुकड़े में, सपाट, एक किनारे से दूसरे किनारे तक बुनी जाती है, फिर एक साइड में एक बार सिली जाती है और ऊपर से समेटकर बंद कर दी जाती है।</p>
+  <p>ऊपर की तरफ़ मोड़ने वाली ब्रिम के साथ एक रिब्ड बीनी। यह एक ही टुकड़े में, सपाट, एक किनारे से दूसरे किनारे तक बुनी जाती है, फिर एक साइड में एक बार स्लिप स्टिच से जोड़ी जाती है और ऊपर से समेटकर बंद कर दी जाती है।</p>
 
   <p>रिब हर स्टिच के पिछले लूप में काम करने से बनती है। कोई अलग रिब स्टिच सीखने की ज़रूरत नहीं है।</p>
   <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, विवरण से">विषय सूची पर वापस</a></p>
@@ -217,7 +240,7 @@
 <section aria-labelledby="skill">
   <h2 id="skill" tabindex="-1">स्किल लेवल</h2>
 
-  <p>शुरुआती। आपको चेन बनाना, सिंगल क्रोशे करना, स्लिप स्टिच करना, और हाथ से समेटने वाली सिलाई करना आना चाहिए।</p>
+  <p>शुरुआती। आपको चेन बनाना, सिंगल क्रोशे करना, स्लिप स्टिच करना, और ऊपर के हिस्से को सुई से समेटकर बंद करना आना चाहिए।</p>
   <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, स्किल लेवल से">विषय सूची पर वापस</a></p>
 </section>
 
@@ -229,7 +252,7 @@
   <ul>
     <li>22 इंच, यानी 56 सेंटीमीटर सिर की गोलाई के लिए।</li>
     <li>तैयार ऊँचाई: 12 इंच, यानी 30.5 सेंटीमीटर। इस नाप में फ़ोल्ड पहले से शामिल है, इसलिए इसमें कुछ और मत जोड़िए।</li>
-    <li>सिलाई से पहले सपाट टुकड़े की लंबाई: करीब 20 इंच, यानी 51 सेंटीमीटर।</li>
+    <li>जोड़ने से पहले सपाट टुकड़े की लंबाई: करीब 20 इंच, यानी 51 सेंटीमीटर।</li>
   </ul>
 
   <p>कपड़ा बहुत खिंचता है, इसीलिए सपाट लंबाई उस सिर से करीब 2 इंच, यानी 5 सेंटीमीटर छोटी है जिस पर यह टोपी आती है।</p>
@@ -322,7 +345,7 @@
 
   <p>किसी पूरी रो के बाद ही रुकिए। धागा अभी मत काटिए।</p>
 
-  <h3 id="seam">सिलाई</h3>
+  <h3 id="seam">सीवन</h3>
 
   <ol>
     <li>टुकड़े को बीच से मोड़िए ताकि दोनों छोटे सिरे मिल जाएँ, और उन्हें स्टिच दर स्टिच मिलाइए। अब लंबे किनारे टोपी के नीचे और ऊपर वाले हिस्से हैं।</li>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rosie Beanie — crochet pattern — Crochet Curio</title>
-<meta name="description" content="Free crochet pattern. Ribbed, folded at the brim, and free to read in full. Beginner level, written out in full and free to download.">
+<meta name="description" content="Free crochet pattern. Ribbed, folded at the brim. Beginner level, written out in full and free to download.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -60,56 +60,71 @@
         <div class="product__media">
           <img src="assets/img/beanie.webp" alt="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." title="A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top." width="1000" height="1000">
         </div>
-        <p class="product__mediaNote">
-          The finished piece, made from this pattern. The pattern itself is free to read &mdash; nothing is sold and nothing is posted to you.
-        </p>
       </div>
 
       <div class="product__info">
         <p class="kicker">Digital crochet pattern</p>
         <span class="badge">Free pattern</span>
         <h1>Rosie Beanie</h1>
-        <p class="product__tagline">Ribbed, folded at the brim, and free to read in full.</p>
-        <p class="product__price">Free
-          <span class="product__priceNote">PDF pattern &middot; free download</span>
-        </p>
+        <p class="product__tagline">Ribbed, folded at the brim.</p>
+        
 
-        <ul class="spec-strip">
+        <!-- The formats cell is a list, so it is taller than any other cell.
+             It sits in the second column across every row, which leaves the
+             plain specs stacked in the first column at an even spacing —
+             --spec-rows says how many of them there are. -->
+        <ul class="spec-strip" style="--spec-rows: 3">
           <li>
             <span class="spec-strip__label">Skill level</span>
             <span class="level level--beginner">Beginner</span>
           </li>
           <li>
             <span class="spec-strip__label">Time to make</span>
-            <span class="spec-strip__value">About 6 hours</span>
+            <span class="spec-strip__value">6 hours (approx.)</span>
           </li>
           <li>
-            <span class="spec-strip__label">Sizes written</span>
-            <span class="spec-strip__value">Adult medium, one size — written for a 56cm head, and the rib stretches</span>
+            <span class="spec-strip__label">Size</span>
+            <span class="spec-strip__value">One size</span>
           </li>
-          <li>
-            <span class="spec-strip__label">Pattern length</span>
-            <span class="spec-strip__value">5-page PDF, or 13 pages in large print</span>
+          <li class="spec-strip__item--formats">
+            <span class="spec-strip__label">Pattern formats available</span>
+            <ul class="spec-strip__formats">
+              <li>Standard PDF</li>
+              <li>Large print PDF (24pt font)</li>
+              <li>Accessible webpage (HTML)</li>
+              <li>Accessible Word document (.docx)</li>
+            </ul>
+          </li>
+          <li class="spec-strip__item--language">
+            <span class="spec-strip__label">Language</span>
+            <span class="spec-strip__value">English and Hindi</span>
           </li>
         </ul>
 
         <div class="buy-form">
 
           <!--
-            Two editions of the same hat, each with its own formats.
+            Four formats in two groups: the standard PDF, then the three
+            accessible ones under a heading of their own.
 
-            Groups are named for what they are, never for who they are
-            for: nobody has to identify themselves to get a pattern, and
-            the line under each link does the choosing. Within a group
-            the most useful format leads — the PDF for the standard
-            edition, because people print patterns, and the web page for
-            large print, because it reflows and it is the one that has
-            actually passed a screen reader test.
+            The heading is a jump target. A screen reader user moving by
+            heading, or anyone scanning the page, gets to the accessible
+            formats in one step instead of reading past the standard PDF
+            to find them.
 
-            Both "download the PDF" links carry an aria-label naming
-            their edition, so they stay distinguishable in a screen
-            reader's list of links, where the group heading is no longer
-            alongside them.
+            It does not carry the meaning on its own, though. Each link
+            still names its own edition and format in its visible text —
+            "Download the large print PDF", not "Download the PDF" —
+            because a link list strips headings away, and two links both
+            reading "Download the PDF" would be indistinguishable there.
+            The same string is the visible label and the accessible name,
+            rather than a short visible one and a longer hidden one that
+            disagree (2.5.3 Label in Name).
+
+            Within the group the order is most-reached-for first: the web
+            page, because it reflows and it is the one that has actually
+            passed a screen reader test, then the offline Word file, then
+            the PDF for paper.
           -->
           <h2 class="formats__title">The pattern</h2>
 
@@ -131,76 +146,59 @@
             </select>
           </div>
 
-          <a class="btn btn--primary btn--block" id="patternDownload" href="assets/patterns/rosie-beanie-pattern-standard.pdf" download hreflang="en"
-             aria-label="Download the pattern as a PDF, free">Download the PDF &mdash; free</a>
-          <p class="formats__note" id="patternNote">5 pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+          <!--
+            No aria-label on any of these in English: the visible text
+            already names the edition and the format, and a hidden label
+            that only repeats it is one more string to keep in step.
+            pattern-lang.js adds one when the file is Hindi, because
+            that is the one thing the visible text cannot say while the
+            page itself is in English.
+          -->
+          <ul class="formats">
+            <li>
+              <a class="btn btn--primary btn--block" id="patternDownload" href="assets/patterns/rosie-beanie-pattern-standard.pdf" download hreflang="en">Download standard PDF</a>
+              <p class="formats__note" id="patternNote">5 pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+            </li>
+          </ul>
 
-          <h2 class="formats__title">Large print edition</h2>
+          <h2 class="formats__title">Accessible patterns</h2>
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block" id="largePrintRead" hreflang="en" href="pattern-beanie-accessible.html"
-                 aria-label="Read the large print edition in your browser">Read it in your browser</a>
-              <p class="formats__note" id="largePrintReadNote">24 point type that reflows and zooms. Read from beginning to end with NVDA. The Word file, for reading offline, is linked at the top of that page.</p>
+              <a class="btn btn--secondary btn--block" id="largePrintRead" hreflang="en" href="pattern-beanie-accessible.html">Open in browser</a>
+              <p class="formats__note" id="largePrintReadNote">Pattern in your browser, compatible with screen readers.</p>
             </li>
             <li>
-              <a class="btn btn--secondary btn--block" id="largePrintDownload" hreflang="en" href="assets/patterns/rosie-beanie-pattern.pdf" download
-                 aria-label="Download the large print edition as a PDF">Download the PDF</a>
-              <p class="formats__note" id="largePrintDownloadNote">13 pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading &mdash; with a screen reader, use the web page above.</p>
+              <a class="btn btn--secondary btn--block" id="largePrintWord" hreflang="en" href="assets/patterns/rosie-beanie-pattern-large-print.docx" download>Download Word file</a>
+              <p class="formats__note" id="largePrintWordNote">Word file for offline use, compatible with screen readers.</p>
+            </li>
+            <li>
+              <a class="btn btn--secondary btn--block" id="largePrintDownload" hreflang="en" href="assets/patterns/rosie-beanie-pattern.pdf" download>Download large print PDF</a>
+              <p class="formats__note" id="largePrintDownloadNote">24 point font, black on white.</p>
             </li>
           </ul>
 
         </div>
 
-        <h2 class="product__detailsTitle">What is in the file</h2>
-        <ul class="includes">
-          <li>The complete pattern as a PDF or a web page, free — nothing to buy and no account to make</li>
-          <li>Every direction written out in full, with no abbreviations and no charts</li>
-          <li>24 point type, black on white, and no meaning carried by colour</li>
-          <li>Stitch counts on every row, so you can work to the counts if your gauge differs</li>
-          <li>Tagged for screen readers, so the headings and lists survive in the file</li>
-        </ul>
 
-        <h2 class="product__detailsTitle">Before you cast on</h2>
+        <h2 class="product__detailsTitle">Materials used</h2>
         <dl class="product__details">
-          <div><dt>Yarn</dt><dd>Acrylic, weight 4 medium — also sold as worsted, afghan or aran. 100–120g, about 180–220m.</dd></div>
-          <div><dt>Hook</dt><dd>5mm hook, also marked H-8.</dd></div>
-          <div><dt>Other bits</dt><dd>Darning needle, stitch markers or safety pins, measuring tape, scissors.</dd></div>
-          <div><dt>Gauge</dt><dd>40 stitches to about 30.5cm across a row; 66 rows to about 51cm along the long edge.</dd></div>
+          <div><dt>Yarn</dt><dd>100% acrylic yarn, weight 4</dd></div>
+          <div><dt>Hook size</dt><dd>5mm</dd></div>
+          <div><dt>Other materials</dt><dd>Darning needle, stitch markers or safety pins, measuring tape, scissors.</dd></div>
         </dl>
 
         <h2 class="product__detailsTitle">Stitches you will use</h2>
         <ul class="skills">
-          <li>Working into the back loop only, which is where the ribbing comes from</li>
-          <li>Working a hat flat, from side to side, in one piece</li>
-          <li>Slip stitching a side seam through both layers</li>
-          <li>Gathering the crown closed with a running stitch</li>
+          <li>Chain stitch</li>
+          <li>Single crochet</li>
+          <li>Back loop single crochet</li>
+          <li>Slip stitch</li>
         </ul>
-        <p class="muted skills__note">Chain, single crochet, slip stitch, and one seam sewn by hand. Nothing else in it.</p>
 
-        <div class="product__body">
-          <p>Worked flat from side to side in one long ribbed strip, then seamed once down the side and drawn closed at the top. Every row is 40 stitches, 66 rows in total, and the count never changes — there is no shaping to keep track of.</p>
-          <p>The ribbing is single crochet into the back loop only. The loops you leave untouched build up into the ridges, so there is no special stitch to learn. The brim folds up as deep as you like it, and the finished height already allows for the fold.</p>
-        </div>
-
-        <h2 class="product__detailsTitle">Notes from the studio</h2>
-        <dl class="product__details">
-          <div><dt>Why it is free</dt><dd>A plain, accessible edition of a first hat. Read it here, print it, or make it straight off the screen.</dd></div>
-          <div><dt>Gauge</dt><dd>Work to the stitch counts rather than the measurements. The fabric stretches, so the hat still fits.</dd></div>
-        </dl>
       </div>
     </div>
 
-    <nav class="product-nav" aria-label="More patterns">
-      <a class="product-nav__link" href="product-cloud-cardigan.html">
-        <span class="muted">Previous pattern</span>
-        <span>Lumi Cardigan</span>
-      </a>
-      <a class="product-nav__link product-nav__link--next" href="product-strawberry-cardigan.html">
-        <span class="muted">Next pattern</span>
-        <span>Sweetheart Cardigan</span>
-      </a>
-    </nav>
 
   </div>
 </main>
@@ -209,7 +207,7 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <p class="brand" style="margin-bottom: var(--space-m)">Crochet&nbsp;Curio</p>
+        <p style="margin-bottom: var(--space-m)"><a class="brand" href="index.html">Crochet&nbsp;Curio</a></p>
         <p class="muted" style="font-size: var(--text-m-size); max-width: 32ch">
           Digital crochet patterns, written and tested by hand. Make the piece yourself.
         </p>
@@ -217,12 +215,7 @@
       <nav aria-labelledby="footer-shop">
         <h2 id="footer-shop">Patterns</h2>
         <ul>
-          <li><a href="product-checkerboard-bag.html">Marina Tote Bag</a></li>
-          <li><a href="product-cloud-cardigan.html">Lumi Cardigan</a></li>
           <li><a href="product-beanie.html">Rosie Beanie</a></li>
-          <li><a href="product-strawberry-cardigan.html">Sweetheart Cardigan</a></li>
-          <li><a href="product-bucket-hat.html">Poppy Hat</a></li>
-          <li><a href="product-rosewater-set.html">Ariel Set</a></li>
         </ul>
       </nav>
       <nav aria-labelledby="footer-help">
@@ -244,7 +237,7 @@
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Crochet Curio. Patterns are for your own use; the pieces you make from them are yours to sell.</p>
+      <p>&copy; 2026 Crochet Curio. Patterns are for your own use.</p>
       <p>Built on the Crochet Curio design system.</p>
     </div>
   </div>

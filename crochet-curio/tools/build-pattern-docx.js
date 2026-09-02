@@ -1,15 +1,20 @@
 /* ============================================================
-   build-pattern-docx.js — the large print edition as a Word file
+   build-pattern-docx.js — the accessible edition as a Word file
 
    Run:  node tools/build-pattern-docx.js
 
    Why this format exists at all. WebAIM's screen reader user survey
    asks people directly which document format works best for them:
    Word 68.9 per cent, PDF 12.9. Preference runs the same way, Word
-   60.6 against PDF 17.3. A Word file also reflows, which is what
-   large print actually needs — enlarging a fixed-layout PDF means
-   scrolling sideways as well as down, and a quarter of low vision
-   users magnify to 400 per cent or more.
+   60.6 against PDF 17.3.
+
+   Reflow is the other reason. This file is set at the same size as the
+   standard edition, not at a fixed large one, because a reader who
+   needs bigger type is better served by raising it themselves than by
+   being handed one size somebody else chose. Word reflows when they
+   do. Enlarging a fixed-layout PDF instead means scrolling sideways as
+   well as down, and a quarter of low vision users magnify to 400 per
+   cent or more. The large print PDF is still there for paper.
 
    It is built from pattern-beanie-accessible.html, the same source
    the PDF comes from, so the wording cannot drift between them.
@@ -61,9 +66,9 @@ const EDITION = HI
       /* hi-IN so a screen reader picks its Hindi voice, and so Word does
          not spell-check Hindi against an English dictionary. */
       lang: "hi-IN",
-      title: "फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम — बड़े अक्षरों वाला एडिशन",
+      title: "फोल्ड होने वाली रिब्ड बीनी, वयस्क मीडियम — एक्सेसिबल एडिशन",
       description:
-        "फोल्ड होने वाली रिब्ड बीनी का क्रोशे पैटर्न, वयस्क मीडियम। बड़े अक्षरों वाला एडिशन: 24 पॉइंट टाइप, कोई शॉर्ट फ़ॉर्म नहीं, कोई चार्ट नहीं।",
+        "फोल्ड होने वाली रिब्ड बीनी का क्रोशे पैटर्न, वयस्क मीडियम। एक्सेसिबल एडिशन: सैन्स सेरिफ़ टाइप, कोई शॉर्ट फ़ॉर्म नहीं, कोई चार्ट नहीं। टाइप का साइज़ आप खुद बढ़ा सकते हैं।",
     }
   : {
       source: path.join(ROOT, "pattern-beanie-accessible.html"),
@@ -73,9 +78,9 @@ const EDITION = HI
          misspellings and a screen reader gets the right pronunciation
          rules */
       lang: "en-GB",
-      title: "Foldable Ribbed Beanie, Adult Medium — large print edition",
+      title: "Foldable Ribbed Beanie, Adult Medium — accessible edition",
       description:
-        "Crochet pattern for a foldable ribbed beanie in adult medium. Large print edition: 24 point sans serif, no abbreviations, no charts.",
+        "Crochet pattern for a foldable ribbed beanie in adult medium. Accessible edition: sans serif, no abbreviations, no charts, and the type size is yours to raise.",
     };
 
 const SOURCE = EDITION.source;
@@ -219,8 +224,8 @@ while ((m = re.exec(body))) {
 
 /* Named on both the ascii and the complex-script slots. Devanagari is
    a complex script in Word's model: without the cs font and size it
-   falls back to the theme font at 10 point, which would quietly undo
-   the whole point of a large print edition. */
+   falls back to the theme font at 10 point, which is smaller than the
+   size set here and would quietly undercut the whole file. */
 const FONT = { ascii: EDITION.font, hAnsi: EDITION.font, cs: EDITION.font };
 const BLACK = "000000";
 const LANG = EDITION.lang;
@@ -230,9 +235,9 @@ const LANG = EDITION.lang;
    Word's own (16/13/12pt) and a redefinition loses to them, so the type
    size is set on the run instead, where it wins outright. */
 const HEADING_OF = {
-  h1: { level: HeadingLevel.HEADING_1, size: 64 },
-  h2: { level: HeadingLevel.HEADING_2, size: 56 },
-  h3: { level: HeadingLevel.HEADING_3, size: 52 },
+  h1: { level: HeadingLevel.HEADING_1, size: 40 },
+  h2: { level: HeadingLevel.HEADING_2, size: 30 },
+  h3: { level: HeadingLevel.HEADING_3, size: 26 },
 };
 
 /* Only the headings the contents actually points at get a bookmark.
@@ -319,7 +324,7 @@ const numberedLevel = (format, text, indent, hanging) => ({
   text,
   alignment: AlignmentType.LEFT,
   style: {
-    run: { font: FONT, size: 48, sizeComplexScript: 48, color: BLACK },
+    run: { font: FONT, size: 24, sizeComplexScript: 24, color: BLACK },
     paragraph: {
       indent: { left: convertInchesToTwip(indent), hanging: convertInchesToTwip(hanging) },
     },
@@ -332,13 +337,14 @@ const doc = new Document({
   creator: "Crochet Curio",
   styles: {
     default: {
-      /* 24 point is 48 half-points, the floor the Accessible Patterns
-         Index sets, so it is the base size for body text */
+      /* 12 point is 24 half-points — the same size as the standard
+         edition. Not a fixed large size: the reader raises it in Word
+         to whatever they need, and the text reflows when they do. */
       document: {
         run: {
           font: FONT,
-          size: 48,
-          sizeComplexScript: 48,
+          size: 24,
+          sizeComplexScript: 24,
           color: BLACK,
           italics: false,
           language: { value: LANG, bidirectional: LANG },

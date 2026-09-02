@@ -77,7 +77,6 @@ p { text-wrap: pretty; }
 }
 
 .section { padding-block: var(--layout-section); }
-.section--tight { padding-block: var(--space-7xl); }
 .section--tinted { background: var(--background-hover); }
 
 .stack > * + * { margin-top: var(--space-xl); }
@@ -161,31 +160,6 @@ p { text-wrap: pretty; }
 .btn--secondary:hover  { background: var(--background-hover);   border-color: var(--border-primary); color: var(--content-primary); }
 .btn--secondary:active { background: var(--background-pressed); border-color: var(--border-primary); color: var(--content-primary); }
 
-/* Type=Tertiary — link-coloured, no fill until it is interacted with */
-.btn--tertiary {
-  background: var(--background-primary);
-  color: var(--content-link);
-}
-.btn--tertiary:hover  { background: var(--background-hover);   color: var(--content-link-hover); }
-.btn--tertiary:active { background: var(--background-pressed); color: var(--content-link-pressed); }
-
-/* Type=Tertiary mono */
-.btn--tertiary-mono {
-  background: var(--background-primary);
-  color: var(--content-secondary);
-}
-.btn--tertiary-mono:hover  { background: var(--background-hover);   color: var(--content-primary); }
-.btn--tertiary-mono:active { background: var(--background-pressed); color: var(--content-primary); }
-
-/* Size=S */
-.btn--small {
-  min-height: 32px;
-  padding: calc(var(--space-xs) - var(--stroke-width-xs))
-           calc(var(--space-s) + var(--space-xs) - var(--stroke-width-xs));
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
-}
-
 /* The component set has no disabled variant, but the tokens for one exist and
    the shop disables the buy button once a pattern is owned — see README. */
 .btn:disabled,
@@ -245,6 +219,20 @@ p { text-wrap: pretty; }
   white-space: nowrap;
 }
 .brand:hover { color: var(--content-brand); }
+
+/* The footer wordmark is a link home, the same as the one in the header.
+   .footer-grid a is more specific than .brand, so it would otherwise pull
+   the wordmark down to link size and colour and underline it on hover.
+   Restated here so the two wordmarks look and behave alike. */
+.footer-grid a.brand {
+  font-size: var(--heading-s-size);
+  line-height: var(--heading-s-line);
+  color: var(--content-primary);
+}
+.footer-grid a.brand:hover {
+  color: var(--content-brand);
+  text-decoration: none;
+}
 
 .nav-list {
   display: flex;
@@ -329,26 +317,11 @@ p { text-wrap: pretty; }
 }
 
 /* ---------- Product grid ---------- */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6xl) var(--space-2xl);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
 .product-card {
   display: flex;
   flex-direction: column;
   position: relative;
 }
-.product-card__media {
-  border-radius: var(--radius-l);
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-  margin-bottom: var(--space-l);
-}
-.product-card__media svg { width: 100%; height: 100%; }
 .product-card h3 {
   font-size: var(--heading-s-size);
   line-height: var(--heading-s-line);
@@ -359,14 +332,6 @@ p { text-wrap: pretty; }
 .product-card h3 a { color: inherit; text-decoration: none; }
 .product-card h3 a::after { content: ""; position: absolute; inset: 0; }
 .product-card h3 a:hover { color: var(--content-brand); text-decoration: underline; text-underline-offset: 4px; }
-.product-card__meta {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-m);
-  margin-top: auto;
-  padding-top: var(--space-s);
-}
 .price { font-weight: var(--text-semibold); color: var(--content-primary); }
 .badge {
   display: inline-block;
@@ -571,7 +536,6 @@ p { text-wrap: pretty; }
   :root { --layout-gutter: var(--space-6xl); --layout-section: var(--space-8xl); }
   .hero__grid, .split, .contact-grid { gap: var(--space-6xl); }
   .hero h1 { font-size: var(--heading-2xl-size); line-height: var(--heading-2xl-line); }
-  .product-grid { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4xl); }
 }
 
@@ -631,7 +595,6 @@ p { text-wrap: pretty; }
   .hero__actions { margin-top: var(--space-xl); gap: var(--space-m); }
   .hero__actions .btn { width: 100%; }
 
-  .product-grid { grid-template-columns: 1fr; gap: var(--space-4xl); }
   .steps { grid-template-columns: 1fr; gap: var(--space-2xl); }
   .footer-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
   .newsletter { padding: var(--space-4xl) var(--space-xl); }

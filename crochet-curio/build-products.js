@@ -11,90 +11,7 @@
 const fs = require("fs");
 const path = require("path");
 
-/* What every pattern in the studio includes, regardless of project. */
-const INCLUDED = [
-  "Written instructions, row by row, in UK and US terms",
-  "Stitch charts for every motif and panel",
-  "Step photos for the joins and the shaping",
-  "A yarn substitution guide and a gauge swatch checklist",
-  "Lifetime access — re-download whenever an update lands"
-];
-
 const PATTERNS = [
-  {
-    slug: "checkerboard-bag",
-    name: "Marina Tote Bag",
-    price: 380,
-    badge: "Most made",
-    tile: "accent",
-    span: "wide",
-    image: "Bluebell.webp",
-    imageW: 1000,
-    imageH: 1500,
-    alt: "A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it.",
-    tagline: "A sky blue checkerboard on a long single strap — and the pattern behind it.",
-    difficulty: "Confident beginner",
-    difficultyNote: "If you can chain, double crochet and carry a second colour along a row, you can make this.",
-    time: "About 11 hours",
-    sizes: "One size — 34cm wide by 38cm deep, strap drop 30cm",
-    pages: 16,
-    yarn: "Mercerised cotton, DK weight. About 320g in blue, 180g in white.",
-    hook: "4mm hook. A 3.5mm for the strap edging if you work loosely.",
-    notions: "Cotton drill for the lining (40 by 90cm), tapestry needle, stitch markers.",
-    gauge: "18 stitches and 20 rows to 10cm in double crochet, after blocking.",
-    skills: [
-      "Chain, slip stitch and double crochet",
-      "Changing colour mid-row without a join",
-      "Working in continuous rounds",
-      "Hand-sewing a simple lining"
-    ],
-    extras: ["A printable checkerboard grid you can recolour before you start"],
-    body: [
-      "The checkerboard is worked square by square in mercerised cotton, and the pattern spends real time on the part most tutorials skip: how to carry the resting colour so the blocks stay crisp rather than blurring at the edges. Chart and written rows sit side by side, so you can follow whichever you read faster.",
-      "The strap is crocheted in one continuous piece with the body rather than sewn on afterwards, so there is no seam to work loose under weight. The pattern walks through that transition stitch by stitch, with photos at the two rows where it is easy to lose count."
-    ],
-    notes: [
-      ["Sizing it up", "Add stitches in multiples of 8 to keep the checkerboard square. The maths is written out."],
-      ["Yarn swaps", "Any smooth DK cotton works. Avoid fluffy yarns — they soften the colour edges."]
-    ]
-  },
-  {
-    slug: "cloud-cardigan",
-    name: "Lumi Cardigan",
-    price: 620,
-    badge: null,
-    tile: "neutral",
-    span: "tall",
-    image: "Frosty.webp",
-    imageW: 1000,
-    imageH: 667,
-    alt: "A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
-    tagline: "Bobble clouds on a very good blue. Graded XS to XXL.",
-    difficulty: "Intermediate",
-    difficultyNote: "Garment shaping plus a separate bobble motif. Be comfortable with increases and decreases before you start.",
-    time: "About 22 hours",
-    sizes: "XS to XXL — six graded sizes, full measurement table included",
-    pages: 32,
-    yarn: "Cotton-acrylic blend, aran weight. 600–950g depending on size, plus 80g brushed white for the clouds.",
-    hook: "5mm for the body, 4.5mm for the ribbing, 4mm for the clouds.",
-    notions: "Tapestry needle, stitch markers, blocking pins and a flat towel.",
-    gauge: "14 stitches and 16 rows to 10cm in half treble, after blocking.",
-    skills: [
-      "Increasing and decreasing for armhole shaping",
-      "Bobble clusters worked as separate motifs",
-      "Front-post ribbing for the bands and cuffs",
-      "Setting in a balloon sleeve"
-    ],
-    extras: ["A cloud placement map for every size, so the eight clouds land right on yours"],
-    body: [
-      "The clouds are worked separately as dense bobble clusters and stitched on by hand, which is why they stand proud of the surface instead of lying flat. The pattern gives the cluster in both chart and written form and shows exactly where to anchor each one so it does not sag with wear.",
-      "Cropped at the natural waist with balloon sleeves and a deep ribbed cuff, graded across six sizes with a full measurement table. The front bands are ribbed firmly so they hang straight rather than curling — there is a whole page on getting that tension right."
-    ],
-    notes: [
-      ["Fit", "Written for 10cm of positive ease. Choose by finished bust, not body bust — the table shows both."],
-      ["Yarn swaps", "Any aran-weight blend with a little stretch. Pure cotton will grow; the pattern says how to allow for it."]
-    ]
-  },
   {
     slug: "beanie",
     name: "Rosie Beanie",
@@ -138,147 +55,26 @@ const PATTERNS = [
     imageW: 1000,
     imageH: 1000,
     alt: "A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top.",
-    tagline: "Ribbed, folded at the brim, and free to read in full.",
+    tagline: "Ribbed, folded at the brim.",
     difficulty: "Beginner",
-    difficultyNote: "Chain, single crochet, slip stitch, and one seam sewn by hand. Nothing else in it.",
-    time: "About 6 hours",
-    sizes: "Adult medium, one size — written for a 56cm head, and the rib stretches",
+    time: "6 hours (approx.)",
+    sizes: "One size",
     pages: 13,
-    yarn: "Acrylic, weight 4 medium — also sold as worsted, afghan or aran. 100–120g, about 180–220m.",
-    hook: "5mm hook, also marked H-8.",
+    /* The large print edition also exists as a Word file. It is linked
+       twice on purpose: from the top of the page readHref points at, for
+       someone already reading who wants it offline, and from the formats
+       list on the product page, for someone still choosing. */
+    wordHref: "assets/patterns/rosie-beanie-pattern-large-print.docx",
+    wordHrefHi: "assets/patterns/rosie-beanie-pattern-large-print-hi.docx",
+    yarn: "100% acrylic yarn, weight 4",
+    hook: "5mm",
     notions: "Darning needle, stitch markers or safety pins, measuring tape, scissors.",
     gauge: "40 stitches to about 30.5cm across a row; 66 rows to about 51cm along the long edge.",
     skills: [
-      "Working into the back loop only, which is where the ribbing comes from",
-      "Working a hat flat, from side to side, in one piece",
-      "Slip stitching a side seam through both layers",
-      "Gathering the crown closed with a running stitch"
-    ],
-    includes: [
-      "The complete pattern as a PDF or a web page, free — nothing to buy and no account to make",
-      "Every direction written out in full, with no abbreviations and no charts",
-      "24 point type, black on white, and no meaning carried by colour",
-      "Stitch counts on every row, so you can work to the counts if your gauge differs",
-      "Tagged for screen readers, so the headings and lists survive in the file"
-    ],
-    body: [
-      "Worked flat from side to side in one long ribbed strip, then seamed once down the side and drawn closed at the top. Every row is 40 stitches, 66 rows in total, and the count never changes — there is no shaping to keep track of.",
-      "The ribbing is single crochet into the back loop only. The loops you leave untouched build up into the ridges, so there is no special stitch to learn. The brim folds up as deep as you like it, and the finished height already allows for the fold."
-    ],
-    notes: [
-      ["Why it is free", "A plain, accessible edition of a first hat. Read it here, print it, or make it straight off the screen."],
-      ["Gauge", "Work to the stitch counts rather than the measurements. The fabric stretches, so the hat still fits."]
-    ]
-  },
-  {
-    slug: "strawberry-cardigan",
-    name: "Sweetheart Cardigan",
-    price: 650,
-    badge: "New pattern",
-    tile: "accent",
-    span: "normal",
-    image: "Valentine.webp",
-    imageW: 1000,
-    imageH: 750,
-    alt: "A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.",
-    tagline: "Eight strawberries, each worked as its own small piece.",
-    difficulty: "Intermediate",
-    difficultyNote: "Garment shaping plus a three-part appliqué motif in a finer yarn.",
-    time: "About 24 hours",
-    sizes: "XS to XXL — six graded sizes, full measurement table included",
-    pages: 34,
-    yarn: "Undyed cotton, aran weight. 600–950g. Plus 60g red and 20g green in DK.",
-    hook: "5mm for the body, 4.5mm ribbing, 3.5mm for the strawberries.",
-    notions: "Toy stuffing for the berries, tapestry needle, blocking pins.",
-    gauge: "14 stitches and 16 rows to 10cm in half treble, after blocking.",
-    skills: [
-      "Increasing and decreasing for armhole shaping",
-      "Small amigurumi-style shaping for the berries",
-      "Working leaves in a finer yarn",
-      "Front-post ribbing for the bands and cuffs"
-    ],
-    extras: ["A strawberry placement map for every size, and a chart for the leaves"],
-    body: [
-      "Each strawberry is crocheted as its own small piece — body, then leaves — and attached by hand, so they sit raised off the cream ground. The pattern writes the berry as a standalone mini-project you can practise once before committing it to the cardigan.",
-      "The green tops are worked in a separate finer yarn to keep the leaves sharp; the pattern explains the hook change and gives the leaf as a chart. The body is the same cropped, balloon-sleeved shape as the Cloud Cardigan, so making one teaches you the other."
-    ],
-    notes: [
-      ["Fit", "Written for 10cm of positive ease. Choose by finished bust — the table gives both."],
-      ["Make it plain", "The cardigan stands on its own without the berries. Skip pages 22 to 30 to leave it undecorated."]
-    ]
-  },
-  {
-    slug: "bucket-hat",
-    name: "Poppy Hat",
-    price: 320,
-    badge: null,
-    tile: "neutral",
-    span: "normal",
-    image: "Poppy.webp",
-    imageW: 1000,
-    imageH: 667,
-    alt: "A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle.",
-    tagline: "Red on pink, with a brim that will not flop. Start here.",
-    difficulty: "Beginner",
-    difficultyNote: "Worked in the round from the crown down. No shaping beyond even increases.",
-    time: "About 8 hours",
-    sizes: "Three head sizes — 54, 57 and 60cm circumference",
-    pages: 14,
-    yarn: "Mercerised cotton, DK weight. About 130g red, 110g pink.",
-    hook: "3.5mm hook — deliberately tight, for the brim.",
-    notions: "Stitch marker, tapestry needle.",
-    gauge: "20 stitches and 22 rounds to 10cm in double crochet, worked firmly.",
-    skills: [
-      "Working in continuous rounds",
-      "Even increases for a flat crown",
-      "Changing colour mid-round",
-      "Working a rolled edge"
-    ],
-    extras: ["A beginner's round-counting sheet you can print and tick off"],
-    body: [
-      "This is the pattern to start with. The brim is worked at a tighter tension than the crown and finished with a rolled red edge, which is what keeps it standing up instead of collapsing after a season — the pattern is specific about the tension change and shows both rounds in photos.",
-      "Two shades of cotton are carried in a checkerboard, changed mid-round rather than worked in blocks and sewn, so there are no joins inside and nothing to rub. The colour-carry method is charted and written, and it is the same technique the Marina Tote Bag uses at a larger scale."
-    ],
-    notes: [
-      ["Sizing", "Three head circumferences, with a note on adding rounds for anything in between."],
-      ["Yarn swaps", "Must be a firm DK cotton. Soft or fluffy yarn will not hold the brim up."]
-    ]
-  },
-  {
-    slug: "rosewater-set",
-    name: "Ariel Set",
-    price: 540,
-    badge: null,
-    tile: "accent",
-    span: "wide",
-    image: "rosewater-set.webp",
-    imageW: 1000,
-    imageH: 667,
-    alt: "A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist.",
-    tagline: "A ruffled top and a skirt that goes over everything. Two patterns, one file.",
-    difficulty: "Confident beginner",
-    difficultyNote: "Two straightforward pieces. The ruffle is the only new technique.",
-    time: "About 14 hours",
-    sizes: "XS to XXL — top ties to fit, skirt graded across five sizes",
-    pages: 26,
-    yarn: "Cotton-nylon blend, 4ply. 180g for the top, 260–340g for the skirt.",
-    hook: "3mm hook. 2.5mm for the braided ties.",
-    notions: "Swimwear lining for the top, drawstring cord, tapestry needle.",
-    gauge: "24 stitches and 28 rows to 10cm in double crochet, worked firmly.",
-    skills: [
-      "Gathering a ruffle by stitch count rather than by eye",
-      "Working a straight tube skirt",
-      "Braiding long halter ties",
-      "Threading and finishing a drawstring"
-    ],
-    extras: ["Both garments in one file — buy once, make either or both"],
-    body: [
-      "Written as a pair. The top has a gathered ruffle along the underband, worked at roughly twice the stitch count of the band itself — that ratio is the whole trick, and the pattern gives it as a formula so it holds at every size. The long braided ties at the neck and back are charted separately.",
-      "The skirt is a straightforward tube with a drawstring, meant to be pulled on over swimwear and worn damp. The pattern specifies a density that will not go sheer when wet, and includes the wet test to prove it before you make the whole thing."
-    ],
-    notes: [
-      ["Make one or both", "The two garments are written as independent sections. Neither depends on the other."],
-      ["Yarn swaps", "Needs nylon content for wet recovery. The substitution guide lists three alternatives."]
+      "Chain stitch",
+      "Single crochet",
+      "Back loop single crochet",
+      "Slip stitch"
     ]
   }
 ];
@@ -287,6 +83,18 @@ const PATTERNS = [
 const rupee = n => "&#8377;" + n.toLocaleString("en-IN");
 const esc = s => s.replace(/&(?!#?\w+;)/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const levelClass = d => d.toLowerCase().replace(/\s+/g, "-");
+
+/* Every format the pattern can actually be read in, built from the files the
+   entry names rather than written out by hand, so the line cannot drift from
+   what the page links to. */
+const formatList = p => {
+  const items = [];
+  if (p.standardHref) { items.push("Standard PDF"); }
+  if (p.patternHref)  { items.push(p.standardHref ? "Large print PDF (24pt font)" : "PDF"); }
+  if (p.readHref)     { items.push("Accessible webpage (HTML)"); }
+  if (p.wordHref)     { items.push("Accessible Word document (.docx)"); }
+  return items.length ? items : [`${p.pages}-page PDF`];
+};
 
 function header(activeBasket, activeLibrary) {
   return `<header class="site-header">
@@ -318,7 +126,7 @@ function footer() {
   <div class="container">
     <div class="footer-grid">
       <div>
-        <p class="brand" style="margin-bottom: var(--space-m)">Crochet&nbsp;Curio</p>
+        <p style="margin-bottom: var(--space-m)"><a class="brand" href="index.html">Crochet&nbsp;Curio</a></p>
         <p class="muted" style="font-size: var(--text-m-size); max-width: 32ch">
           Digital crochet patterns, written and tested by hand. Make the piece yourself.
         </p>
@@ -348,7 +156,7 @@ ${PATTERNS.map(p => `          <li><a href="product-${p.slug}.html">${esc(p.name
       </nav>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Crochet Curio. Patterns are for your own use; the pieces you make from them are yours to sell.</p>
+      <p>&copy; 2026 Crochet Curio. Patterns are for your own use.</p>
       <p>Built on the Crochet Curio design system.</p>
     </div>
   </div>
@@ -387,7 +195,6 @@ function patternPage(p, index) {
   const next = PATTERNS[(index + 1) % PATTERNS.length];
   /* A free pattern says what it actually gives you; the rest share the
      studio's standard list. */
-  const includes = p.includes || INCLUDED.concat(p.extras || []);
 
   return head(
     `${p.name} — crochet pattern — Crochet Curio`,
@@ -413,11 +220,6 @@ ${header(false, false)}
         <div class="product__media">
           <img src="assets/img/${p.image}" alt="${esc(p.alt)}" title="${esc(p.alt)}" width="${p.imageW}" height="${p.imageH}">
         </div>
-        <p class="product__mediaNote">
-          ${p.free
-            ? `The finished piece, made from this pattern. The pattern itself is free to read &mdash; nothing is sold and nothing is posted to you.`
-            : `The finished piece, made from this pattern. What you buy is the written pattern for it &mdash; not the item shown.`}
-        </p>
       </div>
 
       <div class="product__info">
@@ -426,14 +228,16 @@ ${header(false, false)}
         <h1>${esc(p.name)}</h1>
         <p class="product__tagline">${esc(p.tagline)}</p>
         ${p.free
-          ? `<p class="product__price">Free
-          <span class="product__priceNote">PDF pattern &middot; free download</span>
-        </p>`
+          ? ``
           : `<p class="product__price">${rupee(p.price)}<span class="visually-hidden"> rupees</span>
           <span class="product__priceNote">PDF pattern &middot; instant download</span>
         </p>`}
 
-        <ul class="spec-strip">
+        <!-- The formats cell is a list, so it is taller than any other cell.
+             It sits in the second column across every row, which leaves the
+             plain specs stacked in the first column at an even spacing —
+             --spec-rows says how many of them there are. -->
+        <ul class="spec-strip" style="--spec-rows: 3">
           <li>
             <span class="spec-strip__label">Skill level</span>
             <span class="level level--${levelClass(p.difficulty)}">${esc(p.difficulty)}</span>
@@ -443,33 +247,46 @@ ${header(false, false)}
             <span class="spec-strip__value">${esc(p.time)}</span>
           </li>
           <li>
-            <span class="spec-strip__label">Sizes written</span>
+            <span class="spec-strip__label">Size</span>
             <span class="spec-strip__value">${esc(p.sizes)}</span>
           </li>
-          <li>
-            <span class="spec-strip__label">Pattern length</span>
-            <span class="spec-strip__value">${p.standardHref ? `${p.standardPages}-page PDF, or ${p.pages} pages in large print` : `${p.pages}-page PDF`}</span>
-          </li>
+          <li class="spec-strip__item--formats">
+            <span class="spec-strip__label">Pattern formats available</span>
+            <ul class="spec-strip__formats">
+${formatList(p).map(f => `              <li>${f}</li>`).join("\n")}
+            </ul>
+          </li>${(p.standardHrefHi || p.patternHrefHi || p.readHrefHi) ? `
+          <li class="spec-strip__item--language">
+            <span class="spec-strip__label">Language</span>
+            <span class="spec-strip__value">English and Hindi</span>
+          </li>` : ``}
         </ul>
 
         ${p.free
           ? `<div class="buy-form">
 ${p.standardHref ? `
           <!--
-            Two editions of the same hat, each with its own formats.
+            Four formats in two groups: the standard PDF, then the three
+            accessible ones under a heading of their own.
 
-            Groups are named for what they are, never for who they are
-            for: nobody has to identify themselves to get a pattern, and
-            the line under each link does the choosing. Within a group
-            the most useful format leads — the PDF for the standard
-            edition, because people print patterns, and the web page for
-            large print, because it reflows and it is the one that has
-            actually passed a screen reader test.
+            The heading is a jump target. A screen reader user moving by
+            heading, or anyone scanning the page, gets to the accessible
+            formats in one step instead of reading past the standard PDF
+            to find them.
 
-            Both "download the PDF" links carry an aria-label naming
-            their edition, so they stay distinguishable in a screen
-            reader's list of links, where the group heading is no longer
-            alongside them.
+            It does not carry the meaning on its own, though. Each link
+            still names its own edition and format in its visible text —
+            "Download the large print PDF", not "Download the PDF" —
+            because a link list strips headings away, and two links both
+            reading "Download the PDF" would be indistinguishable there.
+            The same string is the visible label and the accessible name,
+            rather than a short visible one and a longer hidden one that
+            disagree (2.5.3 Label in Name).
+
+            Within the group the order is most-reached-for first: the web
+            page, because it reflows and it is the one that has actually
+            passed a screen reader test, then the offline Word file, then
+            the PDF for paper.
           -->
           <h2 class="formats__title">The pattern</h2>
 ${p.standardHrefHi ? `
@@ -491,22 +308,35 @@ ${p.standardHrefHi ? `
             </select>
           </div>
 ` : ``}
-          <a class="btn btn--primary btn--block"${p.standardHrefHi ? ` id="patternDownload"` : ``} href="${p.standardHref}" download${p.standardHrefHi ? ` hreflang="en"` : ``}
-             aria-label="Download the pattern as a PDF, free">Download the PDF &mdash; free</a>
-          <p class="formats__note"${p.standardHrefHi ? ` id="patternNote"` : ``}>${p.standardPages} pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+          <!--
+            No aria-label on any of these in English: the visible text
+            already names the edition and the format, and a hidden label
+            that only repeats it is one more string to keep in step.
+            pattern-lang.js adds one when the file is Hindi, because
+            that is the one thing the visible text cannot say while the
+            page itself is in English.
+          -->
+          <ul class="formats">
+            <li>
+              <a class="btn btn--primary btn--block"${p.standardHrefHi ? ` id="patternDownload"` : ``} href="${p.standardHref}" download${p.standardHrefHi ? ` hreflang="en"` : ``}>Download standard PDF</a>
+              <p class="formats__note"${p.standardHrefHi ? ` id="patternNote"` : ``}>${p.standardPages} pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+            </li>
+          </ul>
 
-          <h2 class="formats__title">Large print edition</h2>
+          <h2 class="formats__title">Accessible patterns</h2>
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block"${p.readHrefHi ? ` id="largePrintRead" hreflang="en"` : ``} href="${p.readHref}"
-                 aria-label="Read the large print edition in your browser">Read it in your browser</a>
-              <p class="formats__note"${p.readHrefHi ? ` id="largePrintReadNote"` : ``}>24 point type that reflows and zooms. Read from beginning to end with NVDA. The Word file, for reading offline, is linked at the top of that page.</p>
-            </li>
+              <a class="btn btn--secondary btn--block"${p.readHrefHi ? ` id="largePrintRead" hreflang="en"` : ``} href="${p.readHref}">Open in browser</a>
+              <p class="formats__note"${p.readHrefHi ? ` id="largePrintReadNote"` : ``}>Pattern in your browser, compatible with screen readers.</p>
+            </li>${p.wordHref ? `
             <li>
-              <a class="btn btn--secondary btn--block"${p.patternHrefHi ? ` id="largePrintDownload" hreflang="en"` : ``} href="${p.patternHref}" download
-                 aria-label="Download the large print edition as a PDF">Download the PDF</a>
-              <p class="formats__note"${p.patternHrefHi ? ` id="largePrintDownloadNote"` : ``}>${p.pages} pages, 24 point type, black on white. Every direction written out in full, with no abbreviations to look up. For printing and reading &mdash; with a screen reader, use the web page above.</p>
+              <a class="btn btn--secondary btn--block"${p.wordHrefHi ? ` id="largePrintWord" hreflang="en"` : ``} href="${p.wordHref}" download>Download Word file</a>
+              <p class="formats__note"${p.wordHrefHi ? ` id="largePrintWordNote"` : ``}>Word file for offline use, compatible with screen readers.</p>
+            </li>` : ``}
+            <li>
+              <a class="btn btn--secondary btn--block"${p.patternHrefHi ? ` id="largePrintDownload" hreflang="en"` : ``} href="${p.patternHref}" download>Download large print PDF</a>
+              <p class="formats__note"${p.patternHrefHi ? ` id="largePrintDownloadNote"` : ``}>24 point font, black on white.</p>
             </li>
           </ul>
 ` : `
@@ -533,37 +363,23 @@ ${p.standardHrefHi ? `
           </p>
         </div>`}
 
-        <h2 class="product__detailsTitle">What is in the file</h2>
-        <ul class="includes">
-${includes.map(t => `          <li>${esc(t)}</li>`).join("\n")}
-        </ul>
 
-        <h2 class="product__detailsTitle">Before you cast on</h2>
+        <h2 class="product__detailsTitle">Materials used</h2>
         <dl class="product__details">
           <div><dt>Yarn</dt><dd>${esc(p.yarn)}</dd></div>
-          <div><dt>Hook</dt><dd>${esc(p.hook)}</dd></div>
-          <div><dt>Other bits</dt><dd>${esc(p.notions)}</dd></div>
-          <div><dt>Gauge</dt><dd>${esc(p.gauge)}</dd></div>
+          <div><dt>Hook size</dt><dd>${esc(p.hook)}</dd></div>
+          <div><dt>Other materials</dt><dd>${esc(p.notions)}</dd></div>
         </dl>
 
         <h2 class="product__detailsTitle">Stitches you will use</h2>
         <ul class="skills">
 ${p.skills.map(s => `          <li>${esc(s)}</li>`).join("\n")}
         </ul>
-        <p class="muted skills__note">${esc(p.difficultyNote)}</p>
 
-        <div class="product__body">
-${p.body.map(t => `          <p>${esc(t)}</p>`).join("\n")}
-        </div>
-
-        <h2 class="product__detailsTitle">Notes from the studio</h2>
-        <dl class="product__details">
-${p.notes.map(([k, v]) => `          <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></div>`).join("\n")}
-        </dl>
       </div>
     </div>
 
-    <nav class="product-nav" aria-label="More patterns">
+${PATTERNS.length > 1 ? `    <nav class="product-nav" aria-label="More patterns">
       <a class="product-nav__link" href="product-${prev.slug}.html">
         <span class="muted">Previous pattern</span>
         <span>${esc(prev.name)}</span>
@@ -573,7 +389,7 @@ ${p.notes.map(([k, v]) => `          <div><dt>${esc(k)}</dt><dd>${esc(v)}</dd></
         <span>${esc(next.name)}</span>
       </a>
     </nav>
-
+` : ``}
   </div>
 </main>
 
@@ -613,4 +429,4 @@ const catalogue =
 fs.writeFileSync(path.join(root, "assets/js/catalogue.js"), catalogue);
 
 console.log("Wrote " + PATTERNS.length + " pattern pages + assets/js/catalogue.js");
-module.exports = { PATTERNS, INCLUDED, header, footer, head, rupee, esc };
+module.exports = { PATTERNS, header, footer, head, rupee, esc };

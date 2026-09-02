@@ -15,11 +15,6 @@
   border: var(--stroke-width-xs) solid var(--neutral-100);
 }
 
-/* Kept for any future tinted treatment; unused by the current grid */
-.tile--neutral { background: var(--background-hover); }
-.tile--accent  { background: var(--background-accent-subtle); }
-.tile--brand   { background: var(--brand-100); }
-
 /* ---------- Alt text on hover ----------
    No custom tooltip. Each <img> carries `title` matching its `alt`, so the
    browser draws its own small native tooltip after a short hover — the
@@ -113,19 +108,6 @@
   padding-top: var(--space-s);
 }
 
-/* The whole card is already one link (h3 a::after covers it). This line is
-   the visible invitation, not a second tab stop — a real link here would
-   duplicate the destination for keyboard and screen reader users. */
-.shop-card__cta {
-  margin-top: var(--space-m);
-  font-size: var(--text-m-size);
-  font-weight: var(--text-semibold);
-  color: var(--content-brand);
-}
-.shop-card__cta::after { content: " \2192"; }
-.shop-card:hover .shop-card__cta,
-.shop-card:focus-within .shop-card__cta { text-decoration: underline; text-underline-offset: 4px; }
-
 /* ============================================================
    Skill level pill
    Level is carried by the word itself; the tint is a second cue,
@@ -153,7 +135,6 @@
 .level--beginner            { color: var(--content-positive); }
 .level--confident-beginner  { color: var(--content-brand); }
 .level--intermediate        { color: var(--brand-accent-700); }
-.level--advanced            { color: var(--content-negative); }
 
 /* In the skill-levels section the pill stands in for the step number */
 .step > .level { margin-bottom: var(--space-l); }
@@ -191,7 +172,9 @@
    ============================================================ */
 .product {
   display: grid;
-  grid-template-columns: 1.1fr .9fr;
+  /* Even columns. The info side carries the spec strip, whose second
+     column has to hold the longest format name on one line. */
+  grid-template-columns: 1fr 1fr;
   gap: var(--space-8xl);
   align-items: start;
   padding-bottom: var(--space-8xl);
@@ -213,13 +196,6 @@
   height: 100%;
   object-fit: contain;
   padding: var(--space-6xl);
-}
-.product__mediaNote {
-  margin-top: var(--space-l);
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
-  color: var(--content-tertiary);
-  max-width: 48ch;
 }
 
 .kicker {
@@ -263,18 +239,50 @@
 }
 
 /* ---------- What the pattern is, at a glance ---------- */
-.spec-strip {
+/* ul.spec-strip, not .spec-strip: the reset's `ul[class]` zeroes list padding
+   at the same specificity, so a bare class selector loses the padding it
+   asks for. */
+ul.spec-strip {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--space-l) var(--space-xl);
+  /* Not an even split. The first column holds short values — "6 hours
+     (approx.)" is the longest at about 125px — while the second holds the
+     format names, and "Accessible Word document (.docx)" needs about 267px
+     with its bullet. An even split wrapped the two longest formats onto a
+     second line each. */
+  grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+  /* One row per plain spec in the first column; the second column carries
+     the formats list across the first two and the language on the third.
+     Sharing the tall cell's height between rows this way keeps the gaps
+     down the first column identical. */
+  grid-template-rows: repeat(var(--spec-rows, 2), auto);
+  grid-auto-flow: column;
+  align-items: start;
+  gap: var(--space-m) var(--space-xl);
   list-style: none;
   margin: 0 0 var(--space-2xl);
-  padding: var(--space-xl);
+  padding: var(--space-2xl);
   border: var(--stroke-width-xs) solid var(--neutral-100);
   border-radius: var(--radius-l);
   background: var(--background-hover);
 }
-.spec-strip li { display: flex; flex-direction: column; gap: var(--space-xs); align-items: flex-start; }
+.spec-strip > li { display: flex; flex-direction: column; gap: var(--space-xs); align-items: flex-start; }
+/* Second column, top to bottom: the formats list, then the language under it. */
+.spec-strip__item--formats  { grid-column: 2; grid-row: 1 / span 2; }
+.spec-strip__item--language { grid-column: 2; grid-row: 3; }
+
+/* The formats are a list, so they are marked up as one. Same type as a
+   spec value; `ul.` again because of the reset's `ul[class]`. */
+ul.spec-strip__formats {
+  list-style: disc;
+  margin: 0;
+  padding-left: 1.1em;
+  display: grid;
+  gap: var(--space-2xs);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
+  font-weight: var(--text-semibold);
+  color: var(--content-primary);
+}
 .spec-strip__label {
   font-size: var(--text-s-size);
   line-height: var(--text-s-line);
@@ -354,27 +362,7 @@
   line-height: var(--text-m-line);
   color: var(--content-secondary);
 }
-/* A pattern that cannot be bought yet. Sized and spaced like the
-   button it stands in for, so the buy box keeps its shape, but flat
-   and unfilled: nothing here is pressable. */
-.coming-soon {
-  margin: 0;
-  padding: var(--space-m) var(--space-l);
-  border: var(--stroke-width-xs) dashed var(--border-secondary);
-  border-radius: var(--radius-pill);
-  text-align: center;
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
-  font-weight: var(--text-semibold);
-  color: var(--content-secondary);
-}
 
-.buy-form__note {
-  margin-top: var(--space-l);
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
-  color: var(--content-secondary);
-}
 .owned-note {
   margin-top: var(--space-l);
   font-size: var(--text-m-size);
@@ -416,12 +404,10 @@
   transform: none;
   top: .6em;
 }
-.skills__note { font-size: var(--text-m-size); margin-bottom: var(--space-l); }
 
 .btn--block { width: 100%; }
 
 /* ---------- Product copy ---------- */
-.product__body > * + * { margin-top: var(--space-l); }
 .product__detailsTitle {
   font-size: var(--heading-s-size);
   line-height: var(--heading-s-line);
@@ -581,7 +567,6 @@
   padding: 0;
   margin-bottom: var(--space-s);
 }
-.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-xl); }
 
 .checkout-lines { list-style: none; margin: 0 0 var(--space-xl); padding: 0; display: grid; gap: var(--space-m); }
 .checkout-lines li {
@@ -804,9 +789,6 @@
   .product-nav { grid-template-columns: 1fr; }
   .product-nav__link--next { text-align: left; }
 
-  .size-option span { min-width: 0; flex: 1 1 auto; }
-  .size-options { display: grid; grid-template-columns: 1fr; }
-
   /* Basket rows become stacked cards rather than a squeezed table */
   .basket-row {
     grid-template-columns: 72px 1fr;
@@ -820,14 +802,22 @@
   .basket-row__total  { grid-area: total; text-align: right; align-self: center; }
   .basket-row__remove { grid-area: remove; justify-self: start; padding-left: 0; }
 
-  .spec-strip { grid-template-columns: 1fr; }
+  /* One column: the specs and the formats simply stack, so the two-column
+     placement above is undone rather than squeezed. `ul.` to match the
+     specificity it is overriding. */
+  ul.spec-strip {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
+  .spec-strip__item--formats,
+  .spec-strip__item--language { grid-column: auto; grid-row: auto; }
   .library-card { grid-template-columns: 1fr; }
   .library-card__media { max-width: 200px; }
   .library-help__grid { grid-template-columns: 1fr; }
   .unlocked-row { grid-template-columns: 56px 1fr; }
   .unlocked-row .btn { grid-column: 1 / -1; }
 
-  .field-row { grid-template-columns: 1fr; }
   .page-head h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
 }
 
