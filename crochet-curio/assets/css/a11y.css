@@ -196,13 +196,6 @@
 }
 .a11y__switch[aria-checked="true"] .a11y__knob { left: auto; right: 2px; }
 
-.a11y__note {
-  margin: var(--space-s) 0 0;
-  font-size: var(--text-s-size);
-  line-height: var(--text-s-line);
-  color: var(--content-secondary);
-}
-
 @media (max-width: 620px) {
   .a11y { left: var(--space-l); }
 }

@@ -54,8 +54,6 @@ window.CC_LANG_HI = {
   "Accessibility": "एक्सेसिबिलिटी",
   "Disable animations": "एनिमेशन बंद करें",
   "Dark mode": "डार्क मोड",
-  "Both settings start from your device and are remembered on every page.":
-    "दोनों सेटिंग आपके डिवाइस से शुरू होती हैं और हर पेज पर याद रखी जाती हैं।",
   "Language": "भाषा",
 
   /* ---------- Home: hero ---------- */

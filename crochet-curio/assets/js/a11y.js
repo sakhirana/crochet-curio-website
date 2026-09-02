@@ -107,8 +107,6 @@
           ' aria-checked="false" aria-labelledby="a11yThemeLabel">' +
           '<span class="a11y__knob"></span></button>' +
         '</div>' +
-        '<p class="a11y__note">Both settings start from your device and are ' +
-        'remembered on every page.</p>' +
       '</div>';
 
     document.body.appendChild(wrap);

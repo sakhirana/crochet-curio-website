@@ -113,6 +113,15 @@
   display: grid;
   place-items: center;
   padding: 0 var(--layout-gutter);
+  /* The hat is fixed and hangs off <body> at z-index 1, so it sits in the
+     root stacking context. Sticky makes this stage its own stacking context,
+     which means the phrases' z-index 2 only ranks them inside it — against
+     the hat the whole stage counted as auto, and the hat painted over the
+     words. Naming a z-index here puts the stage above the hat outright. The
+     pink ground is on .manifesto, not on this element, so the hat still shows
+     against it, and the process section below is unpositioned and stays under
+     the hat where it lands. */
+  z-index: 2;
 }
 
 /* every phrase occupies the same cell, so they cross-fade in place */
