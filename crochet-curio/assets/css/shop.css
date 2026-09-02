@@ -699,6 +699,13 @@ ul.spec-strip__formats {
   align-items: center;
   gap: var(--space-l);
 }
+/* The line naming the other formats sits under the button rather than
+   beside it: it is a sentence, not a second control, and on a narrow
+   card it would otherwise wrap into the gap and read as one. */
+.library-card__actions .library-card__other {
+  flex-basis: 100%;
+  margin: 0;
+}
 
 .library-help {
   padding-block: var(--space-6xl) var(--space-8xl);
@@ -749,7 +756,12 @@ ul.spec-strip__formats {
   font-size: var(--text-s-size);
   font-weight: var(--text-semibold);
 }
-.cart-count.is-empty { background: var(--neutral-100); color: var(--content-secondary); }
+/* An empty cart has nothing to report, so the badge is not drawn at all.
+   The markup ships with is-empty already set and shop.js removes it once
+   it has counted, so a "0" never flashes before the count arrives. The
+   count is also written out for a screen reader in #cartCountLabel, which
+   stays in the link either way. */
+.cart-count.is-empty { display: none; }
 
 /* ============================================================
    Responsive

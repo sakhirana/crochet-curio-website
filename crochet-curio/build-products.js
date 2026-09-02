@@ -98,7 +98,16 @@ const formatList = p => {
 
 function header(activeBasket, activeLibrary) {
   return `<header class="site-header">
-  <p class="announcement">Instant PDF download &middot; Written rows, charts and step photos &middot; Yours to keep</p>
+  <div class="announcement" id="announcement">
+    <p>Instant download &middot; Written rows, diagrams and stitch counts &middot; Yours to keep</p>
+    <button class="announcement__close" type="button" id="announcementClose">
+      <span class="visually-hidden">Dismiss announcement</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" aria-hidden="true" focusable="false">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
 
   <div class="container">
     <nav class="nav-bar" aria-label="Primary">
@@ -114,7 +123,7 @@ function header(activeBasket, activeLibrary) {
         <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#contact">Contact</a></li>
         <li><a href="library.html"${activeLibrary ? ' aria-current="page"' : ""}>My patterns</a></li>
-        <li><a class="cart-link" href="cart.html"${activeBasket ? ' aria-current="page"' : ""}>Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
+        <li><a class="cart-link" href="cart.html"${activeBasket ? ' aria-current="page"' : ""}>Cart <span class="cart-count is-empty" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
   </div>
@@ -263,7 +272,7 @@ ${formatList(p).map(f => `              <li>${f}</li>`).join("\n")}
         </ul>
 
         ${p.free
-          ? `<div class="buy-form">
+          ? `<div class="buy-form" data-free-slug="${p.slug}">
 ${p.standardHref ? `
           <!--
             Four formats in two groups: the standard PDF, then the three
@@ -318,7 +327,7 @@ ${p.standardHrefHi ? `
           -->
           <ul class="formats">
             <li>
-              <a class="btn btn--primary btn--block"${p.standardHrefHi ? ` id="patternDownload"` : ``} href="${p.standardHref}" download${p.standardHrefHi ? ` hreflang="en"` : ``}>Download standard PDF</a>
+              <a class="btn btn--primary btn--block" data-format="standard-pdf"${p.standardHrefHi ? ` id="patternDownload"` : ``} href="${p.standardHref}" download${p.standardHrefHi ? ` hreflang="en"` : ``}>Download standard PDF</a>
               <p class="formats__note"${p.standardHrefHi ? ` id="patternNote"` : ``}>${p.standardPages} pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
             </li>
           </ul>
@@ -327,22 +336,22 @@ ${p.standardHrefHi ? `
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block"${p.readHrefHi ? ` id="largePrintRead" hreflang="en"` : ``} href="${p.readHref}">Open in browser</a>
+              <a class="btn btn--secondary btn--block" data-format="browser"${p.readHrefHi ? ` id="largePrintRead" hreflang="en"` : ``} href="${p.readHref}">Open in browser</a>
               <p class="formats__note"${p.readHrefHi ? ` id="largePrintReadNote"` : ``}>Pattern in your browser, compatible with screen readers.</p>
             </li>${p.wordHref ? `
             <li>
-              <a class="btn btn--secondary btn--block"${p.wordHrefHi ? ` id="largePrintWord" hreflang="en"` : ``} href="${p.wordHref}" download>Download Word file</a>
+              <a class="btn btn--secondary btn--block" data-format="word"${p.wordHrefHi ? ` id="largePrintWord" hreflang="en"` : ``} href="${p.wordHref}" download>Download Word file</a>
               <p class="formats__note"${p.wordHrefHi ? ` id="largePrintWordNote"` : ``}>Word file for offline use, compatible with screen readers.</p>
             </li>` : ``}
             <li>
-              <a class="btn btn--secondary btn--block"${p.patternHrefHi ? ` id="largePrintDownload" hreflang="en"` : ``} href="${p.patternHref}" download>Download large print PDF</a>
+              <a class="btn btn--secondary btn--block" data-format="large-print-pdf"${p.patternHrefHi ? ` id="largePrintDownload" hreflang="en"` : ``} href="${p.patternHref}" download>Download large print PDF</a>
               <p class="formats__note"${p.patternHrefHi ? ` id="largePrintDownloadNote"` : ``}>24 point font, black on white.</p>
             </li>
           </ul>
 ` : `
           <a class="btn btn--primary btn--block" href="${p.patternHref}" download>Download the pattern &mdash; free</a>
           <p class="buy-form__note">
-            No basket, no account, nothing to pay. The PDF saves straight to your device &mdash;
+            No cart, no account, nothing to pay. The PDF saves straight to your device &mdash;
             large print, black on white, and every direction written out in full.
           </p>`}
         </div>`

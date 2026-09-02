@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your basket — Crochet Curio</title>
-<meta name="description" content="Review the crochet patterns in your Crochet Curio basket before you download them.">
+<title>Your cart — Crochet Curio</title>
+<meta name="description" content="Review the crochet patterns in your Crochet Curio cart before you download them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -22,7 +22,16 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site-header">
-  <p class="announcement">Instant PDF download &middot; Written rows, charts and step photos &middot; Yours to keep</p>
+  <div class="announcement" id="announcement">
+    <p>Instant download &middot; Written rows, diagrams and stitch counts &middot; Yours to keep</p>
+    <button class="announcement__close" type="button" id="announcementClose">
+      <span class="visually-hidden">Dismiss announcement</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" aria-hidden="true" focusable="false">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
 
   <div class="container">
     <nav class="nav-bar" aria-label="Primary">
@@ -38,7 +47,7 @@
         <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#contact">Contact</a></li>
         <li><a href="library.html">My patterns</a></li>
-        <li><a class="cart-link" href="cart.html" aria-current="page">Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
+        <li><a class="cart-link" href="cart.html" aria-current="page">Cart <span class="cart-count is-empty" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
   </div>
@@ -48,7 +57,7 @@
   <div class="container">
 
     <div class="page-head">
-      <h1>Your basket</h1>
+      <h1>Your cart</h1>
       <p class="muted">
         Digital crochet patterns. One copy of each is all you need &mdash; every
         size and both terminologies are written into the file.

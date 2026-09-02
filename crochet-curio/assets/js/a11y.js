@@ -24,6 +24,7 @@
 
   var KEY = "cc-motion";          /* "on" | "off"; absent means "not asked" */
   var KEY_THEME = "cc-theme";     /* "dark" | "light"; absent means "not asked" */
+  var KEY_NOTE = "cc-announcement"; /* "dismissed"; absent means still showing */
   var root = document.documentElement;
 
   /* localStorage throws rather than returns null in a locked-down
@@ -68,10 +69,22 @@
     root.setAttribute("data-theme", dark ? "dark" : "light");
   };
 
-  /* Before paint: the class motion.js reads, and the theme attribute. */
+  /* ---------- The announcement bar ----------
+     Dismissing it is a preference like the other two, so it is read
+     here rather than in site.js: site.js runs at the foot of the page,
+     and a bar removed there would still have been painted and would
+     still have shifted the page down on every load. */
+  var noteIsDismissed = function () { return read(KEY_NOTE) === "dismissed"; };
+  var applyNote = function (gone) {
+    root.classList.toggle("announcement-dismissed", gone);
+  };
+
+  /* Before paint: the class motion.js reads, the theme attribute, and
+     the announcement bar. */
   var apply = function (off) { root.classList.toggle("no-motion", off); };
   apply(motionIsOff());
   applyTheme(themeIsDark());
+  applyNote(noteIsDismissed());
 
   /* ---------- The panel ---------- */
   var ICON =
@@ -81,6 +94,20 @@
     '<path d="M7.5 10h9"/><path d="M12 10v4"/><path d="M12 14l-2 4"/><path d="M12 14l2 4"/></svg>';
 
   function build() {
+    /* The announcement's dismiss button. Focus is moved to the brand
+       link rather than left on a control that is about to disappear,
+       so a keyboard user carries on from the top of the header instead
+       of from the top of the document (2.4.3). */
+    var noteClose = document.getElementById("announcementClose");
+    if (noteClose) {
+      noteClose.addEventListener("click", function () {
+        var brand = document.querySelector(".site-header .brand");
+        applyNote(true);
+        write(KEY_NOTE, "dismissed");
+        if (brand) { brand.focus(); }
+      });
+    }
+
     if (document.querySelector(".a11y")) { return; }
 
     var wrap = document.createElement("div");

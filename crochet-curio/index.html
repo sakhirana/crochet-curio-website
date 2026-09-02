@@ -23,7 +23,16 @@
 
 <!-- ============ Header ============ -->
 <header class="site-header">
-  <p class="announcement">Instant PDF download &middot; Written rows, charts and step photos &middot; Yours to keep</p>
+  <div class="announcement" id="announcement">
+    <p>Instant download &middot; Written rows, diagrams and stitch counts &middot; Yours to keep</p>
+    <button class="announcement__close" type="button" id="announcementClose">
+      <span class="visually-hidden">Dismiss announcement</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" aria-hidden="true" focusable="false">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
 
   <div class="container">
     <nav class="nav-bar" aria-label="Primary">
@@ -39,7 +48,7 @@
         <li><a href="#story">Our story</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="library.html">My patterns</a></li>
-        <li><a class="cart-link" href="cart.html">Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
+        <li><a class="cart-link" href="cart.html">Cart <span class="cart-count is-empty" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
   </div>
@@ -82,11 +91,11 @@
       <div class="section-head">
         <div>
           <p class="eyebrow">The pattern library</p>
-          <h2 id="patterns-title">Six projects, written to be followed</h2>
+          <h2 id="patterns-title">One pattern written, five on the way</h2>
         </div>
         <p class="muted">
-          Every listing is a downloadable PDF pattern. The photograph shows what
-          you will have made, not what we post you.
+          Each pattern downloads as a PDF once it is written. The photograph shows
+          what you will make.
         </p>
       </div>
 
@@ -130,7 +139,7 @@
         <li class="shop-card shop-card--normal shop-card--soon">
           <div class="shop-card__media">
             <span class="shop-card__badge">Pattern coming soon</span>
-            <img src="assets/img/Poppy.webp" alt="A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle." title="A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a brim that rolls up at the edge, shown at a three-quarter angle." width="1000" height="667" loading="lazy">
+            <img src="assets/img/Poppy.webp" alt="A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a short brim that slopes down all the way round, shown at a three-quarter angle." title="A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a short brim that slopes down all the way round, shown at a three-quarter angle." width="1000" height="667" loading="lazy">
           </div>
           <h3>Poppy Hat</h3>
         </li>
@@ -212,7 +221,7 @@
         <li class="step">
           <p class="step__num" aria-hidden="true"></p>
           <h3>Make it your own</h3>
-          <p>Your yarn, your colours, your size. Sell what you make if you like
+          <p>Your yarn, your colours, your size. Make it as many times as you like
              &mdash; just keep the file itself to yourself.</p>
         </li>
       </ol>
@@ -275,20 +284,23 @@
         <li class="step">
           <p class="level level--beginner">Beginner</p>
           <h3>You have made a swatch</h3>
-          <p>Chain, double crochet, working in rounds. Nothing shaped, nothing
-             seamed. Start with the Poppy Hat.</p>
+          <p>Chain, single crochet, slip stitch. Straight rows, one simple seam
+             &mdash; and something you can wear the same evening. Start with the
+             Rosie Beanie.</p>
         </li>
         <li class="step">
           <p class="level level--confident-beginner">Confident beginner</p>
           <h3>You have finished something</h3>
           <p>Colour changes, simple increases and decreases, a little hand-sewing.
-             The bag, the bikini and the Ariel set live here.</p>
+             You can see a mistake coming three rows before it lands. This is where
+             flat fabric starts turning into shapes.</p>
         </li>
         <li class="step">
           <p class="level level--intermediate">Intermediate</p>
           <h3>You are ready for a garment</h3>
           <p>Armhole shaping, set-in sleeves, motifs worked separately and applied.
-             Both cardigans, graded across six sizes.</p>
+             You swatch without being told to and adjust a size to your own
+             measurements.</p>
         </li>
       </ol>
     </div>

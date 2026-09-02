@@ -22,7 +22,16 @@
 <a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site-header">
-  <p class="announcement">Instant PDF download &middot; Written rows, charts and step photos &middot; Yours to keep</p>
+  <div class="announcement" id="announcement">
+    <p>Instant download &middot; Written rows, diagrams and stitch counts &middot; Yours to keep</p>
+    <button class="announcement__close" type="button" id="announcementClose">
+      <span class="visually-hidden">Dismiss announcement</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" aria-hidden="true" focusable="false">
+        <path d="M6 6l12 12M18 6L6 18"/>
+      </svg>
+    </button>
+  </div>
 
   <div class="container">
     <nav class="nav-bar" aria-label="Primary">
@@ -38,7 +47,7 @@
         <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#contact">Contact</a></li>
         <li><a href="library.html">My patterns</a></li>
-        <li><a class="cart-link" href="cart.html">Basket <span class="cart-count" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
+        <li><a class="cart-link" href="cart.html">Cart <span class="cart-count is-empty" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
   </div>
@@ -101,7 +110,7 @@
           </li>
         </ul>
 
-        <div class="buy-form">
+        <div class="buy-form" data-free-slug="beanie">
 
           <!--
             Four formats in two groups: the standard PDF, then the three
@@ -156,7 +165,7 @@
           -->
           <ul class="formats">
             <li>
-              <a class="btn btn--primary btn--block" id="patternDownload" href="assets/patterns/rosie-beanie-pattern-standard.pdf" download hreflang="en">Download standard PDF</a>
+              <a class="btn btn--primary btn--block" data-format="standard-pdf" id="patternDownload" href="assets/patterns/rosie-beanie-pattern-standard.pdf" download hreflang="en">Download standard PDF</a>
               <p class="formats__note" id="patternNote">5 pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
             </li>
           </ul>
@@ -165,15 +174,15 @@
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block" id="largePrintRead" hreflang="en" href="pattern-beanie-accessible.html">Open in browser</a>
+              <a class="btn btn--secondary btn--block" data-format="browser" id="largePrintRead" hreflang="en" href="pattern-beanie-accessible.html">Open in browser</a>
               <p class="formats__note" id="largePrintReadNote">Pattern in your browser, compatible with screen readers.</p>
             </li>
             <li>
-              <a class="btn btn--secondary btn--block" id="largePrintWord" hreflang="en" href="assets/patterns/rosie-beanie-pattern-large-print.docx" download>Download Word file</a>
+              <a class="btn btn--secondary btn--block" data-format="word" id="largePrintWord" hreflang="en" href="assets/patterns/rosie-beanie-pattern-large-print.docx" download>Download Word file</a>
               <p class="formats__note" id="largePrintWordNote">Word file for offline use, compatible with screen readers.</p>
             </li>
             <li>
-              <a class="btn btn--secondary btn--block" id="largePrintDownload" hreflang="en" href="assets/patterns/rosie-beanie-pattern.pdf" download>Download large print PDF</a>
+              <a class="btn btn--secondary btn--block" data-format="large-print-pdf" id="largePrintDownload" hreflang="en" href="assets/patterns/rosie-beanie-pattern.pdf" download>Download large print PDF</a>
               <p class="formats__note" id="largePrintDownloadNote">24 point font, black on white.</p>
             </li>
           </ul>

@@ -116,8 +116,8 @@
       "rows, stitch charts and step photos are delivered from the studio",
       "once the pattern library is connected to a file store.",
       "",
-      "The pattern is for your own making. Sell the pieces you crochet",
-      "from it if you like — please do not resell or share the file."
+      "The pattern is for your own making.",
+      "Please do not resell or share the file."
     ];
     return lines.join("\n");
   }
@@ -165,8 +165,8 @@
       if (already) {
         if (status) {
           status.textContent = buyForm.dataset.name +
-            " is already in your basket — one copy is all you need. " +
-            "Go to your basket to check out.";
+            " is already in your cart — one copy is all you need. " +
+            "Go to your cart to check out.";
         }
         return;
       }
@@ -183,7 +183,7 @@
       writeBasket(items);
 
       if (status) {
-        status.textContent = buyForm.dataset.name + " pattern added to your basket. " +
+        status.textContent = buyForm.dataset.name + " pattern added to your cart. " +
           items.length + " " + patternWord(items.length) + " ready to download after checkout.";
       }
     });
@@ -267,7 +267,7 @@
 
       var live = document.getElementById("basketStatus");
       if (live && removed) {
-        live.textContent = "The " + removed.name + " pattern was removed from your basket.";
+        live.textContent = "The " + removed.name + " pattern was removed from your cart.";
       }
       var focusTarget = document.querySelector(".basket-row__remove") ||
                         document.querySelector(".basket-empty a");
@@ -286,7 +286,7 @@
     if (!checkoutItems.length) {
       checkoutRoot.innerHTML =
         '<h2 id="coSummaryTitle">Your patterns</h2>' +
-        '<p class="muted">Your basket is empty. ' +
+        '<p class="muted">Your cart is empty. ' +
         '<a class="link" href="index.html#patterns">Pick a pattern first</a>.</p>';
       var emptyForm = document.getElementById("checkoutForm");
       if (emptyForm) { emptyForm.hidden = true; }
@@ -428,6 +428,85 @@
     });
   }
 
+  /* ---------- free patterns ----------
+     A free pattern never goes through the basket: the four format
+     buttons hand the file over directly. Taking any one of them is
+     what puts the pattern in My patterns, so the visitor can find it
+     again without having to remember which format they picked.
+
+     What is stored is only "this browser has the Rosie Beanie". The
+     format and the language are not recorded, because the row in the
+     library links back to the product page, where all four formats and
+     both languages already sit — one tap to come back in a different
+     one, and nothing extra to keep in step.
+  ------------------------------------------------------------------ */
+  var freeForm = document.querySelector("[data-free-slug]");
+
+  /* The four formats, in English, for the button the library row draws.
+     Stored by key rather than by label so the row can be rendered in
+     either language: i18n-hi.js translates these the way it translates
+     the same four labels on the product page. */
+  var FORMAT_LABELS = {
+    "standard-pdf": "Download standard PDF",
+    "browser": "Open in browser",
+    "word": "Download Word file",
+    "large-print-pdf": "Download large print PDF"
+  };
+
+  /* One row per pattern, and the row records the format last taken.
+     Taking a different one later moves the row to it rather than adding
+     a second: a list of everything ever clicked would be four rows for
+     one hat, and someone whose PDF read badly would still be offered
+     the PDF. Last taken wins.
+
+     The href is read off the link at the moment of the click, so it
+     carries the language pattern-lang.js has the page set to. The
+     browser edition is the one that matters most here — it is not a
+     file, so the library row is the only way back to it. */
+  function rememberFree(slug, link) {
+    var entry = catalogueEntry(slug);
+    if (!entry) { return; }
+
+    var format = link.dataset.format || null;
+    var record = {
+      slug: entry.slug,
+      name: entry.name,
+      price: entry.price,
+      image: entry.image,
+      difficulty: entry.difficulty,
+      savedAt: today(),
+      free: true,
+      format: format,
+      href: link.getAttribute("href"),
+      /* "browser" is a page, not a download: no download attribute on
+         the library button either, or the page saves as a file. */
+      isFile: link.hasAttribute("download"),
+      lang: link.getAttribute("hreflang") || "en"
+    };
+
+    var library = readLibrary();
+    var existing = library.filter(function (p) { return p.slug === slug; })[0];
+    if (existing) {
+      Object.keys(record).forEach(function (key) { existing[key] = record[key]; });
+    } else {
+      library.push(record);
+    }
+    writeLibrary(library);
+  }
+
+  if (freeForm) {
+    /* Delegated, so it covers every format link in the group — the two
+       downloads, the Word file and the page that opens in the browser —
+       and keeps covering them if a format is added later. The link is
+       never intercepted: the file downloads exactly as it did before,
+       and the library entry is written on the way past. */
+    freeForm.addEventListener("click", function (event) {
+      var link = event.target.closest("a[href]");
+      if (!link) { return; }
+      rememberFree(freeForm.dataset.freeSlug, link);
+    });
+  }
+
   /* ---------- pattern library page ---------- */
   var libraryRoot = document.getElementById("libraryRoot");
 
@@ -439,8 +518,8 @@
       libraryRoot.innerHTML =
         '<div class="basket-empty">' +
           "<h2>Nothing unlocked yet</h2>" +
-          '<p class="muted">Patterns you buy land here, and stay here. ' +
-          "Download them as often as you like — a new hook, a new laptop, a lost file.</p>" +
+          '<p class="muted">Patterns you download land here, and stay here. ' +
+          "Open them as often as you like — a new hook, a new laptop, a lost file.</p>" +
           '<p><a class="btn btn--primary" href="index.html#patterns">Find your first pattern</a></p>' +
         "</div>";
       return;
@@ -455,24 +534,70 @@
         var difficulty = (entry && entry.difficulty) || item.difficulty || "";
         var pages = (entry && entry.pages) || item.pages;
 
+        /* A free pattern's real files live on its product page, in four
+           formats and two languages. So its row sends the reader back
+           there rather than repeating one format here, and it says
+           "Free pattern" rather than a page count that would only
+           describe one of the four. A bought pattern keeps the
+           download button, which is what the order paid for. */
+        var summary = item.free
+          ? "Free pattern"
+          : (pages ? pages + "-page PDF" : "PDF pattern");
+
+        /* The row hands back the exact file that was taken, in the
+           language it was taken in — the one thing the product page
+           cannot do, because it does not know what was chosen and
+           would make the reader choose again.
+
+           The line under it is the way out: the other three formats
+           are named and one link away. It matters most for a reader
+           whose format did not suit them — the large print PDF reads
+           badly in Acrobat, which is why the Word file exists — and
+           listing the alternatives here saves them working out that
+           the product page is where to start over. */
+        var label = FORMAT_LABELS[item.format];
+        var freeAction = label && item.href
+          ? '<a class="btn btn--primary" href="' + item.href + '"' +
+              (item.isFile ? " download" : "") +
+              ' hreflang="' + (item.lang || "en") + '"' +
+              (item.lang === "hi"
+                ? ' aria-label="' + label + ', in Hindi: ' + item.name + '"'
+                : "") +
+              ">" + label +
+              "<span class=\"visually-hidden\">: " + item.name + "</span>" +
+            "</a>" +
+            '<p class="library-card__other muted">Standard PDF, large print PDF, ' +
+              "Word file and the browser version are all on the " +
+              '<a class="link" href="product-' + item.slug + '.html">pattern page</a>.</p>'
+          /* An entry saved before formats were recorded, or one whose
+             format has since gone: the product page still works. */
+          : '<a class="btn btn--primary" href="product-' + item.slug + '.html">' +
+              "Open the pattern<span class=\"visually-hidden\">: " + item.name + "</span>" +
+            "</a>";
+
+        var action = item.free
+          ? freeAction
+          : '<button type="button" class="btn btn--primary" data-download="' + item.slug + '">' +
+              "Download pattern<span class=\"visually-hidden\">: " + item.name + "</span>" +
+            "</button>" +
+            '<a class="link" href="product-' + item.slug + '.html">See the finished piece</a>';
+
         return '<li class="library-card">' +
           '<div class="library-card__media">' +
             '<img src="assets/img/' + image + '" alt="' + description + '" width="240" height="240">' +
           "</div>" +
           '<div class="library-card__info">' +
             "<h3>" + item.name + "</h3>" +
-            '<p class="muted">' +
-              (pages ? pages + "-page PDF" : "PDF pattern") +
+            '<p class="muted">' + summary +
               (difficulty ? " · " + difficulty : "") +
             "</p>" +
-            '<p class="library-card__meta muted">Unlocked ' + (item.purchasedAt || "") +
-              (item.ref ? " · order " + item.ref : "") + "</p>" +
-            '<div class="library-card__actions">' +
-              '<button type="button" class="btn btn--primary" data-download="' + item.slug + '">' +
-                "Download pattern<span class=\"visually-hidden\">: " + item.name + "</span>" +
-              "</button>" +
-              '<a class="link" href="product-' + item.slug + '.html">See the finished piece</a>' +
-            "</div>" +
+            '<p class="library-card__meta muted">' +
+              (item.free
+                ? "Saved " + (item.savedAt || "")
+                : "Unlocked " + (item.purchasedAt || "") +
+                  (item.ref ? " · order " + item.ref : "")) +
+            "</p>" +
+            '<div class="library-card__actions">' + action + "</div>" +
           "</div>" +
         "</li>";
       }).join("") +
