@@ -453,6 +453,29 @@
     "large-print-pdf": "Download large print PDF"
   };
 
+  /* The same four formats named the way they read inside a sentence,
+     for the line under the button. The format the row is already
+     offering is left out of it: it is the one thing the reader
+     demonstrably does not need pointing at. */
+  var FORMAT_NAMES = {
+    "standard-pdf": "standard PDF",
+    "browser": "browser version",
+    "word": "Word file",
+    "large-print-pdf": "large print PDF"
+  };
+
+  function otherFormats(taken) {
+    var names = ["standard-pdf", "large-print-pdf", "word", "browser"]
+      .filter(function (key) { return key !== taken; })
+      .map(function (key) { return FORMAT_NAMES[key]; });
+
+    /* Written out as one sentence rather than assembled from fragments,
+       so i18n-hi.js can translate each of the four whole — Hindi puts
+       the clause together in a different order than a join would. */
+    return "If you want the " + names.slice(0, -1).join(", ") +
+           " or " + names[names.length - 1] + ", all are on the";
+  }
+
   /* One row per pattern, and the row records the format last taken.
      Taking a different one later moves the row to it rather than adding
      a second: a list of everything ever clicked would be four rows for
@@ -566,9 +589,8 @@
               ">" + label +
               "<span class=\"visually-hidden\">: " + item.name + "</span>" +
             "</a>" +
-            '<p class="library-card__other muted">Standard PDF, large print PDF, ' +
-              "Word file and the browser version are all on the " +
-              '<a class="link" href="product-' + item.slug + '.html">pattern page</a>.</p>'
+            '<p class="library-card__other muted">' + otherFormats(item.format) +
+              ' <a class="link" href="product-' + item.slug + '.html">pattern page</a>.</p>'
           /* An entry saved before formats were recorded, or one whose
              format has since gone: the product page still works. */
           : '<a class="btn btn--primary" href="product-' + item.slug + '.html">' +

@@ -254,12 +254,19 @@ window.CC_LANG_HI = {
   "is part of what you paid for.": "उसी कीमत में शामिल है।",
   "Download pattern": "पैटर्न डाउनलोड कीजिए",
   "Open the pattern": "पैटर्न खोलिए",
-  /* The line under a library row's button. Split by the link inside it,
-     the way the "Pattern support" line above is: the clause before the
-     link ends on a colon so the full stop after the link still closes
-     the sentence in either language. */
-  "Standard PDF, large print PDF, Word file and the browser version are all on the":
-    "आम PDF, बड़े अक्षरों वाली PDF, Word फ़ाइल और ब्राउज़र वाला रूप — सब मिलेंगे यहाँ:",
+  /* The line under a library row's button, once for each format the row
+     might already be offering: the other three are what it names. Split
+     by the link inside it, the way the "Pattern support" line above is,
+     and the clause before the link ends on a colon so the full stop
+     after the link still closes the sentence in either language. */
+  "If you want the large print PDF, Word file or browser version, all are on the":
+    "अगर आपको बड़े अक्षरों वाली PDF, Word फ़ाइल या ब्राउज़र वाला रूप चाहिए, तो सब मिलेंगे यहाँ:",
+  "If you want the standard PDF, Word file or browser version, all are on the":
+    "अगर आपको आम PDF, Word फ़ाइल या ब्राउज़र वाला रूप चाहिए, तो सब मिलेंगे यहाँ:",
+  "If you want the standard PDF, large print PDF or browser version, all are on the":
+    "अगर आपको आम PDF, बड़े अक्षरों वाली PDF या ब्राउज़र वाला रूप चाहिए, तो सब मिलेंगे यहाँ:",
+  "If you want the standard PDF, large print PDF or Word file, all are on the":
+    "अगर आपको आम PDF, बड़े अक्षरों वाली PDF या Word फ़ाइल चाहिए, तो सब मिलेंगे यहाँ:",
   "pattern page": "पैटर्न पेज",
   "Your pattern file is downloading. It stays in My patterns — come back for it any time.":
     "आपकी पैटर्न फ़ाइल डाउनलोड हो रही है। यह मेरे पैटर्न में रहती है — जब चाहें वापस आइए।",

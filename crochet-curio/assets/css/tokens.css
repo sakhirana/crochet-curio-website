@@ -29,6 +29,7 @@
   --brand-accent-500: #d9a6ad;
   --brand-accent-600: #bf8c93;
   --brand-accent-700: #a6737a;
+  --brand-accent-800: #8c5a61;
 
   /* ---------- Primitives: Status ---------- */
   --blue-500:   #3355ff;
@@ -51,6 +52,7 @@
   --content-disabled:          var(--neutral-300);
   --content-brand:             var(--brand-500);
   --content-brand-accent:      var(--brand-accent-500);
+  --content-on-accent:         var(--neutral-900);
   --content-link:              var(--blue-600);
   --content-link-hover:        var(--blue-700);
   --content-link-pressed:      var(--blue-700);
@@ -73,6 +75,9 @@
      Border/Focus and Content/Link — Blue/500 and Blue/600. */
   --background-focus:          var(--blue-500);
   --background-focus-hover:    var(--blue-600);
+  --background-brand-accent:         var(--brand-accent-500);
+  --background-brand-accent-hover:   var(--brand-accent-600);
+  --background-brand-accent-pressed: var(--brand-accent-800);
   --background-accent-subtle:  var(--brand-accent-500);
   --background-negative-subtle:#facccc;
   /* The full-bleed pink band behind the hero copy and the manifesto. Named

@@ -151,6 +151,14 @@ p { text-wrap: pretty; }
 .btn--primary:hover  { background: var(--background-brand-hover); }
 .btn--primary:active { background: var(--background-brand-pressed); }
 
+/* Type=Brand Accent */
+.btn--brand-accent {
+  background: var(--background-brand-accent);
+  color: var(--content-on-accent);
+}
+.btn--brand-accent:hover  { background: var(--background-brand-accent-hover); }
+.btn--brand-accent:active { background: var(--background-brand-accent-pressed); }
+
 /* Type=Secondary — the label darkens to Content/Primary on hover and press */
 .btn--secondary {
   background: var(--background-primary);
@@ -685,7 +693,7 @@ p { text-wrap: pretty; }
 .hero-banner {
   position: relative;
   isolation: isolate;
-  background: var(--surface-band-accent);
+  background: var(--background-brand);
   padding: clamp(var(--space-xl), 3.2vw, var(--space-5xl));
 }
 

@@ -141,6 +141,11 @@
        the two drifting apart. */
     if (file.label) { next.setAttribute("aria-label", file.label); }
     if (link.hasAttribute("download")) { next.setAttribute("download", ""); }
+    /* Which format this link is, which shop.js records when the file is
+       taken. It describes the link rather than the language, so it has
+       to survive the swap — without it the library row knows a pattern
+       was taken but not which edition. */
+    if (link.dataset.format) { next.dataset.format = link.dataset.format; }
     next.textContent = spec.text;
     link.parentNode.replaceChild(next, link);
 
