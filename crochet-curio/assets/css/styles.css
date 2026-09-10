@@ -102,8 +102,8 @@ p { text-wrap: pretty; }
   margin-bottom: var(--space-l);
 }
 .lede {
-  font-size: var(--text-xl-size);
-  line-height: var(--text-xl-line);
+  font-size: var(--heading-m-size);
+  line-height: var(--heading-m-line);
   color: var(--content-secondary);
   max-width: 60ch;
 }
@@ -147,17 +147,19 @@ p { text-wrap: pretty; }
 .btn--primary {
   background: var(--background-brand);
   color: var(--content-primary-inverse);
+  border-color: var(--background-brand);
 }
-.btn--primary:hover  { background: var(--background-brand-hover); }
-.btn--primary:active { background: var(--background-brand-pressed); }
+.btn--primary:hover  { background: var(--background-brand-hover);  border-color: var(--background-brand-hover); }
+.btn--primary:active { background: var(--background-brand-pressed); border-color: var(--background-brand-pressed); }
 
 /* Type=Brand Accent */
 .btn--brand-accent {
   background: var(--background-brand-accent);
   color: var(--content-on-accent);
+  border-color: var(--background-brand);
 }
-.btn--brand-accent:hover  { background: var(--background-brand-accent-hover); }
-.btn--brand-accent:active { background: var(--background-brand-accent-pressed); }
+.btn--brand-accent:hover  { background: var(--background-brand-accent-hover);  border-color: var(--background-brand-hover); }
+.btn--brand-accent:active { background: var(--background-brand-accent-pressed); border-color: var(--background-brand-pressed); }
 
 /* Type=Secondary — the label darkens to Content/Primary on hover and press */
 .btn--secondary {
@@ -569,25 +571,18 @@ p { text-wrap: pretty; }
 }
 
 /* ============================================================
-   Responsive — Figma breakpoints: Desktop/Tablet 1440, Mobile 393.
+   Responsive — Figma breakpoints: XL 1440, L 1024, M 768, S 393.
    1.4.10 Reflow: no horizontal scrolling down to 320px.
    ============================================================ */
 
-/* ---- Small desktop / tablet landscape ---- */
-@media (max-width: 1100px) {
+/* ---- Desktop (L breakpoint) ---- */
+@media (max-width: 1024px) {
   :root { --layout-gutter: var(--space-6xl); --layout-section: var(--space-8xl); }
-  .hero__grid, .split, .contact-grid { gap: var(--space-6xl); }
-  .hero h1 { font-size: var(--heading-2xl-size); line-height: var(--heading-2xl-line); }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4xl); }
-}
 
-/* ---- Tablet portrait (Figma tablet frame ~768) ----
-   Nav collapses to the disclosure here; the hero goes single column with the
-   words first, so heading, lede and buttons are what you land on.
------------------------------------------------------------------- */
-@media (max-width: 900px) {
-  :root { --layout-gutter: var(--space-2xl); --layout-section: var(--space-7xl); }
-
+  /* The seven links plus the language selector need about 940px of their own.
+     Below the L breakpoint they cannot fit on one row, so the whole set moves
+     into the disclosure rather than wrapping the header or pushing the page
+     into a sideways scroll. */
   .nav-toggle { display: inline-flex; }
   .nav-list {
     display: none;
@@ -608,6 +603,15 @@ p { text-wrap: pretty; }
     border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
   }
 
+  .hero__grid, .split, .contact-grid { gap: var(--space-6xl); }
+  .hero h1 { font-size: var(--heading-2xl-size); line-height: var(--heading-2xl-line); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4xl); }
+}
+
+/* ---- Tablet (M breakpoint) ---- */
+@media (max-width: 768px) {
+  :root { --layout-gutter: var(--space-2xl); --layout-section: var(--space-7xl); }
+
   .hero {
     min-height: 0;
     padding-block: var(--space-4xl) var(--space-7xl);
@@ -624,8 +628,12 @@ p { text-wrap: pretty; }
   .newsletter-form .btn { margin-top: 0; }
 }
 
-/* ---- Mobile (Figma mobile frame 393) ---- */
-@media (max-width: 620px) {
+/* ---- Mobile (S breakpoint) ----
+   393 is the Figma frame width, not the widest phone: Pixel 7 is 412,
+   iPhone 11 414, iPhone 15 Pro Max 430. Held at 480 so those get the
+   phone layout rather than the tablet one, which needs 470px and would
+   otherwise push the page into a sideways scroll. */
+@media (max-width: 480px) {
   :root { --layout-gutter: var(--space-xl); --layout-section: var(--space-6xl); }
 
   .announcement { font-size: var(--text-s-size); line-height: var(--text-s-line); }
@@ -633,7 +641,7 @@ p { text-wrap: pretty; }
   .hero { padding-block: var(--space-2xl) var(--space-6xl); }
   .hero__grid { gap: var(--space-2xl); }
   .hero h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
-  .lede { font-size: var(--text-l-size); line-height: var(--text-l-line); }
+  .lede { font-size: var(--text-xl-size); line-height: var(--text-xl-line); }
   .hero__actions { margin-top: var(--space-xl); gap: var(--space-m); }
   .hero__actions .btn { width: 100%; }
 
@@ -668,7 +676,7 @@ p { text-wrap: pretty; }
     line-height: var(--heading-m-line);
     margin-bottom: var(--space-m);
   }
-  .hero .lede { font-size: var(--text-l-size); line-height: var(--text-l-line); }
+  .hero .lede { font-size: var(--text-xl-size); line-height: var(--text-xl-line); }
   .hero .eyebrow { margin-bottom: var(--space-s); }
   .hero__actions { margin-top: var(--space-l); }
   .announcement { padding-block: var(--space-xs); }
@@ -777,7 +785,8 @@ p { text-wrap: pretty; }
    Static: 4.53:1 default, 5.62:1 hover, 6.83:1 pressed (1.4.3). */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .announcement,
-  :root:not([data-theme="light"]) .btn--primary { color: var(--system-inverse-static); }
+  :root:not([data-theme="light"]) .btn--primary,
+  :root:not([data-theme="light"]) .btn--brand-accent { color: var(--system-inverse-static); }
 
   /* The newsletter is a large filled panel rather than a control, so it
      takes the deep Brand/800 from the dark ramp and keeps the light
@@ -804,7 +813,8 @@ p { text-wrap: pretty; }
 }
 
 :root[data-theme="dark"] .announcement,
-:root[data-theme="dark"] .btn--primary { color: var(--system-inverse-static); }
+:root[data-theme="dark"] .btn--primary,
+:root[data-theme="dark"] .btn--brand-accent { color: var(--system-inverse-static); }
 
 :root[data-theme="dark"] .newsletter { background: var(--brand-800); }
 :root[data-theme="dark"] .newsletter,
@@ -845,6 +855,6 @@ p { text-wrap: pretty; }
 }
 .lang__select:hover { border-color: var(--border-primary); }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .lang { padding-block: var(--space-s); }
 }

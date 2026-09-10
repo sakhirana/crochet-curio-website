@@ -200,7 +200,7 @@
       basketRoot.innerHTML =
         '<div class="basket-empty">' +
           "<h2>No patterns picked yet</h2>" +
-          '<p class="muted">Six projects in the library, from a first bucket hat to a graded cardigan.</p>' +
+          '<p class="muted">One pattern written so far, five more on the way.</p>' +
           '<p><a class="btn btn--primary" href="index.html#patterns">Browse the patterns</a></p>' +
         "</div>";
       var sum = document.getElementById("basketSummary");

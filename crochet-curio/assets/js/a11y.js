@@ -24,6 +24,7 @@
 
   var KEY = "cc-motion";          /* "on" | "off"; absent means "not asked" */
   var KEY_THEME = "cc-theme";     /* "dark" | "light"; absent means "not asked" */
+  var KEY_VISION = "cc-lowvision"; /* "on" | "off"; absent means "not asked" */
   var KEY_NOTE = "cc-announcement"; /* "dismissed"; absent means still showing */
   var root = document.documentElement;
 
@@ -79,11 +80,16 @@
     root.classList.toggle("announcement-dismissed", gone);
   };
 
+  /* ---------- Low vision ---------- */
+  var visionIsOn = function () { return read(KEY_VISION) === "on"; };
+  var applyVision = function (on) { root.classList.toggle("low-vision", on); };
+
   /* Before paint: the class motion.js reads, the theme attribute, and
      the announcement bar. */
   var apply = function (off) { root.classList.toggle("no-motion", off); };
   apply(motionIsOff());
   applyTheme(themeIsDark());
+  applyVision(visionIsOn());
   applyNote(noteIsDismissed());
 
   /* ---------- The panel ---------- */
@@ -134,18 +140,25 @@
           ' aria-checked="false" aria-labelledby="a11yThemeLabel">' +
           '<span class="a11y__knob"></span></button>' +
         '</div>' +
+        '<div class="a11y__row">' +
+          '<span class="a11y__label" id="a11yVisionLabel">Low vision friendly</span>' +
+          '<button class="a11y__switch a11y__switch--vision" type="button" role="switch"' +
+          ' aria-checked="false" aria-labelledby="a11yVisionLabel">' +
+          '<span class="a11y__knob"></span></button>' +
+        '</div>' +
       '</div>';
 
     document.body.appendChild(wrap);
 
-    /* The launcher sits below the sticky header rather than over it, so its
-       offset is whatever that header currently measures. */
     var header = document.querySelector(".site-header");
     var placeBelowHeader = function () {
       if (!header) { return; }
       root.style.setProperty("--a11y-top", header.offsetHeight + "px");
     };
     placeBelowHeader();
+    if (typeof ResizeObserver !== "undefined" && header) {
+      new ResizeObserver(placeBelowHeader).observe(header);
+    }
     window.addEventListener("resize", placeBelowHeader);
 
     var launch = wrap.querySelector(".a11y__launch");
@@ -153,12 +166,14 @@
     var close  = wrap.querySelector(".a11y__close");
     var toggle = wrap.querySelector(".a11y__switch");
     var theme  = wrap.querySelector(".a11y__switch--theme");
+    var vision = wrap.querySelector(".a11y__switch--vision");
 
     /* The switch reads as the visitor's intent — "disable animations" —
        so it is on when movement is off. */
     var reflect = function () {
       toggle.setAttribute("aria-checked", motionIsOff() ? "true" : "false");
       theme.setAttribute("aria-checked", themeIsDark() ? "true" : "false");
+      vision.setAttribute("aria-checked", visionIsOn() ? "true" : "false");
     };
     reflect();
 
@@ -190,6 +205,13 @@
       var dark = !themeIsDark();
       write(KEY_THEME, dark ? "dark" : "light");
       applyTheme(dark);
+      reflect();
+    });
+
+    vision.addEventListener("click", function () {
+      var on = !visionIsOn();
+      write(KEY_VISION, on ? "on" : "off");
+      applyVision(on);
       reflect();
     });
 

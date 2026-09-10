@@ -184,6 +184,8 @@ window.CC_LANG_HI = {
   "as soon as you check out, and stay there for good.":
     "में चेकआउट करते ही आ जाती हैं और हमेशा वहीं रहती हैं।",
   "No patterns picked yet": "अभी कोई पैटर्न नहीं चुना",
+  "One pattern written so far, five more on the way.":
+    "अब तक एक पैटर्न लिखा जा चुका, पाँच और आने वाले हैं।",
   "Remove": "हटाइए",
 
   /* ---------- Checkout ---------- */

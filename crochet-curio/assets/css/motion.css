@@ -175,7 +175,7 @@
   to   { translate: 0 -14px; rotate: -3deg; }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .js-motion .manifesto__track { height: 260vh; }
   .js-motion .shape--coaster { width: 150px; left: 2%;  top: 14%; }
   .js-motion .shape--bikini  { width: 170px; right: 4%; top: 20%; }
@@ -183,7 +183,7 @@
   .js-motion .shape--hat     { width: 148px; left: 3%;  bottom: 11%; }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 480px) {
   .manifesto__line { font-size: clamp(2rem, 13vw, 3.25rem); }
   .js-motion .shape--coaster { width: 108px; }
   .js-motion .shape--bikini  { width: 120px; }
@@ -327,7 +327,7 @@
   .to-top { transition: none; transform: none; }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 480px) {
   .to-top { right: var(--space-l); bottom: var(--space-l); }
 }
 

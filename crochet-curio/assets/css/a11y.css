@@ -21,15 +21,36 @@
 
 /* ------------------------------------------------------------
    Launcher
-   Top left, tucked just under the sticky header — a11y.js measures
-   that header and writes its height into --a11y-top, so the button
-   clears the brand at every width instead of sitting on top of it.
+   Top left, below the sticky header. a11y.js measures the header
+   and writes its height into --a11y-top so the button clears
+   the nav at every breakpoint.
    ------------------------------------------------------------ */
 .a11y {
   position: fixed;
   top: calc(var(--a11y-top, 96px) + var(--space-l));
   left: var(--space-2xl);
   z-index: 45;
+}
+
+/* On arrival the launcher slides down from under the header — the header
+   is z-index 50 and this is 45, so it emerges from behind it. Slow and
+   late on purpose: it has to be noticed rather than glimpsed. */
+@keyframes a11y-arrive {
+  from {
+    transform: translateY(calc(-1 * (var(--a11y-top, 96px) + var(--space-l) + 64px)));
+  }
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.no-motion) .a11y {
+    animation: a11y-arrive 1.5s cubic-bezier(.22, .61, .36, 1) .6s both;
+  }
+  /* Opening the panel ends the entrance early — the panel is a child, and
+     an animated ancestor would drag it around with the button. */
+  html:not(.no-motion) .a11y:has(.a11y__launch[aria-expanded="true"]) {
+    animation: none;
+  }
 }
 
 .a11y__launch {
@@ -196,7 +217,7 @@
 }
 .a11y__switch[aria-checked="true"] .a11y__knob { left: auto; right: 2px; }
 
-@media (max-width: 620px) {
+@media (max-width: 480px) {
   .a11y { left: var(--space-l); }
 }
 
@@ -286,4 +307,171 @@
     border-inline-start: var(--stroke-width-xs) solid var(--content-brand);
     padding-inline-start: var(--space-2xl);
   }
+}
+
+/* ============================================================
+   Low-vision friendly mode
+
+   Toggled by the "Low vision friendly" switch in the accessibility
+   panel. Adds `.low-vision` to <html>. Everything here is one CSS
+   class — no JS beyond the toggle.
+   ============================================================ */
+
+/* --- 1. Larger text: 150% base so 1rem = 24px = 18pt (WCAG large text) --- */
+.low-vision { font-size: 150%; }
+.low-vision {
+  --text-m-size:  1rem;    --text-m-line:  1.5rem;
+  --text-s-size:  1rem;    --text-s-line:  1.5rem;
+  --text-xs-size: 1rem;    --text-xs-line: 1.5rem;
+}
+
+/* Keep manifesto text at its original size — rem values would scale
+   with the 150% base, so pin to the equivalent px values. */
+.low-vision .manifesto__line {
+  font-size: clamp(40px, 9vw, 96px) !important;
+  line-height: 1.02 !important;
+}
+@media (max-width: 480px) {
+  .low-vision .manifesto__line {
+    font-size: clamp(32px, 13vw, 52px) !important;
+  }
+}
+@media (min-width: 901px) {
+  .low-vision.no-motion .manifesto__line {
+    font-size: clamp(24px, 2.4vw, 36px) !important;
+  }
+}
+
+/* --- 2. Increased line height and letter spacing --- */
+.low-vision body {
+  line-height: 1.8;
+  letter-spacing: 0.03em;
+  word-spacing: 0.08em;
+}
+
+/* --- 3. Underline all interactive elements --- */
+.low-vision a,
+.low-vision button:not(.a11y__launch):not(.a11y__close):not(.a11y__switch):not(.nav-toggle):not(.announcement__close) {
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px !important;
+}
+
+/* Filled buttons: underline the text inside them */
+.low-vision .btn {
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px !important;
+}
+
+/* Nav links get a thicker underline for visibility */
+.low-vision .nav-list a {
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 6px;
+}
+
+/* --- 4. Higher-contrast borders on cards and inputs --- */
+.low-vision .shop-card:not(.shop-card--soon),
+.low-vision input,
+.low-vision textarea,
+.low-vision select {
+  border: var(--stroke-width-m) solid var(--content-primary) !important;
+}
+.low-vision .shop-card:not(.shop-card--soon) {
+  padding: var(--space-s) !important;
+}
+.low-vision .shop-card--soon {
+  border: none !important;
+}
+
+/* --- 5. Thicker focus rings --- */
+.low-vision :focus-visible {
+  outline-width: 3px !important;
+  outline-offset: 3px !important;
+}
+
+/* --- 6. Larger click targets on smaller buttons --- */
+.low-vision .btn {
+  min-height: 52px;
+  min-width: 52px;
+  padding: var(--space-l) var(--space-xl);
+}
+
+/* --- 7. Force opaque backgrounds (no transparency) --- */
+.low-vision .hero-banner .hero {
+  background: rgba(0, 0, 0, 0) !important;
+}
+
+/* --- 8. Hero transformation: hide image, show centered content
+      on dusk-pink background with brand/content colours --- */
+.low-vision .hero-photo,
+.low-vision .hero-banner .manifesto__shapes,
+.low-vision .hero-banner .shape--hat {
+  display: none !important;
+}
+.low-vision .hero-banner {
+  background: #E8CACE !important;
+  padding-block: var(--space-8xl);
+}
+.low-vision .hero-banner__frame {
+  display: block;
+}
+.low-vision .hero-banner .hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.low-vision .hero-banner .hero__grid {
+  grid-template-columns: minmax(0, 38rem) !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+.low-vision .hero-banner .hero__actions {
+  justify-content: center !important;
+}
+/* Hero content uses light-mode colours in both themes so it always
+   reads on the dusk-pink band. */
+.low-vision .hero-banner .hero .eyebrow {
+  color: var(--brand-500) !important;
+}
+.low-vision .hero-banner .hero h1 {
+  color: var(--neutral-900) !important;
+}
+.low-vision .hero-banner .hero .lede {
+  color: var(--neutral-800) !important;
+}
+.low-vision .hero-banner .btn--secondary {
+  background: #ffffff !important;
+  color: var(--neutral-800) !important;
+  border-color: #8c8c8c !important;
+}
+.low-vision .hero-banner .btn--secondary:hover {
+  background: #f2f2f2 !important;
+  color: var(--neutral-900) !important;
+  border-color: var(--neutral-600) !important;
+}
+.low-vision .hero-banner .btn--brand-accent {
+  background: var(--background-brand) !important;
+  color: var(--content-primary-inverse) !important;
+}
+.low-vision .hero-banner .btn--brand-accent,
+.low-vision .hero-banner .btn--brand-accent * {
+  text-decoration-color: var(--content-primary-inverse) !important;
+}
+.low-vision .hero-banner :focus-visible {
+  outline-color: var(--neutral-900) !important;
+}
+
+/* --- 9. Suppress hover-only reveals: make them always visible --- */
+.low-vision [data-reveal] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* --- 10. Hide decorative floating shapes --- */
+.low-vision .manifesto__shapes,
+.low-vision .shape--hat {
+  display: none !important;
 }

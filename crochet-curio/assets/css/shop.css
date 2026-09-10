@@ -220,24 +220,6 @@
   color: var(--content-secondary);
   margin-bottom: var(--space-xl);
 }
-.product__price {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: var(--space-m);
-  font-size: var(--heading-m-size);
-  line-height: var(--heading-m-line);
-  font-weight: var(--text-semibold);
-  color: var(--content-primary);
-  margin-bottom: var(--space-2xl);
-}
-.product__priceNote {
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
-  font-weight: var(--text-regular);
-  color: var(--content-tertiary);
-}
-
 /* ---------- What the pattern is, at a glance ---------- */
 /* ul.spec-strip, not .spec-strip: the reset's `ul[class]` zeroes list padding
    at the same specificity, so a bare class selector loses the padding it
@@ -423,28 +405,6 @@ ul.spec-strip__formats {
 }
 .product__details dt { font-weight: var(--text-semibold); color: var(--content-primary); }
 .product__details dd { margin: 0; color: var(--content-secondary); }
-
-/* ---------- Prev / next ---------- */
-.product-nav {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2xl);
-  padding-block: var(--space-6xl);
-  border-top: var(--stroke-width-xs) solid var(--neutral-100);
-}
-.product-nav__link {
-  display: grid;
-  gap: var(--space-xs);
-  padding: var(--space-xl);
-  border: var(--stroke-width-xs) solid var(--neutral-100);
-  border-radius: var(--radius-l);
-  text-decoration: none;
-  color: var(--content-primary);
-  font-weight: var(--text-semibold);
-}
-.product-nav__link:hover { background: var(--background-hover); border-color: var(--border-secondary); }
-.product-nav__link .muted { font-weight: var(--text-regular); font-size: var(--text-m-size); }
-.product-nav__link--next { text-align: right; }
 
 /* ============================================================
    Basket
@@ -766,12 +726,12 @@ ul.spec-strip__formats {
 /* ============================================================
    Responsive
    ============================================================ */
-@media (max-width: 1100px) {
+@media (max-width: 1024px) {
   .product { gap: var(--space-6xl); }
   .basket-layout, .checkout-layout { gap: var(--space-4xl); }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .shop-grid { grid-template-columns: repeat(2, 1fr); gap: var(--space-2xl); }
   .shop-card--feature,
   .shop-card--tall,
@@ -790,7 +750,7 @@ ul.spec-strip__formats {
   .summary { position: static; }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 480px) {
   .shop-grid { grid-template-columns: 1fr; }
   .shop-card--banner { grid-column: span 1; }
   .shop-card--banner .shop-card__media { aspect-ratio: 1 / 1; }
@@ -798,8 +758,6 @@ ul.spec-strip__formats {
 
   .product__info h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
   .product__details > div { grid-template-columns: 1fr; gap: var(--space-xs); }
-  .product-nav { grid-template-columns: 1fr; }
-  .product-nav__link--next { text-align: left; }
 
   /* Basket rows become stacked cards rather than a squeezed table */
   .basket-row {

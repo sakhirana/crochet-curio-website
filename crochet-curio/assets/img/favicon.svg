@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Crochet Curio">
+  <defs>
+    <clipPath id="ball"><circle cx="16" cy="16" r="13"/></clipPath>
+  </defs>
+  <circle cx="16" cy="16" r="13" fill="#3a5240"/>
+  <g clip-path="url(#ball)" fill="none" stroke="#e8cace" stroke-width="1.7"
+     stroke-linecap="round" opacity=".85">
+    <path d="M1 19C8 16 13 10 15.5 1"/>
+    <path d="M1.5 11C9 10 16 6 20 1"/>
+    <path d="M31 13C24 15 17 20 13 31"/>
+    <path d="M31 21C25 22 20 26 17.5 31"/>
+  </g>
+</svg>
