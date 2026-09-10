@@ -668,15 +668,14 @@ p { text-wrap: pretty; }
 
 /* ---- Short viewports (landscape phones, small laptops, 4:3 tablets) ----
    Height, not width, is the constraint here: tighten the hero's vertical
-   spend so the call to action stays on the first screen. */
+   spend so the call to action stays on the first screen.
+
+   Spacing only, never type size: a short viewport is indistinguishable from a
+   zoomed-in one, so shrinking the heading here would make text smaller for
+   someone who zoomed in to make it bigger (WCAG 2.2 AA 1.4.4 Resize Text). */
 @media (max-height: 720px) {
   .hero { padding-block: var(--space-l) var(--space-6xl); }
-  .hero h1 {
-    font-size: var(--heading-m-size);
-    line-height: var(--heading-m-line);
-    margin-bottom: var(--space-m);
-  }
-  .hero .lede { font-size: var(--text-xl-size); line-height: var(--text-xl-line); }
+  .hero h1 { margin-bottom: var(--space-m); }
   .hero .eyebrow { margin-bottom: var(--space-s); }
   .hero__actions { margin-top: var(--space-l); }
   .announcement { padding-block: var(--space-xs); }
