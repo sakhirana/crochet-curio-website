@@ -93,6 +93,7 @@
   --border-inverse:   var(--primary-white);
   --border-focus:     var(--blue-500);
   --border-mono:      var(--neutral-900);
+  --border-brand-accent: var(--brand-accent-500);
 
   /* ---------- Stroke widths ---------- */
   --stroke-width-xs: 1px;
@@ -265,6 +266,7 @@
     --border-inverse:   #1a1a1a;
     --border-focus:     #5c77ff;
     --border-mono:      #ffffff;
+    --border-brand-accent: var(--brand-accent-400);
   }
 }
 
@@ -352,6 +354,7 @@
     --border-inverse:   #1a1a1a;
     --border-focus:     #5c77ff;
     --border-mono:      #ffffff;
+    --border-brand-accent: var(--brand-accent-400);
 }
 
 

@@ -456,6 +456,18 @@
   background: var(--background-brand) !important;
   color: var(--content-primary-inverse) !important;
 }
+/* The resting fill above is !important, which would otherwise swallow the
+   base hover and press states too — the button would sit inert under the
+   pointer. Restated here on the Brand ramp, so it answers the pointer the
+   same way the primary buttons elsewhere on the page do. */
+.low-vision .hero-banner .btn--brand-accent:hover {
+  background: var(--background-brand-hover) !important;
+  border-color: var(--background-brand-hover) !important;
+}
+.low-vision .hero-banner .btn--brand-accent:active {
+  background: var(--background-brand-pressed) !important;
+  border-color: var(--background-brand-pressed) !important;
+}
 .low-vision .hero-banner .btn--brand-accent,
 .low-vision .hero-banner .btn--brand-accent * {
   text-decoration-color: var(--content-primary-inverse) !important;

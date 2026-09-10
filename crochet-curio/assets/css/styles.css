@@ -156,10 +156,10 @@ p { text-wrap: pretty; }
 .btn--brand-accent {
   background: var(--background-brand-accent);
   color: var(--content-on-accent);
-  border-color: var(--background-brand);
+  border-color: var(--border-brand-accent);
 }
-.btn--brand-accent:hover  { background: var(--background-brand-accent-hover);  border-color: var(--background-brand-hover); }
-.btn--brand-accent:active { background: var(--background-brand-accent-pressed); border-color: var(--background-brand-pressed); }
+.btn--brand-accent:hover  { background: var(--background-brand-accent-hover); }
+.btn--brand-accent:active { background: var(--background-brand-accent-pressed); }
 
 /* Type=Secondary — the label darkens to Content/Primary on hover and press */
 .btn--secondary {
