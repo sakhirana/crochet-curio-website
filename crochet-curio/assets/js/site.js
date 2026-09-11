@@ -97,7 +97,7 @@
 
       setError("emailField", "newsletterError", "newsletterEmail", null);
       newsletter.reset();
-      announce("newsletterStatus", "Thank you — you are on the list. We will write when the next pattern is ready.");
+      announce("newsletterStatus", "Thank you. You are on the list. We will write when the next pattern is ready.");
     });
   }
 
@@ -148,7 +148,7 @@
       }
 
       contact.reset();
-      announce("contactStatus", "Thank you — your message is on its way. We reply within two working days.");
+      announce("contactStatus", "Thank you. Your message is on its way. We reply within two working days.");
     });
   }
 })();

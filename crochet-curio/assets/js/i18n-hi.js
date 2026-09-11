@@ -58,8 +58,8 @@ window.CC_LANG_HI = {
   "Language": "भाषा",
 
   /* ---------- Home: hero ---------- */
-  "Crochet Curio — crochet patterns to make yourself":
-    "Crochet Curio — खुद बनाने के लिए क्रोशे पैटर्न",
+  "Crochet Curio | crochet patterns to make yourself":
+    "Crochet Curio | खुद बनाने के लिए क्रोशे पैटर्न",
   "Digital patterns": "डिजिटल पैटर्न",
   "Make something beautiful, one stitch at a time.":
     "कुछ सुंदर बनाइए, एक स्टिच से शुरू करके।",
@@ -111,23 +111,23 @@ window.CC_LANG_HI = {
   "No parcel, no waiting. The file is yours the moment you check out.":
     "न कोई पार्सल, न इंतज़ार। चेकआउट करते ही फ़ाइल आपकी।",
   "Pick your project": "अपना प्रोजेक्ट चुनिए",
-  "Every listing shows the skill level, how long it takes, the yarn and hook you need and how many sizes are written in — before you buy.":
-    "हर लिस्टिंग बताती है स्किल लेवल, कितना समय लगेगा, कौन-सा यार्न और हुक चाहिए और कितने साइज़ लिखे हैं — खरीदने से पहले।",
+  "Every listing shows the skill level, how long it takes, the yarn and hook you need and how many sizes are written in, before you buy.":
+    "हर लिस्टिंग बताती है स्किल लेवल, कितना समय लगेगा, कौन-सा यार्न और हुक चाहिए और कितने साइज़ लिखे हैं, खरीदने से पहले।",
   "Download the pattern": "पैटर्न डाउनलोड कीजिए",
   "A PDF with written rows in UK and US terms, stitch charts, step photos and a yarn substitution guide. It lands in My patterns straight away.":
     "एक PDF, जिसमें UK और US टर्म्स में लिखी हुई रो, स्टिच चार्ट, स्टेप फ़ोटो और यार्न बदलने की गाइड है। यह तुरंत मेरे पैटर्न में आ जाती है।",
   "Make it your own": "इसे अपना बनाइए",
-  "Your yarn, your colours, your size. Make it as many times as you like — just keep the file itself to yourself.":
-    "आपका यार्न, आपके रंग, आपका साइज़। जितनी बार चाहें बनाइए — बस फ़ाइल खुद किसी को न दें।",
+  "Your yarn, your colours, your size. Make it as many times as you like. Just keep the file itself to yourself.":
+    "आपका यार्न, आपके रंग, आपका साइज़। जितनी बार चाहें बनाइए। बस फ़ाइल खुद किसी को न दें।",
 
   /* ---------- Home: story ---------- */
   "It started with a gift made by hand.": "शुरुआत हाथ से बने एक तोहफ़े से हुई।",
   "Crochet Curio began with a simple wish to gift a friend something handmade, thoughtful, and filled with love. After endless tries, unraveled stitches, and starting over, we discovered something special. There is something deeply joyful about making something with your own hands, but seeing someone light up when you gift it to them makes it even more special.":
-    "Crochet Curio की शुरुआत एक सीधी-सी इच्छा से हुई — किसी दोस्त को हाथ से बना, सोच-समझकर चुना और प्यार से भरा तोहफ़ा देने की। बहुत कोशिशों, उधड़ी हुई स्टिच और बार-बार शुरू करने के बाद हमें कुछ ख़ास मिला। अपने हाथों से कुछ बनाने में गहरी खुशी है, लेकिन जब कोई उसे तोहफ़े में पाकर खिल उठता है, तो बात और भी ख़ास हो जाती है।",
+    "Crochet Curio की शुरुआत एक सीधी-सी इच्छा से हुई: किसी दोस्त को हाथ से बना, सोच-समझकर चुना और प्यार से भरा तोहफ़ा देने की। बहुत कोशिशों, उधड़ी हुई स्टिच और बार-बार शुरू करने के बाद हमें कुछ ख़ास मिला। अपने हाथों से कुछ बनाने में गहरी खुशी है, लेकिन जब कोई उसे तोहफ़े में पाकर खिल उठता है, तो बात और भी ख़ास हो जाती है।",
   "We fell in love with that feeling and wanted to share it with others.":
     "हमें उस एहसास से प्यार हो गया और हम इसे औरों तक पहुँचाना चाहते थे।",
   "We still work the same way, one maker and one project at a time. Every design is created, tested, and refined before the pattern reaches you.":
-    "हम आज भी उसी तरह काम करते हैं — एक बार में एक मेकर, एक प्रोजेक्ट। हर डिज़ाइन बनाया, टेस्ट किया और सुधारा जाता है, तभी पैटर्न आप तक पहुँचता है।",
+    "हम आज भी उसी तरह काम करते हैं: एक बार में एक मेकर, एक प्रोजेक्ट। हर डिज़ाइन बनाया, टेस्ट किया और सुधारा जाता है, तभी पैटर्न आप तक पहुँचता है।",
   "If a row is confusing, it gets rewritten. Because making should feel just as lovely as the finished piece.":
     "अगर कोई रो उलझन भरी है, तो उसे दोबारा लिखा जाता है। क्योंकि बनाने का एहसास भी तैयार पीस जितना ही अच्छा होना चाहिए।",
 
@@ -137,8 +137,8 @@ window.CC_LANG_HI = {
   "Levels describe the techniques, not how fast you crochet.":
     "लेवल तकनीक बताते हैं, यह नहीं कि आप कितनी तेज़ क्रोशे करते हैं।",
   "You have made a swatch": "आपने एक स्वैच बनाया है",
-  "Chain, single crochet, slip stitch. Straight rows, one simple seam — and something you can wear the same evening. Start with the Rosie Beanie.":
-    "चेन, सिंगल क्रोशे, स्लिप स्टिच। सीधी रो, एक आसान सिलाई — और कुछ ऐसा जो आप उसी शाम पहन सकें। रोज़ी बीनी से शुरू कीजिए।",
+  "Chain, single crochet, slip stitch. Straight rows, one simple seam, and something you can wear the same evening. Start with the Rosie Beanie.":
+    "चेन, सिंगल क्रोशे, स्लिप स्टिच। सीधी रो, एक आसान सिलाई, और कुछ ऐसा जो आप उसी शाम पहन सकें। रोज़ी बीनी से शुरू कीजिए।",
   "You have finished something": "आपने कुछ पूरा बनाया है",
   "Colour changes, simple increases and decreases, a little hand-sewing. You can see a mistake coming three rows before it lands. This is where flat fabric starts turning into shapes.":
     "रंग बदलना, आसान इंक्रीज़ और डिक्रीज़, थोड़ी हाथ की सिलाई। गलती होने से तीन रो पहले आपको दिख जाती है। यहीं से सपाट कपड़ा शेप लेना शुरू करता है।",
@@ -148,8 +148,8 @@ window.CC_LANG_HI = {
 
   /* ---------- Home: newsletter + contact ---------- */
   "Know when a new pattern lands": "नया पैटर्न आते ही जान जाइए",
-  "We release a few patterns a year, and testers get first look. One email when something new is written — nothing else.":
-    "हम साल में कुछ ही पैटर्न निकालते हैं, और टेस्टर सबसे पहले देखते हैं। कुछ नया लिखे जाने पर एक ईमेल — और कुछ नहीं।",
+  "We release a few patterns a year, and testers get first look. One email when something new is written, nothing else.":
+    "हम साल में कुछ ही पैटर्न निकालते हैं, और टेस्टर सबसे पहले देखते हैं। कुछ नया लिखे जाने पर एक ईमेल, और कुछ नहीं।",
   "About one email a month. Unsubscribe any time.":
     "महीने में लगभग एक ईमेल। जब चाहें अनसब्सक्राइब कीजिए।",
   "Join the list": "लिस्ट में जुड़िए",
@@ -159,8 +159,8 @@ window.CC_LANG_HI = {
     "पैटर्न सपोर्ट उसी कीमत में शामिल है। रो नंबर और आप कहाँ तक पहुँचे हैं उसकी फ़ोटो भेजिए, हम आपके साथ मिलकर पता लगाएँगे कि कहाँ गड़बड़ हुई। अगली रिलीज़ को टेस्ट-क्रोशे करना चाहते हैं? नीचे बता दीजिए।",
   "Email": "ईमेल",
   "Refunds": "रिफ़ंड",
-  "Digital files cannot be returned once downloaded — but if a pattern does not work, tell us and we will fix it.":
-    "डाउनलोड हो जाने के बाद डिजिटल फ़ाइल वापस नहीं होती — लेकिन अगर पैटर्न काम न करे, तो बताइए, हम उसे ठीक कर देंगे।",
+  "Digital files cannot be returned once downloaded, but if a pattern does not work, tell us and we will fix it.":
+    "डाउनलोड हो जाने के बाद डिजिटल फ़ाइल वापस नहीं होती, लेकिन अगर पैटर्न काम न करे, तो बताइए, हम उसे ठीक कर देंगे।",
   "Your name": "आपका नाम",
   "Email address": "ईमेल पता",
   "What can we help with?": "हम किस बात में मदद करें?",
@@ -169,10 +169,10 @@ window.CC_LANG_HI = {
   "Send message": "मैसेज भेजिए",
 
   /* ---------- Basket ---------- */
-  "Your cart — Crochet Curio": "आपका कार्ट — Crochet Curio",
+  "Your cart | Crochet Curio": "आपका कार्ट | Crochet Curio",
   "Your cart": "आपका कार्ट",
-  "Digital crochet patterns. One copy of each is all you need — every size and both terminologies are written into the file.":
-    "डिजिटल क्रोशे पैटर्न। हर पैटर्न की एक ही कॉपी काफ़ी है — सभी साइज़ और दोनों टर्मिनोलॉजी फ़ाइल में लिखी हैं।",
+  "Digital crochet patterns. One copy of each is all you need: every size and both terminologies are written into the file.":
+    "डिजिटल क्रोशे पैटर्न। हर पैटर्न की एक ही कॉपी काफ़ी है: सभी साइज़ और दोनों टर्मिनोलॉजी फ़ाइल में लिखी हैं।",
   "Order summary": "ऑर्डर सारांश",
   "0 patterns": "0 पैटर्न",
   "Subtotal": "सबटोटल",
@@ -189,17 +189,17 @@ window.CC_LANG_HI = {
   "Remove": "हटाइए",
 
   /* ---------- Checkout ---------- */
-  "Get your patterns — Crochet Curio": "अपने पैटर्न लीजिए — Crochet Curio",
+  "Get your patterns | Crochet Curio": "अपने पैटर्न लीजिए | Crochet Curio",
   "Get your patterns": "अपने पैटर्न लीजिए",
-  "Two fields, then the files are yours. No delivery address — nothing physical is being sent.":
-    "दो फ़ील्ड, और फ़ाइलें आपकी। कोई डिलीवरी पता नहीं — कुछ भी भौतिक रूप से नहीं भेजा जा रहा।",
+  "Two fields, then the files are yours. No delivery address: nothing physical is being sent.":
+    "दो फ़ील्ड, और फ़ाइलें आपकी। कोई डिलीवरी पता नहीं: कुछ भी भौतिक रूप से नहीं भेजा जा रहा।",
   "Demonstration checkout.": "डेमो चेकआउट।",
-  "Nothing is transmitted and no payment is taken — this is the front-end flow only, and the download hands over a stand-in text file rather than the studio's real PDF. Connect a payment provider and a file store before selling patterns for money.":
-    "कुछ भी भेजा नहीं जाता और कोई पेमेंट नहीं ली जाती — यह सिर्फ़ फ़्रंट-एंड फ़्लो है, और डाउनलोड में स्टूडियो की असली PDF की जगह एक नमूना टेक्स्ट फ़ाइल मिलती है। पैसे लेकर पैटर्न बेचने से पहले पेमेंट प्रोवाइडर और फ़ाइल स्टोर जोड़िए।",
+  "Nothing is transmitted and no payment is taken: this is the front-end flow only, and the download hands over a stand-in text file rather than the studio's real PDF. Connect a payment provider and a file store before selling patterns for money.":
+    "कुछ भी भेजा नहीं जाता और कोई पेमेंट नहीं ली जाती: यह सिर्फ़ फ़्रंट-एंड फ़्लो है, और डाउनलोड में स्टूडियो की असली PDF की जगह एक नमूना टेक्स्ट फ़ाइल मिलती है। पैसे लेकर पैटर्न बेचने से पहले पेमेंट प्रोवाइडर और फ़ाइल स्टोर जोड़िए।",
   "Pattern unlocked": "पैटर्न अनलॉक हुआ",
   "Happy making": "बनाने का आनंद लीजिए",
   "unlocked for": "अनलॉक हुआ",
-  "— order": "— ऑर्डर",
+  ", order": ", ऑर्डर",
   ". The files are in your library now, and a copy of this receipt is on its way to the email address you gave us.":
     "। फ़ाइलें अब आपकी लाइब्रेरी में हैं, और इस रसीद की एक कॉपी आपके दिए ईमेल पते पर भेजी जा रही है।",
   "Open My patterns": "मेरे पैटर्न खोलिए",
@@ -221,13 +221,13 @@ window.CC_LANG_HI = {
   "Anything you would like help with?": "किसी चीज़ में मदद चाहिए?",
   "A technique you are nervous about, a yarn you already own.":
     "कोई तकनीक जिससे झिझक हो, या कोई यार्न जो आपके पास पहले से है।",
-  "Your pattern is for your own making. Crochet it as often as you like — please do not resell or share the file itself.":
-    "पैटर्न आपके अपने बनाने के लिए है। जितनी बार चाहें क्रोशे कीजिए — बस फ़ाइल को दोबारा न बेचें और न साझा करें।",
+  "Your pattern is for your own making. Crochet it as often as you like. Please do not resell or share the file itself.":
+    "पैटर्न आपके अपने बनाने के लिए है। जितनी बार चाहें क्रोशे कीजिए। बस फ़ाइल को दोबारा न बेचें और न साझा करें।",
   "Unlock my patterns": "मेरे पैटर्न अनलॉक कीजिए",
   "Your patterns": "आपके पैटर्न",
   "Enter the name to put on the pattern licence.": "पैटर्न लाइसेंस पर लिखा जाने वाला नाम भरिए।",
-  "Enter an email address — your download link goes there.":
-    "ईमेल पता भरिए — डाउनलोड लिंक वहीं जाएगा।",
+  "Enter an email address: your download link goes there.":
+    "ईमेल पता भरिए: डाउनलोड लिंक वहीं जाएगा।",
   "That email address is missing an @ or a domain. Check it and try again.":
     "इस ईमेल पते में @ या डोमेन नहीं है। जाँच कर दोबारा कोशिश कीजिए।",
   "Your patterns were not unlocked. Check the highlighted fields.":
@@ -235,15 +235,15 @@ window.CC_LANG_HI = {
   "Go to your cart to check out.": "चेकआउट के लिए अपने कार्ट में जाइए।",
 
   /* ---------- Library ---------- */
-  "My patterns — Crochet Curio": "मेरे पैटर्न — Crochet Curio",
-  "Everything you have unlocked, ready to download again — a new laptop, a lost file, a second go at the same cardigan.":
-    "आपने जो कुछ अनलॉक किया है, सब दोबारा डाउनलोड के लिए तैयार — नया लैपटॉप, खोई हुई फ़ाइल, या वही कार्डिगन दोबारा बनाना।",
+  "My patterns | Crochet Curio": "मेरे पैटर्न | Crochet Curio",
+  "Everything you have unlocked, ready to download again: a new laptop, a lost file, a second go at the same cardigan.":
+    "आपने जो कुछ अनलॉक किया है, सब दोबारा डाउनलोड के लिए तैयार: नया लैपटॉप, खोई हुई फ़ाइल, या वही कार्डिगन दोबारा बनाना।",
   "Demonstration library.": "डेमो लाइब्रेरी।",
   "Your patterns are remembered in this browser only, so they will not follow you to another device. The free pattern opens the studio's real files; a bought one hands over a stand-in text file. Connect an account system and a file store to make this permanent.":
     "आपके पैटर्न सिर्फ़ इसी ब्राउज़र में याद रखे जाते हैं, इसलिए वे किसी दूसरे डिवाइस पर नहीं जाएँगे। मुफ़्त पैटर्न में स्टूडियो की असली फ़ाइलें खुलती हैं; खरीदे हुए में एक नमूना टेक्स्ट फ़ाइल मिलती है। इसे स्थायी बनाने के लिए अकाउंट सिस्टम और फ़ाइल स्टोर जोड़िए।",
   "Nothing unlocked yet": "अभी कुछ अनलॉक नहीं हुआ",
-  "Patterns you download land here, and stay here. Open them as often as you like — a new hook, a new laptop, a lost file.":
-    "जो पैटर्न आप डाउनलोड करते हैं, वे यहीं आ जाते हैं और यहीं रहते हैं। जितनी बार चाहें खोलिए — नया हुक, नया लैपटॉप, खोई हुई फ़ाइल।",
+  "Patterns you download land here, and stay here. Open them as often as you like: a new hook, a new laptop, a lost file.":
+    "जो पैटर्न आप डाउनलोड करते हैं, वे यहीं आ जाते हैं और यहीं रहते हैं। जितनी बार चाहें खोलिए: नया हुक, नया लैपटॉप, खोई हुई फ़ाइल।",
   "While you are making": "बनाते समय",
   "Swatch first": "पहले स्वैच",
   "Every pattern gives a gauge over 10cm. Ten minutes on a swatch saves a cardigan that comes out two sizes off.":
@@ -270,8 +270,8 @@ window.CC_LANG_HI = {
   "If you want the standard PDF, large print PDF or Word file, all are on the":
     "अगर आपको आम PDF, बड़े अक्षरों वाली PDF या Word फ़ाइल चाहिए, तो सब मिलेंगे यहाँ:",
   "pattern page": "पैटर्न पेज",
-  "Your pattern file is downloading. It stays in My patterns — come back for it any time.":
-    "आपकी पैटर्न फ़ाइल डाउनलोड हो रही है। यह मेरे पैटर्न में रहती है — जब चाहें वापस आइए।",
+  "Your pattern file is downloading. It stays in My patterns. Come back for it any time.":
+    "आपकी पैटर्न फ़ाइल डाउनलोड हो रही है। यह मेरे पैटर्न में रहती है। जब चाहें वापस आइए।",
   "That pattern is not in your library yet.": "यह पैटर्न अभी आपकी लाइब्रेरी में नहीं है।",
 
   /* ---------- Product pages: shared furniture ---------- */
@@ -279,7 +279,7 @@ window.CC_LANG_HI = {
   "rupees": "रुपये",
   "PDF pattern · instant download": "PDF पैटर्न · तुरंत डाउनलोड",
   "PDF pattern · free download": "PDF पैटर्न · मुफ़्त डाउनलोड",
-  "Download the pattern — free": "पैटर्न डाउनलोड कीजिए — मुफ़्त",
+  "Download the pattern, free": "पैटर्न डाउनलोड कीजिए, मुफ़्त",
 
   /* The pattern, standard edition.
 
@@ -350,12 +350,12 @@ window.CC_LANG_HI = {
 
 
   /* ---------- Rosie Beanie (the free pattern) ---------- */
-  "Rosie Beanie — crochet pattern — Crochet Curio":
-    "रोज़ी बीनी — क्रोशे पैटर्न — Crochet Curio",
+  "Rosie Beanie, crochet pattern | Crochet Curio":
+    "रोज़ी बीनी, क्रोशे पैटर्न | Crochet Curio",
   "Ribbed, folded at the brim.": "रिब्ड, ब्रिम पर मुड़ी हुई।",
   "6 hours (approx.)": "6 घंटे (लगभग)",
-  "Adult medium, one size — written for a 56cm head, and the rib stretches":
-    "एडल्ट मीडियम, एक ही साइज़ — 56cm सिर के लिए लिखा गया, और रिब खिंचती है",
+  "Adult medium, one size: written for a 56cm head, and the rib stretches":
+    "एडल्ट मीडियम, एक ही साइज़: 56cm सिर के लिए लिखा गया, और रिब खिंचती है",
   "100% acrylic yarn, weight 4":
     "100% ऐक्रेलिक यार्न, वेट 4",
   "Darning needle, stitch markers or safety pins, measuring tape, scissors.":
@@ -376,10 +376,10 @@ window.CC_LANG_HI = {
   /* ---------- Image descriptions (alt / title) ---------- */
   "A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it.":
     "हाथ से बना शोल्डर बैग, आसमानी और सफ़ेद चेकरबोर्ड में, कोने हल्के गोल और ऊपर एक लंबी सिंगल स्ट्रैप ऊँचे लूप में खड़ी हुई।",
-  "A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.":
-    "चटख टील-नीले क्रोशे में क्रॉप्ड कार्डिगन, सामने से खुला, सतह से उभरे आठ रोएँदार सफ़ेद बादल — हर सामने के पैनल पर दो और हर बलून स्लीव पर दो — नीचे रिब्ड हेम और कफ़।",
-  "A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf — two on each front panel and two on each balloon sleeve — above a ribbed hem and cuffs.":
-    "क्रीम क्रोशे में क्रॉप्ड कार्डिगन, सामने से खुला, उभरी हुई आठ लाल स्ट्रॉबेरी, हर एक पर एक हरी पत्ती — हर सामने के पैनल पर दो और हर बलून स्लीव पर दो — नीचे रिब्ड हेम और कफ़।",
+  "A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface, two on each front panel and two on each balloon sleeve, above a ribbed hem and cuffs.":
+    "चटख टील-नीले क्रोशे में क्रॉप्ड कार्डिगन, सामने से खुला, सतह से उभरे आठ रोएँदार सफ़ेद बादल, हर सामने के पैनल पर दो और हर बलून स्लीव पर दो, नीचे रिब्ड हेम और कफ़।",
+  "A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf, two on each front panel and two on each balloon sleeve, above a ribbed hem and cuffs.":
+    "क्रीम क्रोशे में क्रॉप्ड कार्डिगन, सामने से खुला, उभरी हुई आठ लाल स्ट्रॉबेरी, हर एक पर एक हरी पत्ती, हर सामने के पैनल पर दो और हर बलून स्लीव पर दो, नीचे रिब्ड हेम और कफ़।",
   "A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a short brim that slopes down all the way round, shown at a three-quarter angle.":
     "लाल और गुलाबी चेकरबोर्ड में हाथ से बनी बकेट हैट, ऊँचा सपाट क्राउन और चारों ओर नीचे की ओर झुका छोटा ब्रिम, तिरछे कोण से दिखाई गई।",
   "A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist.":
@@ -417,10 +417,10 @@ window.CC_LANG_HI = {
     [/^The (.+) pattern was removed from your cart\.$/, function (_, name) {
       return window.CC_LANG_HI_NAME(name) + " पैटर्न आपके कार्ट से हटा दिया गया।";
     }],
-    [/^The (.+) is already in your cart — one copy is all you need\.(.*)$/,
+    [/^The (.+) is already in your cart. One copy is all you need\.(.*)$/,
      function (_, name, tail) {
        return window.CC_LANG_HI_NAME(name) +
-              " पहले से आपके कार्ट में है — एक ही कॉपी काफ़ी है।" + tail;
+              " पहले से आपके कार्ट में है। एक ही कॉपी काफ़ी है।" + tail;
      }],
     [/^(\d+) patterns?$/, "$1 पैटर्न"],
     [/^(\d+)-page PDF$/, "$1 पेज की PDF"],
@@ -433,11 +433,11 @@ window.CC_LANG_HI = {
     [/^Free pattern · (.+)$/, function (_, level) {
       return "मुफ़्त पैटर्न · " + window.CC_LANG_HI_LEVEL(level);
     }],
-    [/^Get the pattern — (₹[\d,]+)$/, "पैटर्न लीजिए — $1"],
+    [/^Get the pattern, (₹[\d,]+)$/, "पैटर्न लीजिए, $1"],
     [/^Unlocked on (.+)$/, "$1 को अनलॉक हुआ"],
     [/^Saved (.+)$/, "$1 को सेव हुआ"],
-    [/^(.+) unlocked for (.+) — order (.+)$/, function (_, what, who, order) {
-      return who + " के लिए " + window.CC_LANG_HI_NAME(what) + " अनलॉक हुआ — ऑर्डर " + order;
+    [/^(.+) unlocked for (.+), order (.+)$/, function (_, what, who, order) {
+      return who + " के लिए " + window.CC_LANG_HI_NAME(what) + " अनलॉक हुआ, ऑर्डर " + order;
     }]
   ]
 };

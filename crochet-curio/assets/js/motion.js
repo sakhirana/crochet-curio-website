@@ -94,7 +94,7 @@
        the hat sits upright rather than slanted. */
     var TILT_LEVEL   = -115;   /* degrees by the time the brim is level */
     var TILT_LANDED  = -115;   /* and by the time it is sitting on the words */
-    var LANDED_SCALE = 0.72;   /* it settles smaller, in proportion to a label */
+    var LANDED_SCALE = 0.72;   /* the size it wears throughout, in proportion to a label */
 
     var base = {};
 
@@ -137,7 +137,12 @@
       var b = ease((vh - trackBottom) / (vh * 0.62));
 
       var angle = TILT_LEVEL * ease(a) + (TILT_LANDED - TILT_LEVEL) * b;
-      var scale = 1 + (LANDED_SCALE - 1) * b;
+      /* One size the whole way down. The hat used to come in at full size and
+         shrink as it travelled; it now arrives already at the size it lands
+         at, so nothing about it changes between entering the manifesto and
+         sitting on the heading. The landing geometry below is untouched — at
+         b = 1 this is the same number it has always been. */
+      var scale = LANDED_SCALE;
 
       /* Turning about the left edge carries the hat's middle a long way round
          with it. Measure that arc: the landing cancels it outright so it can

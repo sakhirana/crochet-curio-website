@@ -597,6 +597,15 @@ p { text-wrap: pretty; }
     box-shadow: var(--shadow-l2);
     padding: var(--space-s) var(--layout-gutter) var(--space-xl);
   }
+  /* A landscape phone is under 420px tall, and the seven links plus the
+     language selector need about 345px under a 100px header. The panel is
+     absolute inside a sticky header, so anything past the bottom edge could
+     not be scrolled to — it scrolls inside itself instead. */
+  .nav-list {
+    max-height: 72svh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
   .nav-list.is-open { display: flex; }
   .nav-list a {
     min-height: 48px;
@@ -679,6 +688,9 @@ p { text-wrap: pretty; }
   .hero .eyebrow { margin-bottom: var(--space-s); }
   .hero__actions { margin-top: var(--space-l); }
   .announcement { padding-block: var(--space-xs); }
+  /* Above the M breakpoint the artwork carries no height cap, so on a
+     landscape phone (844 wide, 390 tall) one photograph filled a screen. */
+  .split__art { max-height: 70svh; }
 }
 
 /* Landscape phones: two short labels sit side by side rather than stacking */

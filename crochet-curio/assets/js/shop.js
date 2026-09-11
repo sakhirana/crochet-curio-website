@@ -97,17 +97,17 @@
   ------------------------------------------------- */
   function patternFileText(entry, item) {
     var lines = [
-      "CROCHET CURIO — " + (entry ? entry.name : item.name),
+      "CROCHET CURIO: " + (entry ? entry.name : item.name),
       "Digital crochet pattern",
       "",
-      "Skill level : " + (entry && entry.difficulty ? entry.difficulty : "—"),
-      "Length      : " + (entry && entry.pages ? entry.pages + " pages" : "—"),
-      "Sizes       : " + (entry && entry.sizes ? entry.sizes : "—"),
-      "Time to make: " + (entry && entry.time ? entry.time : "—"),
+      "Skill level : " + (entry && entry.difficulty ? entry.difficulty : "-"),
+      "Length      : " + (entry && entry.pages ? entry.pages + " pages" : "-"),
+      "Sizes       : " + (entry && entry.sizes ? entry.sizes : "-"),
+      "Time to make: " + (entry && entry.time ? entry.time : "-"),
       "",
-      "Yarn  : " + (entry && entry.yarn ? entry.yarn : "—"),
-      "Hook  : " + (entry && entry.hook ? entry.hook : "—"),
-      "Gauge : " + (entry && entry.gauge ? entry.gauge : "—"),
+      "Yarn  : " + (entry && entry.yarn ? entry.yarn : "-"),
+      "Hook  : " + (entry && entry.hook ? entry.hook : "-"),
+      "Gauge : " + (entry && entry.gauge ? entry.gauge : "-"),
       "",
       "Unlocked on " + (item.purchasedAt || today()) +
         (item.ref ? "  ·  order " + item.ref : ""),
@@ -165,7 +165,7 @@
       if (already) {
         if (status) {
           status.textContent = buyForm.dataset.name +
-            " is already in your cart — one copy is all you need. " +
+            " is already in your cart. One copy is all you need. " +
             "Go to your cart to check out.";
         }
         return;
@@ -341,7 +341,7 @@
          "Enter the name to put on the pattern licence."],
         ["coField-email", "coError-email", "co-email",
          document.getElementById("co-email").value.trim(),
-         "Enter an email address — your download link goes there."]
+         "Enter an email address: your download link goes there."]
       ];
 
       var firstInvalid = null;
@@ -542,7 +542,7 @@
         '<div class="basket-empty">' +
           "<h2>Nothing unlocked yet</h2>" +
           '<p class="muted">Patterns you download land here, and stay here. ' +
-          "Open them as often as you like — a new hook, a new laptop, a lost file.</p>" +
+          "Open them as often as you like: a new hook, a new laptop, a lost file.</p>" +
           '<p><a class="btn btn--primary" href="index.html#patterns">Find your first pattern</a></p>' +
         "</div>";
       return;
@@ -639,7 +639,7 @@
                document.getElementById("checkoutStatus");
     if (live) {
       live.textContent = ok
-        ? "Your pattern file is downloading. It stays in My patterns — come back for it any time."
+        ? "Your pattern file is downloading. It stays in My patterns. Come back for it any time."
         : "That pattern is not in your library yet.";
     }
   });

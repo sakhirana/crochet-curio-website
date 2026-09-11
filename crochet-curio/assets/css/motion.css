@@ -108,8 +108,17 @@
 
 .js-motion .manifesto__stage {
   position: sticky;
-  top: 0;
-  height: 100vh;
+  /* The site header is sticky, opaque and z-index 50, so a pane pinned to
+     top: 0 sat behind it and the first line of the longest phrase was cut
+     off at the header's bottom edge. Starting the pane below the header
+     gives that band back. a11y.js measures the header into --a11y-top; the
+     96px fallback is that height at the desktop breakpoint. */
+  top: var(--a11y-top, 96px);
+  /* A floor, not a fixed height. At 100vh a phrase taller than the pane was
+     clipped with no way to reach the rest of it; now the pane makes room for
+     the words instead, and the type size is left alone (1.4.4). */
+  height: auto;
+  min-height: calc(100svh - var(--a11y-top, 96px));
   display: grid;
   place-items: center;
   padding: 0 var(--layout-gutter);
@@ -181,6 +190,19 @@
   .js-motion .shape--bikini  { width: 170px; right: 4%; top: 20%; }
   .js-motion .shape--bag     { width: 89px;  right: 2%; bottom: 14%; }
   .js-motion .shape--hat     { width: 148px; left: 3%;  bottom: 11%; }
+}
+
+/* ---- Short landscape (phones turned sideways) ----
+   The shape widths above are width-gated, and a landscape phone is 844–915
+   wide, so the full-size photographs landed in a 390px-tall stage and sat
+   right on the words. Photographs only — the type is untouched, because a
+   short viewport is indistinguishable from a zoomed-in one (1.4.4), and the
+   stage already grows for the words rather than clipping them. */
+@media (max-height: 520px) and (orientation: landscape) {
+  .js-motion .shape--coaster { width: 130px; }
+  .js-motion .shape--bikini  { width: 140px; }
+  .js-motion .shape--bag     { width: 78px; }
+  .js-motion .shape--hat     { width: 128px; }
 }
 
 @media (max-width: 480px) {
