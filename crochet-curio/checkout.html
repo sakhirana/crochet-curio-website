@@ -25,12 +25,14 @@
 
 <header class="site-header">
   <div class="announcement" id="announcement">
-    <p>Instant download &middot; Written rows, diagrams and stitch counts &middot; Yours to keep</p>
-    <button class="announcement__close" type="button" id="announcementClose">
+    <p>Get 5% off on your first checkout</p>
+    <button class="btn-icon btn-icon--s announcement__close" type="button" id="announcementClose">
       <span class="visually-hidden">Dismiss announcement</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" aria-hidden="true" focusable="false">
-        <path d="M6 6l12 12M18 6L6 18"/>
+      <!-- Icon/X/16 -->
+      <svg class="icon-16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+           stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true" focusable="false">
+        <path d="M12 4L4 12M4 4L12 12"/>
       </svg>
     </button>
   </div>
@@ -39,8 +41,13 @@
     <nav class="nav-bar" aria-label="Primary">
       <a class="brand" href="index.html">Crochet&nbsp;Curio</a>
 
-      <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="navList">
-        <span aria-hidden="true">&#9776;</span> Menu
+      <button class="btn btn--secondary nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="navList">
+        <!-- Icon/Menu/24 -->
+        <svg class="icon-24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true" focusable="false">
+          <path d="M3 12H21M3 6H21M3 18H21"/>
+        </svg> Menu
       </button>
 
       <ul class="nav-list" id="navList">
@@ -48,7 +55,7 @@
         <li><a href="index.html#process">How it works</a></li>
         <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="library.html">My patterns</a></li>
+        <li class="nav-list__utility"><a href="library.html">My patterns</a></li>
         <li><a class="cart-link" href="cart.html">Cart <span class="cart-count is-empty" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
@@ -108,14 +115,14 @@
 
           <div class="field" id="coField-name">
             <label for="co-name">Full name</label>
-            <input type="text" id="co-name" name="name" autocomplete="name" aria-describedby="coHint-name coError-name">
+            <input type="text" id="co-name" name="name" autocomplete="name" placeholder=" " aria-describedby="coHint-name coError-name">
             <p class="hint" id="coHint-name">Goes on the pattern licence inside the file.</p>
             <p class="error" id="coError-name"></p>
           </div>
 
           <div class="field" id="coField-email">
             <label for="co-email">Email address</label>
-            <input type="email" id="co-email" name="email" autocomplete="email" aria-describedby="coHint-email coError-email">
+            <input type="email" id="co-email" name="email" autocomplete="email" placeholder=" " aria-describedby="coHint-email coError-email">
             <p class="hint" id="coHint-email">Your download link and receipt go here. Nothing is posted.</p>
             <p class="error" id="coError-email"></p>
           </div>
@@ -137,7 +144,7 @@
 
           <div class="field" id="coField-notes">
             <label for="co-notes">Anything you would like help with? <span class="muted">(optional)</span></label>
-            <textarea id="co-notes" name="notes" aria-describedby="coHint-notes"></textarea>
+            <textarea id="co-notes" name="notes" placeholder=" " aria-describedby="coHint-notes"></textarea>
             <p class="hint" id="coHint-notes">A technique you are nervous about, a yarn you already own.</p>
           </div>
         </fieldset>

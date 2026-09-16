@@ -19,8 +19,7 @@ window.CC_LANG_HI = {
 
   /* ---------- Chrome: header, nav, footer ---------- */
   "Skip to main content": "मुख्य सामग्री पर जाएँ",
-  "Instant download · Written rows, diagrams and stitch counts · Yours to keep":
-    "तुरंत डाउनलोड · लिखी हुई रो, डायग्राम और स्टिच काउंट · हमेशा के लिए आपके",
+  "Get 5% off on your first checkout": "अपने पहले चेकआउट पर 5% की छूट पाएँ",
   "Dismiss announcement": "यह सूचना हटाएँ",
   "Menu": "मेन्यू",
   "Patterns": "पैटर्न",
@@ -89,7 +88,7 @@ window.CC_LANG_HI = {
     "यह पैटर्न अभी लिखा नहीं गया है, इसलिए अभी खरीदने के लिए कुछ नहीं है। फ़ोटो तैयार पीस दिखाती है।",
   "Free": "मुफ़्त",
   "Beginner": "बिगिनर",
-  "Confident beginner": "कॉन्फ़िडेंट बिगिनर",
+  "Easy": "आसान",
   "Intermediate": "इंटरमीडिएट",
 
   /* ---------- Home: manifesto ---------- */
@@ -456,7 +455,7 @@ window.CC_LANG_HI_NAME = function (name) {
 window.CC_LANG_HI_LEVEL = function (level) {
   var map = {
     "Beginner": "बिगिनर",
-    "Confident beginner": "कॉन्फ़िडेंट बिगिनर",
+    "Easy": "आसान",
     "Intermediate": "इंटरमीडिएट",
     "Advanced": "एडवांस्ड"
   };

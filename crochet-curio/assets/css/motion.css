@@ -72,9 +72,9 @@
    all three phrases are visible, stacked.
    ============================================================ */
 .manifesto {
-  /* Same pink the hero copy sits on, so the two full-bleed bands that carry
-     the big brand-green type are the same ground. */
-  background: var(--surface-band-accent);
+  /* Background/Brand System Inverse — Brand accent/100 in light, Brand/500
+     in dark. The two inks on it invert with it: see tokens.css. */
+  background: var(--background-brand-system-inverse);
   overflow: clip;
 }
 
@@ -84,7 +84,7 @@
   gap: var(--space-2xl);
   justify-items: center;
   padding-block: var(--space-8xl);
-  padding-inline: var(--layout-gutter);
+  padding-inline: var(--layout-margin);
 }
 .manifesto__line {
   margin: 0;
@@ -94,12 +94,14 @@
   line-height: 1.02;
   font-weight: var(--heading-weight);
   letter-spacing: var(--heading-tracking);
-  color: var(--content-brand);
+  /* Content/Brand System Inverse — Brand/500 for display text on the accent
+     band: 3.81:1 on the light band, 4.07:1 on the dark one. */
+  color: var(--content-brand-system-inverse);
   text-wrap: balance;
 }
 /* The three words the phrase turns on, held a couple of steps darker than
    the rest of the line. Colour only — nothing here touches the type. */
-.manifesto__accent { color: var(--brand-700); }
+.manifesto__accent { color: var(--content-brand-highlight); }
 
 .manifesto__shapes { display: none; }
 
@@ -121,7 +123,7 @@
   min-height: calc(100svh - var(--a11y-top, 96px));
   display: grid;
   place-items: center;
-  padding: 0 var(--layout-gutter);
+  padding: 0 var(--layout-margin);
   /* The hat is fixed and hangs off <body> at z-index 1, so it sits in the
      root stacking context. Sticky makes this stage its own stacking context,
      which means the phrases' z-index 2 only ranks them inside it — against
@@ -198,7 +200,7 @@
    right on the words. Photographs only — the type is untouched, because a
    short viewport is indistinguishable from a zoomed-in one (1.4.4), and the
    stage already grows for the words rather than clipping them. */
-@media (max-height: 520px) and (orientation: landscape) {
+@media (max-height: 560px) and (orientation: landscape) {
   .js-motion .shape--coaster { width: 130px; }
   .js-motion .shape--bikini  { width: 140px; }
   .js-motion .shape--bag     { width: 78px; }
@@ -298,7 +300,7 @@
   height: 3px;
   width: 0;
   background: var(--content-brand);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-circle);
   transition: width var(--dur-slow) var(--ease-out-soft) 250ms;
 }
 .js-motion .section-head h2.is-underlined::after { width: 72px; }
@@ -319,22 +321,16 @@
 /* ============================================================
    Back to top — appears once the page has been scrolled
    ============================================================ */
+/* Button Icon, Size=L, Type=Tertiary, holding Icon/Arrow Up/24. The box, the
+   ring and the 48px target come from .btn-icon; what is left here is where it
+   sits and how it arrives. */
 .to-top {
   position: fixed;
   right: var(--space-2xl);
   bottom: var(--space-2xl);
   z-index: 40;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-pill);
-  border: var(--stroke-width-xs) solid var(--border-secondary);
-  background: var(--background-primary);
   color: var(--content-primary);
   box-shadow: var(--shadow-l3);
-  cursor: pointer;
   opacity: 0;
   visibility: hidden;
   transform: translateY(12px);
@@ -343,7 +339,6 @@
               visibility var(--dur-fast);
 }
 .to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
-.to-top:hover { background: var(--background-hover); border-color: var(--border-primary); }
 
 @media (prefers-reduced-motion: reduce) {
   .to-top { transition: none; transform: none; }
@@ -366,20 +361,8 @@
   .shop-card, .btn { transition: none; }
 }
 
-/* ============================================================
-   Dark theme — the manifesto band
-
-   The band keeps its pink, so the phrases darken rather than lighten:
-   Brand/600 reads 4.33:1 on it and Brand/800 8.79:1, holding the same
-   two-step separation the light theme has between phrase and accent.
-   ============================================================ */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .manifesto__line { color: var(--brand-600); }
-  :root:not([data-theme="light"]) .manifesto__accent { color: var(--brand-800); }
-}
-
-/* The same values again, for a reader who chose dark in the accessibility
-   panel rather than in their operating system. */
-:root[data-theme="dark"] .manifesto__line { color: var(--brand-600); }
-:root[data-theme="dark"] .manifesto__accent { color: var(--brand-800); }
+/* The band keeps its pink in both themes, so the phrases darken rather than
+   lighten. Both inks now come from the two Content/Accent Brand tokens, which
+   carry their own dark values — the per-theme overrides that used to live here
+   are gone. */
 

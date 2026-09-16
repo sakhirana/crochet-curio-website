@@ -39,12 +39,18 @@ h1, h2, h3, h4 {
   text-wrap: balance;
 }
 
+/* The design system carries two weights, 400 and 600, and those are the only
+   two faces the page loads. Left to the browser, <strong> and <b> ask for
+   700, which has to be synthesized from the 400 face — a thicker, softer
+   letterform sitting next to real semibold everywhere else. */
+strong, b { font-weight: var(--text-semibold); }
+
 p { text-wrap: pretty; }
 
-/* ---------- Focus: 2px ring in Border/Focus, offset outside the control,
+/* ---------- Focus: 2px ring in Border/Focus Blue, offset outside the control,
      exactly as the Figma Button component specifies (2.4.7, 1.4.11) ---------- */
 :focus-visible {
-  outline: var(--stroke-width-m) solid var(--border-focus);
+  outline: var(--stroke-width-m) solid var(--border-focus-blue);
   /* The Figma focus ring sits 2px clear of the control, not 4px */
   outline-offset: var(--stroke-width-m);
 }
@@ -71,13 +77,19 @@ p { text-wrap: pretty; }
 /* ---------- Layout ---------- */
 .container {
   width: 100%;
-  max-width: calc(var(--layout-max) + (var(--layout-gutter) * 2));
+  max-width: calc(var(--layout-max) + (var(--layout-margin) * 2));
   margin-inline: auto;
-  padding-inline: var(--layout-gutter);
+  padding-inline: var(--layout-margin);
 }
 
 .section { padding-block: var(--layout-section); }
-.section--tinted { background: var(--background-hover); }
+.section--tinted { background: var(--background-primary); }
+
+/* A hairline where one section ends and the next begins — the same rule the
+   footer draws above itself, in Border/Section Divider. Only between the
+   sections that want the break: the manifesto band and the contact block are
+   left alone. */
+.section--divider { border-bottom: var(--stroke-width-xs) solid var(--border-section-divider); }
 
 .stack > * + * { margin-top: var(--space-xl); }
 
@@ -110,12 +122,12 @@ p { text-wrap: pretty; }
 .muted { color: var(--content-tertiary); }
 
 /* ---------- Buttons — the Figma "Button" component set ----------
-   Read from the design file (page Button, 53:7343): Size L/S, Type Primary /
-   Secondary / Tertiary / Tertiary mono, states Default / Hover / Pressed /
-   Focus. Two things worth naming because they are easy to get wrong:
+   Read from the design file (page Button, 53:7343): Type Primary / Secondary /
+   Link, states Default / Hover / Pressed / Disabled / Focus. Two things worth
+   naming because they are easy to get wrong:
 
    • No corner radius. The component is square on every variant.
-   • The label is Regular (400), not Semibold, at Text/L on size L.
+   • The label is Text/L Semibold (600) on size L.
 
    Padding is the frame's 12px plus the Label node's own 4px inline padding,
    so a size-L button is 48px tall and its text sits 16px from each edge. */
@@ -135,7 +147,7 @@ p { text-wrap: pretty; }
   min-width: 48px;           /* 2.5.8 Target Size — well past the 24px floor */
   font-size: var(--text-l-size);
   line-height: var(--text-l-line);
-  font-weight: var(--text-regular);
+  font-weight: var(--text-semibold);
   border: var(--stroke-width-xs) solid transparent;
   text-decoration: none;
   cursor: pointer;
@@ -147,19 +159,18 @@ p { text-wrap: pretty; }
 .btn--primary {
   background: var(--background-brand);
   color: var(--content-primary-inverse);
-  border-color: var(--background-brand);
 }
-.btn--primary:hover  { background: var(--background-brand-hover);  border-color: var(--background-brand-hover); }
-.btn--primary:active { background: var(--background-brand-pressed); border-color: var(--background-brand-pressed); }
+.btn--primary:hover  { background: var(--background-brand-hover); }
+.btn--primary:active { background: var(--background-brand-pressed); }
 
-/* Type=Brand Accent */
+/* Type=Brand Accent — the hero button. No longer in the Figma Button set;
+   it stands on the photograph and does not invert. */
 .btn--brand-accent {
-  background: var(--background-brand-accent);
-  color: var(--content-on-accent);
-  border-color: var(--border-brand-accent);
+  background: var(--brand-accent-500);
+  color: var(--content-static-black);
 }
-.btn--brand-accent:hover  { background: var(--background-brand-accent-hover); }
-.btn--brand-accent:active { background: var(--background-brand-accent-pressed); }
+.btn--brand-accent:hover  { background: var(--brand-accent-400); }
+.btn--brand-accent:active { background: var(--brand-accent-300); }
 
 /* Type=Secondary — the label darkens to Content/Primary on hover and press */
 .btn--secondary {
@@ -193,7 +204,6 @@ p { text-wrap: pretty; }
   text-underline-offset: 3px;
 }
 .link:hover   { color: var(--content-link-hover); }
-.link:active  { color: var(--content-link-pressed); }
 
 /* ---------- Header ---------- */
 .site-header {
@@ -201,46 +211,101 @@ p { text-wrap: pretty; }
   top: 0;
   z-index: 50;
   background: var(--background-primary);
-  border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+  border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
 }
 .announcement {
   position: relative;
-  background: var(--background-brand);
-  color: var(--content-primary-inverse);
+  /* Centring the line itself, rather than letting padding place it. The bar
+     has a floor of 36px but its padded line can be shorter, and any slack
+     left over settles below the text unless the box shares it out. */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-brand-system-inverse);
+  color: var(--content-primary);
   text-align: center;
   font-size: var(--text-m-size);
   line-height: var(--text-m-line);
   /* Room on both sides for the dismiss control, so the line stays
      centred on the bar rather than centred on what is left of it. */
   padding: var(--space-s) var(--space-4xl);
+  /* The dismiss control is Button Icon Size=S, 32px square, and it is taken
+     out of flow — so the bar has to reserve its own height. Below the S
+     breakpoint the text drops to Text/S and the padded line alone comes to
+     32px, leaving the control flush against both edges. 36px keeps the 2px
+     it clears by everywhere else. */
+  min-height: 36px;
 }
 .announcement p { margin: 0; }
 
-/* The dismiss control. Absolutely placed so the message keeps the full
-   width of the bar to centre itself in; 32px square, which clears the
-   24px minimum target size (2.5.8) on a bar this shallow. */
+/* ---------- Button Icon (Figma: Button Icon/Desktop, 53:8871) ----------
+   Type=Secondary: no fill and no border at rest, the ground arriving only on
+   Hover and Pressed. Size carries the box; the icon inside carries its own
+   size, so .icon-16 and .icon-24 are what change, not this rule. */
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-circle);
+  background: none;
+  color: var(--content-primary);
+  cursor: pointer;
+}
+/* Size=S — 32px square. Above the 24px minimum target size (2.5.8), and the
+   size the component uses wherever a bar is too shallow for Size=L. Fixed
+   rather than padded, because the icon it carries is 16px where the Figma
+   variant carries 24, so padding alone would not reach 32. */
+.btn-icon--s { width: 32px; height: 32px; }
+/* Size=L — Space/M around an Icon 24 comes to the 48px the component
+   documents. Sized by padding rather than a fixed box so a zoomed page grows
+   the target along with the icon. */
+.btn-icon--l { padding: var(--space-m); }
+/* Type=Tertiary — the only Button Icon type that draws its own edge: a
+   Background/Primary fill inside a Stroke Width/XS ring, Border/Secondary at
+   rest and Border/Primary once pointed at. It is the type for a control that
+   floats over content and has to hold its own shape against whatever is
+   behind it. The border is inset, so the 48px box stays 48px. */
+.btn-icon--tertiary {
+  background: var(--background-primary);
+  border: var(--stroke-width-xs) solid var(--border-secondary);
+  /* The component draws its stroke inside the frame, so the ring must not
+     grow the control. The box is sized by padding here rather than a fixed
+     width, so the padding gives back what the border takes and 48px stays
+     48px — the same compensation .btn makes. */
+  padding: calc(var(--space-m) - var(--stroke-width-xs));
+}
+@media (hover: hover) {
+  .btn-icon--tertiary:hover { border-color: var(--border-primary); }
+}
+.btn-icon--tertiary:active { border-color: var(--border-primary); }
+/* Hover is a desktop-only state. The Tablet & Mobile set has no Hover variant
+   because a touch device has no hover, so the control goes straight to
+   Pressed. */
+@media (hover: hover) {
+  .btn-icon:hover { background: var(--background-hover); }
+}
+.btn-icon:active { background: var(--background-pressed); }
+
+/* ---------- Icon sizes (Figma: Iconography, 16/24/32px sets) ----------
+   The icon draws at its own size inside whatever control holds it. Stroke
+   weight is authored into the symbol, so it is not restated here. */
+.icon-16 { width: 16px; height: 16px; }
+.icon-24 { width: 24px; height: 24px; }
+
+/* The dismiss control — Button Icon, Size=S, Type=Secondary, holding
+   Icon/X/16. Absolutely placed so the message keeps the full width of the bar
+   to centre itself in. */
 .announcement__close {
   position: absolute;
   top: 50%;
   right: var(--space-s);
   transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-s);
-  background: none;
-  color: inherit;
-  cursor: pointer;
 }
-.announcement__close svg { width: 15px; height: 15px; }
-.announcement__close:hover { background: rgba(255, 255, 255, 0.16); }
 /* Same reason as the newsletter panel: the blue ring would drop below
    3:1 against the brand green, so it switches to white (1.4.11). */
-.announcement :focus-visible { outline-color: var(--primary-white); }
+.announcement :focus-visible { outline-color: var(--border-focus-white); }
 
 /* Set by a11y.js from storage before the first paint, so a bar the
    visitor has already dismissed never flashes in on the next page. */
@@ -262,7 +327,7 @@ p { text-wrap: pretty; }
   text-decoration: none;
   white-space: nowrap;
 }
-.brand:hover { color: var(--content-brand); }
+.brand:hover  { color: var(--background-brand-hover); }
 
 /* The footer wordmark is a link home, the same as the one in the header.
    .footer-grid a is more specific than .brand, so it would otherwise pull
@@ -274,45 +339,53 @@ p { text-wrap: pretty; }
   color: var(--content-primary);
 }
 .footer-grid a.brand:hover {
-  color: var(--content-brand);
+  color: var(--background-brand-hover);
   text-decoration: none;
 }
 
 .nav-list {
   display: flex;
   align-items: center;
-  gap: var(--space-2xl);
+  gap: var(--space-xl);
   margin: 0;
   list-style: none;
   padding: 0;
 }
+/* Button, Type=Link. Default is Content/Primary with no rule; Hover adds
+   Background/Brand Hover and a 2px underline in that same ink. */
 .nav-list a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;               /* 2.5.8 Target Size */
   padding-inline: var(--space-xs);
-  color: var(--content-secondary);
+  color: var(--content-primary);
   text-decoration: none;
   font-size: var(--text-l-size);
 }
-.nav-list a:hover { color: var(--content-brand); text-decoration: underline; text-underline-offset: 4px; }
+.nav-list a:hover {
+  color: var(--background-brand-hover);
+  text-decoration: underline;
+  text-decoration-thickness: var(--stroke-width-m);
+  text-underline-offset: 4px;
+}
 .nav-list a[aria-current="page"] { color: var(--content-primary); font-weight: var(--text-semibold); }
 
-.nav-toggle {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-s);
-  min-height: 44px;
-  min-width: 44px;
-  padding: var(--space-s) var(--space-m);
-  background: var(--background-primary);
-  border: var(--stroke-width-xs) solid var(--border-secondary);
-  color: var(--content-secondary);
-  font-size: var(--text-m-size);
-  cursor: pointer;
+/* Two groups, not eight peers. Patterns, How it works, Our story and Contact
+   are places in the site; My patterns, Cart and the language select are
+   controls over it, and reading as four more links is what made the row feel
+   like a list to scan rather than a menu to use. A rule and a wider gap mark
+   the seam. The rule is Border/Section Divider, the same hairline the
+   sections use. */
+.nav-list__utility {
+  margin-left: var(--space-s);
+  padding-left: var(--space-xl);
+  border-left: var(--stroke-width-xs) solid var(--border-section-divider);
 }
-.nav-toggle:hover { background: var(--background-hover); border-color: var(--border-primary); color: var(--content-primary); }
+
+/* Type=Secondary, Size=L — the button carries .btn .btn--secondary, so every
+   state comes from the component. Only its visibility belongs here: the
+   toggle appears at the breakpoint where the nav collapses. */
+.nav-toggle { display: none; }
 
 /* ---------- Hero ----------
    The heading, lede and both buttons must all be visible on landing, so the
@@ -360,31 +433,17 @@ p { text-wrap: pretty; }
   line-height: var(--heading-xl-line);
 }
 
-/* ---------- Product grid ---------- */
-.product-card {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-}
-.product-card h3 {
-  font-size: var(--heading-s-size);
-  line-height: var(--heading-s-line);
-  margin-bottom: var(--space-xs);
-}
-/* The whole card is clickable, but the link text is the product name,
-   so the accessible name is meaningful on its own (2.4.4) */
-.product-card h3 a { color: inherit; text-decoration: none; }
-.product-card h3 a::after { content: ""; position: absolute; inset: 0; }
-.product-card h3 a:hover { color: var(--content-brand); text-decoration: underline; text-underline-offset: 4px; }
 .price { font-weight: var(--text-semibold); color: var(--content-primary); }
 .badge {
   display: inline-block;
   font-size: var(--text-s-size);
   line-height: var(--text-s-line);
   padding: var(--space-xs) var(--space-s);
-  border-radius: var(--radius-pill);
-  background: var(--background-accent-subtle);
-  color: var(--content-primary);   /* 8.2:1 on the accent — see README */
+  border-radius: var(--radius-circle);
+  background: var(--background-brand);
+  /* Content/Primary Inverse flips with the fill: white on the green in light,
+     near-black on the pink in dark. 5.81:1 and 8.29:1 at 12px. */
+  color: var(--content-primary-inverse);
   margin-bottom: var(--space-s);
   align-self: flex-start;
 }
@@ -428,7 +487,7 @@ p { text-wrap: pretty; }
   justify-content: center;
   width: 48px;
   height: 48px;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-circle);
   border: var(--stroke-width-m) solid var(--content-brand);
   color: var(--content-brand);
   font-weight: var(--text-semibold);
@@ -443,66 +502,138 @@ p { text-wrap: pretty; }
 
 /* ---------- Newsletter ---------- */
 .newsletter {
-  background: var(--background-brand);
+  /* Background/Newsletter — Brand accent/100 in light, Brand/700 in dark.
+     Both values live on the token, so the panel names it once. */
+  background: var(--background-newsletter);
   color: var(--content-primary-inverse);
   border-radius: var(--radius-l);
   padding: var(--space-8xl) var(--space-7xl);
 }
 .newsletter h2 {
-  color: var(--content-primary-inverse);
+  /* Content/Primary, which is Neutral/900 in light and Primary/White in dark
+     — one token, the right ink on each of the panel's two grounds. The dark
+     blocks below name it again only because they have to outrank the
+     inverse ink the panel sets on itself. */
+  color: var(--content-primary);
   font-size: var(--heading-l-size);
   line-height: var(--heading-l-line);
   margin-bottom: var(--space-m);
 }
-.newsletter p { color: var(--content-secondary-inverse); max-width: 52ch; }
-/* On the dark brand panel the blue focus ring would drop to 1.6:1,
-   so the ring switches to white (8.5:1) — 1.4.11 */
-.newsletter :focus-visible { outline-color: var(--primary-white); }
+/* Content/Secondary — Neutral/800 in light, Neutral/100 in dark. One token,
+   the right ink on each of the panel's two grounds, the same way the heading
+   above takes Content/Primary. */
+.newsletter p { color: var(--content-secondary); max-width: 52ch; }
+/* Everything focusable on the panel takes Border/Focus Blue, the ring the
+   rest of the site wears -- Blue/500 in light, Blue/400 in dark. The panel
+   used to switch to white because the blue dropped to 1.6:1 on the green, but
+   in light the ground is Background/Brand System Inverse now: the blue reads
+   3.55:1 on that pink and 4.57:1 on the dark green, both clear of the 3:1 a
+   focus ring answers to (1.4.11). */
+.newsletter :focus-visible { outline-color: var(--border-focus-blue); }
 
 /* ---------- Forms ---------- */
 .field { display: flex; flex-direction: column; gap: var(--space-s); }
 .field label { font-size: var(--text-m-size); font-weight: var(--text-semibold); }
 .field .hint { font-size: var(--text-m-size); color: var(--content-tertiary); }
+/* Idle the field draws in Border/Primary. It steps to Border/Secondary once
+   the reader is in it, and stays there once it holds a value — so a completed
+   field reads differently from an untouched one without relying on colour
+   alone (1.4.1): the label and any error message carry the same information.
+   The empty placeholder on each field is what lets :placeholder-shown stand
+   in for "still empty". */
 .field input, .field textarea, .field select {
   min-height: 48px;
   padding: var(--space-m) var(--space-l);
-  border: var(--stroke-width-xs) solid var(--border-secondary);
+  border: var(--stroke-width-xs) solid var(--border-primary);
   background: var(--background-primary);
   color: var(--content-primary);
   width: 100%;
 }
+.field input:focus,
+.field textarea:focus,
+.field select:focus,
+.field input:not(:placeholder-shown),
+.field textarea:not(:placeholder-shown) {
+  border-color: var(--border-secondary);
+}
 .field textarea { min-height: 140px; resize: vertical; }
 .field input::placeholder, .field textarea::placeholder { color: var(--content-tertiary); }
+/* The file's Help Text, Status=Error: the message is preceded by
+   Icon/Status/Error/24, set Space/S clear of it. Both sit in one flex row and
+   both start at its top edge, so the disc and the first line of the message
+   begin on the same level and a wrapped message runs on underneath. The icon
+   replaces the word "Error:" on screen only: the word stays in the DOM,
+   visually hidden, because a screen reader has no icon to read (1.1.1). */
 .field .error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-s);
   font-size: var(--text-m-size);
   color: var(--content-negative);
   font-weight: var(--text-semibold);
 }
+.field .error::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  background: url("../img/icon-status-error-24.svg") center / contain no-repeat;
+}
+/* The dark icon is the same exported glyph with the mode's own two colours:
+   the disc in Content/Negative, Red/500, so it matches the message beside it,
+   and the stroke through it in Content/Primary Inverse, Neutral/900, so the
+   mark reads as a hole punched in the disc rather than a white sticker on a
+   dark page. A second file rather than a recolour because an SVG referenced
+   as a background cannot see the page's custom properties. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .field .error::before {
+    background-image: url("../img/icon-status-error-24-dark.svg");
+  }
+}
+:root[data-theme="dark"] .field .error::before {
+  background-image: url("../img/icon-status-error-24-dark.svg");
+}
 .field:not(.is-invalid) .error { display: none; }
-.field.is-invalid input, .field.is-invalid textarea {
-  border-color: var(--content-negative);
+/* The file's Input state, State=Error: the field's stroke is Border/Negative
+   Focus at Stroke Width/M. Red/600 in light, its own lighter step in dark. */
+.field.is-invalid input,
+.field.is-invalid textarea,
+.field.is-invalid select {
+  border-color: var(--border-negative-focus);
   border-width: var(--stroke-width-m);
 }
 
+/* The button has to sit level with the input, which means clearing the label
+   above it. A margin measured from the label's line box was doing that, but
+   the measurement was a guess: a taller label left the button riding high.
+
+   A grid measures it instead. The field's children join the form's own grid
+   (display: contents) so the label, input and hint are real rows, and the
+   button is simply placed in the input's row — level with it at any type
+   size, whether that comes from browser zoom or a reader's own minimum font
+   size. DOM order is untouched. */
 .newsletter-form {
-  display: flex;
-  gap: var(--space-l);
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: minmax(15rem, 1fr) auto;
+  column-gap: var(--space-l);
+  row-gap: var(--space-s);
   margin-top: var(--space-2xl);
-  flex-wrap: wrap;
 }
-.newsletter-form .field { flex: 1 1 280px; }
-.newsletter-form label { color: var(--content-primary-inverse); }
-.newsletter-form .hint { color: var(--content-tertiary-inverse); }
+.newsletter-form .field { display: contents; }
+/* Content/Primary, like the heading above it: Neutral/900 in light, Primary/
+   White in dark. */
+.newsletter-form label  { grid-column: 1; grid-row: 1; color: var(--content-primary); }
+.newsletter-form input  { grid-column: 1; grid-row: 2; }
+/* Content/Tertiary -- Neutral/600 in light, Neutral/300 in dark. */
+.newsletter-form .hint  { grid-column: 1; grid-row: 3; color: var(--content-tertiary); }
+.newsletter-form .error { grid-column: 1; grid-row: 4; }
+/* Placement only. The button is Type=Primary, like the contact form send
+   button, so its five states come straight from the component above —
+   Background/Brand, which is green in light and pink in dark. */
 .newsletter-form .btn {
-  background: var(--primary-white);
-  color: var(--content-primary);
-  /* Drops the control to the input's own top edge: the label's line box
-     (it inherits the body line-height) plus the gap .field puts under it. */
-  margin-top: calc(var(--text-l-line) + var(--space-s));
+  grid-column: 2;
+  grid-row: 2;
 }
-.newsletter-form .btn:hover { background: var(--neutral-100); }
-.newsletter-form .error { color: #ffd7d7; }
 
 .form-status {
   margin-top: var(--space-l);
@@ -531,7 +662,7 @@ p { text-wrap: pretty; }
 
 /* ---------- Footer ---------- */
 .site-footer {
-  border-top: var(--stroke-width-xs) solid var(--neutral-100);
+  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
   padding-block: var(--space-7xl) var(--space-4xl);
 }
 .footer-grid {
@@ -549,19 +680,26 @@ p { text-wrap: pretty; }
   margin-bottom: var(--space-l);
 }
 .footer-grid ul { display: grid; gap: var(--space-s); }
+/* Button, Type=Link, like the primary nav. Default is Content/Primary with no
+   rule; Hover adds Background/Brand Hover and a 2px underline in that ink. */
 .footer-grid a {
   display: inline-flex;
   align-items: center;
   min-height: 32px;
-  color: var(--content-secondary);
+  color: var(--content-primary);
   text-decoration: none;
   font-size: var(--text-m-size);
 }
-.footer-grid a:hover { color: var(--content-brand); text-decoration: underline; text-underline-offset: 3px; }
+.footer-grid a:hover {
+  color: var(--background-brand-hover);
+  text-decoration: underline;
+  text-decoration-thickness: var(--stroke-width-m);
+  text-underline-offset: 3px;
+}
 .footer-bottom {
   margin-top: var(--space-6xl);
   padding-top: var(--space-xl);
-  border-top: var(--stroke-width-xs) solid var(--neutral-100);
+  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-l);
@@ -577,7 +715,16 @@ p { text-wrap: pretty; }
 
 /* ---- Desktop (L breakpoint) ---- */
 @media (max-width: 1024px) {
-  :root { --layout-gutter: var(--space-6xl); --layout-section: var(--space-8xl); }
+  :root {
+    --layout-margin: var(--space-6xl); --layout-section: var(--space-8xl);
+
+    /* Heading scale, L mode. Only the two largest levels step: below 3XL
+       the desktop values still fit the narrower measure. Nothing restates
+       a level it does not change — max-width queries stack, so a level set
+       here stays set at M and S unless one of those blocks moves it. */
+    --heading-3xl-size: var(--size-48);  --heading-3xl-line: var(--line-56);
+    --heading-2xl-size: var(--size-40);  --heading-2xl-line: var(--line-48);
+  }
 
   /* The seven links plus the language selector need about 940px of their own.
      Below the L breakpoint they cannot fit on one row, so the whole set moves
@@ -593,9 +740,11 @@ p { text-wrap: pretty; }
     align-items: stretch;
     gap: 0;
     background: var(--background-primary);
-    border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+    border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
     box-shadow: var(--shadow-l2);
-    padding: var(--space-s) var(--layout-gutter) var(--space-xl);
+    /* No side padding on the panel itself: the rows carry it instead, so
+       the rule under each link reaches both edges. */
+    padding: var(--space-s) 0 var(--space-xl);
   }
   /* A landscape phone is under 420px tall, and the seven links plus the
      language selector need about 345px under a 100px header. The panel is
@@ -607,19 +756,39 @@ p { text-wrap: pretty; }
     overscroll-behavior: contain;
   }
   .nav-list.is-open { display: flex; }
+  /* Each row fills the panel and carries its own side padding, so the rule
+     under a link spans the panel edge to edge. */
   .nav-list a {
+    display: flex;
     min-height: 48px;
-    border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+    padding-inline: var(--space-xl);
+    border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
   }
+  /* The language control is a list item in the same run, so it takes the
+     same indent as the links above it. */
+  .nav-list .lang { padding-inline: var(--space-xl); }
+  /* In the collapsed panel the list is a column, so the group seam is not a
+     rule down the side. Each row already carries its own rule underneath. */
+  .nav-list__utility { margin-left: 0; padding-left: 0; border-left: 0; }
 
   .hero__grid, .split, .contact-grid { gap: var(--space-6xl); }
-  .hero h1 { font-size: var(--heading-2xl-size); line-height: var(--heading-2xl-line); }
   .footer-grid { grid-template-columns: 1fr 1fr; gap: var(--space-4xl); }
 }
 
 /* ---- Tablet (M breakpoint) ---- */
 @media (max-width: 768px) {
-  :root { --layout-gutter: var(--space-2xl); --layout-section: var(--space-7xl); }
+  :root {
+    --layout-margin: var(--space-2xl); --layout-section: var(--space-7xl);
+
+    /* Heading scale, M mode. One column wide from here down, so the four
+       largest levels each drop a step. 3XL and 2XL land on the same value
+       as XL and L respectively — the scale compresses towards the bottom
+       rather than keeping seven distinct sizes on a tablet. */
+    --heading-3xl-size: var(--size-40);  --heading-3xl-line: var(--line-48);
+    --heading-2xl-size: var(--size-32);  --heading-2xl-line: var(--line-40);
+    --heading-xl-size:  var(--size-32);  --heading-xl-line:  var(--line-40);
+    --heading-l-size:   var(--size-24);  --heading-l-line:   var(--line-32);
+  }
 
   .hero {
     min-height: 0;
@@ -627,14 +796,10 @@ p { text-wrap: pretty; }
   }
   .hero__grid, .split, .contact-grid { grid-template-columns: 1fr; }
   .hero__grid { gap: var(--space-4xl); }
-  .hero h1 { font-size: var(--heading-xl-size); line-height: var(--heading-xl-line); }
-
-  .section-head h2, .split h2 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
   .section-head { margin-bottom: var(--space-4xl); }
   .split__art { max-height: 60svh; }
   .steps { grid-template-columns: repeat(3, 1fr); gap: var(--space-2xl); }
   .newsletter { padding: var(--space-6xl) var(--space-4xl); }
-  .newsletter-form .btn { margin-top: 0; }
 }
 
 /* ---- Mobile (S breakpoint) ----
@@ -643,14 +808,20 @@ p { text-wrap: pretty; }
    phone layout rather than the tablet one, which needs 470px and would
    otherwise push the page into a sideways scroll. */
 @media (max-width: 480px) {
-  :root { --layout-gutter: var(--space-xl); --layout-section: var(--space-6xl); }
+  :root {
+    --layout-margin: var(--space-xl); --layout-section: var(--space-6xl);
+
+    /* Heading scale, S mode. 3XL takes the last step it has to give, and M
+       joins S at 20px. Every level at or under 20px holds: shrinking those
+       buys a few pixels of width and costs more than it buys. */
+    --heading-3xl-size: var(--size-32);  --heading-3xl-line: var(--line-40);
+    --heading-m-size:   var(--size-20);  --heading-m-line:   var(--line-28);
+  }
 
   .announcement { font-size: var(--text-s-size); line-height: var(--text-s-line); }
 
   .hero { padding-block: var(--space-2xl) var(--space-6xl); }
   .hero__grid { gap: var(--space-2xl); }
-  .hero h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
-  .lede { font-size: var(--text-xl-size); line-height: var(--text-xl-line); }
   .hero__actions { margin-top: var(--space-xl); gap: var(--space-m); }
   .hero__actions .btn { width: 100%; }
 
@@ -660,18 +831,16 @@ p { text-wrap: pretty; }
   .newsletter-form .btn { width: 100%; }
 
   /* Stacked, the button is the thing being reached for, so it goes
-     directly under the input and the hint follows it. The field's
-     children join the form's own column (display: contents) to be
-     ordered against the button, which is not inside the field. DOM
-     order is untouched — a screen reader still meets the hint with
-     the input it describes, before the button. */
-  .newsletter-form { flex-direction: column; gap: var(--space-s); }
-  .newsletter-form .field { display: contents; }
-  .newsletter-form label { order: 1; }
-  .newsletter-form input { order: 2; }
-  .newsletter-form .error { order: 3; }
-  .newsletter-form .btn { order: 4; margin-top: var(--space-l); }
-  .newsletter-form .hint { order: 5; }
+     directly under the input and the hint follows it. One column, and the
+     rows are re-dealt so the button comes before the hint. DOM order is
+     untouched — a screen reader still meets the hint with the input it
+     describes, before the button. */
+  .newsletter-form { grid-template-columns: 1fr; }
+  .newsletter-form label  { grid-row: 1; }
+  .newsletter-form input  { grid-row: 2; }
+  .newsletter-form .error { grid-row: 3; }
+  .newsletter-form .btn   { grid-column: 1; grid-row: 4; margin-top: var(--space-l); }
+  .newsletter-form .hint  { grid-row: 5; }
   .footer-bottom { margin-top: var(--space-4xl); }
 }
 
@@ -687,7 +856,6 @@ p { text-wrap: pretty; }
   .hero h1 { margin-bottom: var(--space-m); }
   .hero .eyebrow { margin-bottom: var(--space-s); }
   .hero__actions { margin-top: var(--space-l); }
-  .announcement { padding-block: var(--space-xs); }
   /* Above the M breakpoint the artwork carries no height cap, so on a
      landscape phone (844 wide, 390 tall) one photograph filled a screen. */
   .split__art { max-height: 70svh; }
@@ -701,7 +869,7 @@ p { text-wrap: pretty; }
 /* ---------- Print ---------- */
 @media print {
   .site-header, .newsletter, .nav-toggle, .skip-link { display: none; }
-  body { color: #000; }
+  body { color: var(--content-static-black); }
 }
 
 /* ---------- Full-bleed hero banner ----------
@@ -712,7 +880,7 @@ p { text-wrap: pretty; }
 .hero-banner {
   position: relative;
   isolation: isolate;
-  background: var(--background-brand);
+  background: var(--background-brand-system-inverse);
   padding: clamp(var(--space-xl), 3.2vw, var(--space-5xl));
 }
 
@@ -759,24 +927,11 @@ p { text-wrap: pretty; }
    unaffected — it holds the same three lines anywhere above 29rem. */
 .hero-banner .hero__grid   { grid-template-columns: minmax(0, 29rem); justify-content: start; text-align: left; }
 .hero-banner .hero__actions { justify-content: flex-start; }
-/* Same reasoning for the outline button standing on the photograph: white
-   fill and dark ink whichever theme is running, since the ground under it
-   never changes. Primitives, not semantic tokens, so nothing flips. */
-.hero-banner .btn--secondary {
-  background: var(--primary-white);
-  color: var(--neutral-900);
-  border-color: var(--primary-white);
-}
-.hero-banner .btn--secondary:hover,
-.hero-banner .btn--secondary:active {
-  background: var(--neutral-300);
-  color: var(--neutral-900);
-  border-color: var(--neutral-300);
-}
-/* Border/Focus is 1.6:1 against the scrim, so the ring turns inverse here for
+/* The outline button on the photograph carries no correction: it is
+   Type=Secondary and wears the component's own five states. */
+/* Border/Focus Blue is 1.6:1 against the scrim, so the ring turns inverse here for
    the same reason it does on the newsletter panel — 1.4.11 */
-.hero-banner :focus-visible { outline-color: var(--primary-white); }
-
+.hero-banner :focus-visible { outline-color: var(--border-focus-white); }
 
 /* ============================================================
    Dark theme — component corrections
@@ -791,53 +946,40 @@ p { text-wrap: pretty; }
    panel. Ratios are measured against the surface each rule paints on.
    ============================================================ */
 
-/* Nothing lighter clears 4.5:1 on the mid-green brand fill in every
-   state, so the label takes the file's own Background/System Inverse
-   Static: 4.53:1 default, 5.62:1 hover, 6.83:1 pressed (1.4.3). */
+/* Buttons need no correction here. Every type — Primary, Secondary and the
+   hero button — takes its fill and label from semantic tokens that flip on
+   their own. */
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .announcement,
-  :root:not([data-theme="light"]) .btn--primary,
-  :root:not([data-theme="light"]) .btn--brand-accent { color: var(--system-inverse-static); }
 
   /* The newsletter is a large filled panel rather than a control, so it
      takes the deep Brand/800 from the dark ramp and keeps the light
      theme's pale text: 17.3:1, 13.8:1 and 8.2:1. */
-  :root:not([data-theme="light"]) .newsletter { background: var(--brand-800); }
   :root:not([data-theme="light"]) .newsletter,
   :root:not([data-theme="light"]) .newsletter h2,
   :root:not([data-theme="light"]) .newsletter-form label { color: var(--content-primary); }
   :root:not([data-theme="light"]) .newsletter p { color: var(--content-secondary); }
   :root:not([data-theme="light"]) .newsletter-form .hint { color: var(--content-tertiary); }
+  /* In dark the panel's error joins every other error on Content/Negative,
+     which is Red/500 here. Named at all only because `.newsletter p` above is
+     more specific than `.newsletter-form .error`, so without this the message
+     would take the panel's body ink and lose its colour entirely. */
+  :root:not([data-theme="light"]) .newsletter-form .error { color: var(--content-negative); }
 
-  /* The Join button stays white, so its label and hover must not follow
-     Content/Primary into white as well. */
-  :root:not([data-theme="light"]) .newsletter-form .btn { color: var(--content-primary-inverse); }
-  :root:not([data-theme="light"]) .newsletter-form .btn:hover { background: var(--neutral-300); }
+  /* The hero copy is not corrected here: it stands on the photograph, not on
+     the pink, and that photograph is the same dark image in both themes. Its
+     white is set once in the component rules above. */
 
-  /* The hero copy is not corrected here: it stands on the photograph, not
-     on the pink, and that photograph is the same dark image in both themes.
-     Its white is set once in the component rules above.
-
-     The badge pill keeps its pink fill here, so its label stays the light
-     theme's Content/Primary dark ink: 9:1 on Brand Accent/400. */
-  :root:not([data-theme="light"]) .badge { color: var(--content-primary-inverse); }
 }
 
-:root[data-theme="dark"] .announcement,
-:root[data-theme="dark"] .btn--primary,
-:root[data-theme="dark"] .btn--brand-accent { color: var(--system-inverse-static); }
 
-:root[data-theme="dark"] .newsletter { background: var(--brand-800); }
 :root[data-theme="dark"] .newsletter,
 :root[data-theme="dark"] .newsletter h2,
 :root[data-theme="dark"] .newsletter-form label { color: var(--content-primary); }
 :root[data-theme="dark"] .newsletter p { color: var(--content-secondary); }
 :root[data-theme="dark"] .newsletter-form .hint { color: var(--content-tertiary); }
+:root[data-theme="dark"] .newsletter-form .error { color: var(--content-negative); }
 
-:root[data-theme="dark"] .newsletter-form .btn { color: var(--content-primary-inverse); }
-:root[data-theme="dark"] .newsletter-form .btn:hover { background: var(--neutral-300); }
 
-:root[data-theme="dark"] .badge { color: var(--content-primary-inverse); }
 
 /* ---------- Language control ----------
    Sits in the primary nav as its own list item, so it is reachable by
@@ -849,16 +991,26 @@ p { text-wrap: pretty; }
   gap: var(--space-s);
 }
 .lang__label {
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  /* Text/L, the size the nav links beside it are set at */
+  font-size: var(--text-l-size);
+  line-height: var(--text-l-line);
   color: var(--content-secondary);
   white-space: nowrap;
 }
 .lang__select {
   min-height: 40px;               /* 2.5.8 Target Size */
-  padding: var(--space-xs) var(--space-s);
+  /* Space/M each side of the label-and-chevron pair: 12px, then the text,
+     then Space/S, then the 12px chevron, then 12px to the border. */
+  padding: var(--space-xs) calc(var(--space-m) + 12px + var(--space-s))
+           var(--space-xs) var(--space-m);
   border: var(--stroke-width-xs) solid var(--border-secondary);
-  background: var(--background-primary);
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--background-primary);
+  background-image: var(--icon-chevron-down);
+  background-repeat: no-repeat;
+  background-position: right var(--space-m) center;
+  background-size: 12px 12px;
   color: var(--content-primary);
   font-size: var(--text-m-size);
   line-height: var(--text-m-line);
@@ -868,4 +1020,29 @@ p { text-wrap: pretty; }
 
 @media (max-width: 768px) {
   .lang { padding-block: var(--space-s); }
+}
+
+/* ============================================================
+   A field in error keeps its red stroke, but not a red ring
+   The file's Input state, State=Error, carries no focus variant: the error
+   stroke is the state. Focus is a separate signal, so a focused field in
+   error draws both — the stroke in Border/Negative Focus, the ring in
+   Border/Focus Blue.
+
+   The two say different things and should not be made to say them in the
+   same colour. The ring answers "where am I", and it answers it in the same
+   blue on every ground the site is built on — white in light, black in dark,
+   Blue/500 and Blue/400. The stroke underneath answers "what is wrong", and
+   holds its red until what is typed validates: site.js and shop.js re-check
+   an invalid field on every keystroke and clear it the instant it passes.
+   The message below carries the error in words as well (1.4.1).
+
+   These rules are last in the file and carry :root so they outrank the dark
+   per-form rules above.
+   ============================================================ */
+:root .field.is-invalid input:focus-visible,
+:root .field.is-invalid textarea:focus-visible,
+:root .field.is-invalid select:focus-visible {
+  border-color: var(--border-negative-focus);
+  outline-color: var(--border-focus-blue);
 }

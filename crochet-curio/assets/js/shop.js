@@ -316,15 +316,28 @@
   if (checkoutForm) {
     var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    var setError = function (fieldId, errorId, inputId, message) {
+    /* "Error:" is drawn as Icon/Status/Error/16 by the stylesheet, so the
+       word itself is written visually hidden: the icon carries it on screen,
+       the text carries it to a screen reader (1.1.1, 3.3.1). */
+    var writeError = function (error, message) {
+      var label = document.createElement("span");
+      label.className = "visually-hidden";
+      label.textContent = "Error: ";
+      error.textContent = "";
+      error.appendChild(label);
+      error.appendChild(document.createTextNode(message));
+    };
+
+    var setError = function (fieldId, errorId, inputId, message, check) {
       var field = document.getElementById(fieldId);
       var error = document.getElementById(errorId);
       var input = document.getElementById(inputId);
       if (!field || !error || !input) { return; }
       if (message) {
         field.classList.add("is-invalid");
-        error.textContent = "Error: " + message;
+        writeError(error, message);
         input.setAttribute("aria-invalid", "true");
+        watch(fieldId, errorId, inputId, check);
       } else {
         field.classList.remove("is-invalid");
         error.textContent = "";
@@ -332,32 +345,53 @@
       }
     };
 
+    /* A field that has failed stays red — stroke and focus ring both — until
+       what is typed passes the same check that failed it. It re-checks on
+       every keystroke from that point on, so the red clears the moment the
+       value is right rather than waiting for the next submit. Fields that
+       have not failed yet are never watched, so nothing turns red while the
+       reader is still typing their first attempt (3.3.1). */
+    var watched = {};
+
+    var watch = function (fieldId, errorId, inputId, check) {
+      var input = document.getElementById(inputId);
+      if (!input || !check || watched[inputId]) { return; }
+      watched[inputId] = true;
+      input.addEventListener("input", function () {
+        if (!check(input.value.trim())) {
+          setError(fieldId, errorId, inputId, null);
+        }
+      });
+    };
+
+    /* One row per field: submit and the keystroke re-check run the same
+       check, so they can never disagree about whether a field is wrong. */
+    var CHECKOUT_FIELDS = [
+      { fieldId: "coField-name", errorId: "coError-name", inputId: "co-name",
+        check: function (value) {
+          return value ? null : "Enter the name to put on the pattern licence.";
+        } },
+      { fieldId: "coField-email", errorId: "coError-email", inputId: "co-email",
+        check: function (value) {
+          if (!value) { return "Enter an email address: your download link goes there."; }
+          if (!EMAIL_RE.test(value)) {
+            return "That email address is missing an @ or a domain. Check it and try again.";
+          }
+          return null;
+        } }
+    ];
+
     checkoutForm.addEventListener("submit", function (event) {
       event.preventDefault();
 
-      var checks = [
-        ["coField-name", "coError-name", "co-name",
-         document.getElementById("co-name").value.trim(),
-         "Enter the name to put on the pattern licence."],
-        ["coField-email", "coError-email", "co-email",
-         document.getElementById("co-email").value.trim(),
-         "Enter an email address: your download link goes there."]
-      ];
-
       var firstInvalid = null;
 
-      checks.forEach(function (c) {
-        var fieldId = c[0], errorId = c[1], inputId = c[2], value = c[3], message = c[4];
-        var problem = null;
-
-        if (!value) {
-          problem = message;
-        } else if (inputId === "co-email" && !EMAIL_RE.test(value)) {
-          problem = "That email address is missing an @ or a domain. Check it and try again.";
-        }
-
-        setError(fieldId, errorId, inputId, problem);
-        if (problem && !firstInvalid) { firstInvalid = document.getElementById(inputId); }
+      CHECKOUT_FIELDS.forEach(function (f) {
+        var input = document.getElementById(f.inputId);
+        if (!input) { return; }
+        var problem = f.check(input.value.trim());
+        setError(f.fieldId, f.errorId, f.inputId, problem, f.check);
+        if (problem && !firstInvalid) { firstInvalid = input; }
       });
 
       var status = document.getElementById("checkoutStatus");

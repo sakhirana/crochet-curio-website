@@ -155,7 +155,7 @@
     }).join("");
 
     li.innerHTML =
-      '<label class="lang__label" for="' + id + '">Language</label>' +
+      '<label class="lang__label visually-hidden" for="' + id + '">Language</label>' +
       '<select class="lang__select" id="' + id + '">' + options + '</select>';
 
     host.appendChild(li);

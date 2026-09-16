@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 
 const root = __dirname;
-const port = Number(process.argv[2]) || 4173;
+const port = Number(process.env.PORT) || Number(process.argv[2]) || 4173;
 
 const TYPES = {
   ".html": "text/html; charset=utf-8",

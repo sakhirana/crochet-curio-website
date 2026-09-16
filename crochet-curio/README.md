@@ -360,17 +360,17 @@ should either be added to the file or dropped from the CSS.
 | | Size L | Size S |
 |---|---|---|
 | Box | 48px tall, 12px frame padding | 32px tall, 8/4px frame padding |
-| Label | Text/L Regular 16/24 | Text/M Regular 14/20 |
+| Label | Text/L Semibold 16/24 | Text/M Semibold 14/20 |
 | Inset | 16px (12px frame + 4px on the Label node) | 12px |
 | Radius | none | none |
 
 Types: **Primary** `Background/Brand` → `Brand hover` → `Brand pressed`,
 label `Content/Primary inverse`. **Secondary** white, 1px `Border/Secondary`,
 label `Content/Secondary` that darkens to `Content/Primary` on hover and
-press. **Tertiary** link-coloured, fill only on hover and press.
-**Tertiary mono** the same shape in `Content/Secondary`.
+press. **Link** no fill or border, label `Content/Primary` that takes
+`Background/Brand hover` and a 2px underline in that same ink on hover.
 
-The focus state matters most: the component puts a **2px `Border/Focus` ring
+The focus state matters most: the component puts a **2px `Border/Focus Blue` ring
 2px outside the control**, and the CSS does the same via `outline` +
 `outline-offset`.
 
@@ -380,22 +380,39 @@ The focus state matters most: the component puts a **2px `Border/Focus` ring
 
 Four things in the Figma file will fail an audit or trip a user. None of them
 are fixed here — they need fixing in the file, or every consumer of the
-library inherits them. The site works around the first two.
+library inherits them. The site works around the second; the first is still
+open — the focus ring on the announcement bar fails in one mode whichever ring
+it takes.
 
-**1. `Border/Focus` is unusable on brand surfaces — 1.4.11 Non-text Contrast.**
-`#3355ff` is 5.4:1 against white, which is fine, but 1.6:1 against
-`Background/Brand` `#3a5240` and 1.2:1 against `Background/Brand Pressed`.
-Any focused control on a brand panel has a ring nobody can see, and 3:1 is the
-floor. *Fix:* add a `Border/Focus Inverse` variable (`Primary/White`) and a
-Focus-on-dark variant, or make the ring two-tone — 2px `Border/Focus` with a
-2px white outer ring, which then works on any ground. The site does the first
-of these by hand on the hero band and the newsletter panel.
+**1. No focus ring works on a surface that flips colour between modes — 1.4.11
+Non-text Contrast.** The file now carries both `Border/Focus Blue` and
+`Border/Focus White`, which covers most of the site: because the ring sits 2px
+*outside* the control, the gap shows the page rather than the fill, so the blue
+ring is measured against the page and clears the floor comfortably — 5.41:1 in
+light, 4.59:1 in dark. Controls sitting **inside** a filled band are the
+exception, because there the gap shows the band. The announcement bar is the
+case that breaks: it is `Brand accent/100` in light and `Brand/500` in dark, and
+neither ring survives the flip.
+
+| Ring | On pink (light) | On green (dark) |
+|---|---|---|
+| `Border/Focus Blue` | 3.55:1 | **1.53:1** |
+| `Border/Focus White` | **1.52:1** | 5.81:1 |
+
+Each passes in one mode and fails in the other, so no fixed value can serve the
+bar. *Fix:* the file needs a focus ring that resolves per mode the way every
+other semantic does — one variable, white in the mode where the band is dark and
+`Content/Static` in the mode where it is light — rather than two fixed rings the
+consumer has to choose between by hand. Naming it for the surface it sits on
+(`Border/Focus on Accent`) rather than for its colour keeps it usable as the
+band's own value changes.
 
 **2. `Content/Link Hover` and `Content/Link Pressed` are the same colour**
-(`#1f3399`). A Tertiary button looks identical whether you are hovering it or
-holding it down, so press is unacknowledged. Not a contrast failure — both are
-7:1+ — but it costs the feedback 3.2.x expects. *Fix:* move pressed down to
-`Blue/800`, keeping hover at `Blue/700`.
+(`#1f3399` in light). Any link looks identical whether you are hovering it or
+holding it down, so press is unacknowledged. In dark it is worse: Pressed
+(`#adbbff`) is the same as Link at rest. Not a contrast failure — all are 9:1+
+— but it costs the feedback 3.2.x expects. *Fix:* give Pressed its own step at
+each end of the ramp, below `Blue/700` in light and above `Blue/200` in dark.
 
 **3. The Button set has no Disabled variant**, though `Content/Disabled`,
 `Background/Disabled` and `Border/Disabled` all exist. The shop disables the

@@ -4,15 +4,16 @@
    ============================================================ */
 
 /* ---------- Tiles the photography sits on ----------
-   Product shots sit on white. Two of the six PNGs carry an alpha channel,
-   so the tile paints white underneath rather than trusting the file — the
-   background is guaranteed regardless of what each image contains.
-   A hairline border keeps a white tile legible on a white page.
+   Product shots sit on Background/Secondary, one step off the page rather
+   than flush with it: Neutral/50 in light, Neutral/800 in dark. Two of the
+   six PNGs carry an alpha channel, so the tile paints that ground underneath
+   rather than trusting the file — the background is guaranteed whatever each
+   image contains. A hairline border keeps the tile legible against the page.
 --------------------------------------------------------------- */
 .shop-card__media,
 .product__media {
-  background: var(--primary-white);
-  border: var(--stroke-width-xs) solid var(--neutral-100);
+  background: var(--background-secondary);
+  border: var(--stroke-width-xs) solid var(--border-section-divider);
 }
 
 /* ---------- Alt text on hover ----------
@@ -96,7 +97,7 @@
 }
 .shop-card h3 a { color: inherit; text-decoration: none; }
 .shop-card h3 a::after { content: ""; position: absolute; inset: 0; }
-.shop-card h3 a:hover { color: var(--content-brand); text-decoration: underline; text-underline-offset: 4px; }
+.shop-card h3 a:hover { color: var(--background-brand-hover); text-decoration: underline; text-underline-offset: 4px; }
 
 .shop-card__meta {
   display: flex;
@@ -129,12 +130,12 @@
   content: "";
   width: 8px;
   height: 8px;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-circle);
   background: currentColor;
 }
-.level--beginner            { color: var(--content-positive); }
-.level--confident-beginner  { color: var(--content-brand); }
-.level--intermediate        { color: var(--brand-accent-700); }
+.level--beginner            { color: var(--content-pill-1); }
+.level--confident-beginner  { color: var(--content-pill-2); }
+.level--intermediate        { color: var(--content-pill-3); }
 
 /* In the skill-levels section the pill stands in for the step number */
 .step > .level { margin-bottom: var(--space-l); }
@@ -164,7 +165,7 @@
   align-items: center;
   min-height: 24px;
 }
-.breadcrumb a:hover { color: var(--content-brand); text-decoration: underline; }
+.breadcrumb a:hover { color: var(--background-brand-hover); text-decoration: underline; }
 .breadcrumb [aria-current="page"] { color: var(--content-primary); }
 
 /* ============================================================
@@ -243,7 +244,7 @@ ul.spec-strip {
   list-style: none;
   margin: 0 0 var(--space-2xl);
   padding: var(--space-2xl);
-  border: var(--stroke-width-xs) solid var(--neutral-100);
+  border: var(--stroke-width-xs) solid var(--border-section-divider);
   border-radius: var(--radius-l);
   background: var(--background-hover);
 }
@@ -281,8 +282,8 @@ ul.spec-strip__formats {
 
 /* ---------- Get the pattern ---------- */
 .buy-form {
-  border-top: var(--stroke-width-xs) solid var(--neutral-100);
-  border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
+  border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
   padding-block: var(--space-2xl);
   margin-bottom: var(--space-2xl);
 }
@@ -294,7 +295,7 @@ ul.spec-strip__formats {
   margin: var(--space-xl) 0 var(--space-m);
   font-size: var(--text-l-size);
   line-height: var(--text-l-line);
-  font-weight: 600;
+  font-weight: var(--text-semibold);
   color: var(--content-primary);
 }
 .formats__title:first-child { margin-top: 0; }
@@ -315,9 +316,17 @@ ul.spec-strip__formats {
 }
 .formats__langSelect {
   min-height: 44px;               /* 2.5.8 Target Size */
-  padding: var(--space-xs) var(--space-s);
+  /* Space/M each side of the label-and-chevron pair, as in the nav selector. */
+  padding: var(--space-xs) calc(var(--space-m) + 12px + var(--space-s))
+           var(--space-xs) var(--space-m);
   border: var(--stroke-width-xs) solid var(--border-secondary);
-  background: var(--background-primary);
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--background-primary);
+  background-image: var(--icon-chevron-down);
+  background-repeat: no-repeat;
+  background-position: right var(--space-m) center;
+  background-size: 12px 12px;
   color: var(--content-primary);
   font-size: var(--text-m-size);
   line-height: var(--text-m-line);
@@ -378,9 +387,11 @@ ul.spec-strip__formats {
   transform: rotate(-45deg);
 }
 .skills li::before {
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-circle);
   border: 0;
-  background: var(--content-brand-accent);
+  /* Background/Brand — Brand/500 here. The dark page takes Brand accent/500
+     instead of the token's own dark value; see the block at the foot. */
+  background: var(--background-brand);
   width: 8px;
   height: 8px;
   transform: none;
@@ -401,7 +412,7 @@ ul.spec-strip__formats {
   grid-template-columns: 140px 1fr;
   gap: var(--space-l);
   padding-bottom: var(--space-l);
-  border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+  border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
 }
 .product__details dt { font-weight: var(--text-semibold); color: var(--content-primary); }
 .product__details dd { margin: 0; color: var(--content-secondary); }
@@ -432,9 +443,9 @@ ul.spec-strip__formats {
   gap: var(--space-xl);
   align-items: center;
   padding-block: var(--space-xl);
-  border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+  border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
 }
-.basket-row:first-child { border-top: var(--stroke-width-xs) solid var(--neutral-100); }
+.basket-row:first-child { border-top: var(--stroke-width-xs) solid var(--border-section-divider); }
 
 .basket-row__media {
   background: var(--background-hover);
@@ -453,7 +464,8 @@ ul.spec-strip__formats {
 
 .basket-row__total { font-weight: var(--text-semibold); color: var(--content-primary); white-space: nowrap; }
 
-/* Type=Tertiary from the Figma Button component, at Size=S — square, link
+/* Link-coloured and square, at Size=S. The Figma Button set carries Primary,
+   Secondary and Link only, so this has no variant of its own — square, link
    coloured, and it takes a fill only on hover and press. */
 .basket-row__remove {
   min-height: 44px;
@@ -467,12 +479,11 @@ ul.spec-strip__formats {
   font-size: var(--text-m-size);
 }
 .basket-row__remove:hover  { color: var(--content-link-hover);   background: var(--background-hover); }
-.basket-row__remove:active { color: var(--content-link-pressed); background: var(--background-pressed); }
 
 .basket-empty {
   padding: var(--space-8xl) var(--space-2xl);
   text-align: center;
-  border: var(--stroke-width-xs) solid var(--neutral-100);
+  border: var(--stroke-width-xs) solid var(--border-section-divider);
   border-radius: var(--radius-l);
 }
 .basket-empty h2 {
@@ -484,7 +495,7 @@ ul.spec-strip__formats {
 
 /* ---------- Summary card ---------- */
 .summary {
-  border: var(--stroke-width-xs) solid var(--neutral-100);
+  border: var(--stroke-width-xs) solid var(--border-section-divider);
   border-radius: var(--radius-l);
   padding: var(--space-2xl);
   position: sticky;
@@ -501,7 +512,7 @@ ul.spec-strip__formats {
 .summary dd { margin: 0; color: var(--content-primary); font-weight: var(--text-semibold); }
 .summary .is-total {
   padding-top: var(--space-m);
-  border-top: var(--stroke-width-xs) solid var(--neutral-100);
+  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
   font-size: var(--text-xl-size);
 }
 .summary__note { font-size: var(--text-m-size); color: var(--content-tertiary); margin-top: var(--space-m); }
@@ -535,7 +546,7 @@ ul.spec-strip__formats {
   gap: var(--space-l);
   font-size: var(--text-m-size);
   padding-bottom: var(--space-m);
-  border-bottom: var(--stroke-width-xs) solid var(--neutral-100);
+  border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
 }
 .checkout-totals { display: grid; gap: var(--space-m); margin: 0; }
 .checkout-totals > div { display: flex; justify-content: space-between; gap: var(--space-l); }
@@ -543,7 +554,7 @@ ul.spec-strip__formats {
 .checkout-totals dd { margin: 0; font-weight: var(--text-semibold); color: var(--content-primary); }
 .checkout-totals .is-total {
   padding-top: var(--space-m);
-  border-top: var(--stroke-width-xs) solid var(--neutral-100);
+  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
   font-size: var(--text-xl-size);
 }
 
@@ -552,7 +563,7 @@ ul.spec-strip__formats {
   line-height: var(--text-m-line);
   color: var(--content-tertiary);
   padding: var(--space-l) 0;
-  border-top: var(--stroke-width-xs) solid var(--neutral-100);
+  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
 }
 
 /* ============================================================
@@ -572,7 +583,7 @@ ul.spec-strip__formats {
   margin-bottom: var(--space-m);
 }
 .order-placed p { margin-bottom: var(--space-xl); }
-.order-placed:focus-visible { outline: var(--stroke-width-m) solid var(--border-focus); outline-offset: var(--stroke-width-m); }
+.order-placed:focus-visible { outline: var(--stroke-width-m) solid var(--border-focus-blue); outline-offset: var(--stroke-width-m); }
 .order-placed__actions {
   display: flex;
   flex-wrap: wrap;
@@ -596,7 +607,7 @@ ul.spec-strip__formats {
   align-items: center;
   gap: var(--space-l);
   padding: var(--space-m);
-  border: var(--stroke-width-xs) solid var(--neutral-100);
+  border: var(--stroke-width-xs) solid var(--border-section-divider);
   border-radius: var(--radius-m);
   background: var(--background-primary);
 }
@@ -604,7 +615,7 @@ ul.spec-strip__formats {
   width: 100%;
   aspect-ratio: 1 / 1;
   object-fit: contain;
-  background: var(--primary-white);
+  background: var(--background-secondary);
   border-radius: var(--radius-s);
 }
 .unlocked-row__info h3 {
@@ -630,12 +641,12 @@ ul.spec-strip__formats {
   gap: var(--space-2xl);
   align-items: center;
   padding: var(--space-xl);
-  border: var(--stroke-width-xs) solid var(--neutral-100);
+  border: var(--stroke-width-xs) solid var(--border-section-divider);
   border-radius: var(--radius-l);
 }
 .library-card__media {
-  background: var(--primary-white);
-  border: var(--stroke-width-xs) solid var(--neutral-100);
+  background: var(--background-secondary);
+  border: var(--stroke-width-xs) solid var(--border-section-divider);
   border-radius: var(--radius-m);
   overflow: hidden;
   aspect-ratio: 1 / 1;
@@ -669,7 +680,7 @@ ul.spec-strip__formats {
 
 .library-help {
   padding-block: var(--space-6xl) var(--space-8xl);
-  border-top: var(--stroke-width-xs) solid var(--neutral-100);
+  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
 }
 .library-help h2 {
   font-size: var(--heading-m-size);
@@ -710,8 +721,8 @@ ul.spec-strip__formats {
   height: 24px;
   padding-inline: var(--space-xs);
   margin-left: var(--space-s);
-  border-radius: var(--radius-pill);
-  background: var(--background-brand);
+  border-radius: var(--radius-circle);
+  background: var(--content-brand);
   color: var(--content-primary-inverse);
   font-size: var(--text-s-size);
   font-weight: var(--text-semibold);
@@ -756,7 +767,6 @@ ul.spec-strip__formats {
   .shop-card--banner .shop-card__media { aspect-ratio: 1 / 1; }
   .shop-card__media img { padding: var(--space-xl); }
 
-  .product__info h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
   .product__details > div { grid-template-columns: 1fr; gap: var(--space-xs); }
 
   /* Basket rows become stacked cards rather than a squeezed table */
@@ -788,19 +798,12 @@ ul.spec-strip__formats {
   .unlocked-row { grid-template-columns: 56px 1fr; }
   .unlocked-row .btn { grid-column: 1 / -1; }
 
-  .page-head h1 { font-size: var(--heading-l-size); line-height: var(--heading-l-line); }
 }
 
 /* ============================================================
-   Dark theme — skill level pills
-   Brand accent/700 falls to 3.1:1 on the dark page; the dark ramp's
-   own Brand accent/400 reads 8.8:1 at the same 12px (1.4.3).
+   Dark theme — stitch bullets
+   Nothing is needed here. Background/Brand is Brand accent/500 on a dark
+   page, which is the value the bullets used to be corrected to by hand, and
+   Content/Pill 1 to 3 carry their own dark values in tokens.css.
    ============================================================ */
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .level--intermediate { color: var(--brand-accent-400); }
-}
-
-/* The same values again, for a reader who chose dark in the accessibility
-   panel rather than in their operating system. */
-:root[data-theme="dark"] .level--intermediate { color: var(--brand-accent-400); }
 

@@ -51,7 +51,20 @@
 
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  function setError(fieldId, errorId, inputId, message) {
+  /* "Error:" is drawn as Icon/Status/Error/16 by the stylesheet, so the word
+     itself is written visually hidden: the icon carries it on screen, the
+     text carries it to a screen reader, and the message reads the same
+     either way (1.1.1, 3.3.1). */
+  function writeError(error, message) {
+    var label = document.createElement("span");
+    label.className = "visually-hidden";
+    label.textContent = "Error: ";
+    error.textContent = "";
+    error.appendChild(label);
+    error.appendChild(document.createTextNode(message));
+  }
+
+  function setError(fieldId, errorId, inputId, message, check) {
     var field = document.getElementById(fieldId);
     var error = document.getElementById(errorId);
     var input = document.getElementById(inputId);
@@ -59,13 +72,52 @@
 
     if (message) {
       field.classList.add("is-invalid");
-      error.textContent = "Error: " + message;
+      writeError(error, message);
       input.setAttribute("aria-invalid", "true");
+      watch(fieldId, errorId, inputId, check);
     } else {
       field.classList.remove("is-invalid");
       error.textContent = "";
       input.removeAttribute("aria-invalid");
     }
+  }
+
+  /* Once a field has gone wrong it stays wrong — red stroke, red focus ring —
+     until what is typed passes the same check that failed. Waiting for the
+     next submit would leave a corrected field still reading as an error, and
+     would mean the red only ever clears on a keypress the reader may not
+     make. So the field re-checks itself on every keystroke from the moment it
+     goes invalid, and clears the instant it passes.
+
+     Only fields that have already failed are watched. Nothing turns red while
+     the reader is still typing their first attempt: a field goes invalid on
+     submit and nowhere else (3.3.1). `check` takes the trimmed value and
+     returns the problem, or null when there is none. */
+  var watched = {};
+
+  function watch(fieldId, errorId, inputId, check) {
+    var input = document.getElementById(inputId);
+    if (!input || !check || watched[inputId]) { return; }
+    watched[inputId] = true;
+    input.addEventListener("input", function () {
+      if (!check(input.value.trim())) {
+        setError(fieldId, errorId, inputId, null);
+      }
+    });
+  }
+
+  function emailProblem(missing) {
+    return function (value) {
+      if (!value) { return missing; }
+      if (!EMAIL_RE.test(value)) {
+        return "That email address is missing an @ or a domain. Check it and try again.";
+      }
+      return null;
+    };
+  }
+
+  function requiredProblem(missing) {
+    return function (value) { return value ? null : missing; };
   }
 
   function announce(statusId, message) {
@@ -76,70 +128,53 @@
   /* ---------- Newsletter ---------- */
   var newsletter = document.getElementById("newsletterForm");
   if (newsletter) {
+    var newsletterCheck = emailProblem(
+      "Enter your email address so we know where to send new pattern releases.");
+
     newsletter.addEventListener("submit", function (event) {
       event.preventDefault();
       var input = document.getElementById("newsletterEmail");
-      var value = input.value.trim();
       announce("newsletterStatus", "");
 
-      if (!value) {
-        setError("emailField", "newsletterError", "newsletterEmail",
-                 "Enter your email address so we know where to send new pattern releases.");
-        input.focus();
-        return;
-      }
-      if (!EMAIL_RE.test(value)) {
-        setError("emailField", "newsletterError", "newsletterEmail",
-                 "That email address is missing an @ or a domain. Check it and try again.");
+      var problem = newsletterCheck(input.value.trim());
+      setError("emailField", "newsletterError", "newsletterEmail", problem, newsletterCheck);
+      if (problem) {
         input.focus();
         return;
       }
 
-      setError("emailField", "newsletterError", "newsletterEmail", null);
       newsletter.reset();
       announce("newsletterStatus", "Thank you. You are on the list. We will write when the next pattern is ready.");
     });
   }
 
   /* ---------- Contact ---------- */
+  /* One row per field, so submit and the keystroke re-check run the same
+     check and can never disagree about whether a field is still wrong. */
+  var CONTACT_FIELDS = [
+    { fieldId: "nameField", errorId: "nameError", inputId: "contactName",
+      check: requiredProblem("Enter your name.") },
+    { fieldId: "contactEmailField", errorId: "contactEmailError", inputId: "contactEmail",
+      check: emailProblem("Enter your email address so we can reply.") },
+    { fieldId: "messageField", errorId: "messageError", inputId: "contactMessage",
+      check: requiredProblem("Tell us what you would like help with.") }
+  ];
+
   var contact = document.getElementById("contactForm");
   if (contact) {
     contact.addEventListener("submit", function (event) {
       event.preventDefault();
       announce("contactStatus", "");
 
-      var name = document.getElementById("contactName");
-      var email = document.getElementById("contactEmail");
-      var message = document.getElementById("contactMessage");
       var firstInvalid = null;
 
-      if (!name.value.trim()) {
-        setError("nameField", "nameError", "contactName", "Enter your name.");
-        firstInvalid = firstInvalid || name;
-      } else {
-        setError("nameField", "nameError", "contactName", null);
-      }
-
-      var emailValue = email.value.trim();
-      if (!emailValue) {
-        setError("contactEmailField", "contactEmailError", "contactEmail",
-                 "Enter your email address so we can reply.");
-        firstInvalid = firstInvalid || email;
-      } else if (!EMAIL_RE.test(emailValue)) {
-        setError("contactEmailField", "contactEmailError", "contactEmail",
-                 "That email address is missing an @ or a domain. Check it and try again.");
-        firstInvalid = firstInvalid || email;
-      } else {
-        setError("contactEmailField", "contactEmailError", "contactEmail", null);
-      }
-
-      if (!message.value.trim()) {
-        setError("messageField", "messageError", "contactMessage",
-                 "Tell us what you would like help with.");
-        firstInvalid = firstInvalid || message;
-      } else {
-        setError("messageField", "messageError", "contactMessage", null);
-      }
+      CONTACT_FIELDS.forEach(function (f) {
+        var input = document.getElementById(f.inputId);
+        if (!input) { return; }
+        var problem = f.check(input.value.trim());
+        setError(f.fieldId, f.errorId, f.inputId, problem, f.check);
+        if (problem && !firstInvalid) { firstInvalid = input; }
+      });
 
       if (firstInvalid) {
         firstInvalid.focus();

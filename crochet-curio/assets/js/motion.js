@@ -17,9 +17,14 @@
   function buildBackToTop() {
     var btn = document.createElement("button");
     btn.type = "button";
-    btn.className = "to-top";
+    btn.className = "btn-icon btn-icon--l btn-icon--tertiary to-top";
     btn.setAttribute("aria-label", "Back to top");
-    btn.innerHTML = '<span aria-hidden="true">&#8593;</span>';
+    /* Icon/Arrow Up/24 */
+    btn.innerHTML =
+      '<svg class="icon-24" viewBox="0 0 24 24" fill="none" stroke="currentColor"' +
+      ' stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"' +
+      ' aria-hidden="true" focusable="false">' +
+      '<path d="M12 19V5.00003M19 12L12 5.00003L5 12"/></svg>';
 
     btn.addEventListener("click", function () {
       window.scrollTo({
@@ -277,7 +282,6 @@
   var REVEALS = [
     [".section-head",            "up",    0],
     [".shop-card",               "up",    90],
-    [".product-card",            "up",    90],
     [".split > div:first-child", "left",  0],
     [".split__art",              "right", 0],
     [".step",                    "up",    120],

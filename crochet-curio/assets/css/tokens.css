@@ -13,34 +13,46 @@
   /* ---------- Primitives: Neutral ---------- */
   --neutral-900: #1a1a1a;
   --neutral-800: #333333;
+  --neutral-700: #4d4d4d;
   --neutral-600: #666666;
+  --neutral-450: #8c8c8c;
+  --neutral-400: #999999;
+  --neutral-200: #cccccc;
   --neutral-300: #b2b2b2;
   --neutral-100: #e5e5e5;
+  --neutral-50:  #f2f2f2;
   --primary-white: #ffffff;
+  --primary-black: #000000;
 
   /* ---------- Primitives: Brand ---------- */
-  --brand-100: #98a69b;
   --brand-500: #536b59;
   --brand-600: #3a5240;
   --brand-700: #203826;
-  --brand-800: #071f0d;
 
   /* ---------- Primitives: Brand accent ---------- */
+  --brand-accent-100: #e8cace;
+  --brand-accent-300: #e1b8bd;
+  --brand-accent-400: #ddafb5;
   --brand-accent-500: #d9a6ad;
-  --brand-accent-600: #bf8c93;
-  --brand-accent-700: #a6737a;
-  --brand-accent-800: #8c5a61;
 
   /* ---------- Primitives: Status ---------- */
+  --blue-200:   #c2ccff;
+  --blue-300:   #adbbff;
+  --blue-400:   #5c77ff;
   --blue-500:   #3355ff;
   --blue-600:   #2944cc;
   --blue-700:   #1f3399;
-  --orange-500: #ff8000;
-  --orange-600: #cc6600;
-  --red-500:    #e50000;
   --red-600:    #b70000;
-  --green-500:  #009933;
   --green-600:  #007a29;
+
+  /* ---------- Primitives: Pill ---------- */
+  /* The three ramps behind Content/Pill 1-3 — the steps each mode names. */
+  --violet-400: #c95cff;
+  --violet-600: #9629cc;
+  --yellow-400: #ffd633;
+  --yellow-800: #665200;
+  --teal-400:   #33d6d6;
+  --teal-700:   #007a7a;
 
   /* ---------- Semantic: Content ---------- */
   --content-primary:           var(--neutral-900);
@@ -51,63 +63,126 @@
   --content-tertiary-inverse:  var(--neutral-300);
   --content-disabled:          var(--neutral-300);
   --content-brand:             var(--brand-500);
-  --content-brand-accent:      var(--brand-accent-500);
-  --content-on-accent:         var(--neutral-900);
+  /* The manifesto band and the two inks on it. All three invert by mode:
+     a pink band with green ink in light, a green band with pink and white
+     ink in dark. 3.81:1 and 5.6:1 here; 3.81:1 and 5.81:1 there. Both light
+     inks are display type at 24px and up, so the 3:1 floor applies. */
+  --background-brand-system-inverse: var(--brand-accent-100);
+  --content-brand-system-inverse: var(--brand-500);
+  --content-brand-highlight:      var(--brand-600);
+  --content-static-black:            var(--primary-black);
+  /* Content/Link is Blue/600 in the file and Content/Link Hover is Blue/700 —
+     the same two steps the semantic tokens name there. 7.52:1 and 10.54:1 on
+     Background/Primary. */
   --content-link:              var(--blue-600);
   --content-link-hover:        var(--blue-700);
-  --content-link-pressed:      var(--blue-700);
   --content-negative:          var(--red-600);
   --content-positive:          var(--green-600);
 
+  /* Content/Pill 1, 2 and 3 — one ramp per skill level. The tint is a second
+     cue behind the word itself, never the only one (1.4.1). The file's own
+     light values: 6.02:1, 7.58:1 and 5.17:1 on Background/Primary, all clear
+     of the 4.5:1 floor the 12px pill answers to (1.4.3). */
+  --content-pill-1: var(--violet-600);
+  --content-pill-2: var(--yellow-800);
+  --content-pill-3: var(--teal-700);
+
   /* ---------- Semantic: Background ---------- */
   --background-primary:        var(--primary-white);
-  --background-hover:          #f2f2f2;
+  /* Background/Secondary — the surface one step off the page, for the tiles
+     product photography sits on. The Figma Background group carries no
+     Secondary token of its own, so each mode names its primitive outright:
+     Neutral/50 in light, Neutral/800 in dark. */
+  --background-secondary:      var(--neutral-50);
+  --background-hover:          var(--neutral-50);
   --background-pressed:        var(--neutral-100);
-  --background-disabled:       #f2f2f2;
+  --background-disabled:       var(--neutral-50);
   --background-inverse:        var(--neutral-900);
-  --background-brand:          var(--brand-600);
-  --background-brand-hover:    var(--brand-700);
-  --background-brand-pressed:  var(--brand-800);
-  /* The focus blue as a fill, not just a ring. Reserved for the
-     accessibility launcher: it is a control over the site rather than a
-     part of it, so it wears the system colour the focus ring already uses
-     instead of the brand green every other button wears. Same ramp as
-     Border/Focus and Content/Link — Blue/500 and Blue/600. */
-  --background-focus:          var(--blue-500);
-  --background-focus-hover:    var(--blue-600);
-  --background-brand-accent:         var(--brand-accent-500);
-  --background-brand-accent-hover:   var(--brand-accent-600);
-  --background-brand-accent-pressed: var(--brand-accent-800);
-  --background-accent-subtle:  var(--brand-accent-500);
+  --background-brand:        var(--brand-500);
+  --background-brand-hover:   var(--brand-600);
+  --background-brand-pressed: var(--brand-700);
+  /* Background/Info — the file's own token, Blue/500, and the same value as
+     Border/Focus Blue. The accessibility launcher fills with it: the launcher is a
+     control over the site rather than a part of it, so it wears the system
+     blue instead of the brand green every other button wears. */
+  --background-info:           var(--blue-500);
+  /* Background/Info Hover. Blue/600 in light, Blue/300 in dark — the ramp
+     steps down in light and up in dark, the same direction Content/Link
+     takes, so the hover always moves away from the page ground. */
+  --background-info-hover:     var(--blue-600);
+  /* Background/Newsletter — the sign-up panel's own surface. Brand accent/100
+     in light, Brand/700 in dark. It carries its own token rather than sharing
+     Background/Brand System Inverse, because that one is the manifesto band's
+     and the band stays Brand/500 in dark. */
+  --background-newsletter:     var(--brand-accent-100);
   --background-negative-subtle:#facccc;
-  /* The full-bleed pink band behind the hero copy and the manifesto. Named
-     here so the dark theme can restate it; the value is unchanged. */
-  --surface-band-accent:       #E8CACE;
   --background-positive-subtle:#ccebd6;
 
   /* ---------- Semantic: Border ---------- */
   --border-primary:   var(--neutral-600);
-  --border-secondary: #8c8c8c;
-  --border-tertiary:  #8c8c8c;
-  --border-disabled:  #cccccc;
-  --border-inverse:   var(--primary-white);
-  --border-focus:     var(--blue-500);
-  --border-mono:      var(--neutral-900);
-  --border-brand-accent: var(--brand-accent-500);
+  --border-secondary: var(--neutral-450);
+  --border-disabled:  var(--neutral-200);
+  --border-focus-blue:     var(--blue-500);
+  /* Border/Focus White — Primary/White, the ring for controls standing on a
+     dark panel where Border/Focus Blue itself drops to 1.6:1. Same value in both
+     modes, so it is not redefined below. */
+  --border-focus-white: var(--primary-white);
+  /* Border/Negative Focus — the file's own token, Red/600 in light. It is the
+     stroke a field in error wears, and it is what the focus ring switches to
+     while that field is still wrong: a field that takes focus while its value
+     is still invalid must not read as a field that has been fixed. 6.97:1 on
+     Background/Primary, against the 3:1 a focus ring answers to (1.4.11). */
+  --border-negative-focus: var(--red-600);
+  --border-section-divider: var(--neutral-100);
 
-  /* ---------- Stroke widths ---------- */
+  /* ---------- Icons ----------
+     The chevron the language selects draw for themselves. A native select
+     paints its arrow against the border box, outside the padding, so the
+     control turns off `appearance` and places this one instead — which puts
+     the arrow inside the padded container with the label. Drawn in
+     Content/Primary, so it carries a dark value below. */
+  --icon-chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5 6 8.5 10 4.5' fill='none' stroke='%231a1a1a' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+
+  /* ---------- Stroke widths ----------
+     Borders are XS unless they are calling for attention, then M. Icon stroke
+     follows icon size — 16/XS, 24/S, 32/M. */
+
+  /* Stroke Width/XS — any border that separates one thing from the next:
+     panels, cards, inputs, selects, table and list rules, section dividers,
+     the Tertiary button ring. Also the stroke weight for 16px icons. */
   --stroke-width-xs: 1px;
+  /* Stroke Width/S — 24px icons. An icon weight only; no border uses it. */
+  --stroke-width-s:  1.5px;
+  /* Stroke Width/M — anything the eye must be pulled to: every focus ring
+     (2px, offset 2px, per 1.4.11), the brand rule down a callout, a link's
+     hover underline, the border on a field in error. Also the stroke weight
+     for 32px icons. */
   --stroke-width-m:  2px;
 
   /* ---------- Radius ----------
-     The names are real (Border collection, FurGo design tokens); the values
-     below are not confirmed — the API returns names and types, not numbers.
-     Note the Button component uses no radius at all. */
+     A corner shape, not a size ramp: the steps rise while a corner still reads
+     as a corner, then stop. Circle and Pill are the two fully-round shapes and
+     sit outside the ramp by design. The Button component uses no radius at all.
+     Values confirmed against the Border collection. */
+
+  /* Radius/XS — the smallest corner that still softens an edge. Notes and
+     inline callouts, where the box should stay square-feeling. */
   --radius-xs:   4px;
-  --radius-s:    8px;  /* (inferred) */
-  --radius-m:    12px; /* (inferred) */
-  --radius-l:    16px;
-  --radius-pill: 999px;
+  /* Radius/S — thumbnails and images nested inside a larger rounded box, where
+     the inner corner has to stay tighter than the one containing it. */
+  --radius-s:    8px;
+  /* Radius/M — dense rows and floating panels: a list item or an overlay that
+     sits on the page rather than forming it. */
+  --radius-m:   12px;
+  /* Radius/L — the page's own surfaces. Cards, media, and the panels a section
+     is built out of. The default for anything large enough to read as a sheet. */
+  --radius-l:   16px;
+  /* Radius/Circle — round controls: a 48px launcher, a knob, a count badge, a
+     bullet. Sized for square boxes, where it clamps to a true circle. */
+  --radius-circle: 50px;
+  /* Radius/Pill — fully round on boxes wider than they are tall: chips, badges
+     and the switch track. Stated large so the shape never depends on width. */
+  --radius-pill:   999px;
 
   /* ---------- Spacing (4px base grid) ---------- */
   --space-2xs: 2px;   /* (inferred) */
@@ -128,27 +203,57 @@
   /* ---------- Typography family ---------- */
   --family-poppins: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
 
-  /* ---------- Heading scale (letter-spacing -1px, weight 600) ---------- */
-  --heading-5xl-size: 4.5rem;   --heading-5xl-line: 5rem;    /* 72 / 80 */
-  --heading-4xl-size: 4rem;     --heading-4xl-line: 4.5rem;  /* 64 / 72 */
-  --heading-3xl-size: 3.5rem;   --heading-3xl-line: 4rem;    /* 56 / 64 */
-  --heading-2xl-size: 3rem;     --heading-2xl-line: 3.5rem;  /* 48 / 56 */
-  --heading-xl-size:  2.5rem;   --heading-xl-line:  3rem;    /* 40 / 48 */
-  --heading-l-size:   2rem;     --heading-l-line:   2.5rem;  /* 32 / 40 */
-  --heading-m-size:   1.5rem;   --heading-m-line:   2rem;    /* 24 / 32 */
-  --heading-s-size:   1.25rem;  --heading-s-line:   1.75rem; /* 20 / 28 */
-  --heading-xs-size:  1rem;     --heading-xs-line:  1.5rem;  /* 16 / 24 */
-  --heading-tracking: -1px;
-  --heading-weight:   600;
+  /* ---------- Type primitives ----------
+     The raw steps of the scale, named by the pixel value they carry so the
+     mapping to the Figma primitive collection stays unambiguous whichever
+     t-shirt labels that collection uses. Nothing in the site points at
+     these directly: the semantic levels below do, and the breakpoint
+     blocks in styles.css re-point those. Each value is written once. */
+  --size-12: 0.75rem;   --line-16: 1rem;
+  --size-14: 0.875rem;  --line-20: 1.25rem;
+  --size-16: 1rem;      --line-24: 1.5rem;
+  --size-20: 1.25rem;   --line-28: 1.75rem;
+  --size-24: 1.5rem;    --line-32: 2rem;
+  --size-32: 2rem;      --line-40: 2.5rem;
+  --size-40: 2.5rem;    --line-48: 3rem;
+  --size-48: 3rem;      --line-56: 3.5rem;
+  --size-56: 3.5rem;    --line-64: 4rem;
+  --tracking-xs:      -1px;
+  --weight-regular:   400;
+  --weight-semi-bold: 600;
 
-  /* ---------- Body scale (letter-spacing 0) ---------- */
-  --text-xl-size: 1.25rem;  --text-xl-line: 1.75rem;  /* 20 / 28 */
-  --text-l-size:  1rem;     --text-l-line:  1.5rem;   /* 16 / 24 */
-  --text-m-size:  0.875rem; --text-m-line:  1.25rem;  /* 14 / 20 */
-  --text-s-size:  0.75rem;  --text-s-line:  1rem;     /* 12 / 16 */
-  --text-xs-size: 0.625rem; --text-xs-line: 0.875rem; /* 10 / 14 */
-  --text-regular: 400;
-  --text-semibold: 600;
+  /* ---------- Heading scale, semantic ----------
+     Seven levels. The values here are the Desktop mode; the L, M and S
+     modes live in the breakpoint blocks at the foot of styles.css, which
+     re-point these same names at smaller primitives. An element names its
+     level once and never restates it at a breakpoint.
+
+     Weight and letter spacing vary by neither level nor breakpoint. They
+     are named here anyway so all four rows of the Figma semantic
+     collection have somewhere to land. */
+  --heading-3xl-size: var(--size-56);  --heading-3xl-line: var(--line-64);
+  --heading-2xl-size: var(--size-48);  --heading-2xl-line: var(--line-56);
+  --heading-xl-size:  var(--size-40);  --heading-xl-line:  var(--line-48);
+  --heading-l-size:   var(--size-32);  --heading-l-line:   var(--line-40);
+  --heading-m-size:   var(--size-24);  --heading-m-line:   var(--line-32);
+  --heading-s-size:   var(--size-20);  --heading-s-line:   var(--line-28);
+  --heading-xs-size:  var(--size-16);  --heading-xs-line:  var(--line-24);
+  --heading-tracking: var(--tracking-xs);
+  --heading-weight:   var(--weight-semi-bold);
+
+  /* ---------- Body scale, semantic ----------
+     Four levels, and unlike the headings they hold one value at every
+     breakpoint. Body copy that shrinks on a phone is a legibility loss
+     rather than a responsive gain, so Text/L stays 16px throughout — which
+     is also what keeps a focused form field from zooming the page on iOS.
+     Where a component genuinely needs less room on a narrow screen it names
+     a smaller level for itself; the announcement bar is the one that does. */
+  --text-xl-size: var(--size-20);  --text-xl-line: var(--line-28);
+  --text-l-size:  var(--size-16);  --text-l-line:  var(--line-24);
+  --text-m-size:  var(--size-14);  --text-m-line:  var(--line-20);
+  --text-s-size:  var(--size-12);  --text-s-line:  var(--line-16);
+  --text-regular:  var(--weight-regular);
+  --text-semibold: var(--weight-semi-bold);
 
   /* ---------- Elevation ----------
      NOT IN THE FIGMA FILE. The library has no shadow variables and no effect
@@ -161,15 +266,40 @@
   --shadow-l5: 0 0 10px rgba(0,0,0,.08), 0 12px 24px rgba(0,0,0,.10);
   --shadow-l6: 0 0 12px rgba(0,0,0,.08), 0 16px 32px rgba(0,0,0,.10);
 
-  /* ---------- Overlay ---------- */
-  --overlay-50:         rgba(0,0,0,.5);
-  --overlay-50-inverse: rgba(255,255,255,.5);
-
   /* ---------- Layout (Figma frames: Desktop/Tablet 1440, Mobile 393) ---------- */
   --layout-max:     1200px;
-  --layout-gutter:  var(--space-8xl); /* 96px — echoes the reference site's generous margins */
+  --layout-margin:  var(--space-8xl); /* 96px — the page margin, Figma layout guide "margin" */
   --layout-section: var(--space-9xl); /* 120px vertical rhythm */
 }
+
+/* ============================================================
+   Breakpoints
+
+   Four layouts, so three switches. These cannot be custom properties:
+   a media query is resolved before variables exist, so
+   `@media (max-width: var(--bp-l))` is not valid CSS. The numbers are
+   written literally at every query and named here instead.
+
+     XL   default, no query   desktop. The layout stops growing at
+                              1392px (--layout-max + two gutters)
+                              rather than at a breakpoint.
+     L    max-width: 1024px   small laptop, landscape tablet
+     M    max-width:  768px   portrait tablet
+     S    max-width:  480px   phone
+
+   The Figma frames are 1440 and 393. Those are canvas widths, not
+   switches: 1440 is a screen and 1392 is where content caps, and a
+   switch at 393 would hand a 430px phone the tablet layout. A
+   breakpoint sits above the widest device in its class.
+
+   S has no floor, and must not have one — below it nothing would
+   apply. 320px is the narrowest width the site is tested at.
+
+   Two height rules live alongside these. They are not breakpoints:
+   `max-height: 720px` tightens the hero on any short viewport, and
+   `max-height: 560px and orientation: landscape` is the landscape
+   phone guard.
+   ============================================================ */
 
 /* ============================================================
    Dark theme
@@ -186,175 +316,178 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     /* ---------- Primitives the dark collection adds ---------- */
-    --brand-400: #647a6a;
-    --brand-300: #75897a;
-    --brand-200: #87978b;
     --brand-accent-400: #ddafb5;
     --brand-accent-300: #e1b8bd;
-    --brand-accent-200: #e4c1c6;
 
-    /* Surfaces — the file's Surface/L0 to L6 */
-    --surface-l0: #0d0d0d;
+    /* Surface/L1 — the only step of the Surface ramp the site draws on. */
     --surface-l1: #1a1a1a;
-    --surface-l2: #262626;
-    --surface-l3: #333333;
-    --surface-l4: #404040;
-    --surface-l5: #4d4d4d;
-    --surface-l6: #595959;
-    --system-inverse-static: #000000;  /* the file's Background/System Inverse Static */
 
-    /* Hairlines. The stylesheets reach for --neutral-100 directly wherever
-       a 1px rule is drawn (25 places); at #e5e5e5 those would glare on a
-       dark page, so the primitive carries the file's Border/Tertiary value
-       here. Its two non-border uses — the empty basket chip and the switch
-       track — want the same dark grey anyway. */
-    --neutral-100: #333333;
 
     /* ---------- Semantic: Content ---------- */
-    --content-primary:           #ffffff;
-    --content-secondary:         #e5e5e5;
-    --content-tertiary:          #b2b2b2;
-    --content-primary-inverse:   #1a1a1a;
-    --content-secondary-inverse: #333333;
-    --content-tertiary-inverse:  #666666;
-    --content-disabled:          #4d4d4d;
-    /* DEVIATION — the file's dark Content/Brand is Brand/400 (#647a6a),
-       which measures 3.76:1 on Background/Primary and 2.73:1 on the tinted
-       sections: below the 4.5:1 body-text floor in both. Brand/100 from the
-       same ramp reads 6.85:1 and 4.97:1 (1.4.3). */
-    --content-brand:             var(--brand-100);
-    --content-brand-accent:      var(--brand-accent-400);
-    --content-link:              #5c77ff;
-    --content-link-hover:        #617bff;
-    --content-link-pressed:      #adbbff;
+    --content-primary:           var(--primary-white);
+    --content-secondary:         var(--neutral-100);
+    --content-tertiary:          var(--neutral-300);
+    --content-primary-inverse:   var(--neutral-900);
+    --content-secondary-inverse: var(--neutral-800);
+    --content-tertiary-inverse:  var(--neutral-600);
+    --content-disabled:          var(--neutral-700);
+    /* Content/Brand is Brand accent/400 on a dark page — the file's own dark
+       value. It reads 9:1 on Background/Primary and 6.5:1 on the tinted
+       sections, clearing the 4.5:1 body-text floor in both (1.4.3). */
+    --content-brand:             var(--brand-accent-400);
+    /* The manifesto band is green here, so its two inks invert: the phrase
+       takes Brand accent/100 (3.81:1) and the words it turns on take white
+       (5.81:1). Both clear the 3:1 floor the display sizes answer to. */
+    --background-brand-system-inverse: var(--brand-500);
+    --background-newsletter:     var(--brand-700);
+    --content-brand-system-inverse: var(--brand-accent-100);
+    --content-brand-highlight:      var(--primary-white);
+    /* Content/Link is Blue/300 on a dark page and Content/Link Hover is
+       Blue/200 — both the file's own dark values. 9.39:1 and 11.08:1 on
+       Background/Primary. */
+    --content-link:              var(--blue-300);
+    --content-link-hover:        var(--blue-200);
     /* DEVIATION — Content/Negative (#ea3333) lands at 4.16:1 on the page
        background, so the file's own Content/Negative Bold is used, at
        5.61:1. Positive (#33ad5c, 6.03:1) needs no such step. */
-    --content-negative:          #ef6666;
+    /* Content/Negative in dark. 7.52:1 on Background/Primary, 5.48:1 on
+       Background/Newsletter. */
+    --content-negative:          #ff8599;
     /* DEVIATION — Content/Positive (#33ad5c) reads 4.38:1 on the tinted
        sections, just under the floor for the 12px level pill, so the file's
        own Content/Positive Bold stands in: 5.79:1 there, 7.97:1 on the page. */
     --content-positive:          #66c285;
 
+    /* Content/Pill 1, 2 and 3 take the dark collection values, the 400 step of
+       each ramp: 5.35:1, 12.36:1 and 9.72:1 on Background/Primary. */
+    --content-pill-1: var(--violet-400);
+    --content-pill-2: var(--yellow-400);
+    --content-pill-3: var(--teal-400);
+
     /* ---------- Semantic: Background ---------- */
     --background-primary:        var(--surface-l1);
-    --background-hover:          #333333;
-    --background-pressed:        #4d4d4d;
-    --background-disabled:       #333333;
-    --background-inverse:        #ffffff;
-    --background-brand:          var(--brand-400);
-    --background-brand-hover:    var(--brand-300);
-    --background-brand-pressed:  var(--brand-200);
-    /* The dark blue ramp: Border/Focus and Content/Link Hover. White on
-       #5c77ff reads 3.78:1 — under the text floor, over the 3:1 one for a
-       26px icon and the button's own edge (1.4.11), which is all it carries. */
-    --background-focus:          #5c77ff;
-    --background-focus-hover:    #617bff;
-    --background-accent-subtle:  var(--brand-accent-400);
+    /* Background/Secondary — Neutral/800. --neutral-100 is redefined to this
+       same value above, so the primitive is named outright here. */
+    --background-secondary:      var(--neutral-800);
+    --background-hover:          var(--neutral-800);
+    --background-pressed:        var(--neutral-700);
+    --background-disabled:       var(--neutral-800);
+    --background-inverse:        var(--primary-white);
+    --background-brand:        var(--brand-accent-500);
+    --background-brand-hover:   var(--brand-accent-400);
+    --background-brand-pressed: var(--brand-accent-300);
+    /* Background/Info — the file's dark value, Blue/400, the same as
+       Border/Focus Blue. White on #5c77ff reads 3.78:1 — under the text floor,
+       over the 3:1 one for a 26px icon and the button's own edge (1.4.11),
+       which is all it carries. */
+    --background-info:           var(--blue-400);
+    --background-info-hover:     var(--blue-300);
     --background-negative-subtle:#5c0000;
     --background-positive-subtle:#003d14;
-    /* DEVIATION — the band is the file's dark Brand accent/400 rather than
-       the light #E8CACE. It stays a pink band: the ink on it moves instead,
-       and those overrides sit with the components that draw it. */
-    --surface-band-accent:       var(--brand-accent-400);
 
     /* ---------- Semantic: Border ---------- */
-    --border-primary:   #999999;
-    --border-secondary: #666666;
-    --border-tertiary:  #333333;
-    --border-disabled:  #4d4d4d;
-    --border-inverse:   #1a1a1a;
-    --border-focus:     #5c77ff;
-    --border-mono:      #ffffff;
-    --border-brand-accent: var(--brand-accent-400);
+    --border-primary:   var(--neutral-400);
+    --border-secondary: var(--neutral-450);
+    --border-disabled:  var(--neutral-700);
+    --border-focus-blue:     var(--blue-400);
+    /* Border/Negative Focus in dark is Red/300, the same value
+       Content/Negative takes. 7.51:1 on Background/Primary, 5.48:1 on
+       Background/Newsletter — the one stroke every form in the site wears. */
+    --border-negative-focus: #ff8599;
+    --border-section-divider: var(--neutral-800);
+
+    /* The select chevron, in this mode's Content/Primary. */
+    --icon-chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5 6 8.5 10 4.5' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   }
 }
 
 /* The same values again, for a reader who chose dark in the accessibility
-   panel rather than in their operating system. */
+   panel rather than in their operating system. The panel writes data-theme
+   on the root, which the media query above cannot see. */
 :root[data-theme="dark"] {
     /* ---------- Primitives the dark collection adds ---------- */
-    --brand-400: #647a6a;
-    --brand-300: #75897a;
-    --brand-200: #87978b;
     --brand-accent-400: #ddafb5;
     --brand-accent-300: #e1b8bd;
-    --brand-accent-200: #e4c1c6;
 
-    /* Surfaces — the file's Surface/L0 to L6 */
-    --surface-l0: #0d0d0d;
+    /* Surface/L1 — the only step of the Surface ramp the site draws on. */
     --surface-l1: #1a1a1a;
-    --surface-l2: #262626;
-    --surface-l3: #333333;
-    --surface-l4: #404040;
-    --surface-l5: #4d4d4d;
-    --surface-l6: #595959;
-    --system-inverse-static: #000000;  /* the file's Background/System Inverse Static */
 
-    /* Hairlines. The stylesheets reach for --neutral-100 directly wherever
-       a 1px rule is drawn (25 places); at #e5e5e5 those would glare on a
-       dark page, so the primitive carries the file's Border/Tertiary value
-       here. Its two non-border uses — the empty basket chip and the switch
-       track — want the same dark grey anyway. */
-    --neutral-100: #333333;
 
     /* ---------- Semantic: Content ---------- */
-    --content-primary:           #ffffff;
-    --content-secondary:         #e5e5e5;
-    --content-tertiary:          #b2b2b2;
-    --content-primary-inverse:   #1a1a1a;
-    --content-secondary-inverse: #333333;
-    --content-tertiary-inverse:  #666666;
-    --content-disabled:          #4d4d4d;
-    /* DEVIATION — the file's dark Content/Brand is Brand/400 (#647a6a),
-       which measures 3.76:1 on Background/Primary and 2.73:1 on the tinted
-       sections: below the 4.5:1 body-text floor in both. Brand/100 from the
-       same ramp reads 6.85:1 and 4.97:1 (1.4.3). */
-    --content-brand:             var(--brand-100);
-    --content-brand-accent:      var(--brand-accent-400);
-    --content-link:              #5c77ff;
-    --content-link-hover:        #617bff;
-    --content-link-pressed:      #adbbff;
+    --content-primary:           var(--primary-white);
+    --content-secondary:         var(--neutral-100);
+    --content-tertiary:          var(--neutral-300);
+    --content-primary-inverse:   var(--neutral-900);
+    --content-secondary-inverse: var(--neutral-800);
+    --content-tertiary-inverse:  var(--neutral-600);
+    --content-disabled:          var(--neutral-700);
+    /* Content/Brand is Brand accent/400 on a dark page — the file's own dark
+       value. It reads 9:1 on Background/Primary and 6.5:1 on the tinted
+       sections, clearing the 4.5:1 body-text floor in both (1.4.3). */
+    --content-brand:             var(--brand-accent-400);
+    /* The manifesto band is green here, so its two inks invert: the phrase
+       takes Brand accent/100 (3.81:1) and the words it turns on take white
+       (5.81:1). Both clear the 3:1 floor the display sizes answer to. */
+    --background-brand-system-inverse: var(--brand-500);
+    --background-newsletter:     var(--brand-700);
+    --content-brand-system-inverse: var(--brand-accent-100);
+    --content-brand-highlight:      var(--primary-white);
+    /* Content/Link is Blue/300 on a dark page and Content/Link Hover is
+       Blue/200 — both the file's own dark values. 9.39:1 and 11.08:1 on
+       Background/Primary. */
+    --content-link:              var(--blue-300);
+    --content-link-hover:        var(--blue-200);
     /* DEVIATION — Content/Negative (#ea3333) lands at 4.16:1 on the page
        background, so the file's own Content/Negative Bold is used, at
        5.61:1. Positive (#33ad5c, 6.03:1) needs no such step. */
-    --content-negative:          #ef6666;
+    /* Content/Negative in dark. 7.52:1 on Background/Primary, 5.48:1 on
+       Background/Newsletter. */
+    --content-negative:          #ff8599;
     /* DEVIATION — Content/Positive (#33ad5c) reads 4.38:1 on the tinted
        sections, just under the floor for the 12px level pill, so the file's
        own Content/Positive Bold stands in: 5.79:1 there, 7.97:1 on the page. */
     --content-positive:          #66c285;
 
+    /* Content/Pill 1, 2 and 3 take the dark collection values, the 400 step of
+       each ramp: 5.35:1, 12.36:1 and 9.72:1 on Background/Primary. */
+    --content-pill-1: var(--violet-400);
+    --content-pill-2: var(--yellow-400);
+    --content-pill-3: var(--teal-400);
+
     /* ---------- Semantic: Background ---------- */
     --background-primary:        var(--surface-l1);
-    --background-hover:          #333333;
-    --background-pressed:        #4d4d4d;
-    --background-disabled:       #333333;
-    --background-inverse:        #ffffff;
-    --background-brand:          var(--brand-400);
-    --background-brand-hover:    var(--brand-300);
-    --background-brand-pressed:  var(--brand-200);
-    /* The dark blue ramp: Border/Focus and Content/Link Hover. White on
-       #5c77ff reads 3.78:1 — under the text floor, over the 3:1 one for a
-       26px icon and the button's own edge (1.4.11), which is all it carries. */
-    --background-focus:          #5c77ff;
-    --background-focus-hover:    #617bff;
-    --background-accent-subtle:  var(--brand-accent-400);
+    /* Background/Secondary — Neutral/800. --neutral-100 is redefined to this
+       same value above, so the primitive is named outright here. */
+    --background-secondary:      var(--neutral-800);
+    --background-hover:          var(--neutral-800);
+    --background-pressed:        var(--neutral-700);
+    --background-disabled:       var(--neutral-800);
+    --background-inverse:        var(--primary-white);
+    --background-brand:        var(--brand-accent-500);
+    --background-brand-hover:   var(--brand-accent-400);
+    --background-brand-pressed: var(--brand-accent-300);
+    /* Background/Info — the file's dark value, Blue/400, the same as
+       Border/Focus Blue. White on #5c77ff reads 3.78:1 — under the text floor,
+       over the 3:1 one for a 26px icon and the button's own edge (1.4.11),
+       which is all it carries. */
+    --background-info:           var(--blue-400);
+    --background-info-hover:     var(--blue-300);
     --background-negative-subtle:#5c0000;
     --background-positive-subtle:#003d14;
-    /* DEVIATION — the band is the file's dark Brand accent/400 rather than
-       the light #E8CACE. It stays a pink band: the ink on it moves instead,
-       and those overrides sit with the components that draw it. */
-    --surface-band-accent:       var(--brand-accent-400);
 
     /* ---------- Semantic: Border ---------- */
-    --border-primary:   #999999;
-    --border-secondary: #666666;
-    --border-tertiary:  #333333;
-    --border-disabled:  #4d4d4d;
-    --border-inverse:   #1a1a1a;
-    --border-focus:     #5c77ff;
-    --border-mono:      #ffffff;
-    --border-brand-accent: var(--brand-accent-400);
+    --border-primary:   var(--neutral-400);
+    --border-secondary: var(--neutral-450);
+    --border-disabled:  var(--neutral-700);
+    --border-focus-blue:     var(--blue-400);
+    /* Border/Negative Focus in dark is Red/300, the same value
+       Content/Negative takes. 7.51:1 on Background/Primary, 5.48:1 on
+       Background/Newsletter — the one stroke every form in the site wears. */
+    --border-negative-focus: #ff8599;
+    --border-section-divider: var(--neutral-800);
+
+    /* The select chevron, in this mode's Content/Primary. */
+    --icon-chevron-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5 6 8.5 10 4.5' fill='none' stroke='%23ffffff' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 

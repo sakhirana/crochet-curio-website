@@ -99,12 +99,14 @@ const formatList = p => {
 function header(activeBasket, activeLibrary) {
   return `<header class="site-header">
   <div class="announcement" id="announcement">
-    <p>Instant download &middot; Written rows, diagrams and stitch counts &middot; Yours to keep</p>
-    <button class="announcement__close" type="button" id="announcementClose">
+    <p>Get 5% off on your first checkout</p>
+    <button class="btn-icon btn-icon--s announcement__close" type="button" id="announcementClose">
       <span class="visually-hidden">Dismiss announcement</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" aria-hidden="true" focusable="false">
-        <path d="M6 6l12 12M18 6L6 18"/>
+      <!-- Icon/X/16 -->
+      <svg class="icon-16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+           stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true" focusable="false">
+        <path d="M12 4L4 12M4 4L12 12"/>
       </svg>
     </button>
   </div>
@@ -114,7 +116,12 @@ function header(activeBasket, activeLibrary) {
       <a class="brand" href="index.html">Crochet&nbsp;Curio</a>
 
       <button class="nav-toggle" type="button" id="navToggle" aria-expanded="false" aria-controls="navList">
-        <span aria-hidden="true">&#9776;</span> Menu
+        <!-- Icon/Menu/24 -->
+        <svg class="icon-24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+             aria-hidden="true" focusable="false">
+          <path d="M3 12H21M3 6H21M3 18H21"/>
+        </svg> Menu
       </button>
 
       <ul class="nav-list" id="navList">

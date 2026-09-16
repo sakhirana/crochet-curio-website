@@ -4,8 +4,9 @@
     {
       "name": "crochet-curio",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["crochet-curio/serve.js", "4173"],
-      "port": 4173
+      "runtimeArgs": ["crochet-curio/serve.js"],
+      "port": 4173,
+      "autoPort": true
     }
   ]
 }

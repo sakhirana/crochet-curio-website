@@ -66,7 +66,7 @@
   }
 
   h1, h2, h3 {
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.25;
     margin: 1.4em 0 0.5em;
   }
@@ -91,19 +91,23 @@
   }
   .key dt {
     flex: 0 0 5.5em;
-    font-weight: 700;
+    font-weight: 600;
   }
   .key dd { margin: 0; }
 
   /* Row instructions read better with the row name held out from the
      text that follows it. */
   .rows dt {
-    font-weight: 700;
+    font-weight: 600;
     margin-top: 0.6em;
   }
   .rows dd { margin: 0 0 0.2em; }
 
-  .count { font-weight: 700; }
+  /* The two weights the design system carries are 400 and 600, so the
+     browser default of 700 for <b> is brought down to the semibold the
+     rest of the page uses. */
+  b, strong { font-weight: 600; }
+  .count { font-weight: 600; }
 
   a {
     color: var(--ink);
