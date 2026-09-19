@@ -176,9 +176,9 @@
   /* Even columns. The info side carries the spec strip, whose second
      column has to hold the longest format name on one line. */
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-8xl);
+  gap: var(--space-10xl);
   align-items: start;
-  padding-bottom: var(--space-8xl);
+  padding-bottom: var(--space-10xl);
 }
 
 /* The image column sticks as a whole, so the "this is the pattern, not the
@@ -200,10 +200,13 @@
 }
 
 .kicker {
+  /* Text/S Semibold. The .08em this carried is not a value the system has,
+     so the level's own tracking applies and the weight carries the emphasis
+     the extra spacing used to. Same treatment as .eyebrow, one step down. */
   font-size: var(--text-s-size);
   line-height: var(--text-s-line);
   font-weight: var(--text-semibold);
-  letter-spacing: .08em;
+  letter-spacing: var(--text-tracking);
   text-transform: uppercase;
   color: var(--content-brand);
   margin-bottom: var(--space-s);
@@ -266,11 +269,15 @@ ul.spec-strip__formats {
   font-weight: var(--text-semibold);
   color: var(--content-primary);
 }
+/* Text/S Semibold. This inherited the body weight before and leaned on
+   .06em to separate itself from the value beneath it; the weight does that
+   work now. */
 .spec-strip__label {
   font-size: var(--text-s-size);
   line-height: var(--text-s-line);
+  font-weight: var(--text-semibold);
   text-transform: uppercase;
-  letter-spacing: .06em;
+  letter-spacing: var(--text-tracking);
   color: var(--content-tertiary);
 }
 .spec-strip__value {
@@ -432,7 +439,7 @@ ul.spec-strip__formats {
   grid-template-columns: 1.5fr .9fr;
   gap: var(--space-6xl);
   align-items: start;
-  padding-bottom: var(--space-8xl);
+  padding-bottom: var(--space-10xl);
 }
 
 .basket-list { list-style: none; margin: 0; padding: 0; }
@@ -481,7 +488,7 @@ ul.spec-strip__formats {
 .basket-row__remove:hover  { color: var(--content-link-hover);   background: var(--background-hover); }
 
 .basket-empty {
-  padding: var(--space-8xl) var(--space-2xl);
+  padding: var(--space-10xl) var(--space-2xl);
   text-align: center;
   border: var(--stroke-width-xs) solid var(--border-section-divider);
   border-radius: var(--radius-l);
@@ -525,7 +532,7 @@ ul.spec-strip__formats {
   grid-template-columns: 1.2fr .8fr;
   gap: var(--space-6xl);
   align-items: start;
-  padding-bottom: var(--space-8xl);
+  padding-bottom: var(--space-10xl);
 }
 .checkout-form { display: grid; gap: var(--space-xl); }
 .checkout-form fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: var(--space-xl); }
@@ -630,7 +637,7 @@ ul.spec-strip__formats {
    ============================================================ */
 .library-list {
   list-style: none;
-  margin: 0 0 var(--space-8xl);
+  margin: 0 0 var(--space-10xl);
   padding: 0;
   display: grid;
   gap: var(--space-xl);
@@ -679,7 +686,7 @@ ul.spec-strip__formats {
 }
 
 .library-help {
-  padding-block: var(--space-6xl) var(--space-8xl);
+  padding-block: var(--space-6xl) var(--space-10xl);
   border-top: var(--stroke-width-xs) solid var(--border-section-divider);
 }
 .library-help h2 {

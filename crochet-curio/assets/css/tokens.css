@@ -42,7 +42,9 @@
   --blue-500:   #3355ff;
   --blue-600:   #2944cc;
   --blue-700:   #1f3399;
+  --red-300:    #ff8599;
   --red-600:    #b70000;
+  --green-300:  #66c285;
   --green-600:  #007a29;
 
   /* ---------- Primitives: Pill ---------- */
@@ -59,8 +61,6 @@
   --content-secondary:         var(--neutral-800);
   --content-tertiary:          var(--neutral-600);
   --content-primary-inverse:   var(--primary-white);
-  --content-secondary-inverse: var(--neutral-100);
-  --content-tertiary-inverse:  var(--neutral-300);
   --content-disabled:          var(--neutral-300);
   --content-brand:             var(--brand-500);
   /* The manifesto band and the two inks on it. All three invert by mode:
@@ -115,8 +115,6 @@
      Background/Brand System Inverse, because that one is the manifesto band's
      and the band stays Brand/500 in dark. */
   --background-newsletter:     var(--brand-accent-100);
-  --background-negative-subtle:#facccc;
-  --background-positive-subtle:#ccebd6;
 
   /* ---------- Semantic: Border ---------- */
   --border-primary:   var(--neutral-600);
@@ -151,8 +149,6 @@
      panels, cards, inputs, selects, table and list rules, section dividers,
      the Tertiary button ring. Also the stroke weight for 16px icons. */
   --stroke-width-xs: 1px;
-  /* Stroke Width/S — 24px icons. An icon weight only; no border uses it. */
-  --stroke-width-s:  1.5px;
   /* Stroke Width/M — anything the eye must be pulled to: every focus ring
      (2px, offset 2px, per 1.4.11), the brand rule down a callout, a link's
      hover underline, the border on a field in error. Also the stroke weight
@@ -184,21 +180,24 @@
      and the switch track. Stated large so the shape never depends on width. */
   --radius-pill:   999px;
 
-  /* ---------- Spacing (4px base grid) ---------- */
-  --space-2xs: 2px;   /* (inferred) */
-  --space-xs:  4px;
-  --space-s:   8px;
-  --space-m:   12px;
-  --space-l:   16px;
-  --space-xl:  24px;
-  --space-2xl: 32px;
-  --space-3xl: 40px;  /* (inferred) */
-  --space-4xl: 48px;  /* (inferred) */
-  --space-5xl: 56px;
-  --space-6xl: 64px;  /* (inferred) */
-  --space-7xl: 80px;  /* (inferred) */
-  --space-8xl: 96px;  /* (inferred) */
-  --space-9xl: 120px; /* (inferred) */
+  /* ---------- Spacing (4px base grid) ----------
+     Names and values match the Figma "Spacing" collection one to one.
+     That collection runs an unbroken 2XS–13XL; only the steps the site
+     actually uses are declared here, so the sequence has holes (no 3XL,
+     7XL, 9XL, 11XL, 12XL) but never a name that disagrees with Figma. */
+  --space-2xs:    2px;
+  --space-xs:     4px;
+  --space-s:      8px;
+  --space-m:     12px;
+  --space-l:     16px;
+  --space-xl:    24px;
+  --space-2xl:   32px;
+  --space-4xl:   48px;
+  --space-5xl:   56px;
+  --space-6xl:   64px;
+  --space-8xl:   80px;
+  --space-10xl:  96px;
+  --space-13xl: 120px;
 
   /* ---------- Typography family ---------- */
   --family-poppins: "Poppins", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -218,6 +217,9 @@
   --size-40: 2.5rem;    --line-48: 3rem;
   --size-48: 3rem;      --line-56: 3.5rem;
   --size-56: 3.5rem;    --line-64: 4rem;
+  /* Only the display style reaches this far up the scale. */
+  --size-96: 6rem;
+  --tracking-none:    0;
   --tracking-xs:      -1px;
   --weight-regular:   400;
   --weight-semi-bold: 600;
@@ -232,7 +234,6 @@
      are named here anyway so all four rows of the Figma semantic
      collection have somewhere to land. */
   --heading-3xl-size: var(--size-56);  --heading-3xl-line: var(--line-64);
-  --heading-2xl-size: var(--size-48);  --heading-2xl-line: var(--line-56);
   --heading-xl-size:  var(--size-40);  --heading-xl-line:  var(--line-48);
   --heading-l-size:   var(--size-32);  --heading-l-line:   var(--line-40);
   --heading-m-size:   var(--size-24);  --heading-m-line:   var(--line-32);
@@ -240,6 +241,24 @@
   --heading-xs-size:  var(--size-16);  --heading-xs-line:  var(--line-24);
   --heading-tracking: var(--tracking-xs);
   --heading-weight:   var(--weight-semi-bold);
+
+  /* ---------- Display, semantic ----------
+     One style, and the only type on the site that is fluid rather than
+     stepped: it grows with the window instead of snapping at a breakpoint,
+     so it has two ends rather than four modes. The Figma file holds four
+     static values for it because a Figma variable cannot carry a ramp — the
+     Desktop and Mobile columns there are these two ends, and the middle two
+     are what the ramp passes through at 1024 and 768.
+
+     48 is the floor rather than the 40 this used to carry. At 40 the line
+     shrank as the window grew: the phone rule capped at 52 and the rule
+     above it restarted at 9vw, which is 43px at 481px wide. One ramp across
+     the whole range, with no step down into it, removes that.
+
+     Line height is a ratio, so one value serves every size on the ramp. */
+  --display-hero-min:  var(--size-48);
+  --display-hero-max:  var(--size-96);
+  --display-hero-line: 1.02;
 
   /* ---------- Body scale, semantic ----------
      Four levels, and unlike the headings they hold one value at every
@@ -252,24 +271,27 @@
   --text-l-size:  var(--size-16);  --text-l-line:  var(--line-24);
   --text-m-size:  var(--size-14);  --text-m-line:  var(--line-20);
   --text-s-size:  var(--size-12);  --text-s-line:  var(--line-16);
+  --text-tracking: var(--tracking-none);
   --text-regular:  var(--weight-regular);
   --text-semibold: var(--weight-semi-bold);
 
   /* ---------- Elevation ----------
-     NOT IN THE FIGMA FILE. The library has no shadow variables and no effect
-     styles; these six were invented before the file could be read. Add them
-     to the design system or drop them from the CSS — see README. */
+     Four levels, one per surface that leaves the page. L1 the switch knob,
+     L2 the header dropdown, L3 the to-top button and the accessibility
+     launcher, L4 the accessibility panel. Each step widens the ambient
+     blur and drops the key shadow further, so the order reads as height.
+
+     Being added to the Figma library as an Elevation effect set; until
+     they land there, this block is the source of record. */
   --shadow-l1: 0 0 2px  rgba(0,0,0,.08), 0 2px  4px  rgba(0,0,0,.08);
   --shadow-l2: 0 0 4px  rgba(0,0,0,.08), 0 4px  8px  rgba(0,0,0,.10);
   --shadow-l3: 0 0 6px  rgba(0,0,0,.08), 0 8px  16px rgba(0,0,0,.10);
-  --shadow-l4: 0 0 8px  rgba(0,0,0,.08), 0 10px 20px rgba(0,0,0,.10);
-  --shadow-l5: 0 0 10px rgba(0,0,0,.08), 0 12px 24px rgba(0,0,0,.10);
-  --shadow-l6: 0 0 12px rgba(0,0,0,.08), 0 16px 32px rgba(0,0,0,.10);
+  --shadow-l4: 0 0 10px rgba(0,0,0,.08), 0 12px 24px rgba(0,0,0,.10);
 
   /* ---------- Layout (Figma frames: Desktop/Tablet 1440, Mobile 393) ---------- */
   --layout-max:     1200px;
-  --layout-margin:  var(--space-8xl); /* 96px — the page margin, Figma layout guide "margin" */
-  --layout-section: var(--space-9xl); /* 120px vertical rhythm */
+  --layout-margin:  var(--space-10xl); /* 96px — the page margin, Figma layout guide "margin" */
+  --layout-section: var(--space-13xl); /* 120px vertical rhythm */
 }
 
 /* ============================================================
@@ -320,7 +342,7 @@
     --brand-accent-300: #e1b8bd;
 
     /* Surface/L1 — the only step of the Surface ramp the site draws on. */
-    --surface-l1: #1a1a1a;
+    --surface-l1: var(--neutral-900);
 
 
     /* ---------- Semantic: Content ---------- */
@@ -328,8 +350,6 @@
     --content-secondary:         var(--neutral-100);
     --content-tertiary:          var(--neutral-300);
     --content-primary-inverse:   var(--neutral-900);
-    --content-secondary-inverse: var(--neutral-800);
-    --content-tertiary-inverse:  var(--neutral-600);
     --content-disabled:          var(--neutral-700);
     /* Content/Brand is Brand accent/400 on a dark page — the file's own dark
        value. It reads 9:1 on Background/Primary and 6.5:1 on the tinted
@@ -352,11 +372,11 @@
        5.61:1. Positive (#33ad5c, 6.03:1) needs no such step. */
     /* Content/Negative in dark. 7.52:1 on Background/Primary, 5.48:1 on
        Background/Newsletter. */
-    --content-negative:          #ff8599;
+    --content-negative:          var(--red-300);
     /* DEVIATION — Content/Positive (#33ad5c) reads 4.38:1 on the tinted
        sections, just under the floor for the 12px level pill, so the file's
        own Content/Positive Bold stands in: 5.79:1 there, 7.97:1 on the page. */
-    --content-positive:          #66c285;
+    --content-positive:          var(--green-300);
 
     /* Content/Pill 1, 2 and 3 take the dark collection values, the 400 step of
        each ramp: 5.35:1, 12.36:1 and 9.72:1 on Background/Primary. */
@@ -382,8 +402,6 @@
        which is all it carries. */
     --background-info:           var(--blue-400);
     --background-info-hover:     var(--blue-300);
-    --background-negative-subtle:#5c0000;
-    --background-positive-subtle:#003d14;
 
     /* ---------- Semantic: Border ---------- */
     --border-primary:   var(--neutral-400);
@@ -393,7 +411,7 @@
     /* Border/Negative Focus in dark is Red/300, the same value
        Content/Negative takes. 7.51:1 on Background/Primary, 5.48:1 on
        Background/Newsletter — the one stroke every form in the site wears. */
-    --border-negative-focus: #ff8599;
+    --border-negative-focus: var(--red-300);
     --border-section-divider: var(--neutral-800);
 
     /* The select chevron, in this mode's Content/Primary. */
@@ -410,7 +428,7 @@
     --brand-accent-300: #e1b8bd;
 
     /* Surface/L1 — the only step of the Surface ramp the site draws on. */
-    --surface-l1: #1a1a1a;
+    --surface-l1: var(--neutral-900);
 
 
     /* ---------- Semantic: Content ---------- */
@@ -418,8 +436,6 @@
     --content-secondary:         var(--neutral-100);
     --content-tertiary:          var(--neutral-300);
     --content-primary-inverse:   var(--neutral-900);
-    --content-secondary-inverse: var(--neutral-800);
-    --content-tertiary-inverse:  var(--neutral-600);
     --content-disabled:          var(--neutral-700);
     /* Content/Brand is Brand accent/400 on a dark page — the file's own dark
        value. It reads 9:1 on Background/Primary and 6.5:1 on the tinted
@@ -442,11 +458,11 @@
        5.61:1. Positive (#33ad5c, 6.03:1) needs no such step. */
     /* Content/Negative in dark. 7.52:1 on Background/Primary, 5.48:1 on
        Background/Newsletter. */
-    --content-negative:          #ff8599;
+    --content-negative:          var(--red-300);
     /* DEVIATION — Content/Positive (#33ad5c) reads 4.38:1 on the tinted
        sections, just under the floor for the 12px level pill, so the file's
        own Content/Positive Bold stands in: 5.79:1 there, 7.97:1 on the page. */
-    --content-positive:          #66c285;
+    --content-positive:          var(--green-300);
 
     /* Content/Pill 1, 2 and 3 take the dark collection values, the 400 step of
        each ramp: 5.35:1, 12.36:1 and 9.72:1 on Background/Primary. */
@@ -472,8 +488,6 @@
        which is all it carries. */
     --background-info:           var(--blue-400);
     --background-info-hover:     var(--blue-300);
-    --background-negative-subtle:#5c0000;
-    --background-positive-subtle:#003d14;
 
     /* ---------- Semantic: Border ---------- */
     --border-primary:   var(--neutral-400);
@@ -483,7 +497,7 @@
     /* Border/Negative Focus in dark is Red/300, the same value
        Content/Negative takes. 7.51:1 on Background/Primary, 5.48:1 on
        Background/Newsletter — the one stroke every form in the site wears. */
-    --border-negative-focus: #ff8599;
+    --border-negative-focus: var(--red-300);
     --border-section-divider: var(--neutral-800);
 
     /* The select chevron, in this mode's Content/Primary. */

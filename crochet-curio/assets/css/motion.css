@@ -83,15 +83,18 @@
   display: grid;
   gap: var(--space-2xl);
   justify-items: center;
-  padding-block: var(--space-8xl);
+  padding-block: var(--space-10xl);
   padding-inline: var(--layout-margin);
 }
 .manifesto__line {
   margin: 0;
   max-width: 16ch;
   text-align: center;
-  font-size: clamp(2.5rem, 9vw, 6rem);
-  line-height: 1.02;
+  /* Fluid, not stepped: 9vw between the two ends, so the line grows with the
+     window rather than snapping. Held in one place — preferences.css hands these
+     same two tokens back to the no-motion fallback. */
+  font-size: clamp(var(--display-hero-min), 9vw, var(--display-hero-max));
+  line-height: var(--display-hero-line);
   font-weight: var(--heading-weight);
   letter-spacing: var(--heading-tracking);
   /* Content/Brand System Inverse — Brand/500 for display text on the accent
@@ -208,7 +211,10 @@
 }
 
 @media (max-width: 480px) {
-  .manifesto__line { font-size: clamp(2rem, 13vw, 3.25rem); }
+  /* No size rule here any more. This used to run its own 13vw ramp up to
+     52px, which the rule above then restarted below — the line lost 8px
+     crossing 480 outwards. The single ramp holds at its 48px floor to
+     533px and grows from there. */
   .js-motion .shape--coaster { width: 108px; }
   .js-motion .shape--bikini  { width: 120px; }
   .js-motion .shape--bag     { width: 65px; }

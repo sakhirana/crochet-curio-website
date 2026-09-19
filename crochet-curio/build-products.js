@@ -194,7 +194,7 @@ function head(title, description) {
 <link rel="stylesheet" href="assets/css/styles.css">
 <link rel="stylesheet" href="assets/css/shop.css">
 <link rel="stylesheet" href="assets/css/motion.css">
-<link rel="stylesheet" href="assets/css/a11y.css">
+<link rel="stylesheet" href="assets/css/preferences.css">
 <script src="assets/js/a11y.js"></script>
 <script src="assets/js/i18n-hi.js"></script>
 <script src="assets/js/i18n.js"></script>

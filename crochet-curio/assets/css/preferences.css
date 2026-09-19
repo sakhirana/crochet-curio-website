@@ -1,5 +1,13 @@
 /* ============================================================
-   Crochet Curio — accessibility controls
+   Crochet Curio — the preferences panel
+
+   Named for the feature, not for accessibility. Nothing about
+   accessibility is confined to this file: the contrast decisions sit in
+   tokens.css, the focus states and the skip link in styles.css, the
+   reflow rules in the breakpoint blocks, and the type scale throughout.
+   A file called a11y.css would suggest otherwise, and invite the next
+   person to put the accessible version of something in here rather than
+   making the thing itself accessible.
 
    A small floating panel, present on every page, that lets a visitor
    turn the site's movement off and on for themselves. It is the same
@@ -137,7 +145,7 @@
   border-radius: var(--radius-m);
   border: var(--stroke-width-xs) solid var(--border-secondary);
   background: var(--background-primary);
-  box-shadow: var(--shadow-l5);
+  box-shadow: var(--shadow-l4);
   /* On a short viewport (a landscape phone at 375px) the panel ran past the
      bottom edge. It is fixed-positioned, so the page cannot be scrolled to
      reach the rest — it scrolls inside itself. The subtraction is the
@@ -162,23 +170,17 @@
   font-weight: var(--text-semibold);
   color: var(--content-primary);
 }
-/* Button Icon, Size=L, Type=Secondary — 48px square. */
-.a11y__close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 48px;
-  height: 48px;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-circle);
-  background: none;
-  color: var(--content-secondary);
-  font-size: var(--text-xl-size);
-  line-height: 1;
-  cursor: pointer;
+/* Button Icon, Size=S, Type=Secondary, holding Icon/X/16 — the component
+   carries the box, the border radius, the hover and pressed grounds and the
+   32px target, so nothing of that is restated here. This rule sets the one
+   thing that is this control's own: the ink, a step back from the panel
+   title beside it. The previous version drew a &times; character and sized
+   it with font-size and line-height, which meant a text setting decided how
+   big a control was. */
+.a11y__close { color: var(--content-secondary); }
+@media (hover: hover) {
+  .a11y__close:hover { color: var(--content-primary); }
 }
-.a11y__close:hover { background: var(--background-hover); color: var(--content-primary); }
 
 /* One row per control, so more can be added underneath without
    touching anything above. */
@@ -285,7 +287,7 @@
   place-items: initial;
   justify-items: center;
   gap: var(--space-2xl);
-  padding-block: var(--space-8xl);
+  padding-block: var(--space-10xl);
 }
 .no-motion .manifesto__line { grid-area: auto !important; }
 .no-motion .manifesto__shapes { display: none !important; }
@@ -333,10 +335,15 @@
   align-items: start;
   column-gap: var(--space-2xl);
 }
+/* Heading/L. Three phrases side by side need far less size than the one
+   that sweeps the page under motion, and the range this rule covers — 1025
+   up — is narrow enough that a step reads the same as a ramp. The fluid
+   Display style stays where it earns its keep: the single line below L,
+   which doubles rather than drifting. */
 .no-motion .manifesto__line {
   max-width: none;
-  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
-  line-height: 1.12;
+  font-size: var(--heading-l-size);
+  line-height: var(--heading-l-line);
 }
 /* One rule between neighbours — the divider is a shape, so it reads
    without relying on the colour difference. */
@@ -352,8 +359,8 @@
   .no-motion .manifesto__stage { grid-template-columns: 1fr; }
   .no-motion .manifesto__line {
     max-width: 16ch;
-    font-size: clamp(2.5rem, 9vw, 6rem);
-    line-height: 1.02;
+    font-size: clamp(var(--display-hero-min), 9vw, var(--display-hero-max));
+    line-height: var(--display-hero-line);
   }
   .no-motion .manifesto__line + .manifesto__line {
     border-inline-start: 0;

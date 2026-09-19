@@ -107,6 +107,15 @@
     'C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2Z"/>' +
     '</svg>';
 
+  /* Icon/X/16, the same symbol the announcement bar's dismiss control
+     carries inline in every page. */
+  var ICON_X =
+    '<svg class="icon-16" viewBox="0 0 16 16" fill="none" stroke="currentColor"' +
+    ' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"' +
+    ' aria-hidden="true" focusable="false">' +
+    '<path d="M12 4L4 12M4 4L12 12"/>' +
+    '</svg>';
+
   function build() {
     /* The announcement's dismiss button. Focus is moved to the brand
        link rather than left on a control that is about to disappear,
@@ -134,8 +143,12 @@
       ' aria-labelledby="a11yTitle" hidden>' +
         '<div class="a11y__head">' +
           '<h2 class="a11y__title" id="a11yTitle">Accessibility</h2>' +
-          '<button class="a11y__close" type="button" aria-label="Close accessibility options">' +
-            '<span aria-hidden="true">&times;</span></button>' +
+          /* Button Icon, Size=S, Type=Secondary, holding Icon/X/16 — the same
+             control the announcement bar dismisses with. It drew a &times;
+             glyph before, which meant the box was sized by a font rather than
+             by the component. */
+          '<button class="btn-icon btn-icon--s a11y__close" type="button"' +
+          ' aria-label="Close accessibility options">' + ICON_X + '</button>' +
         '</div>' +
         '<div class="a11y__row">' +
           '<span class="a11y__label" id="a11yMotionLabel">Disable animations</span>' +
@@ -177,7 +190,7 @@
     };
     reflect();
 
-    /* The entrance slide runs once per page load. a11y.css drops it as soon
+    /* The entrance slide runs once per page load. preferences.css drops it as soon
        as this class is set, and nothing takes the class off again, so the
        launcher stays put when the panel closes. Set on the animation's own
        end, or early if the panel is opened mid-slide — the panel is a child
@@ -203,7 +216,7 @@
       apply(off);
       reflect();
 
-      /* Turning movement off takes effect on the spot: a11y.css puts the
+      /* Turning movement off takes effect on the spot: preferences.css puts the
          page into the same state it has without scripting. Turning it back
          on can need a reload — if the page opened with movement off,
          motion.js stopped before setting any of it up, and only a fresh

@@ -104,10 +104,14 @@ p { text-wrap: pretty; }
 }
 
 /* ---------- Type utilities ---------- */
+/* Text/M Semibold. The .12em this carried is not a value the design system
+   has — the Letter Spacing group is None, S and XS, all zero or negative —
+   so the level's own tracking applies and the label loses the opening-up
+   that uppercase usually gets. The weight carries the emphasis instead. */
 .eyebrow {
   font-size: var(--text-m-size);
   line-height: var(--text-m-line);
-  letter-spacing: .12em;
+  letter-spacing: var(--text-tracking);
   text-transform: uppercase;
   color: var(--content-brand);
   font-weight: var(--text-semibold);
@@ -329,20 +333,6 @@ p { text-wrap: pretty; }
 }
 .brand:hover  { color: var(--background-brand-hover); }
 
-/* The footer wordmark is a link home, the same as the one in the header.
-   .footer-grid a is more specific than .brand, so it would otherwise pull
-   the wordmark down to link size and colour and underline it on hover.
-   Restated here so the two wordmarks look and behave alike. */
-.footer-grid a.brand {
-  font-size: var(--heading-s-size);
-  line-height: var(--heading-s-line);
-  color: var(--content-primary);
-}
-.footer-grid a.brand:hover {
-  color: var(--background-brand-hover);
-  text-decoration: none;
-}
-
 .nav-list {
   display: flex;
   align-items: center;
@@ -351,24 +341,34 @@ p { text-wrap: pretty; }
   list-style: none;
   padding: 0;
 }
-/* Button, Type=Link. Default is Content/Primary with no rule; Hover adds
-   Background/Brand Hover and a 2px underline in that same ink. */
-.nav-list a {
+/* ---------- Button, Type=Link (Figma: Button/Desktop, 53:7432) ----------
+   A standalone base like .btn-icon, not a .btn modifier: the Link type wears
+   no box, so none of the .btn frame applies. Default is Content/Primary with
+   no rule; Hover adds Background/Brand Hover and a 2px underline in that
+   same ink. Carried by the primary nav and the footer columns. */
+.btn-link {
   display: inline-flex;
   align-items: center;
-  min-height: 44px;               /* 2.5.8 Target Size */
+  /* Space/M above and below a 24px Text/L line is the 48px the component is
+     drawn at. Padded rather than given a fixed height, so a zoomed or
+     re-spaced label grows the target with it (1.4.12, 2.5.8). */
+  padding-block: var(--space-m);
   padding-inline: var(--space-xs);
   color: var(--content-primary);
-  text-decoration: none;
   font-size: var(--text-l-size);
+  line-height: var(--text-l-line);
+  text-decoration: none;
+  /* Text/L Regular — the Link type is the one Button type whose label is not
+     Semibold, so the weight is stated rather than inherited. */
+  font-weight: var(--text-regular);
 }
-.nav-list a:hover {
+.btn-link:hover {
   color: var(--background-brand-hover);
   text-decoration: underline;
   text-decoration-thickness: var(--stroke-width-m);
   text-underline-offset: 4px;
 }
-.nav-list a[aria-current="page"] { color: var(--content-primary); font-weight: var(--text-semibold); }
+.btn-link[aria-current="page"] { color: var(--content-primary); font-weight: var(--text-semibold); }
 
 /* Two groups, not eight peers. Patterns, How it works, Our story and Contact
    are places in the site; My patterns, Cart and the language select are
@@ -394,7 +394,7 @@ p { text-wrap: pretty; }
    chrome eats into the viewport.
 --------------------------------------------------------------- */
 .hero {
-  padding-block: var(--space-4xl) var(--space-7xl);
+  padding-block: var(--space-4xl) var(--space-8xl);
 }
 .hero > .container { width: 100%; }
 
@@ -403,7 +403,7 @@ p { text-wrap: pretty; }
   /* one column since the artwork came out — capped so the heading keeps a
      readable measure instead of running the full container width */
   grid-template-columns: minmax(0, 52rem);
-  gap: var(--space-8xl);
+  gap: var(--space-10xl);
 }
 .hero h1 {
   font-size: var(--heading-3xl-size);
@@ -452,7 +452,7 @@ p { text-wrap: pretty; }
 .split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-8xl);
+  gap: var(--space-10xl);
   align-items: center;
 }
 .split h2 {
@@ -507,7 +507,7 @@ p { text-wrap: pretty; }
   background: var(--background-newsletter);
   color: var(--content-primary-inverse);
   border-radius: var(--radius-l);
-  padding: var(--space-8xl) var(--space-7xl);
+  padding: var(--space-10xl) var(--space-8xl);
 }
 .newsletter h2 {
   /* Content/Primary, which is Neutral/900 in light and Primary/White in dark
@@ -645,7 +645,7 @@ p { text-wrap: pretty; }
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-8xl);
+  gap: var(--space-10xl);
   align-items: start;
 }
 .contact-form { display: grid; gap: var(--space-xl); }
@@ -663,39 +663,28 @@ p { text-wrap: pretty; }
 /* ---------- Footer ---------- */
 .site-footer {
   border-top: var(--stroke-width-xs) solid var(--border-section-divider);
-  padding-block: var(--space-7xl) var(--space-4xl);
+  padding-block: var(--space-8xl) var(--space-4xl);
 }
 .footer-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: var(--space-4xl);
 }
+/* Text/M Semibold, the same as .eyebrow above. */
 .footer-grid h2 {
   font-size: var(--text-m-size);
   line-height: var(--text-m-line);
-  letter-spacing: .12em;
+  letter-spacing: var(--text-tracking);
   text-transform: uppercase;
   color: var(--content-tertiary);
   font-weight: var(--text-semibold);
   margin-bottom: var(--space-l);
 }
 .footer-grid ul { display: grid; gap: var(--space-s); }
-/* Button, Type=Link, like the primary nav. Default is Content/Primary with no
-   rule; Hover adds Background/Brand Hover and a 2px underline in that ink. */
-.footer-grid a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  color: var(--content-primary);
-  text-decoration: none;
-  font-size: var(--text-m-size);
-}
-.footer-grid a:hover {
-  color: var(--background-brand-hover);
-  text-decoration: underline;
-  text-decoration-thickness: var(--stroke-width-m);
-  text-underline-offset: 3px;
-}
+/* The footer carries the same Button, Type=Link the primary nav does, so the
+   label, colour, height, underline and hover all come from .btn-link. Only
+   the underline sits closer here, against the tighter column rhythm. */
+.footer-grid .btn-link:hover { text-underline-offset: 3px; }
 .footer-bottom {
   margin-top: var(--space-6xl);
   padding-top: var(--space-xl);
@@ -716,14 +705,13 @@ p { text-wrap: pretty; }
 /* ---- Desktop (L breakpoint) ---- */
 @media (max-width: 1024px) {
   :root {
-    --layout-margin: var(--space-6xl); --layout-section: var(--space-8xl);
+    --layout-margin: var(--space-6xl); --layout-section: var(--space-10xl);
 
     /* Heading scale, L mode. Only the two largest levels step: below 3XL
        the desktop values still fit the narrower measure. Nothing restates
        a level it does not change — max-width queries stack, so a level set
        here stays set at M and S unless one of those blocks moves it. */
     --heading-3xl-size: var(--size-48);  --heading-3xl-line: var(--line-56);
-    --heading-2xl-size: var(--size-40);  --heading-2xl-line: var(--line-48);
   }
 
   /* The seven links plus the language selector need about 940px of their own.
@@ -758,9 +746,8 @@ p { text-wrap: pretty; }
   .nav-list.is-open { display: flex; }
   /* Each row fills the panel and carries its own side padding, so the rule
      under a link spans the panel edge to edge. */
-  .nav-list a {
+  .nav-list .btn-link {
     display: flex;
-    min-height: 48px;
     padding-inline: var(--space-xl);
     border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
   }
@@ -778,21 +765,20 @@ p { text-wrap: pretty; }
 /* ---- Tablet (M breakpoint) ---- */
 @media (max-width: 768px) {
   :root {
-    --layout-margin: var(--space-2xl); --layout-section: var(--space-7xl);
+    --layout-margin: var(--space-2xl); --layout-section: var(--space-8xl);
 
     /* Heading scale, M mode. One column wide from here down, so the four
        largest levels each drop a step. 3XL and 2XL land on the same value
        as XL and L respectively — the scale compresses towards the bottom
        rather than keeping seven distinct sizes on a tablet. */
     --heading-3xl-size: var(--size-40);  --heading-3xl-line: var(--line-48);
-    --heading-2xl-size: var(--size-32);  --heading-2xl-line: var(--line-40);
     --heading-xl-size:  var(--size-32);  --heading-xl-line:  var(--line-40);
     --heading-l-size:   var(--size-24);  --heading-l-line:   var(--line-32);
   }
 
   .hero {
     min-height: 0;
-    padding-block: var(--space-4xl) var(--space-7xl);
+    padding-block: var(--space-4xl) var(--space-8xl);
   }
   .hero__grid, .split, .contact-grid { grid-template-columns: 1fr; }
   .hero__grid { gap: var(--space-4xl); }
