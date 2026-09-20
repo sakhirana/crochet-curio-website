@@ -5,7 +5,7 @@ window.CATALOGUE = [
     "name": "Rosie Beanie",
     "price": 0,
     "image": "beanie.webp",
-    "alt": "A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top.",
+    "alt": "Dusty pink crochet beanie, ribbed all over, with a deep turned-up brim.",
     "difficulty": "Beginner",
     "pages": 13,
     "time": "6 hours (approx.)",

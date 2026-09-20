@@ -373,16 +373,16 @@ window.CC_LANG_HI = {
 
 
   /* ---------- Image descriptions (alt / title) ---------- */
-  "A hand-crocheted shoulder bag in a sky blue and white checkerboard, with softly rounded corners and a long single strap standing in a tall loop above it.":
-    "हाथ से बना शोल्डर बैग, आसमानी और सफ़ेद चेकरबोर्ड में, कोने हल्के गोल और ऊपर एक लंबी सिंगल स्ट्रैप ऊँचे लूप में खड़ी हुई।",
-  "A cropped cardigan in bright teal-blue crochet, open at the front, with eight fluffy white clouds raised off the surface, two on each front panel and two on each balloon sleeve, above a ribbed hem and cuffs.":
-    "चटख टील-नीले क्रोशे में क्रॉप्ड कार्डिगन, सामने से खुला, सतह से उभरे आठ रोएँदार सफ़ेद बादल, हर सामने के पैनल पर दो और हर बलून स्लीव पर दो, नीचे रिब्ड हेम और कफ़।",
-  "A cropped cardigan in cream crochet, open at the front, with eight raised red strawberries each topped by a green leaf, two on each front panel and two on each balloon sleeve, above a ribbed hem and cuffs.":
-    "क्रीम क्रोशे में क्रॉप्ड कार्डिगन, सामने से खुला, उभरी हुई आठ लाल स्ट्रॉबेरी, हर एक पर एक हरी पत्ती, हर सामने के पैनल पर दो और हर बलून स्लीव पर दो, नीचे रिब्ड हेम और कफ़।",
-  "A hand-crocheted bucket hat in a red and pink checkerboard, with a tall flat-topped crown and a short brim that slopes down all the way round, shown at a three-quarter angle.":
-    "लाल और गुलाबी चेकरबोर्ड में हाथ से बनी बकेट हैट, ऊँचा सपाट क्राउन और चारों ओर नीचे की ओर झुका छोटा ब्रिम, तिरछे कोण से दिखाई गई।",
-  "A matching pink crochet set: a triangle bikini top with a ruffled lower edge and long braided halter ties, above a short crochet mini skirt with a drawstring tie at the waist.":
-    "मिलता-जुलता गुलाबी क्रोशे सेट: नीचे फ़्रिल वाले किनारे और लंबी गुँथी हॉल्टर डोरियों वाला त्रिकोण बिकिनी टॉप, और नीचे कमर पर ड्रॉस्ट्रिंग वाली छोटी क्रोशे मिनी स्कर्ट।",
+  "Sky blue and white checkerboard crochet shoulder bag with a long strap.":
+    "आसमानी और सफ़ेद चेकरबोर्ड क्रोशे शोल्डर बैग, लंबी स्ट्रैप के साथ।",
+  "Teal crochet cropped cardigan with raised white clouds and balloon sleeves.":
+    "टील क्रोशे क्रॉप्ड कार्डिगन, उभरे सफ़ेद बादल और बलून स्लीव के साथ।",
+  "Cream crochet cropped cardigan with raised red strawberries and balloon sleeves.":
+    "क्रीम क्रोशे क्रॉप्ड कार्डिगन, उभरी लाल स्ट्रॉबेरी और बलून स्लीव के साथ।",
+  "Red and pink checkerboard crochet bucket hat with a short sloping brim.":
+    "लाल और गुलाबी चेकरबोर्ड क्रोशे बकेट हैट, छोटे झुके ब्रिम के साथ।",
+  "Pink crochet set: ruffled triangle bikini top and matching mini skirt.":
+    "गुलाबी क्रोशे सेट: फ़्रिल वाला त्रिकोण बिकिनी टॉप और मिलती मिनी स्कर्ट।",
 
   /* ---------- Placeholders ---------- */
   "you@example.com": "aap@example.com",

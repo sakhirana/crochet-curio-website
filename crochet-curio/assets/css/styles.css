@@ -47,8 +47,11 @@ strong, b { font-weight: var(--text-semibold); }
 
 p { text-wrap: pretty; }
 
-/* ---------- Focus: 2px ring in Border/Focus Blue, offset outside the control,
-     exactly as the Figma Button component specifies (2.4.7, 1.4.11) ---------- */
+/* ---------- State=Focus Blue: a 2px ring in Border/Focus Blue, offset outside
+     the control, exactly as the Figma Button component specifies (2.4.7,
+     1.4.11). It is the default focus state; the ring only turns white on the
+     few brand grounds the blue cannot clear 3:1 against, and those are named
+     State=Focus White where they appear. ---------- */
 :focus-visible {
   outline: var(--stroke-width-m) solid var(--border-focus-blue);
   /* The Figma focus ring sits 2px clear of the control, not 4px */
@@ -127,7 +130,8 @@ p { text-wrap: pretty; }
 
 /* ---------- Buttons — the Figma "Button" component set ----------
    Read from the design file (page Button, 53:7343): Type Primary / Secondary /
-   Link, states Default / Hover / Pressed / Disabled / Focus. Two things worth
+   Link, states Default / Hover / Pressed / Disabled / Focus Blue / Focus
+   White. Two things worth
    naming because they are easy to get wrong:
 
    • No corner radius. The component is square on every variant.
@@ -225,8 +229,8 @@ p { text-wrap: pretty; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--background-brand-system-inverse);
-  color: var(--content-primary);
+  background: var(--background-brand);
+  color: var(--content-primary-inverse);
   text-align: center;
   font-size: var(--text-m-size);
   line-height: var(--text-m-line);
@@ -245,7 +249,9 @@ p { text-wrap: pretty; }
 /* ---------- Button Icon (Figma: Button Icon/Desktop, 53:8871) ----------
    Type=Secondary: no fill and no border at rest, the ground arriving only on
    Hover and Pressed. Size carries the box; the icon inside carries its own
-   size, so .icon-16 and .icon-24 are what change, not this rule. */
+   size, so .icon-16 and .icon-24 are what change, not this rule.
+   Focus comes from the global ring — State=Focus Blue everywhere except the
+   announcement bar, where the brand ground calls for State=Focus White. */
 .btn-icon {
   display: inline-flex;
   align-items: center;
@@ -306,9 +312,19 @@ p { text-wrap: pretty; }
   top: 50%;
   right: var(--space-s);
   transform: translateY(-50%);
+  /* Content/Primary Inverse, the same ink the message is set in — the
+     component's own Content/Primary would all but vanish on Background/Brand. */
+  color: var(--content-primary-inverse);
 }
-/* Same reason as the newsletter panel: the blue ring would drop below
-   3:1 against the brand green, so it switches to white (1.4.11). */
+/* The component's Background/Hover is a near-white neutral, which on a brand
+   bar would light up behind a white glyph and swallow it. The ground steps
+   along the brand ramp instead, so the icon keeps separating from it. */
+@media (hover: hover) {
+  .announcement__close:hover { background: var(--background-brand-hover); }
+}
+.announcement__close:active { background: var(--background-brand-pressed); }
+/* State=Focus White. The blue ring reads 1.07:1 on the brand green, so the bar
+   takes the white ring the system keeps for brand grounds (1.4.11). */
 .announcement :focus-visible { outline-color: var(--border-focus-white); }
 
 /* Set by a11y.js from storage before the first paint, so a bar the
@@ -523,7 +539,7 @@ p { text-wrap: pretty; }
    the right ink on each of the panel's two grounds, the same way the heading
    above takes Content/Primary. */
 .newsletter p { color: var(--content-secondary); max-width: 52ch; }
-/* Everything focusable on the panel takes Border/Focus Blue, the ring the
+/* State=Focus Blue. Everything focusable on the panel takes the ring the
    rest of the site wears -- Blue/500 in light, Blue/400 in dark. The panel
    used to switch to white because the blue dropped to 1.6:1 on the green, but
    in light the ground is Background/Brand System Inverse now: the blue reads
@@ -628,7 +644,7 @@ p { text-wrap: pretty; }
 .newsletter-form .hint  { grid-column: 1; grid-row: 3; color: var(--content-tertiary); }
 .newsletter-form .error { grid-column: 1; grid-row: 4; }
 /* Placement only. The button is Type=Primary, like the contact form send
-   button, so its five states come straight from the component above —
+   button, so its states come straight from the component above —
    Background/Brand, which is green in light and pink in dark. */
 .newsletter-form .btn {
   grid-column: 2;
@@ -914,9 +930,10 @@ p { text-wrap: pretty; }
 .hero-banner .hero__grid   { grid-template-columns: minmax(0, 29rem); justify-content: start; text-align: left; }
 .hero-banner .hero__actions { justify-content: flex-start; }
 /* The outline button on the photograph carries no correction: it is
-   Type=Secondary and wears the component's own five states. */
-/* Border/Focus Blue is 1.6:1 against the scrim, so the ring turns inverse here for
-   the same reason it does on the newsletter panel — 1.4.11 */
+   Type=Secondary and wears the component's own states. */
+/* State=Focus White. Border/Focus Blue is 1.6:1 against the scrim, so the ring
+   turns inverse here for the same reason it does on the announcement bar
+   — 1.4.11 */
 .hero-banner :focus-visible { outline-color: var(--border-focus-white); }
 
 /* ============================================================

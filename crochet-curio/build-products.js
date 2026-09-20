@@ -54,7 +54,7 @@ const PATTERNS = [
     image: "beanie.webp",
     imageW: 1000,
     imageH: 1000,
-    alt: "A crochet beanie in dusty pink, ribbed from brim to crown, with a deep turned-up fold at the bottom edge and a gathered top.",
+    alt: "Dusty pink crochet beanie, ribbed all over, with a deep turned-up brim.",
     tagline: "Ribbed, folded at the brim.",
     difficulty: "Beginner",
     time: "6 hours (approx.)",
@@ -234,7 +234,7 @@ ${header(false, false)}
     <div class="product">
       <div class="product__mediaCol">
         <div class="product__media">
-          <img src="assets/img/${p.image}" alt="${esc(p.alt)}" title="${esc(p.alt)}" width="${p.imageW}" height="${p.imageH}">
+          <img src="assets/img/${p.image}" alt="${esc(p.alt)}" width="${p.imageW}" height="${p.imageH}">
         </div>
       </div>
 

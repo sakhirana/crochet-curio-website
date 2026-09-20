@@ -81,9 +81,11 @@
 .a11y__launch:hover  { background: var(--background-info-hover); }
 .a11y__launch:active { background: var(--background-info-hover); }
 
-/* Border/Focus Blue at Stroke Width/M, offset by the same, exactly as the
-   component's Focus state draws it: the 2px gap of page between ring and
-   button reads as a halo rather than a fatter button. */
+/* State=Focus Blue — Border/Focus Blue at Stroke Width/M, offset by the same,
+   exactly as the component's Focus Blue state draws it: the 2px gap of page
+   between ring and button reads as a halo rather than a fatter button. The
+   launcher sits on Background/Info, which the blue clears, so it has no call
+   for State=Focus White. */
 .a11y__launch:focus-visible {
   outline: var(--stroke-width-m) solid var(--border-focus-blue);
   outline-offset: var(--stroke-width-m);

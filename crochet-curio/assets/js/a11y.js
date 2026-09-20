@@ -24,7 +24,10 @@
 
   var KEY = "cc-motion";          /* "on" | "off"; absent means "not asked" */
   var KEY_THEME = "cc-theme";     /* "dark" | "light"; absent means "not asked" */
-  var KEY_NOTE = "cc-announcement"; /* "dismissed"; absent means still showing */
+  var KEY_NOTE = "cc-announcement"; /* "dismissed"; absent means still showing.
+     Session storage, not local: the offer is part of arriving at the site, so a
+     visitor who dismissed it last week should meet it again on their next
+     visit. Within one visit the dismissal still carries page to page. */
   var root = document.documentElement;
 
   /* localStorage throws rather than returns null in a locked-down
@@ -35,6 +38,14 @@
   };
   var write = function (key, value) {
     try { window.localStorage.setItem(key, value); } catch (e) { /* nothing to do */ }
+  };
+  /* The same pair against sessionStorage, for a preference that should last
+     the visit rather than outlive it. */
+  var readSession = function (key) {
+    try { return window.sessionStorage.getItem(key); } catch (e) { return null; }
+  };
+  var writeSession = function (key, value) {
+    try { window.sessionStorage.setItem(key, value); } catch (e) { /* nothing to do */ }
   };
 
   var stored   = function () { return read(KEY); };
@@ -74,7 +85,7 @@
      here rather than in site.js: site.js runs at the foot of the page,
      and a bar removed there would still have been painted and would
      still have shifted the page down on every load. */
-  var noteIsDismissed = function () { return read(KEY_NOTE) === "dismissed"; };
+  var noteIsDismissed = function () { return readSession(KEY_NOTE) === "dismissed"; };
   var applyNote = function (gone) {
     root.classList.toggle("announcement-dismissed", gone);
   };
@@ -126,7 +137,7 @@
       noteClose.addEventListener("click", function () {
         var brand = document.querySelector(".site-header .brand");
         applyNote(true);
-        write(KEY_NOTE, "dismissed");
+        writeSession(KEY_NOTE, "dismissed");
         if (brand) { brand.focus(); }
       });
     }
