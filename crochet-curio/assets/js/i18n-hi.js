@@ -59,11 +59,11 @@ window.CC_LANG_HI = {
   /* ---------- Home: hero ---------- */
   "Crochet Curio | crochet patterns to make yourself":
     "Crochet Curio | खुद बनाने के लिए क्रोशे पैटर्न",
-  "Digital patterns": "डिजिटल पैटर्न",
-  "Make something beautiful, one stitch at a time.":
-    "कुछ सुंदर बनाइए, एक स्टिच से शुरू करके।",
-  "Discover thoughtfully designed crochet patterns and bring charming pieces to life with your own hands.":
-    "सोच-समझकर बनाए गए क्रोशे पैटर्न देखिए और प्यारे पीस अपने हाथों से तैयार कीजिए।",
+  "Digital accessible crochet patterns": "डिजिटल सुलभ क्रोशे पैटर्न",
+  "Make something beautiful, in a format that fits you.":
+    "कुछ सुंदर बनाइए, उस फ़ॉर्मेट में जो आपके लिए सही हो।",
+  "Discover thoughtfully designed crochet patterns in accessible formats, and bring charming pieces to life with your own hands.":
+    "सोच-समझकर बनाए गए क्रोशे पैटर्न सुलभ फ़ॉर्मेट में पाइए और प्यारे पीस अपने हाथों से तैयार कीजिए।",
   "Browse the patterns": "पैटर्न देखिए",
 
   /* ---------- Product names ----------
