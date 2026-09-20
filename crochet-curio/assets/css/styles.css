@@ -171,15 +171,6 @@ p { text-wrap: pretty; }
 .btn--primary:hover  { background: var(--background-brand-hover); }
 .btn--primary:active { background: var(--background-brand-pressed); }
 
-/* Type=Brand Accent — the hero button. No longer in the Figma Button set;
-   it stands on the photograph and does not invert. */
-.btn--brand-accent {
-  background: var(--brand-accent-500);
-  color: var(--content-static-black);
-}
-.btn--brand-accent:hover  { background: var(--brand-accent-400); }
-.btn--brand-accent:active { background: var(--brand-accent-300); }
-
 /* Type=Secondary — the label darkens to Content/Primary on hover and press */
 .btn--secondary {
   background: var(--background-primary);
@@ -429,9 +420,28 @@ p { text-wrap: pretty; }
      unsupported, which just falls back to the normal greedy break */
   text-wrap: balance;
 }
+/* The two hero buttons match each other rather than each sizing to its own
+   label: side by side, two different widths read as two different kinds of
+   control. Grid rather than flex, because only a grid can hand both tracks
+   the width of the wider one.
+
+   auto-fit, not two fixed columns. Forcing a pair into whatever space is left
+   made the longer label wrap to two lines in the band just above the S
+   breakpoint, so the buttons stayed equal by getting taller. Here the track
+   floor is the width the longer label needs on one line, and the pair drops
+   to a single column rather than squeezing below it.
+
+   `width: max-content` keeps the pair shrunk to its own size instead of
+   stretching across the column, and `max-width: 100%` stops it running off
+   the side (1.4.10). The floor is a plain length rather than min(100%, ...):
+   a percentage inside a max-content container is circular, and the browser
+   resolves it by collapsing the pair to one column at every width. 12.5rem
+   is measured from the longer label, so re-check it if that label changes. */
 .hero__actions {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5rem, 1fr));
+  width: max-content;
+  max-width: 100%;
   gap: var(--space-l);
   margin-top: var(--space-2xl);
 }
@@ -824,8 +834,13 @@ p { text-wrap: pretty; }
 
   .hero { padding-block: var(--space-2xl) var(--space-6xl); }
   .hero__grid { gap: var(--space-2xl); }
-  .hero__actions { margin-top: var(--space-xl); gap: var(--space-m); }
-  .hero__actions .btn { width: 100%; }
+  /* Full width below S, so the pair fills the column rather than shrinking to
+     the wider label. */
+  .hero__actions {
+    width: auto;
+    margin-top: var(--space-xl);
+    gap: var(--space-m);
+  }
 
   .steps { grid-template-columns: 1fr; gap: var(--space-2xl); }
   .footer-grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
@@ -863,11 +878,6 @@ p { text-wrap: pretty; }
   .split__art { max-height: 70svh; }
 }
 
-/* Landscape phones: two short labels sit side by side rather than stacking */
-@media (max-height: 560px) and (orientation: landscape) {
-  .hero__actions .btn { width: auto; }
-}
-
 /* ---------- Print ---------- */
 @media print {
   .site-header, .newsletter, .nav-toggle, .skip-link { display: none; }
@@ -897,6 +907,34 @@ p { text-wrap: pretty; }
 }
 .hero-banner__frame > * { grid-area: 1 / 1; }
 
+/* ---------- Hero scrim ----------
+   The copy stands on a photograph, so nothing about the surface behind it is
+   fixed: the pale cardigan crops into frame at some widths and not others, and
+   white on that cardigan measured 1.04:1 against the 4.5:1 the lede answers to
+   (1.4.3). A tint over the photograph is what makes the ink's contrast a
+   property of the page rather than of the crop.
+
+   Flat, not a gradient. A gradient was tried first and it only held where the
+   copy column was narrower than the frame: on a phone the words run the full
+   width, the fade had already finished by the time it reached the last of
+   them, and the lede fell back to 1.04:1. One value over the whole frame is
+   the only shape that does not depend on how wide the copy happens to run.
+
+   .55 is the floor, not a preference. At .50 the phone lede reads 4.11:1,
+   under the 4.5:1 that 20px answers to. At .55 the worst point at any of 320,
+   393, 768, 1024 and 1440 is 4.91:1 behind the lede, 5.11:1 behind the heading
+   and 7.80:1 behind the eyebrow.
+
+   `> *` above does not match a pseudo-element, so the cell is named here. It
+   sits above the photograph and below .hero, which is z-index 2. */
+.hero-banner__frame::after {
+  content: "";
+  grid-area: 1 / 1;
+  z-index: 1;
+  background: rgba(0, 0, 0, .55);
+  pointer-events: none;
+}
+
 .hero-photo {
   display: block;
   width: 100%;
@@ -923,12 +961,12 @@ p { text-wrap: pretty; }
    a photograph, and the thicker stroke holds where the pale cardigan comes
    up behind it. */
 .hero-banner .hero .lede { font-weight: var(--text-semibold); }
-/* 29rem, not the 38rem the copy takes elsewhere: it is the widest measure
-   that still breaks the lede before it reaches the cardigan's cuff, which
-   comes into the frame at 43% of its width at that height. The heading is
-   unaffected — it holds the same three lines anywhere above 29rem. */
-.hero-banner .hero__grid   { grid-template-columns: minmax(0, 29rem); justify-content: start; text-align: left; }
-.hero-banner .hero__actions { justify-content: flex-start; }
+/* 34rem, not the 38rem the copy takes elsewhere. The cap used to be 29rem,
+   the widest measure that broke the lede before it reached the cardigan's
+   cuff. The scrim above answers the contrast that cap was holding, so the
+   measure is now set by the line breaks alone: 34rem is where the heading
+   settles into three lines instead of four. */
+.hero-banner .hero__grid   { grid-template-columns: minmax(0, 34rem); justify-content: start; text-align: left; }
 /* The outline button on the photograph carries no correction: it is
    Type=Secondary and wears the component's own states. */
 /* State=Focus White. Border/Focus Blue is 1.6:1 against the scrim, so the ring
