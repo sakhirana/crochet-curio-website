@@ -75,7 +75,6 @@
   --background-brand-system-inverse: var(--brand-accent-100);
   --content-brand-system-inverse: var(--brand-500);
   --content-brand-highlight:      var(--brand-600);
-  --content-static-black:            var(--primary-black);
   /* Static, so it is named once and never restated in a dark block: it
      paints ink that stands on something fixed rather than on a themed
      surface, such as the copy over the hero photograph. */
