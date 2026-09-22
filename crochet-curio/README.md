@@ -26,15 +26,13 @@ Then open <http://localhost:4173>. No build step, no dependencies.
 | --- | --- |
 | `index.html` | Home — hero, pattern library, story, how it works, skill levels, newsletter, contact |
 | `product-*.html` | One page per pattern (6). **Generated — edit the catalogue, not these** |
-| `cart.html` | Basket: the patterns picked, removal, running total |
-| `checkout.html` | Name and email, order summary, pattern-unlocked confirmation |
 | `library.html` | My patterns — every pattern owned, re-downloadable |
 | `build-products.js` | Pattern catalogue + page generator. `node build-products.js` |
 | `assets/css/tokens.css` | Every design token, translated 1:1 from Figma variables |
 | `assets/css/styles.css` | Layout and components, built only from those tokens |
-| `assets/css/shop.css` | Pattern grid, pattern page, basket, checkout and library |
+| `assets/css/shop.css` | Pattern grid, pattern page and library |
 | `assets/js/site.js` | Mobile nav disclosure and accessible form validation |
-| `assets/js/shop.js` | Basket, checkout and pattern-library state |
+| `assets/js/shop.js` | Pattern-library state |
 | `assets/js/catalogue.js` | Generated pattern data — do not edit by hand |
 | `assets/img/` | **Photography of the finished pieces goes here** — see below |
 | `assets/patterns/` | Built pattern files — PDFs and the Word edition. Generated; do not edit by hand |
@@ -221,8 +219,8 @@ white page.
 The first image is `loading="eager" fetchpriority="high"` since it is above the
 fold; the rest are lazy.
 
-The basket resolves each image **by product slug from the catalogue**, not from
-the filename stored in `localStorage`. A basket saved before a photo was
+The library resolves each image **by product slug from the catalogue**, not from
+the filename stored in `localStorage`. A library row saved before a photo was
 renamed still shows the right picture instead of a broken one.
 
 ### Alt text
@@ -263,10 +261,10 @@ Removing the `title` attributes is the one-line fix if that ever bothers you.
 
 Replaced by the **Poppy Hat** — its own pattern page, its own copy and
 details, in the same grid slot. `product-daisy-cardigan.html` was deleted and
-every link across the home page, basket, checkout and library footers now
+every link across the home page and library footers now
 points at `product-bucket-hat.html`. No references remain.
 
-## Patterns, basket and pattern access
+## Patterns and pattern access
 
 Selling a file rather than an object changes the mechanics, not the design.
 Everything below is the same design system doing a different job.
@@ -289,36 +287,27 @@ time to make, sizes written, page count), a single **Get the pattern** button,
 what is inside the file, the yarn/hook/notions/gauge you need before casting
 on, the stitches used, the studio's notes, and previous/next links.
 
-If a pattern is already owned, its button says so, is disabled, and points at
-the library instead of selling the same file twice.
-
 **Skill levels** are `Beginner`, `Confident beginner` and `Intermediate`. The
 pill carries the level as a word first; the tint and dot are a second cue, not
 the only one (1.4.1). `index.html#levels` explains what each level assumes.
 
-**Basket** holds one copy of each pattern — no quantity field, because a second
-copy of a PDF buys nothing — and persists in `localStorage`. Every read is
-wrapped in `try/catch` so a private window or blocked site data still renders a
-working page.
-
-**Checkout** asks for a name and an email and nothing else. There is no
-address, no PIN code and no shipping line, because nothing is posted. On
-submit the basket empties into the pattern library and the confirmation lists
-each unlocked file with its own Download button.
+There is no basket and no checkout. The pattern is free, so its buttons hand
+the file over directly and taking any one of them is what records it. Every
+read of storage is wrapped in `try/catch` so a private window or blocked site
+data still renders a working page.
 
 **My patterns** (`library.html`) is the permanent shelf: every pattern owned,
 re-downloadable as often as you like, with a link back to the finished piece.
 
-> **The checkout and library are a front-end demonstration.** Nothing is
-> transmitted, no payment is taken, and the Download button hands over a
-> plain-text stand-in describing the pattern rather than the studio's real PDF
-> — see `patternFileText()` in `assets/js/shop.js`. Both pages say so plainly
-> to anyone using them. Connect a payment provider and a file store before
-> selling patterns for money.
+> **The library is a front-end demonstration.** For a pattern that is not the
+> free one, the Download button hands over a plain-text stand-in describing the
+> pattern rather than the studio's real PDF — see `patternFileText()` in
+> `assets/js/shop.js`. The page says so plainly to anyone using it. Connect a
+> file store before selling patterns for money.
 
-Two storage keys, both in `localStorage`: `crochet-curio-basket` for what is
-picked and `crochet-curio-library` for what is owned. Ownership is per browser,
-which is exactly the limitation an account system would remove.
+One storage key in `localStorage`: `crochet-curio-library` for what is owned.
+Ownership is per browser, which is exactly the limitation an account system
+would remove.
 
 ---
 
@@ -381,7 +370,7 @@ The focus state matters most: the component puts a **2px `Border/Focus Blue` rin
 Four things in the Figma file will fail an audit or trip a user. None of them
 are fixed here — they need fixing in the file, or every consumer of the
 library inherits them. The site works around the second; the first is still
-open — the focus ring on the announcement bar fails in one mode whichever ring
+open — a focus ring inside a filled brand band fails in one mode whichever ring
 it takes.
 
 **1. No focus ring works on a surface that flips colour between modes — 1.4.11
@@ -390,17 +379,17 @@ Non-text Contrast.** The file now carries both `Border/Focus Blue` and
 *outside* the control, the gap shows the page rather than the fill, so the blue
 ring is measured against the page and clears the floor comfortably — 5.41:1 in
 light, 4.59:1 in dark. Controls sitting **inside** a filled band are the
-exception, because there the gap shows the band. The announcement bar is the
-case that breaks: it is `Brand accent/100` in light and `Brand/500` in dark, and
-neither ring survives the flip.
+exception, because there the gap shows the band. A brand band is the case that
+breaks: it is `Brand accent/100` in light and `Brand/500` in dark, and neither
+ring survives the flip.
 
 | Ring | On pink (light) | On green (dark) |
 |---|---|---|
 | `Border/Focus Blue` | 3.55:1 | **1.53:1** |
 | `Border/Focus White` | **1.52:1** | 5.81:1 |
 
-Each passes in one mode and fails in the other, so no fixed value can serve the
-bar. *Fix:* the file needs a focus ring that resolves per mode the way every
+Each passes in one mode and fails in the other, so no fixed value can serve
+such a band. *Fix:* the file needs a focus ring that resolves per mode the way every
 other semantic does — one variable, white in the mode where the band is dark and
 `Content/Static` in the mode where it is light — rather than two fixed rings the
 consumer has to choose between by hand. Naming it for the surface it sits on
@@ -458,11 +447,6 @@ Sweetheart Cardigan, scaled roughly to page count and grading effort.
 **These are placeholders. Set your real prices** in the catalogue at the top of
 `build-products.js`, then re-run it.
 
-The announcement bar reads "Instant PDF download · Written rows, charts and
-step photos · Yours to keep". It is repeated verbatim in `build-products.js`
-and in the four hand-written pages (`index`, `cart`, `checkout`, `library`) —
-change it in all of them together.
-
 ## Responsive behaviour
 
 Breakpoints follow the Figma frames (Desktop/Tablet 1440, Mobile 393):
@@ -510,8 +494,6 @@ Files: `assets/css/motion.css`, `assets/js/motion.js`.
 | Section headings draw a short sage underline | Every page |
 | Cards lift on hover and on keyboard focus; images scale gently | Pattern grid |
 | Buttons lift on hover with a slight spring | Every page |
-| Basket count pops when it changes | Every page |
-| Summary figures flash sage when they update | Basket, checkout |
 | Back-to-top button appears after 600px of scroll | Every page |
 
 **Two rules govern all of it.**
@@ -624,10 +606,10 @@ state is never colour alone — there is always text.
    written rows in UK and US terms, stitch charts, step photos, a yarn
    substitution guide and a gauge checklist — the page counts in the catalogue
    assume all of it. Deliver what the listing claims.
-3. **Wire the money and the files.** Checkout takes no payment and the library
-   downloads a text stand-in. You need a payment provider, somewhere to host
-   the PDFs, and accounts so a pattern follows its owner between browsers.
-   Replace `patternFileText()` in `assets/js/shop.js` with the real file.
+3. **Wire the files.** The library downloads a text stand-in for anything but
+   the free pattern. You need somewhere to host the PDFs, and accounts so a
+   pattern follows its owner between browsers. Replace `patternFileText()` in
+   `assets/js/shop.js` with the real file.
 4. **Decide the licence properly.** The footer currently says patterns are for
    personal use and finished pieces may be sold. That is a real commitment —
    make sure it is the one you want, then say it somewhere fuller than a

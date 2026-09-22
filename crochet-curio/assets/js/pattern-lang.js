@@ -69,13 +69,13 @@
       href: "pattern-beanie-accessible.html",
       lang: "en",
       label: null,
-      note: "Pattern in your browser, compatible with screen readers."
+      note: "Pattern in your browser, compatible with screen readers. Every direction written out, no abbreviations."
     },
     hi: {
       href: "pattern-beanie-accessible-hi.html",
       lang: "hi",
       label: "Open in browser, in Hindi",
-      note: "Pattern in your browser, in Hindi. Not tested with a screen reader yet."
+      note: "Pattern in your browser, in Hindi. Every direction written out, no abbreviations. Not tested with a screen reader yet."
     }
   };
 
@@ -87,13 +87,13 @@
       href: "assets/patterns/rosie-beanie-pattern-large-print.docx",
       lang: "en",
       label: null,
-      note: "Word file for offline use, compatible with screen readers."
+      note: "Word file for offline use, compatible with screen readers. Every direction written out, no abbreviations."
     },
     hi: {
       href: "assets/patterns/rosie-beanie-pattern-large-print-hi.docx",
       lang: "hi",
       label: "Download Word file, in Hindi",
-      note: "Word file in Hindi for offline use. Not tested with a screen reader yet."
+      note: "Word file in Hindi for offline use. Every direction written out, no abbreviations. Not tested with a screen reader yet."
     }
   };
 
@@ -105,13 +105,19 @@
       href: "assets/patterns/rosie-beanie-pattern.pdf",
       lang: "en",
       label: null,
-      note: "24 point font, black on white."
+      /* "Best for printing" is the steer, and it is put positively.
+         The file's own accessibility statement now says the same
+         thing to whoever opens it: this is the print format, and the
+         browser and Word versions are the two that have been read end
+         to end with NVDA. Saying it here too means the choice is made
+         before the download rather than after. */
+      note: "24 point font, black on white. Every direction written out, no abbreviations. Best for printing."
     },
     hi: {
       href: "assets/patterns/rosie-beanie-pattern-hi.pdf",
       lang: "hi",
       label: "Download large print PDF, in Hindi",
-      note: "24 point font in Hindi, black on white."
+      note: "24 point font in Hindi, black on white. Every direction written out, no abbreviations. Best for printing."
     }
   };
 

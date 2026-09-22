@@ -271,7 +271,7 @@
      rather than a responsive gain, so Text/L stays 16px throughout — which
      is also what keeps a focused form field from zooming the page on iOS.
      Where a component genuinely needs less room on a narrow screen it names
-     a smaller level for itself; the announcement bar is the one that does. */
+     a smaller level for itself. */
   --text-xl-size: var(--size-20);  --text-xl-line: var(--line-28);
   --text-l-size:  var(--size-16);  --text-l-line:  var(--line-24);
   --text-m-size:  var(--size-14);  --text-m-line:  var(--line-20);

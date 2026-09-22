@@ -19,16 +19,12 @@ window.CC_LANG_HI = {
 
   /* ---------- Chrome: header, nav, footer ---------- */
   "Skip to main content": "मुख्य सामग्री पर जाएँ",
-  "Get 5% off on your first checkout": "अपने पहले चेकआउट पर 5% की छूट पाएँ",
-  "Dismiss announcement": "यह सूचना हटाएँ",
   "Menu": "मेन्यू",
   "Patterns": "पैटर्न",
   "Our story": "हमारी कहानी",
   "How it works": "यह कैसे काम करता है",
   "Contact": "संपर्क",
   "My patterns": "मेरे पैटर्न",
-  "Cart": "कार्ट",
-  ", 0 patterns": ", 0 पैटर्न",
   "Home": "होम",
   "Help": "सहायता",
   "How patterns are delivered": "पैटर्न कैसे मिलते हैं",
@@ -60,8 +56,8 @@ window.CC_LANG_HI = {
   "Crochet Curio | crochet patterns to make yourself":
     "Crochet Curio | खुद बनाने के लिए क्रोशे पैटर्न",
   "Digital accessible crochet patterns": "डिजिटल सुलभ क्रोशे पैटर्न",
-  "Make something beautiful, in a format that fits you.":
-    "कुछ सुंदर बनाइए, उस फ़ॉर्मेट में जो आपके लिए सही हो।",
+  "Make something beautiful with a pattern that works for you.":
+    "कुछ सुंदर बनाइए, उस पैटर्न से जो आपके लिए सही हो।",
   "Discover thoughtfully designed crochet patterns in accessible formats, and bring charming pieces to life with your own hands.":
     "सोच-समझकर बनाए गए क्रोशे पैटर्न सुलभ फ़ॉर्मेट में पाइए और प्यारे पीस अपने हाथों से तैयार कीजिए।",
   "Browse the patterns": "पैटर्न देखिए",
@@ -167,73 +163,8 @@ window.CC_LANG_HI = {
     "अगर प्रोजेक्ट बीच में है, तो पैटर्न का नाम और रो नंबर ज़रूर लिखिए।",
   "Send message": "मैसेज भेजिए",
 
-  /* ---------- Basket ---------- */
-  "Your cart | Crochet Curio": "आपका कार्ट | Crochet Curio",
-  "Your cart": "आपका कार्ट",
-  "Digital crochet patterns. One copy of each is all you need: every size and both terminologies are written into the file.":
-    "डिजिटल क्रोशे पैटर्न। हर पैटर्न की एक ही कॉपी काफ़ी है: सभी साइज़ और दोनों टर्मिनोलॉजी फ़ाइल में लिखी हैं।",
-  "Order summary": "ऑर्डर सारांश",
-  "0 patterns": "0 पैटर्न",
-  "Subtotal": "सबटोटल",
-  "Delivery": "डिलीवरी",
-  "Instant download": "तुरंत डाउनलोड",
-  "Total": "कुल",
-  "Get these patterns": "ये पैटर्न लीजिए",
-  "Nothing is posted to you. Your files appear in": "आपको कुछ भेजा नहीं जाता। आपकी फ़ाइलें",
-  "as soon as you check out, and stay there for good.":
-    "में चेकआउट करते ही आ जाती हैं और हमेशा वहीं रहती हैं।",
-  "No patterns picked yet": "अभी कोई पैटर्न नहीं चुना",
-  "One pattern written so far, five more on the way.":
-    "अब तक एक पैटर्न लिखा जा चुका, पाँच और आने वाले हैं।",
-  "Remove": "हटाइए",
-
-  /* ---------- Checkout ---------- */
-  "Get your patterns | Crochet Curio": "अपने पैटर्न लीजिए | Crochet Curio",
-  "Get your patterns": "अपने पैटर्न लीजिए",
-  "Two fields, then the files are yours. No delivery address: nothing physical is being sent.":
-    "दो फ़ील्ड, और फ़ाइलें आपकी। कोई डिलीवरी पता नहीं: कुछ भी भौतिक रूप से नहीं भेजा जा रहा।",
-  "Demonstration checkout.": "डेमो चेकआउट।",
-  "Nothing is transmitted and no payment is taken: this is the front-end flow only, and the download hands over a stand-in text file rather than the studio's real PDF. Connect a payment provider and a file store before selling patterns for money.":
-    "कुछ भी भेजा नहीं जाता और कोई पेमेंट नहीं ली जाती: यह सिर्फ़ फ़्रंट-एंड फ़्लो है, और डाउनलोड में स्टूडियो की असली PDF की जगह एक नमूना टेक्स्ट फ़ाइल मिलती है। पैसे लेकर पैटर्न बेचने से पहले पेमेंट प्रोवाइडर और फ़ाइल स्टोर जोड़िए।",
-  "Pattern unlocked": "पैटर्न अनलॉक हुआ",
-  "Happy making": "बनाने का आनंद लीजिए",
-  "unlocked for": "अनलॉक हुआ",
-  ", order": ", ऑर्डर",
-  ". The files are in your library now, and a copy of this receipt is on its way to the email address you gave us.":
-    "। फ़ाइलें अब आपकी लाइब्रेरी में हैं, और इस रसीद की एक कॉपी आपके दिए ईमेल पते पर भेजी जा रही है।",
-  "Open My patterns": "मेरे पैटर्न खोलिए",
-  "Find another project": "दूसरा प्रोजेक्ट देखिए",
-  "Where your patterns go": "आपके पैटर्न कहाँ जाते हैं",
-  "Full name": "पूरा नाम",
-  "Goes on the pattern licence inside the file.": "फ़ाइल के अंदर पैटर्न लाइसेंस पर यही नाम जाता है।",
-  "Your download link and receipt go here. Nothing is posted.":
-    "आपका डाउनलोड लिंक और रसीद यहीं आएँगे। कुछ भी डाक से नहीं भेजा जाता।",
-  "Before you download": "डाउनलोड से पहले",
-  "How long have you been crocheting?": "आप कब से क्रोशे कर रहे हैं?",
-  "(optional)": "(वैकल्पिक)",
-  "Rather not say": "बताना नहीं चाहते",
-  "This is my first project": "यह मेरा पहला प्रोजेक्ट है",
-  "A few finished pieces": "कुछ पीस पूरे किए हैं",
-  "Years of it": "कई सालों से",
-  "Only used to decide which pattern we write next.":
-    "सिर्फ़ यह तय करने के लिए कि अगला पैटर्न कौन-सा लिखें।",
-  "Anything you would like help with?": "किसी चीज़ में मदद चाहिए?",
-  "A technique you are nervous about, a yarn you already own.":
-    "कोई तकनीक जिससे झिझक हो, या कोई यार्न जो आपके पास पहले से है।",
-  "Your pattern is for your own making. Crochet it as often as you like. Please do not resell or share the file itself.":
-    "पैटर्न आपके अपने बनाने के लिए है। जितनी बार चाहें क्रोशे कीजिए। बस फ़ाइल को दोबारा न बेचें और न साझा करें।",
-  "Unlock my patterns": "मेरे पैटर्न अनलॉक कीजिए",
-  "Your patterns": "आपके पैटर्न",
-  "Enter the name to put on the pattern licence.": "पैटर्न लाइसेंस पर लिखा जाने वाला नाम भरिए।",
-  "Enter an email address: your download link goes there.":
-    "ईमेल पता भरिए: डाउनलोड लिंक वहीं जाएगा।",
-  "That email address is missing an @ or a domain. Check it and try again.":
-    "इस ईमेल पते में @ या डोमेन नहीं है। जाँच कर दोबारा कोशिश कीजिए।",
-  "Your patterns were not unlocked. Check the highlighted fields.":
-    "आपके पैटर्न अनलॉक नहीं हुए। चिह्नित फ़ील्ड जाँचिए।",
-  "Go to your cart to check out.": "चेकआउट के लिए अपने कार्ट में जाइए।",
-
   /* ---------- Library ---------- */
+  "Your patterns": "आपके पैटर्न",
   "My patterns | Crochet Curio": "मेरे पैटर्न | Crochet Curio",
   "Everything you have unlocked, ready to download again: a new laptop, a lost file, a second go at the same cardigan.":
     "आपने जो कुछ अनलॉक किया है, सब दोबारा डाउनलोड के लिए तैयार: नया लैपटॉप, खोई हुई फ़ाइल, या वही कार्डिगन दोबारा बनाना।",
@@ -287,7 +218,11 @@ window.CC_LANG_HI = {
      else, so the wording lives in one place whichever language the
      site is being read in. */
   "The pattern": "पैटर्न",
-  "Accessible patterns": "एक्सेसिबल पैटर्न",
+  /* "पैटर्न" rather than "संस्करण" for "edition": the group above is
+     plain "पैटर्न" too, and the pair reads as two patterns to choose
+     between instead of one pattern and its special-case version. */
+  "Large print and screen reader edition":
+    "बड़े अक्षरों और स्क्रीन रीडर वाला पैटर्न",
   /* "English" and "हिन्दी" are left untranslated on purpose: a language
      is named in its own language, in this select as in the nav one. */
   "Pattern language": "पैटर्न की भाषा",
@@ -303,28 +238,28 @@ window.CC_LANG_HI = {
     "ब्राउज़र में खोलिए",
   "Open in browser, in Hindi":
     "ब्राउज़र में खोलिए, हिन्दी में",
-  "Pattern in your browser, compatible with screen readers.":
-    "पैटर्न आपके ब्राउज़र में, स्क्रीन रीडर के साथ चलता है।",
-  "Pattern in your browser, in Hindi. Not tested with a screen reader yet.":
-    "पैटर्न आपके ब्राउज़र में, हिन्दी में। स्क्रीन रीडर से अभी टेस्ट नहीं किया गया।",
+  "Pattern in your browser, compatible with screen readers. Every direction written out, no abbreviations.":
+    "पैटर्न आपके ब्राउज़र में, स्क्रीन रीडर के साथ चलता है। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं।",
+  "Pattern in your browser, in Hindi. Every direction written out, no abbreviations. Not tested with a screen reader yet.":
+    "पैटर्न आपके ब्राउज़र में, हिन्दी में। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं। स्क्रीन रीडर से अभी टेस्ट नहीं किया गया।",
   "Download Word file":
     "Word फ़ाइल डाउनलोड कीजिए",
   "Word file":
     "Word फ़ाइल",
   "Download Word file, in Hindi":
     "Word फ़ाइल डाउनलोड कीजिए, हिन्दी में",
-  "Word file for offline use, compatible with screen readers.":
-    "बिना इंटरनेट पढ़ने के लिए Word फ़ाइल, स्क्रीन रीडर के साथ चलती है।",
-  "Word file in Hindi for offline use. Not tested with a screen reader yet.":
-    "हिन्दी में Word फ़ाइल, बिना इंटरनेट पढ़ने के लिए। स्क्रीन रीडर से अभी टेस्ट नहीं किया गया।",
+  "Word file for offline use, compatible with screen readers. Every direction written out, no abbreviations.":
+    "बिना इंटरनेट पढ़ने के लिए Word फ़ाइल, स्क्रीन रीडर के साथ चलती है। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं।",
+  "Word file in Hindi for offline use. Every direction written out, no abbreviations. Not tested with a screen reader yet.":
+    "हिन्दी में Word फ़ाइल, बिना इंटरनेट पढ़ने के लिए। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं। स्क्रीन रीडर से अभी टेस्ट नहीं किया गया।",
   "Download large print PDF":
     "बड़े अक्षरों वाली PDF डाउनलोड कीजिए",
   "Download large print PDF, in Hindi":
     "बड़े अक्षरों वाली PDF डाउनलोड कीजिए, हिन्दी में",
-  "24 point font, black on white.":
-    "24 पॉइंट फ़ॉन्ट, सफ़ेद पर काला।",
-  "24 point font in Hindi, black on white.":
-    "हिन्दी में 24 पॉइंट फ़ॉन्ट, सफ़ेद पर काला।",
+  "24 point font, black on white. Every direction written out, no abbreviations. Best for printing.":
+    "24 पॉइंट फ़ॉन्ट, सफ़ेद पर काला। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं। प्रिंट करने के लिए सबसे अच्छी।",
+  "24 point font in Hindi, black on white. Every direction written out, no abbreviations. Best for printing.":
+    "हिन्दी में 24 पॉइंट फ़ॉन्ट, सफ़ेद पर काला। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं। प्रिंट करने के लिए सबसे अच्छी।",
   "5-page PDF, or 13 pages in large print": "5 पेज की PDF, या बड़े अक्षरों में 13 पेज",
   "PDF pattern": "PDF पैटर्न",
   "Skill level": "स्किल लेवल",
@@ -387,13 +322,11 @@ window.CC_LANG_HI = {
   /* ---------- Placeholders ---------- */
   "you@example.com": "aap@example.com",
 
-  "Instant download after checkout": "चेकआउट के बाद तुरंत डाउनलोड",
-
   /* ---------- Sentences the shop builds at runtime ----------
      These carry a product name, a count or a price, so they are matched
      as patterns rather than as whole strings. A replacement may be a
      function where part of the sentence needs looking up in turn — the
-     skill level inside a cart row, for one. */
+     skill level inside a library row, for one. */
   "@patterns": [
     [/^PDF pattern · (\d+) pages · (.+)$/, function (_, pages, level) {
       return "PDF पैटर्न · " + pages + " पेज · " + window.CC_LANG_HI_LEVEL(level);
@@ -402,26 +335,6 @@ window.CC_LANG_HI = {
     [/^PDF pattern · (.+)$/, function (_, level) {
       return "PDF पैटर्न · " + window.CC_LANG_HI_LEVEL(level);
     }],
-    /* A product name inside a runtime sentence goes through the same
-       Devanagari list the standalone names use, so a cart message never
-       mixes scripts with the row printed above it. */
-    [/^the (.+) pattern$/, function (_, name) {
-      return window.CC_LANG_HI_NAME(name) + " पैटर्न";
-    }],
-    [/^(.+) pattern added to your cart\. (\d+) patterns? ready to download after checkout\.$/,
-     function (_, name, n) {
-       return window.CC_LANG_HI_NAME(name) + " पैटर्न आपके कार्ट में जुड़ गया। " +
-              "चेकआउट के बाद डाउनलोड के लिए " + n + " पैटर्न तैयार।";
-     }],
-    [/^The (.+) pattern was removed from your cart\.$/, function (_, name) {
-      return window.CC_LANG_HI_NAME(name) + " पैटर्न आपके कार्ट से हटा दिया गया।";
-    }],
-    [/^The (.+) is already in your cart. One copy is all you need\.(.*)$/,
-     function (_, name, tail) {
-       return window.CC_LANG_HI_NAME(name) +
-              " पहले से आपके कार्ट में है। एक ही कॉपी काफ़ी है।" + tail;
-     }],
-    [/^(\d+) patterns?$/, "$1 पैटर्न"],
     [/^(\d+)-page PDF$/, "$1 पेज की PDF"],
     /* The summary line on a library row: a page count or, for a free
        pattern, the words "Free pattern" — then the skill level, which
@@ -434,14 +347,11 @@ window.CC_LANG_HI = {
     }],
     [/^Get the pattern, (₹[\d,]+)$/, "पैटर्न लीजिए, $1"],
     [/^Unlocked on (.+)$/, "$1 को अनलॉक हुआ"],
-    [/^Saved (.+)$/, "$1 को सेव हुआ"],
-    [/^(.+) unlocked for (.+), order (.+)$/, function (_, what, who, order) {
-      return who + " के लिए " + window.CC_LANG_HI_NAME(what) + " अनलॉक हुआ, ऑर्डर " + order;
-    }]
+    [/^Saved (.+)$/, "$1 को सेव हुआ"]
   ]
 };
 
-/* The four skill levels, for the rules above: a cart row prints the
+/* The four skill levels, for the rules above: a library row prints the
    level inside a longer sentence, so it cannot be looked up as a whole
    string. Anything unrecognised is handed back untouched. */
 /* Product names for the rules above, looked up in the dictionary itself so

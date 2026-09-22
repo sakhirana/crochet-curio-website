@@ -1,19 +1,17 @@
 /* ============================================================
-   Crochet Curio — pattern basket, checkout and pattern library
+   Crochet Curio — the pattern library
 
-   Everything sold here is a digital PDF pattern. That shapes the
-   rules: one copy of a pattern per basket (no quantity), no size
-   choice at purchase (every size is written into the file), and no
-   shipping — the file lands in the buyer's library.
+   Every pattern here is a free digital PDF. There is nothing to buy,
+   so there is no basket and no checkout: taking a file is what puts
+   the pattern in My patterns.
 
-   State lives in localStorage under two keys. Every read is
+   State lives in localStorage under one key. Every read is
    defensive: a private window, cleared storage or a browser that
    blocks site data must still render a working page.
    ============================================================ */
 (function () {
   "use strict";
 
-  var BASKET_KEY  = "crochet-curio-basket";
   var LIBRARY_KEY = "crochet-curio-library";
 
   /* ---------- storage ---------- */
@@ -35,57 +33,20 @@
     }
   }
 
-  function readBasket() { return read(BASKET_KEY); }
-  function writeBasket(items) { write(BASKET_KEY, items); paintCount(); }
-
   function readLibrary() { return read(LIBRARY_KEY); }
   function writeLibrary(items) { write(LIBRARY_KEY, items); }
 
-  function ownsPattern(slug) {
-    return readLibrary().some(function (p) { return p.slug === slug; });
-  }
-
   /* ---------- formatting ---------- */
-  function rupees(n) {
-    return "₹" + Number(n).toLocaleString("en-IN");
-  }
-
-  function basketTotal(items) {
-    return items.reduce(function (sum, i) { return sum + i.price; }, 0);
-  }
-
-  function patternWord(n) {
-    return n === 1 ? "pattern" : "patterns";
-  }
-
   function catalogueEntry(slug) {
     return (window.CATALOGUE || []).filter(function (c) {
       return c.slug === slug;
     })[0];
   }
 
-  function orderRef() {
-    return "CC-" + Math.random().toString(36).slice(2, 7).toUpperCase();
-  }
-
   function today() {
     return new Date().toLocaleDateString("en-IN", {
       day: "numeric", month: "long", year: "numeric"
     });
-  }
-
-  /* ---------- header count ---------- */
-  function paintCount() {
-    var n = readBasket().length;
-    var badge = document.getElementById("cartCount");
-    var label = document.getElementById("cartCountLabel");
-    if (badge) {
-      badge.textContent = String(n);
-      badge.classList.toggle("is-empty", n === 0);
-    }
-    if (label) {
-      label.textContent = ", " + n + " " + patternWord(n);
-    }
   }
 
   /* ---------- the stand-in pattern file ----------
@@ -139,332 +100,9 @@
     return true;
   }
 
-  /* ---------- add a pattern to the basket (pattern pages) ---------- */
-  var buyForm = document.getElementById("buyForm");
-  if (buyForm) {
-    var slug = buyForm.dataset.slug;
-    var status = document.getElementById("buyStatus");
-    var button = buyForm.querySelector("button[type=submit]");
-
-    /* Already owned? The page says so and points at the library
-       instead of selling the same file twice. */
-    if (ownsPattern(slug) && button) {
-      button.textContent = "You already own this pattern";
-      button.disabled = true;
-      buyForm.insertAdjacentHTML("beforeend",
-        '<p class="owned-note">In your library since you bought it. ' +
-        '<a class="link" href="library.html">Open My patterns</a> to download it again.</p>');
-    }
-
-    buyForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      var items = readBasket();
-      var already = items.some(function (i) { return i.slug === slug; });
-
-      if (already) {
-        if (status) {
-          status.textContent = buyForm.dataset.name +
-            " is already in your cart. One copy is all you need. " +
-            "Go to your cart to check out.";
-        }
-        return;
-      }
-
-      items.push({
-        slug: slug,
-        name: buyForm.dataset.name,
-        price: Number(buyForm.dataset.price),
-        image: buyForm.dataset.image,
-        pages: Number(buyForm.dataset.pages) || null,
-        difficulty: buyForm.dataset.difficulty || ""
-      });
-
-      writeBasket(items);
-
-      if (status) {
-        status.textContent = buyForm.dataset.name + " pattern added to your cart. " +
-          items.length + " " + patternWord(items.length) + " ready to download after checkout.";
-      }
-    });
-  }
-
-  /* ---------- basket page ---------- */
-  var basketRoot = document.getElementById("basketRoot");
-
-  function renderBasket() {
-    if (!basketRoot) { return; }
-    var items = readBasket();
-
-    if (!items.length) {
-      basketRoot.innerHTML =
-        '<div class="basket-empty">' +
-          "<h2>No patterns picked yet</h2>" +
-          '<p class="muted">One pattern written so far, five more on the way.</p>' +
-          '<p><a class="btn btn--primary" href="index.html#patterns">Browse the patterns</a></p>' +
-        "</div>";
-      var sum = document.getElementById("basketSummary");
-      if (sum) { sum.hidden = true; }
-      return;
-    }
-
-    var rows = items.map(function (item, index) {
-      /* Resolve the image and specs from the catalogue by slug rather than
-         trusting what was stored — a basket saved before a photo was renamed
-         would otherwise point at a file that no longer exists. */
-      var entry = catalogueEntry(item.slug);
-      var image = entry ? entry.image : item.image;
-      var description = entry ? entry.alt : item.name;
-      var difficulty = (entry && entry.difficulty) || item.difficulty || "";
-      var pages = (entry && entry.pages) || item.pages;
-
-      return '<li class="basket-row">' +
-        '<div class="basket-row__media">' +
-          '<img src="assets/img/' + image + '" alt="' + description + '" width="160" height="160">' +
-        "</div>" +
-        '<div class="basket-row__info">' +
-          "<h3>" + item.name + "</h3>" +
-          '<p class="muted">PDF pattern' + (pages ? " · " + pages + " pages" : "") +
-            (difficulty ? " · " + difficulty : "") + "</p>" +
-          '<p class="basket-row__unit muted">Instant download after checkout</p>' +
-        "</div>" +
-        '<p class="basket-row__total">' + rupees(item.price) + "</p>" +
-        '<button type="button" class="basket-row__remove" data-remove="' + index + '">' +
-          'Remove<span class="visually-hidden"> the ' + item.name + " pattern</span>" +
-        "</button>" +
-      "</li>";
-    }).join("");
-
-    basketRoot.innerHTML = '<ul class="basket-list">' + rows + "</ul>";
-    paintSummary(items);
-  }
-
-  function paintSummary(items) {
-    var sum = document.getElementById("basketSummary");
-    if (!sum) { return; }
-    sum.hidden = false;
-    var subtotal = basketTotal(items);
-
-    var el = function (id) { return document.getElementById(id); };
-    if (el("sumCount")) {
-      el("sumCount").textContent = items.length + " " + patternWord(items.length);
-    }
-    if (el("sumSubtotal")) { el("sumSubtotal").textContent = rupees(subtotal); }
-    if (el("sumDelivery")) { el("sumDelivery").textContent = "Instant download"; }
-    if (el("sumTotal")) { el("sumTotal").textContent = rupees(subtotal); }
-  }
-
-  if (basketRoot) {
-    basketRoot.addEventListener("click", function (event) {
-      var btn = event.target.closest("[data-remove]");
-      if (!btn) { return; }
-      var index = Number(btn.dataset.remove);
-      var items = readBasket();
-      var removed = items[index];
-      items.splice(index, 1);
-      writeBasket(items);
-      renderBasket();
-
-      var live = document.getElementById("basketStatus");
-      if (live && removed) {
-        live.textContent = "The " + removed.name + " pattern was removed from your cart.";
-      }
-      var focusTarget = document.querySelector(".basket-row__remove") ||
-                        document.querySelector(".basket-empty a");
-      if (focusTarget) { focusTarget.focus(); }
-    });
-
-    renderBasket();
-  }
-
-  /* ---------- checkout page ---------- */
-  var checkoutRoot = document.getElementById("checkoutSummary");
-
-  if (checkoutRoot) {
-    var checkoutItems = readBasket();
-
-    if (!checkoutItems.length) {
-      checkoutRoot.innerHTML =
-        '<h2 id="coSummaryTitle">Your patterns</h2>' +
-        '<p class="muted">Your cart is empty. ' +
-        '<a class="link" href="index.html#patterns">Pick a pattern first</a>.</p>';
-      var emptyForm = document.getElementById("checkoutForm");
-      if (emptyForm) { emptyForm.hidden = true; }
-    } else {
-      var subtotal = basketTotal(checkoutItems);
-      checkoutRoot.innerHTML =
-        '<h2 id="coSummaryTitle">Your patterns</h2>' +
-        '<ul class="checkout-lines">' +
-          checkoutItems.map(function (i) {
-            var entry = catalogueEntry(i.slug);
-            var pages = (entry && entry.pages) || i.pages;
-            return "<li><span>" + i.name +
-              (pages ? ' <span class="muted">&middot; ' + pages + "-page PDF</span>" : "") +
-              "</span><span>" + rupees(i.price) + "</span></li>";
-          }).join("") +
-        "</ul>" +
-        '<dl class="checkout-totals">' +
-          "<div><dt>Subtotal</dt><dd>" + rupees(subtotal) + "</dd></div>" +
-          "<div><dt>Delivery</dt><dd>Instant download</dd></div>" +
-          '<div class="is-total"><dt>Total</dt><dd>' + rupees(subtotal) + "</dd></div>" +
-        "</dl>" +
-        '<p class="summary__note">Digital files. Nothing is posted, so there is no address to give and no shipping to pay.</p>';
-    }
-  }
-
-  var checkoutForm = document.getElementById("checkoutForm");
-  if (checkoutForm) {
-    var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    /* "Error:" is drawn as Icon/Status/Error/16 by the stylesheet, so the
-       word itself is written visually hidden: the icon carries it on screen,
-       the text carries it to a screen reader (1.1.1, 3.3.1). */
-    var writeError = function (error, message) {
-      var label = document.createElement("span");
-      label.className = "visually-hidden";
-      label.textContent = "Error: ";
-      error.textContent = "";
-      error.appendChild(label);
-      error.appendChild(document.createTextNode(message));
-    };
-
-    var setError = function (fieldId, errorId, inputId, message, check) {
-      var field = document.getElementById(fieldId);
-      var error = document.getElementById(errorId);
-      var input = document.getElementById(inputId);
-      if (!field || !error || !input) { return; }
-      if (message) {
-        field.classList.add("is-invalid");
-        writeError(error, message);
-        input.setAttribute("aria-invalid", "true");
-        watch(fieldId, errorId, inputId, check);
-      } else {
-        field.classList.remove("is-invalid");
-        error.textContent = "";
-        input.removeAttribute("aria-invalid");
-      }
-    };
-
-    /* A field that has failed stays red — stroke and focus ring both — until
-       what is typed passes the same check that failed it. It re-checks on
-       every keystroke from that point on, so the red clears the moment the
-       value is right rather than waiting for the next submit. Fields that
-       have not failed yet are never watched, so nothing turns red while the
-       reader is still typing their first attempt (3.3.1). */
-    var watched = {};
-
-    var watch = function (fieldId, errorId, inputId, check) {
-      var input = document.getElementById(inputId);
-      if (!input || !check || watched[inputId]) { return; }
-      watched[inputId] = true;
-      input.addEventListener("input", function () {
-        if (!check(input.value.trim())) {
-          setError(fieldId, errorId, inputId, null);
-        }
-      });
-    };
-
-    /* One row per field: submit and the keystroke re-check run the same
-       check, so they can never disagree about whether a field is wrong. */
-    var CHECKOUT_FIELDS = [
-      { fieldId: "coField-name", errorId: "coError-name", inputId: "co-name",
-        check: function (value) {
-          return value ? null : "Enter the name to put on the pattern licence.";
-        } },
-      { fieldId: "coField-email", errorId: "coError-email", inputId: "co-email",
-        check: function (value) {
-          if (!value) { return "Enter an email address: your download link goes there."; }
-          if (!EMAIL_RE.test(value)) {
-            return "That email address is missing an @ or a domain. Check it and try again.";
-          }
-          return null;
-        } }
-    ];
-
-    checkoutForm.addEventListener("submit", function (event) {
-      event.preventDefault();
-
-      var firstInvalid = null;
-
-      CHECKOUT_FIELDS.forEach(function (f) {
-        var input = document.getElementById(f.inputId);
-        if (!input) { return; }
-        var problem = f.check(input.value.trim());
-        setError(f.fieldId, f.errorId, f.inputId, problem, f.check);
-        if (problem && !firstInvalid) { firstInvalid = input; }
-      });
-
-      var status = document.getElementById("checkoutStatus");
-
-      if (firstInvalid) {
-        firstInvalid.focus();
-        if (status) {
-          status.textContent = "Your patterns were not unlocked. Check the highlighted fields.";
-        }
-        return;
-      }
-
-      /* Nothing is transmitted and no payment is taken — this is a
-         front-end demonstration of the flow. Wire it to a payment
-         provider and a real file store before taking money. */
-      var bought = readBasket();
-      var total = basketTotal(bought);
-      var ref = orderRef();
-      var stamp = today();
-
-      var library = readLibrary();
-      bought.forEach(function (item) {
-        if (library.some(function (p) { return p.slug === item.slug; })) { return; }
-        library.push({
-          slug: item.slug,
-          name: item.name,
-          price: item.price,
-          image: item.image,
-          pages: item.pages,
-          difficulty: item.difficulty,
-          purchasedAt: stamp,
-          ref: ref
-        });
-      });
-      writeLibrary(library);
-
-      try { window.localStorage.removeItem(BASKET_KEY); } catch (e) {}
-      paintCount();
-
-      var done = document.getElementById("orderPlaced");
-      if (done) {
-        done.hidden = false;
-        done.querySelector("[data-total]").textContent = rupees(total);
-        done.querySelector("[data-count]").textContent =
-          bought.length + " " + patternWord(bought.length);
-        done.querySelector("[data-ref]").textContent = ref;
-
-        var list = done.querySelector("[data-unlocked]");
-        if (list) {
-          list.innerHTML = bought.map(function (i) {
-            var entry = catalogueEntry(i.slug);
-            var image = entry ? entry.image : i.image;
-            var pages = (entry && entry.pages) || i.pages;
-            return '<li class="unlocked-row">' +
-              '<img src="assets/img/' + image + '" alt="" width="72" height="72">' +
-              '<div class="unlocked-row__info"><h3>' + i.name + "</h3>" +
-              '<p class="muted">' + (pages ? pages + "-page PDF" : "PDF pattern") + "</p></div>" +
-              '<button type="button" class="btn btn--secondary" data-download="' + i.slug + '">Download</button>' +
-              "</li>";
-          }).join("");
-        }
-
-        checkoutForm.hidden = true;
-        if (checkoutRoot) { checkoutRoot.hidden = true; }
-        done.setAttribute("tabindex", "-1");
-        done.focus();
-      }
-    });
-  }
-
   /* ---------- free patterns ----------
-     A free pattern never goes through the basket: the four format
-     buttons hand the file over directly. Taking any one of them is
+     There is nothing to buy: the four format buttons hand the file
+     over directly. Taking any one of them is
      what puts the pattern in My patterns, so the visitor can find it
      again without having to remember which format they picked.
 
@@ -662,15 +300,13 @@
 
   if (libraryRoot) { renderLibrary(); }
 
-  /* One delegated handler covers the library page and the
-     just-unlocked list on the checkout confirmation. */
+  /* Delegated, so it covers every download button the library draws. */
   document.addEventListener("click", function (event) {
     var btn = event.target.closest("[data-download]");
     if (!btn) { return; }
     var wanted = btn.dataset.download;
     var ok = downloadPattern(wanted);
-    var live = document.getElementById("libraryStatus") ||
-               document.getElementById("checkoutStatus");
+    var live = document.getElementById("libraryStatus");
     if (live) {
       live.textContent = ok
         ? "Your pattern file is downloading. It stays in My patterns. Come back for it any time."
@@ -678,5 +314,4 @@
     }
   });
 
-  paintCount();
 })();

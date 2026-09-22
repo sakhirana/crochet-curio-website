@@ -290,7 +290,6 @@
     [".footer-grid > *",         "up",    60],
     [".product__media",          "left",  0],
     [".product__info",           "right", 0],
-    [".basket-row",              "up",    60],
     /* shop.js paints these before this file runs, so they are in the DOM */
     [".library-card",            "up",    60],
     [".library-help__grid > *",  "up",    90]
@@ -413,44 +412,9 @@
     window.setTimeout(enter, 400);
   }
 
-  /* ---------- Basket count pop, driven by shop.js updating the badge ---------- */
-  function watchBasketCount() {
-    var badge = document.getElementById("cartCount");
-    if (!badge || !("MutationObserver" in window) || reduced.matches) { return; }
-
-    var previous = badge.textContent;
-    new MutationObserver(function () {
-      if (badge.textContent === previous) { return; }
-      previous = badge.textContent;
-      badge.classList.remove("is-bumped");
-      void badge.offsetWidth;          /* restart the animation */
-      badge.classList.add("is-bumped");
-    }).observe(badge, { childList: true, characterData: true, subtree: true });
-  }
-
-  /* ---------- Summary values flash when they change ---------- */
-  function watchSummary() {
-    var summary = document.querySelector(".summary");
-    if (!summary || !("MutationObserver" in window) || reduced.matches) { return; }
-
-    new MutationObserver(function (records) {
-      records.forEach(function (record) {
-        var dd = record.target.nodeType === 1
-          ? record.target.closest("dd")
-          : record.target.parentElement && record.target.parentElement.closest("dd");
-        if (!dd) { return; }
-        dd.classList.remove("is-updated");
-        void dd.offsetWidth;
-        dd.classList.add("is-updated");
-      });
-    }).observe(summary, { childList: true, characterData: true, subtree: true });
-  }
-
   /* ---------- Go ---------- */
   function init() {
     buildBackToTop();
-    watchBasketCount();
-    watchSummary();
 
     /* Under reduced motion we stop here — whether that came from the system
        setting or from the switch in the accessibility panel, which sets

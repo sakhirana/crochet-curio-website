@@ -141,6 +141,22 @@
   .offline p:last-child { margin-bottom: 0.5em; }
 
   /* ---------------------------------------------------------------
+     Screen and paper wording
+
+     Two sentences in the accessibility statement are true of one
+     medium and false of the other. On screen the size is the reader's
+     to set; in the PDF it is fixed at 24 point, and the Accessible
+     Patterns Index needs that number stated. The NVDA claim has the
+     same problem in reverse: in the PDF it describes two files the
+     reader is not holding.
+
+     So those lines exist twice, and each medium hides the other's
+     copy. Nothing structural is hidden either way, so the reading
+     order and the tag tree are the same in both.
+     --------------------------------------------------------------- */
+  .on-paper { display: none; }
+
+  /* ---------------------------------------------------------------
      Print
 
      What the buyer saves as PDF, and the only place a size is fixed:
@@ -165,6 +181,9 @@
        this page is also what Chrome prints the PDF from, so a download
        link left visible would be printed into the PDF itself. */
     .contents, .offline, .backlink { display: none; }
+    .on-screen { display: none; }
+    .on-paper { display: list-item; }
+    p.on-paper { display: block; }
     h1, h2, h3 { break-after: avoid-page; page-break-after: avoid; }
     p, li { break-inside: avoid-page; page-break-inside: avoid; }
     section { break-inside: auto; }
@@ -206,8 +225,9 @@
   <p>This is the accessible edition of this pattern, written for screen reader users and for crocheters with a print disability. It covers this pattern only.</p>
 
   <ul>
-    <li>Set in Verdana, a sans serif face, in black on a white background, at the same size as the standard edition.</li>
-    <li>The text size is yours to set: Ctrl and + in a browser, Word's zoom in the Word file. The text reflows either way.</li>
+    <li class="on-screen">Set in Verdana, a sans serif face, in black on a white background, at the same size as the standard edition.</li>
+    <li class="on-screen">The text size is yours to set: Ctrl and + in a browser, Word's zoom in the Word file. The text reflows either way.</li>
+    <li class="on-paper">Set in 24 point Verdana, a sans serif face, in black on a white background. Headings run from 26 to 32 point.</li>
     <li>No italics are used anywhere.</li>
     <li>Every direction is written out in full. There are no abbreviations, and there is no abbreviations list to memorise.</li>
     <li>There are no charts, no stitch diagrams, and no photographs. Nothing in this pattern is carried by an image.</li>
@@ -219,16 +239,24 @@
   <!--
     This line is a claim about a specific artefact, so it has to name
     which one, and it may only claim what has actually been done: both
-    editions named here have been read end to end with NVDA, by a
+    editions named on screen have been read end to end with NVDA, by a
     person.
 
-    It says nothing about the PDF on purpose. Which format to choose
-    is a decision made on the product page, before anything is opened.
-    A reader who is already inside the pattern has made that choice,
-    and a warning about a file they are not reading is noise in the
-    middle of an accessibility statement.
+    On screen it says nothing about the PDF. Which format to choose is
+    a decision made on the product page, before anything is opened. A
+    reader who is already inside the web page has made that choice, and
+    a warning about a file they are not reading is noise in the middle
+    of an accessibility statement.
+
+    In the PDF the same reasoning runs the other way. There the reader
+    is holding the one file that has not been listened to by a person,
+    and the product page is behind them, so the statement has to say so
+    and name the two formats that have. It does not claim the file is
+    unusable: it is tagged and machine verified, and no reader other
+    than NVDA has been tried on it. It points at what is known to work.
   -->
-  <p>Screen reader testing: the web edition and the Word edition have both been read from beginning to end with NVDA, and read correctly throughout.</p>
+  <p class="on-screen">Screen reader testing: the web edition and the Word edition have both been read from beginning to end with NVDA, and read correctly throughout.</p>
+  <p class="on-paper">Screen reader testing: this PDF is tagged and its reading order has been checked by machine, but it has not yet been listened to from beginning to end by a person. The web page and the Word file have both been read end to end with NVDA and read correctly. If you use a screen reader, those are the two to reach for. This PDF is the format for print and for large print reading.</p>
 
   <!--
     The aria-label is the wording that becomes the link's alternative

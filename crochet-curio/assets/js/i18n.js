@@ -13,8 +13,8 @@
      lets a sentence carrying a <span> or a link work at all.
    * The original English is kept on each node, so switching back is
      a restore rather than a second translation.
-   * The shop renders baskets and receipts after this file has run,
-     so a MutationObserver translates whatever appears later. Those
+   * The pattern library is rendered after this file has run, so a
+     MutationObserver translates whatever appears later. Those
      sentences carry a product name or a count, and are matched by
      the pattern list at the end of the dictionary.
    * <html lang> follows the choice. Without it a screen reader keeps
@@ -171,8 +171,8 @@
     build();
     apply();
 
-    /* The basket, the library and the checkout receipt are written after
-       this point; translate them as they appear. */
+    /* The pattern library is written after this point; translate it
+       as it appears. */
     var observer = new MutationObserver(function (records) {
       if (busy || current === "en") { return; }
       var touched = records.some(function (r) {

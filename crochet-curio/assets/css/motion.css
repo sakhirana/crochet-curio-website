@@ -274,26 +274,6 @@
   .btn:active { transform: translateY(0); }
 }
 
-/* Add-to-basket confirmation pulse */
-@keyframes basket-pop {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.28); }
-  100% { transform: scale(1); }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .cart-count.is-bumped { animation: basket-pop .45s var(--ease-spring); }
-}
-
-/* Numbers in the summary tick over rather than snapping */
-.summary dd, .checkout-totals dd { transition: color var(--dur-fast) var(--ease-out-soft); }
-@keyframes flash-value {
-  from { color: var(--content-brand); }
-  to   { color: var(--content-primary); }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .summary dd.is-updated { animation: flash-value .7s var(--ease-out-soft); }
-}
-
 /* ============================================================
    Section headings — a rule that draws itself in
    ============================================================ */

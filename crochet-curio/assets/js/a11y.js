@@ -24,10 +24,6 @@
 
   var KEY = "cc-motion";          /* "on" | "off"; absent means "not asked" */
   var KEY_THEME = "cc-theme";     /* "dark" | "light"; absent means "not asked" */
-  var KEY_NOTE = "cc-announcement"; /* "dismissed"; absent means still showing.
-     Session storage, not local: the offer is part of arriving at the site, so a
-     visitor who dismissed it last week should meet it again on their next
-     visit. Within one visit the dismissal still carries page to page. */
   var root = document.documentElement;
 
   /* localStorage throws rather than returns null in a locked-down
@@ -39,15 +35,6 @@
   var write = function (key, value) {
     try { window.localStorage.setItem(key, value); } catch (e) { /* nothing to do */ }
   };
-  /* The same pair against sessionStorage, for a preference that should last
-     the visit rather than outlive it. */
-  var readSession = function (key) {
-    try { return window.sessionStorage.getItem(key); } catch (e) { return null; }
-  };
-  var writeSession = function (key, value) {
-    try { window.sessionStorage.setItem(key, value); } catch (e) { /* nothing to do */ }
-  };
-
   var stored   = function () { return read(KEY); };
   var remember = function (value) { write(KEY, value); };
 
@@ -80,22 +67,10 @@
     root.setAttribute("data-theme", dark ? "dark" : "light");
   };
 
-  /* ---------- The announcement bar ----------
-     Dismissing it is a preference like the other two, so it is read
-     here rather than in site.js: site.js runs at the foot of the page,
-     and a bar removed there would still have been painted and would
-     still have shifted the page down on every load. */
-  var noteIsDismissed = function () { return readSession(KEY_NOTE) === "dismissed"; };
-  var applyNote = function (gone) {
-    root.classList.toggle("announcement-dismissed", gone);
-  };
-
-  /* Before paint: the class motion.js reads, the theme attribute, and
-     the announcement bar. */
+  /* Before paint: the class motion.js reads, and the theme attribute. */
   var apply = function (off) { root.classList.toggle("no-motion", off); };
   apply(motionIsOff());
   applyTheme(themeIsDark());
-  applyNote(noteIsDismissed());
 
   /* ---------- The panel ---------- */
   /* Icon/Accessibility/24, exported from the design system (node 2096:1437).
@@ -118,8 +93,7 @@
     'C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2Z"/>' +
     '</svg>';
 
-  /* Icon/X/16, the same symbol the announcement bar's dismiss control
-     carries inline in every page. */
+  /* Icon/X/16, for the panel's close control. */
   var ICON_X =
     '<svg class="icon-16" viewBox="0 0 16 16" fill="none" stroke="currentColor"' +
     ' stroke-width="1" stroke-linecap="round" stroke-linejoin="round"' +
@@ -128,20 +102,6 @@
     '</svg>';
 
   function build() {
-    /* The announcement's dismiss button. Focus is moved to the brand
-       link rather than left on a control that is about to disappear,
-       so a keyboard user carries on from the top of the header instead
-       of from the top of the document (2.4.3). */
-    var noteClose = document.getElementById("announcementClose");
-    if (noteClose) {
-      noteClose.addEventListener("click", function () {
-        var brand = document.querySelector(".site-header .brand");
-        applyNote(true);
-        writeSession(KEY_NOTE, "dismissed");
-        if (brand) { brand.focus(); }
-      });
-    }
-
     if (document.querySelector(".a11y")) { return; }
 
     var wrap = document.createElement("div");
@@ -154,10 +114,9 @@
       ' aria-labelledby="a11yTitle" hidden>' +
         '<div class="a11y__head">' +
           '<h2 class="a11y__title" id="a11yTitle">Accessibility</h2>' +
-          /* Button Icon, Size=S, Type=Secondary, holding Icon/X/16 — the same
-             control the announcement bar dismisses with. It drew a &times;
-             glyph before, which meant the box was sized by a font rather than
-             by the component. */
+          /* Button Icon, Size=S, Type=Secondary, holding Icon/X/16. It drew a
+             &times; glyph before, which meant the box was sized by a font
+             rather than by the component. */
           '<button class="btn-icon btn-icon--s a11y__close" type="button"' +
           ' aria-label="Close accessibility options">' + ICON_X + '</button>' +
         '</div>' +

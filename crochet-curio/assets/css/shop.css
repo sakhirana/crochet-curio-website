@@ -1,5 +1,5 @@
 /* ============================================================
-   Crochet Curio — shop, product, basket and checkout
+   Crochet Curio — shop, product and pattern library
    Same tokens, same focus treatment, same WCAG 2.2 AA target.
    ============================================================ */
 
@@ -425,7 +425,7 @@ ul.spec-strip__formats {
 .product__details dd { margin: 0; color: var(--content-secondary); }
 
 /* ============================================================
-   Basket
+   Page head
    ============================================================ */
 .page-head { padding-block: var(--space-6xl) var(--space-4xl); }
 .page-head h1 {
@@ -434,59 +434,9 @@ ul.spec-strip__formats {
   margin-bottom: var(--space-m);
 }
 
-.basket-layout {
-  display: grid;
-  grid-template-columns: 1.5fr .9fr;
-  gap: var(--space-6xl);
-  align-items: start;
-  padding-bottom: var(--space-10xl);
-}
-
-.basket-list { list-style: none; margin: 0; padding: 0; }
-/* No quantity column — a pattern file is bought once. */
-.basket-row {
-  display: grid;
-  grid-template-columns: 96px 1fr auto auto;
-  gap: var(--space-xl);
-  align-items: center;
-  padding-block: var(--space-xl);
-  border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
-}
-.basket-row:first-child { border-top: var(--stroke-width-xs) solid var(--border-section-divider); }
-
-.basket-row__media {
-  background: var(--background-hover);
-  border-radius: var(--radius-s);
-  overflow: hidden;
-  aspect-ratio: 1 / 1;
-}
-.basket-row__media img { width: 100%; height: 100%; object-fit: contain; padding: var(--space-s); }
-
-.basket-row__info h3 {
-  font-size: var(--heading-xs-size);
-  line-height: var(--heading-xs-line);
-  margin-bottom: var(--space-2xs);
-}
-.basket-row__info p { font-size: var(--text-m-size); }
-
-.basket-row__total { font-weight: var(--text-semibold); color: var(--content-primary); white-space: nowrap; }
-
-/* Link-coloured and square, at Size=S. The Figma Button set carries Primary,
-   Secondary and Link only, so this has no variant of its own — square, link
-   coloured, and it takes a fill only on hover and press. */
-.basket-row__remove {
-  min-height: 44px;
-  padding: var(--space-s) var(--space-m);
-  background: none;
-  border: var(--stroke-width-xs) solid transparent;
-  color: var(--content-link);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-  font-size: var(--text-m-size);
-}
-.basket-row__remove:hover  { color: var(--content-link-hover);   background: var(--background-hover); }
-
+/* ============================================================
+   Empty state — drawn by My patterns when nothing is saved yet
+   ============================================================ */
 .basket-empty {
   padding: var(--space-10xl) var(--space-2xl);
   text-align: center;
@@ -499,138 +449,6 @@ ul.spec-strip__formats {
   margin-bottom: var(--space-m);
 }
 .basket-empty p { margin-bottom: var(--space-xl); }
-
-/* ---------- Summary card ---------- */
-.summary {
-  border: var(--stroke-width-xs) solid var(--border-section-divider);
-  border-radius: var(--radius-l);
-  padding: var(--space-2xl);
-  position: sticky;
-  top: calc(var(--header-h) + var(--space-xl));
-}
-.summary h2 {
-  font-size: var(--heading-s-size);
-  line-height: var(--heading-s-line);
-  margin-bottom: var(--space-xl);
-}
-.summary dl { display: grid; gap: var(--space-m); margin: 0 0 var(--space-xl); }
-.summary dl > div { display: flex; justify-content: space-between; gap: var(--space-l); }
-.summary dt { color: var(--content-secondary); }
-.summary dd { margin: 0; color: var(--content-primary); font-weight: var(--text-semibold); }
-.summary .is-total {
-  padding-top: var(--space-m);
-  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
-  font-size: var(--text-xl-size);
-}
-.summary__note { font-size: var(--text-m-size); color: var(--content-tertiary); margin-top: var(--space-m); }
-
-/* ============================================================
-   Checkout
-   ============================================================ */
-.checkout-layout {
-  display: grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: var(--space-6xl);
-  align-items: start;
-  padding-bottom: var(--space-10xl);
-}
-.checkout-form { display: grid; gap: var(--space-xl); }
-.checkout-form fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: var(--space-xl); }
-.checkout-form legend {
-  font-size: var(--heading-s-size);
-  line-height: var(--heading-s-line);
-  font-weight: var(--heading-weight);
-  letter-spacing: var(--heading-tracking);
-  color: var(--content-primary);
-  padding: 0;
-  margin-bottom: var(--space-s);
-}
-
-.checkout-lines { list-style: none; margin: 0 0 var(--space-xl); padding: 0; display: grid; gap: var(--space-m); }
-.checkout-lines li {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-l);
-  font-size: var(--text-m-size);
-  padding-bottom: var(--space-m);
-  border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
-}
-.checkout-totals { display: grid; gap: var(--space-m); margin: 0; }
-.checkout-totals > div { display: flex; justify-content: space-between; gap: var(--space-l); }
-.checkout-totals dt { color: var(--content-secondary); }
-.checkout-totals dd { margin: 0; font-weight: var(--text-semibold); color: var(--content-primary); }
-.checkout-totals .is-total {
-  padding-top: var(--space-m);
-  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
-  font-size: var(--text-xl-size);
-}
-
-.checkout-terms {
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
-  color: var(--content-tertiary);
-  padding: var(--space-l) 0;
-  border-top: var(--stroke-width-xs) solid var(--border-section-divider);
-}
-
-/* ============================================================
-   Pattern unlocked — the confirmation, and the files with it
-   ============================================================ */
-.order-placed {
-  border: var(--stroke-width-m) solid var(--content-positive);
-  border-radius: var(--radius-l);
-  padding: var(--space-6xl) var(--space-4xl);
-  text-align: center;
-  margin-bottom: var(--space-4xl);
-}
-.order-placed .kicker { color: var(--content-positive); }
-.order-placed h2 {
-  font-size: var(--heading-l-size);
-  line-height: var(--heading-l-line);
-  margin-bottom: var(--space-m);
-}
-.order-placed p { margin-bottom: var(--space-xl); }
-.order-placed:focus-visible { outline: var(--stroke-width-m) solid var(--border-focus-blue); outline-offset: var(--stroke-width-m); }
-.order-placed__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-m);
-  justify-content: center;
-  margin-bottom: 0;
-}
-
-.unlocked-list {
-  list-style: none;
-  margin: 0 auto var(--space-2xl);
-  padding: 0;
-  display: grid;
-  gap: var(--space-m);
-  max-width: 520px;
-  text-align: left;
-}
-.unlocked-row {
-  display: grid;
-  grid-template-columns: 72px 1fr auto;
-  align-items: center;
-  gap: var(--space-l);
-  padding: var(--space-m);
-  border: var(--stroke-width-xs) solid var(--border-section-divider);
-  border-radius: var(--radius-m);
-  background: var(--background-primary);
-}
-.unlocked-row img {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  object-fit: contain;
-  background: var(--background-secondary);
-  border-radius: var(--radius-s);
-}
-.unlocked-row__info h3 {
-  font-size: var(--heading-xs-size);
-  line-height: var(--heading-xs-line);
-  margin-bottom: var(--space-2xs);
-}
-.unlocked-row__info p { font-size: var(--text-m-size); margin: 0; }
 
 /* ============================================================
    My patterns — the library of files already bought
@@ -717,36 +535,10 @@ ul.spec-strip__formats {
 }
 
 /* ============================================================
-   Basket link in the header
-   ============================================================ */
-.cart-link { gap: var(--space-s); }
-.cart-count {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 24px;
-  height: 24px;
-  padding-inline: var(--space-xs);
-  margin-left: var(--space-s);
-  border-radius: var(--radius-circle);
-  background: var(--content-brand);
-  color: var(--content-primary-inverse);
-  font-size: var(--text-s-size);
-  font-weight: var(--text-semibold);
-}
-/* An empty cart has nothing to report, so the badge is not drawn at all.
-   The markup ships with is-empty already set and shop.js removes it once
-   it has counted, so a "0" never flashes before the count arrives. The
-   count is also written out for a screen reader in #cartCountLabel, which
-   stays in the link either way. */
-.cart-count.is-empty { display: none; }
-
-/* ============================================================
    Responsive
    ============================================================ */
 @media (max-width: 1024px) {
   .product { gap: var(--space-6xl); }
-  .basket-layout, .checkout-layout { gap: var(--space-4xl); }
 }
 
 @media (max-width: 768px) {
@@ -763,9 +555,6 @@ ul.spec-strip__formats {
   .product__mediaCol { position: static; }
   .product__media img { padding: var(--space-4xl); }
   .library-help__grid { grid-template-columns: 1fr 1fr; }
-
-  .basket-layout, .checkout-layout { grid-template-columns: 1fr; }
-  .summary { position: static; }
 }
 
 @media (max-width: 480px) {
@@ -775,19 +564,6 @@ ul.spec-strip__formats {
   .shop-card__media img { padding: var(--space-xl); }
 
   .product__details > div { grid-template-columns: 1fr; gap: var(--space-xs); }
-
-  /* Basket rows become stacked cards rather than a squeezed table */
-  .basket-row {
-    grid-template-columns: 72px 1fr;
-    grid-template-areas:
-      "media  info"
-      "remove total";
-    gap: var(--space-m) var(--space-l);
-  }
-  .basket-row__media  { grid-area: media; }
-  .basket-row__info   { grid-area: info; }
-  .basket-row__total  { grid-area: total; text-align: right; align-self: center; }
-  .basket-row__remove { grid-area: remove; justify-self: start; padding-left: 0; }
 
   /* One column: the specs and the formats simply stack, so the two-column
      placement above is undone rather than squeezed. `ul.` to match the
@@ -802,8 +578,6 @@ ul.spec-strip__formats {
   .library-card { grid-template-columns: 1fr; }
   .library-card__media { max-width: 200px; }
   .library-help__grid { grid-template-columns: 1fr; }
-  .unlocked-row { grid-template-columns: 56px 1fr; }
-  .unlocked-row .btn { grid-column: 1 / -1; }
 
 }
 

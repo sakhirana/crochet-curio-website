@@ -1,6 +1,6 @@
 /* ------------------------------------------------------------------
    Generates one pattern page per project, plus assets/js/catalogue.js
-   which the basket, checkout and pattern library read from.
+   which the pattern pages and the pattern library read from.
 
    Every listing on this site is a DIGITAL CROCHET PATTERN. The photo
    shows the finished piece; what is sold is the instructions for
@@ -16,8 +16,8 @@ const PATTERNS = [
     slug: "beanie",
     name: "Rosie Beanie",
     price: 0,
-    /* The one free pattern in the studio. It is not sold and never enters the
-       basket — the PDF downloads straight from the button. It is rendered
+    /* The one free pattern in the studio. It is not sold — the PDF
+       downloads straight from the button. It is rendered
        from pattern-beanie-accessible.html, which stays in the repo as its
        source: 24pt type, no charts, no abbreviations, tagged for screen
        readers. */
@@ -96,21 +96,8 @@ const formatList = p => {
   return items.length ? items : [`${p.pages}-page PDF`];
 };
 
-function header(activeBasket, activeLibrary) {
+function header(activeLibrary) {
   return `<header class="site-header">
-  <div class="announcement" id="announcement">
-    <p>Get 5% off on your first checkout</p>
-    <button class="btn-icon btn-icon--s announcement__close" type="button" id="announcementClose">
-      <span class="visually-hidden">Dismiss announcement</span>
-      <!-- Icon/X/16 -->
-      <svg class="icon-16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
-           stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
-           aria-hidden="true" focusable="false">
-        <path d="M12 4L4 12M4 4L12 12"/>
-      </svg>
-    </button>
-  </div>
-
   <div class="container">
     <nav class="nav-bar" aria-label="Primary">
       <a class="brand" href="index.html">Crochet&nbsp;Curio</a>
@@ -130,7 +117,6 @@ function header(activeBasket, activeLibrary) {
         <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#contact">Contact</a></li>
         <li><a href="library.html"${activeLibrary ? ' aria-current="page"' : ""}>My patterns</a></li>
-        <li><a class="cart-link" href="cart.html"${activeBasket ? ' aria-current="page"' : ""}>Cart <span class="cart-count is-empty" id="cartCount" aria-hidden="true">0</span><span class="visually-hidden" id="cartCountLabel">, 0 patterns</span></a></li>
       </ul>
     </nav>
   </div>
@@ -218,7 +204,7 @@ function patternPage(p, index) {
       ? `Free crochet pattern. ${p.tagline} ${p.difficulty} level, written out in full and free to download.`
       : `Digital crochet pattern. ${p.tagline} ${p.difficulty} level, ${p.pages}-page PDF, instant download.`
   ) + `
-${header(false, false)}
+${header(false)}
 
 <main id="main">
   <div class="container">
@@ -339,20 +325,32 @@ ${p.standardHrefHi ? `
             </li>
           </ul>
 
-          <h2 class="formats__title">Accessible patterns</h2>
+          <!--
+            Named for what the group is, not for who it is for, the same
+            rule the group above it follows. "Accessible patterns" broke
+            that twice over: it sorted the reader rather than the file,
+            and set against "The pattern" it made this the side version
+            and the other one the real one.
+
+            Both words earn their place. "Large print" alone undersells
+            the web page, whose size the reader sets rather than the
+            page, and the two together are the Accessible Patterns
+            Index's own tags, which is how this audience searches.
+          -->
+          <h2 class="formats__title">Large print and screen reader edition</h2>
 
           <ul class="formats">
             <li>
               <a class="btn btn--secondary btn--block" data-format="browser"${p.readHrefHi ? ` id="largePrintRead" hreflang="en"` : ``} href="${p.readHref}">Open in browser</a>
-              <p class="formats__note"${p.readHrefHi ? ` id="largePrintReadNote"` : ``}>Pattern in your browser, compatible with screen readers.</p>
+              <p class="formats__note"${p.readHrefHi ? ` id="largePrintReadNote"` : ``}>Pattern in your browser, compatible with screen readers. Every direction written out, no abbreviations.</p>
             </li>${p.wordHref ? `
             <li>
               <a class="btn btn--secondary btn--block" data-format="word"${p.wordHrefHi ? ` id="largePrintWord" hreflang="en"` : ``} href="${p.wordHref}" download>Download Word file</a>
-              <p class="formats__note"${p.wordHrefHi ? ` id="largePrintWordNote"` : ``}>Word file for offline use, compatible with screen readers.</p>
+              <p class="formats__note"${p.wordHrefHi ? ` id="largePrintWordNote"` : ``}>Word file for offline use, compatible with screen readers. Every direction written out, no abbreviations.</p>
             </li>` : ``}
             <li>
               <a class="btn btn--secondary btn--block" data-format="large-print-pdf"${p.patternHrefHi ? ` id="largePrintDownload" hreflang="en"` : ``} href="${p.patternHref}" download>Download large print PDF</a>
-              <p class="formats__note"${p.patternHrefHi ? ` id="largePrintDownloadNote"` : ``}>24 point font, black on white.</p>
+              <p class="formats__note"${p.patternHrefHi ? ` id="largePrintDownloadNote"` : ``}>24 point font, black on white. Every direction written out, no abbreviations. Best for printing.</p>
             </li>
           </ul>
 ` : `

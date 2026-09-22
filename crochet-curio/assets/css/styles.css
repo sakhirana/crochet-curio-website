@@ -4,9 +4,9 @@
    Target: WCAG 2.2 Level AA.
    ============================================================ */
 
-/* Sticky header height — announcement bar + nav bar. Used by the hero to
+/* Sticky header height — the nav bar plus its hairline. Used by the hero to
    size itself against the visible viewport, and by scroll-margin-top. */
-:root { --header-h: 106px; }
+:root { --header-h: 73px; }
 
 /* ---------- Reset ---------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -212,37 +212,11 @@ p { text-wrap: pretty; }
   background: var(--background-primary);
   border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
 }
-.announcement {
-  position: relative;
-  /* Centring the line itself, rather than letting padding place it. The bar
-     has a floor of 36px but its padded line can be shorter, and any slack
-     left over settles below the text unless the box shares it out. */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--background-brand);
-  color: var(--content-primary-inverse);
-  text-align: center;
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
-  /* Room on both sides for the dismiss control, so the line stays
-     centred on the bar rather than centred on what is left of it. */
-  padding: var(--space-s) var(--space-4xl);
-  /* The dismiss control is Button Icon Size=S, 32px square, and it is taken
-     out of flow — so the bar has to reserve its own height. Below the S
-     breakpoint the text drops to Text/S and the padded line alone comes to
-     32px, leaving the control flush against both edges. 36px keeps the 2px
-     it clears by everywhere else. */
-  min-height: 36px;
-}
-.announcement p { margin: 0; }
-
 /* ---------- Button Icon (Figma: Button Icon/Desktop, 53:8871) ----------
    Type=Secondary: no fill and no border at rest, the ground arriving only on
    Hover and Pressed. Size carries the box; the icon inside carries its own
    size, so .icon-16 and .icon-24 are what change, not this rule.
-   Focus comes from the global ring — State=Focus Blue everywhere except the
-   announcement bar, where the brand ground calls for State=Focus White. */
+   Focus comes from the global ring — State=Focus Blue. */
 .btn-icon {
   display: inline-flex;
   align-items: center;
@@ -295,32 +269,6 @@ p { text-wrap: pretty; }
 .icon-16 { width: 16px; height: 16px; }
 .icon-24 { width: 24px; height: 24px; }
 
-/* The dismiss control — Button Icon, Size=S, Type=Secondary, holding
-   Icon/X/16. Absolutely placed so the message keeps the full width of the bar
-   to centre itself in. */
-.announcement__close {
-  position: absolute;
-  top: 50%;
-  right: var(--space-s);
-  transform: translateY(-50%);
-  /* Content/Primary Inverse, the same ink the message is set in — the
-     component's own Content/Primary would all but vanish on Background/Brand. */
-  color: var(--content-primary-inverse);
-}
-/* The component's Background/Hover is a near-white neutral, which on a brand
-   bar would light up behind a white glyph and swallow it. The ground steps
-   along the brand ramp instead, so the icon keeps separating from it. */
-@media (hover: hover) {
-  .announcement__close:hover { background: var(--background-brand-hover); }
-}
-.announcement__close:active { background: var(--background-brand-pressed); }
-/* State=Focus White. The blue ring reads 1.07:1 on the brand green, so the bar
-   takes the white ring the system keeps for brand grounds (1.4.11). */
-.announcement :focus-visible { outline-color: var(--border-focus-white); }
-
-/* Set by a11y.js from storage before the first paint, so a bar the
-   visitor has already dismissed never flashes in on the next page. */
-.announcement-dismissed .announcement { display: none; }
 .nav-bar {
   display: flex;
   align-items: center;
@@ -377,9 +325,9 @@ p { text-wrap: pretty; }
 }
 .btn-link[aria-current="page"] { color: var(--content-primary); font-weight: var(--text-semibold); }
 
-/* Two groups, not eight peers. Patterns, How it works, Our story and Contact
-   are places in the site; My patterns, Cart and the language select are
-   controls over it, and reading as four more links is what made the row feel
+/* Two groups, not seven peers. Patterns, How it works, Our story and Contact
+   are places in the site; My patterns and the language select are controls
+   over it, and reading as three more links is what made the row feel
    like a list to scan rather than a menu to use. A rule and a wider gap mark
    the seam. The rule is Border/Section Divider, the same hairline the
    sections use. */
@@ -830,8 +778,6 @@ p { text-wrap: pretty; }
     --heading-m-size:   var(--size-20);  --heading-m-line:   var(--line-28);
   }
 
-  .announcement { font-size: var(--text-s-size); line-height: var(--text-s-line); }
-
   .hero { padding-block: var(--space-2xl) var(--space-6xl); }
   .hero__grid { gap: var(--space-2xl); }
   /* Full width below S, so the pair fills the column rather than shrinking to
@@ -970,8 +916,7 @@ p { text-wrap: pretty; }
 /* The outline button on the photograph carries no correction: it is
    Type=Secondary and wears the component's own states. */
 /* State=Focus White. Border/Focus Blue is 1.6:1 against the scrim, so the ring
-   turns inverse here for the same reason it does on the announcement bar
-   — 1.4.11 */
+   turns inverse here (1.4.11). */
 .hero-banner :focus-visible { outline-color: var(--border-focus-white); }
 
 /* ============================================================
