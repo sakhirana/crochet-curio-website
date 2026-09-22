@@ -827,7 +827,9 @@ p { text-wrap: pretty; }
 /* ---------- Print ---------- */
 @media print {
   .site-header, .newsletter, .nav-toggle, .skip-link { display: none; }
-  body { color: var(--content-static-black); }
+  /* Body copy keeps its own semantic ink: Content/Secondary, which is
+     Neutral/800 in light and Neutral/100 in dark. */
+  body { color: var(--content-secondary); }
 }
 
 /* ---------- Full-bleed hero banner ----------
