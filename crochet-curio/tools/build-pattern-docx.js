@@ -148,7 +148,14 @@ function inlineParts(fragment) {
     const before = piece(fragment.slice(last, m.index));
     if (before) parts.push({ text: before });
     if (m[1] !== undefined) {
-      parts.push({ text: piece(m[2]).trim(), href: decode(m[1]) });
+      /* A link can carry the language itself, the way the address does:
+         its label and its text are English inside a Hindi sentence. */
+      const linkLang = (/lang="([^"]*)"/i.exec(m[0]) || [])[1];
+      parts.push({
+        text: piece(m[2]).trim(),
+        href: decode(m[1]),
+        lang: linkLang || undefined,
+      });
     } else {
       parts.push({ text: piece(m[4]).trim(), lang: m[3] });
     }
