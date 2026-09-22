@@ -33,10 +33,20 @@
    and writes its height into --a11y-top so the button clears
    the nav at every breakpoint.
    ------------------------------------------------------------ */
+/* The inset is a variable because the breadcrumb has to clear it: a
+   fixed button over the top left corner sits exactly where a trail
+   starts. shop.css reads --a11y-left and --a11y-size to work out how
+   far, so neither file guesses at the other's numbers. */
+:root {
+  --a11y-left: var(--space-2xl);
+  /* Button Icon Size=L: a 24px glyph in Space/M padding either side. */
+  --a11y-size: 48px;
+}
+
 .a11y {
   position: fixed;
   top: calc(var(--a11y-top, 96px) + var(--space-l));
-  left: var(--space-2xl);
+  left: var(--a11y-left);
   z-index: 45;
 }
 
@@ -249,7 +259,7 @@
 }
 
 @media (max-width: 480px) {
-  .a11y { left: var(--space-l); }
+  :root { --a11y-left: var(--space-l); }
 }
 
 /* ============================================================

@@ -144,6 +144,12 @@
    Breadcrumb
    ============================================================ */
 .breadcrumb { padding-block: var(--space-2xl) var(--space-l); }
+/* The accessibility launcher is fixed over the top left corner, which is
+   where the trail begins, and on a narrower window it covered the first
+   link. The trail is pushed past the button rather than the button
+   moved: the button is a control over the whole site and belongs in the
+   same place on every page, while the trail only has to start a little
+   further in. */
 .breadcrumb ol {
   display: flex;
   flex-wrap: wrap;
@@ -151,6 +157,18 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  /* Pushed past the launcher by exactly as much as it needs and no
+     more. The subtracted term is where the trail would start on its
+     own — the page margin, or half the slack once the container stops
+     growing — and on a wide window that already clears the button, so
+     this resolves to zero and nothing moves. */
+  padding-left: max(
+    0px,
+    calc(
+      var(--a11y-left, 32px) + var(--a11y-size, 48px) + var(--space-m)
+      - max(var(--layout-margin), (100vw - var(--layout-max)) / 2)
+    )
+  );
   font-size: var(--text-m-size);
 }
 .breadcrumb li + li::before {
