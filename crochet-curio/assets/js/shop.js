@@ -281,7 +281,7 @@
             '<img src="assets/img/' + image + '" alt="' + description + '" width="240" height="240">' +
           "</div>" +
           '<div class="library-card__info">' +
-            "<h3>" + item.name + "</h3>" +
+            "<h2>" + item.name + "</h2>" +
             '<p class="muted">' + summary +
               (difficulty ? " · " + difficulty : "") +
             "</p>" +

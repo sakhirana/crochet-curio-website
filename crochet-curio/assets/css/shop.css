@@ -482,7 +482,7 @@ ul.spec-strip__formats {
   object-fit: contain;
   padding: var(--space-l);
 }
-.library-card__info h3 {
+.library-card__info h2 {
   font-size: var(--heading-s-size);
   line-height: var(--heading-s-line);
   margin-bottom: var(--space-xs);
