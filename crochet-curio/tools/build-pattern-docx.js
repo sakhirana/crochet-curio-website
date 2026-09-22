@@ -109,31 +109,49 @@ function textOf(fragment) {
   return decode(fragment.replace(/<[^>]*>/g, "")).replace(/\s+/g, " ").trim();
 }
 
-/* Split a block's inner HTML into plain text and real links, so the
-   email address arrives in Word as something you can click rather
-   than as an address you have to retype. */
+/* Split a block's inner HTML into plain text, real links and spans
+   that carry a language of their own: the email address arrives in
+   Word as something you can click rather than an address to retype,
+   and an English word inside a Hindi sentence reaches Word marked
+   English.
+
+   The page marks those words for the same reason. "worsted" read by
+   a Hindi voice under Devanagari pronunciation rules is not the word
+   a reader is listening for (WCAG 3.1.2 Language of Parts). What the
+   page does with a span, the document does with w:lang on the run. */
 function inlineParts(fragment) {
+  /* Whitespace is collapsed but not trimmed here. A part trimmed on
+     both ends loses the space that separated it from the next one,
+     and putting one back unconditionally invents a space where the
+     source had none: <span>worsted</span>, reads as "worsted ,".
+     The ends of the whole block are trimmed once, at the bottom. */
+  const piece = (f) => decode(f.replace(/<[^>]*>/g, "")).replace(/\s+/g, " ");
+
   const parts = [];
-  const re = /<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>/gi;
+  const re =
+    /<a\b[^>]*href="([^"]*)"[^>]*>([\s\S]*?)<\/a>|<span\b[^>]*lang="([^"]*)"[^>]*>([\s\S]*?)<\/span>/gi;
   let last = 0;
   let m;
 
   while ((m = re.exec(fragment))) {
-    const before = textOf(fragment.slice(last, m.index));
+    const before = piece(fragment.slice(last, m.index));
     if (before) parts.push({ text: before });
-    parts.push({ text: textOf(m[2]), href: decode(m[1]) });
+    if (m[1] !== undefined) {
+      parts.push({ text: piece(m[2]).trim(), href: decode(m[1]) });
+    } else {
+      parts.push({ text: piece(m[4]).trim(), lang: m[3] });
+    }
     last = m.index + m[0].length;
   }
 
-  const rest = textOf(fragment.slice(last));
+  const rest = piece(fragment.slice(last));
   if (rest) parts.push({ text: rest });
 
-  /* textOf trims each piece, so put back the single space that sat
-     between them in the source */
-  return parts.map((p, i) => ({
-    ...p,
-    text: i < parts.length - 1 ? p.text + " " : p.text,
-  }));
+  if (parts.length) {
+    parts[0].text = parts[0].text.replace(/^\s+/, "");
+    parts[parts.length - 1].text = parts[parts.length - 1].text.replace(/\s+$/, "");
+  }
+  return parts.filter((part) => part.text);
 }
 
 const body = (/<body[^>]*>([\s\S]*)<\/body>/i.exec(html) || [, html])[1];
@@ -192,6 +210,15 @@ while ((m = re.exec(body))) {
      and its own contents bookmarks, so eight repeats of the same link
      would be read out for nothing. Dropped the way the offline box is. */
   if (/class="backlink"/.test(attrs)) continue;
+
+  /* The accessibility statement carries two lines twice: one true of
+     the screen, one true of paper, each hidden from the other medium
+     by the page's own stylesheet. A .docx is the screen edition, set
+     at 12 point and reflowed by the reader, so the paper copy is
+     dropped here the way the print stylesheet drops the screen copy.
+     Without this the Word file would announce itself as 24 point and
+     talk about a tagged PDF the reader is not holding. */
+  if (/class="on-paper"/.test(attrs)) continue;
   const inner = m[5];
   const text = textOf(inner);
   if (!text) continue;
@@ -202,6 +229,10 @@ while ((m = re.exec(body))) {
       tag: "li",
       text,
       list: inContents ? "ul" : list.type,
+      /* A contents entry is one link and nothing else, so it keeps the
+         single run its bookmark is wrapped around. Every other item may
+         hold a marked span, so it is built from parts. */
+      parts: inContents ? null : inlineParts(inner),
       instance: inContents ? 0 : list.instance,
       /* a contents entry links to a heading on the page; the same
          fragment becomes a Word bookmark name below, so the entry can
@@ -230,6 +261,19 @@ const FONT = { ascii: EDITION.font, hAnsi: EDITION.font, cs: EDITION.font };
 const BLACK = "000000";
 const LANG = EDITION.lang;
 
+/* The language, on every run rather than only on the document default.
+   docDefaults is the weakest level in the file and a screen reader's
+   automatic language switching reads what sits in the run's own w:rPr:
+   with the language only in the defaults, NVDA carried on in the voice
+   it was already using and read Devanagari with an English synthesiser.
+   Word's PDF export made the same mistake in the other direction and
+   wrote /Lang (en) into a Hindi file.
+
+   Both slots are set. w:val is the Latin language; w:bidi is the
+   complex-script one, and Devanagari is a complex script in Word's
+   model, the same reason the font and size are named on cs above. */
+const LANGUAGE = { value: LANG, bidirectional: LANG };
+
 /* The built-in Heading styles carry the outline level a screen reader
    navigates by, so the paragraphs still use them. Their sizes are
    Word's own (16/13/12pt) and a redefinition loses to them, so the type
@@ -257,17 +301,36 @@ const TARGETS = new Set(blocks.map((b) => b.anchor).filter(Boolean));
    makes the numbers actually run 1, 2, 3. */
 const nextBookmarkId = bookmarkUniqueNumericIdGen();
 
+/* A part carrying its own lang gets that language on its run; every
+   other part gets the edition's. */
+const languageOf = (part) =>
+  part.lang ? { value: part.lang, bidirectional: part.lang } : LANGUAGE;
+
+const runsOf = (parts) =>
+  parts.map((p) =>
+    p.href
+      ? new ExternalHyperlink({
+          link: p.href,
+          children: [
+            new TextRun({ text: p.text, style: "Hyperlink", language: languageOf(p) }),
+          ],
+        })
+      : new TextRun({ text: p.text, language: languageOf(p) })
+  );
+
 const children = blocks.map((b) => {
   if (b.tag === "li") {
-    const run = new TextRun(
-      b.anchor ? { text: b.text, style: "Hyperlink" } : { text: b.text }
-    );
     return new Paragraph({
-      children: [
-        b.anchor
-          ? new InternalHyperlink({ anchor: b.anchor, children: [run] })
-          : run,
-      ],
+      children: b.anchor
+        ? [
+            new InternalHyperlink({
+              anchor: b.anchor,
+              children: [
+                new TextRun({ text: b.text, style: "Hyperlink", language: LANGUAGE }),
+              ],
+            }),
+          ]
+        : runsOf(b.parts || [{ text: b.text }]),
       numbering: {
         reference: b.list === "ol" ? "pattern-numbers" : "pattern-bullets",
         level: 0,
@@ -288,6 +351,7 @@ const children = blocks.map((b) => {
       boldComplexScript: true,
       italics: false,
       color: BLACK,
+      language: LANGUAGE,
     });
     const marked = b.id && TARGETS.has(b.id);
     const bookmarkId = marked ? nextBookmarkId() : null;
@@ -306,16 +370,10 @@ const children = blocks.map((b) => {
     });
   }
 
-  const runs = (b.parts || [{ text: b.text }]).map((p) =>
-    p.href
-      ? new ExternalHyperlink({
-          link: p.href,
-          children: [new TextRun({ text: p.text, style: "Hyperlink" })],
-        })
-      : new TextRun({ text: p.text })
-  );
-
-  return new Paragraph({ children: runs, spacing: { after: 200 } });
+  return new Paragraph({
+    children: runsOf(b.parts || [{ text: b.text }]),
+    spacing: { after: 200 },
+  });
 });
 
 const numberedLevel = (format, text, indent, hanging) => ({
@@ -324,7 +382,7 @@ const numberedLevel = (format, text, indent, hanging) => ({
   text,
   alignment: AlignmentType.LEFT,
   style: {
-    run: { font: FONT, size: 24, sizeComplexScript: 24, color: BLACK },
+    run: { font: FONT, size: 24, sizeComplexScript: 24, color: BLACK, language: LANGUAGE },
     paragraph: {
       indent: { left: convertInchesToTwip(indent), hanging: convertInchesToTwip(hanging) },
     },
@@ -347,7 +405,7 @@ const doc = new Document({
           sizeComplexScript: 24,
           color: BLACK,
           italics: false,
-          language: { value: LANG, bidirectional: LANG },
+          language: LANGUAGE,
         },
         paragraph: { spacing: { line: 360, after: 200 }, alignment: AlignmentType.LEFT },
       },
