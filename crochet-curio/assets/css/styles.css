@@ -703,7 +703,10 @@ p { text-wrap: pretty; }
     gap: 0;
     background: var(--background-primary);
     border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
-    box-shadow: var(--shadow-l2);
+    /* Shadow/L4, the same lift the accessibility panel takes. Both are
+       overlays dropped from the header onto the page, so they sit at the
+       same height above it rather than one reading as a deeper layer. */
+    box-shadow: var(--shadow-l4);
     /* No side padding on the panel itself: the rows carry it instead, so
        the rule under each link reaches both edges. */
     padding: var(--space-s) 0 var(--space-xl);
