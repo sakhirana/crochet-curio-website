@@ -118,6 +118,10 @@
   --background-pressed:        var(--neutral-100);
   --background-disabled:       var(--neutral-50);
   --background-inverse:        var(--neutral-900);
+  /* Background/Tertiary — Neutral/450 in both modes. It is the ink of a
+     control that has to be seen against a page and a panel alike, which
+     is why it does not flip: the toggle knob at rest. */
+  --background-tertiary:       var(--neutral-450);
   --background-brand:        var(--brand-500);
   --background-brand-hover:   var(--brand-600);
   --background-brand-pressed: var(--brand-700);

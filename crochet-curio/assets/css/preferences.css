@@ -245,7 +245,12 @@
   width: 20px;
   height: 20px;
   border-radius: var(--radius-circle);
-  background: var(--content-disabled);
+  /* Background/Tertiary at rest. Content/Disabled was too close to the
+     track it sits in for the switch to be found by eye: 1.89 in light and
+     1.49 in dark, under the 3:1 that Non-text Contrast asks of a control
+     you have to identify (1.4.11). On is a different matter — the brand
+     track carries it there, so only the off state takes this. */
+  background: var(--background-tertiary);
   box-shadow: var(--shadow-l1);
 }
 .a11y__switch[aria-checked="true"] {
