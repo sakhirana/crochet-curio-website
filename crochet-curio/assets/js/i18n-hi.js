@@ -21,10 +21,11 @@ window.CC_LANG_HI = {
   "Skip to main content": "मुख्य सामग्री पर जाएँ",
   "Menu": "मेन्यू",
   "Patterns": "पैटर्न",
+  "Pattern library": "पैटर्न लाइब्रेरी",
   "Our story": "हमारी कहानी",
   "How it works": "यह कैसे काम करता है",
   "Contact": "संपर्क",
-  "My patterns": "मेरे पैटर्न",
+  "Saved patterns": "सेव किए पैटर्न",
   "Home": "होम",
   "Help": "सहायता",
   "How patterns are delivered": "पैटर्न कैसे मिलते हैं",
@@ -109,8 +110,8 @@ window.CC_LANG_HI = {
   "Every listing shows the skill level, how long it takes, the yarn and hook you need and how many sizes are written in, before you buy.":
     "हर लिस्टिंग बताती है स्किल लेवल, कितना समय लगेगा, कौन-सा यार्न और हुक चाहिए और कितने साइज़ लिखे हैं, खरीदने से पहले।",
   "Download the pattern": "पैटर्न डाउनलोड कीजिए",
-  "A PDF with written rows in UK and US terms, stitch charts, step photos and a yarn substitution guide. It lands in My patterns straight away.":
-    "एक PDF, जिसमें UK और US टर्म्स में लिखी हुई रो, स्टिच चार्ट, स्टेप फ़ोटो और यार्न बदलने की गाइड है। यह तुरंत मेरे पैटर्न में आ जाती है।",
+  "A PDF with written rows in UK and US terms, stitch charts, step photos and a yarn substitution guide. It lands in Saved patterns straight away.":
+    "एक PDF, जिसमें UK और US टर्म्स में लिखी हुई रो, स्टिच चार्ट, स्टेप फ़ोटो और यार्न बदलने की गाइड है। यह तुरंत सेव किए पैटर्न में आ जाती है।",
   "Make it your own": "इसे अपना बनाइए",
   "Your yarn, your colours, your size. Make it as many times as you like. Just keep the file itself to yourself.":
     "आपका यार्न, आपके रंग, आपका साइज़। जितनी बार चाहें बनाइए। बस फ़ाइल खुद किसी को न दें।",
@@ -165,7 +166,7 @@ window.CC_LANG_HI = {
 
   /* ---------- Library ---------- */
   "Your patterns": "आपके पैटर्न",
-  "My patterns | Crochet Curio": "मेरे पैटर्न | Crochet Curio",
+  "Saved patterns | Crochet Curio": "सेव किए पैटर्न | Crochet Curio",
   "Everything you have unlocked, ready to download again: a new laptop, a lost file, a second go at the same cardigan.":
     "आपने जो कुछ अनलॉक किया है, सब दोबारा डाउनलोड के लिए तैयार: नया लैपटॉप, खोई हुई फ़ाइल, या वही कार्डिगन दोबारा बनाना।",
   "Demonstration library.": "डेमो लाइब्रेरी।",
@@ -200,8 +201,8 @@ window.CC_LANG_HI = {
   "If you want the standard PDF, large print PDF or Word file, all are on the":
     "अगर आपको आम PDF, बड़े अक्षरों वाली PDF या Word फ़ाइल चाहिए, तो सब मिलेंगे यहाँ:",
   "pattern page": "पैटर्न पेज",
-  "Your pattern file is downloading. It stays in My patterns. Come back for it any time.":
-    "आपकी पैटर्न फ़ाइल डाउनलोड हो रही है। यह मेरे पैटर्न में रहती है। जब चाहें वापस आइए।",
+  "Your pattern file is downloading. It stays in Saved patterns. Come back for it any time.":
+    "आपकी पैटर्न फ़ाइल डाउनलोड हो रही है। यह सेव किए पैटर्न में रहती है। जब चाहें वापस आइए।",
   "That pattern is not in your library yet.": "यह पैटर्न अभी आपकी लाइब्रेरी में नहीं है।",
 
   /* ---------- Product pages: shared furniture ---------- */
@@ -264,6 +265,17 @@ window.CC_LANG_HI = {
   "PDF pattern": "PDF पैटर्न",
   "Skill level": "स्किल लेवल",
   "Time to make": "बनाने का समय",
+  "Size": "साइज़",
+  "One size": "एक ही साइज़",
+  "Pattern formats available": "उपलब्ध पैटर्न फ़ॉर्मेट",
+  /* The format names keep PDF, HTML and .docx in Latin script: they are
+     file formats, and a reader looking for them in a download dialog sees
+     them written that way. */
+  "Standard PDF": "आम PDF",
+  "Large print PDF (24pt font)": "बड़े अक्षरों वाली PDF (24pt फ़ॉन्ट)",
+  "Accessible webpage (HTML)": "सुलभ वेबपेज (HTML)",
+  "Accessible Word document (.docx)": "सुलभ Word डॉक्युमेंट (.docx)",
+  "English and Hindi": "अंग्रेज़ी और हिन्दी",
   "Sizes written": "लिखे गए साइज़",
   "Pattern length": "पैटर्न की लंबाई",
   "the moment you check out.": "में चेकआउट करते ही आ जाती है।",

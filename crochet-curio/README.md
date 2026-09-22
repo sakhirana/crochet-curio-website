@@ -26,7 +26,7 @@ Then open <http://localhost:4173>. No build step, no dependencies.
 | --- | --- |
 | `index.html` | Home — hero, pattern library, story, how it works, skill levels, newsletter, contact |
 | `product-*.html` | One page per pattern (6). **Generated — edit the catalogue, not these** |
-| `library.html` | My patterns — every pattern owned, re-downloadable |
+| `library.html` | Saved patterns — every pattern owned, re-downloadable |
 | `build-products.js` | Pattern catalogue + page generator. `node build-products.js` |
 | `assets/css/tokens.css` | Every design token, translated 1:1 from Figma variables |
 | `assets/css/styles.css` | Layout and components, built only from those tokens |
@@ -296,7 +296,7 @@ the file over directly and taking any one of them is what records it. Every
 read of storage is wrapped in `try/catch` so a private window or blocked site
 data still renders a working page.
 
-**My patterns** (`library.html`) is the permanent shelf: every pattern owned,
+**Saved patterns** (`library.html`) is the permanent shelf: every pattern owned,
 re-downloadable as often as you like, with a link back to the finished piece.
 
 > **The library is a front-end demonstration.** For a pattern that is not the

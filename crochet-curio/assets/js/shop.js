@@ -3,7 +3,7 @@
 
    Every pattern here is a free digital PDF. There is nothing to buy,
    so there is no basket and no checkout: taking a file is what puts
-   the pattern in My patterns.
+   the pattern in Saved patterns.
 
    State lives in localStorage under one key. Every read is
    defensive: a private window, cleared storage or a browser that
@@ -103,7 +103,7 @@
   /* ---------- free patterns ----------
      There is nothing to buy: the four format buttons hand the file
      over directly. Taking any one of them is
-     what puts the pattern in My patterns, so the visitor can find it
+     what puts the pattern in Saved patterns, so the visitor can find it
      again without having to remember which format they picked.
 
      What is stored is only "this browser has the Rosie Beanie". The
@@ -309,7 +309,7 @@
     var live = document.getElementById("libraryStatus");
     if (live) {
       live.textContent = ok
-        ? "Your pattern file is downloading. It stays in My patterns. Come back for it any time."
+        ? "Your pattern file is downloading. It stays in Saved patterns. Come back for it any time."
         : "That pattern is not in your library yet.";
     }
   });

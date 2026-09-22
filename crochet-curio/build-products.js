@@ -112,11 +112,11 @@ function header(activeLibrary) {
       </button>
 
       <ul class="nav-list" id="navList">
-        <li><a href="index.html#patterns">Patterns</a></li>
+        <li><a href="index.html#patterns">Pattern library</a></li>
         <li><a href="index.html#process">How it works</a></li>
         <li><a href="index.html#story">Our story</a></li>
         <li><a href="index.html#contact">Contact</a></li>
-        <li><a href="library.html"${activeLibrary ? ' aria-current="page"' : ""}>My patterns</a></li>
+        <li><a href="library.html"${activeLibrary ? ' aria-current="page"' : ""}>Saved patterns</a></li>
       </ul>
     </nav>
   </div>
@@ -142,7 +142,7 @@ ${PATTERNS.map(p => `          <li><a href="product-${p.slug}.html">${esc(p.name
       <nav aria-labelledby="footer-help">
         <h2 id="footer-help">Help</h2>
         <ul>
-          <li><a href="library.html">My patterns</a></li>
+          <li><a href="library.html">Saved patterns</a></li>
           <li><a href="index.html#process">How patterns are delivered</a></li>
           <li><a href="index.html#levels">Skill levels explained</a></li>
           <li><a href="index.html#contact">Stuck on a row?</a></li>
