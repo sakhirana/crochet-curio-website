@@ -13,6 +13,115 @@
 
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+  /* ---------- Deliberate jumps ----------
+     A nav link and the back to top button are requests to be somewhere,
+     not rides. Smooth scrolling dragged the viewport through every
+     section on the way and set each one animating as it passed, so
+     arriving at Contact meant watching the whole page perform first.
+
+     A jump is instant instead, and everything above the destination is
+     marked revealed before it happens: a section the reader has been
+     carried past has nothing left to introduce. Sections below the
+     destination keep their reveals, for whoever scrolls on.
+
+     Scrolling by hand is untouched. This is only for the two controls
+     that say "take me there".
+  ------------------------------------------------------------------ */
+  function revealAbove(bottom) {
+    /* Held for one frame: the reveals below get their class now and
+       their transition back afterwards, so they appear rather than
+       animate, and a section reached by scrolling later still does. */
+    var root = document.documentElement;
+    root.classList.add("is-jumping");
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        root.classList.remove("is-jumping");
+      });
+    });
+
+    var waiting = document.querySelectorAll("[data-reveal]:not(.is-revealed)");
+    Array.prototype.forEach.call(waiting, function (node) {
+      if (node.getBoundingClientRect().top + window.scrollY < bottom) {
+        node.classList.add("is-revealed");
+      }
+    });
+    /* The hero is above everything, so any jump leaves it behind. */
+    var heroParts = document.querySelectorAll(".hero [data-enter]:not(.is-entered)");
+    Array.prototype.forEach.call(heroParts, function (node) {
+      node.classList.add("is-entered");
+    });
+  }
+
+  /* "instant" is the one thing the stylesheet's smooth cannot override.
+     Lifting scroll-behavior on the element for the length of the call
+     looked equivalent and was not: a jump taken shortly after another
+     one still came out smooth. So the behaviour is named outright, and
+     the inline lift stays underneath it for a browser that does not
+     know the keyword and ignores the whole options object.
+
+     scrollIntoView, not scrollTo, because it is what honours the
+     scroll-margin-top that holds a heading clear of the sticky
+     header. */
+  function jumpTo(target) {
+    var root = document.documentElement;
+    var previous = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+
+    if (target) {
+      try {
+        target.scrollIntoView({ behavior: "instant", block: "start" });
+      } catch (e) {
+        target.scrollIntoView();
+      }
+    } else {
+      try {
+        window.scrollTo({ top: 0, behavior: "instant" });
+      } catch (e) {
+        window.scrollTo(0, 0);
+      }
+    }
+
+    /* After the scroll, not before: what counts is everything the
+       reader can now see, which is the destination plus whatever else
+       the viewport happens to hold. Revealed in the same frame as the
+       jump, so none of it is caught mid-entrance. */
+    revealAbove(window.scrollY + window.innerHeight);
+
+    root.style.scrollBehavior = previous;
+  }
+
+  /* Landing is a scroll position for a sighted reader and a focus point
+     for everyone else, so the destination takes focus too. It is given
+     tabindex -1 only if it has none: focusable already means it can
+     take focus on its own terms. preventScroll keeps the browser from
+     re-scrolling to a place scrollIntoView has already chosen. */
+  function focusTarget(target) {
+    if (!target) { return; }
+    if (!target.hasAttribute("tabindex")) { target.setAttribute("tabindex", "-1"); }
+    try { target.focus({ preventScroll: true }); } catch (e) { target.focus(); }
+  }
+
+  function wireJumps() {
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest('a[href^="#"]');
+      if (!link || event.metaKey || event.ctrlKey || event.shiftKey || event.button) { return; }
+
+      var id = link.getAttribute("href").slice(1);
+      if (!id) { return; }
+      var target = document.getElementById(id);
+      if (!target) { return; }
+
+      event.preventDefault();
+      jumpTo(target);
+      focusTarget(target);
+      /* The address still says where the reader is, so the page can be
+         shared or reloaded at the section they were reading. */
+      if (window.history && window.history.pushState) {
+        window.history.pushState(null, "", "#" + id);
+      }
+    });
+  }
+
   /* ---------- Back to top: useful regardless of motion preference ---------- */
   function buildBackToTop() {
     var btn = document.createElement("button");
@@ -27,10 +136,7 @@
       '<path d="M12 19V5.00003M19 12L12 5.00003L5 12"/></svg>';
 
     btn.addEventListener("click", function () {
-      window.scrollTo({
-        top: 0,
-        behavior: reduced.matches ? "auto" : "smooth"
-      });
+      jumpTo(null);
       var skip = document.querySelector(".skip-link");
       if (skip) { skip.focus(); }
     });
@@ -415,6 +521,7 @@
   /* ---------- Go ---------- */
   function init() {
     buildBackToTop();
+    wireJumps();
 
     /* Under reduced motion we stop here — whether that came from the system
        setting or from the switch in the accessibility panel, which sets

@@ -44,6 +44,14 @@
 /* Once revealed, drop the hint so long pages stay cheap to paint */
 .js-motion [data-reveal].is-revealed { will-change: auto; }
 
+/* A jump is not an entrance. motion.js sets this for the one frame in
+   which a nav link or the back to top button moves the page, so
+   everything the reader lands on is simply there rather than fading in
+   after they arrive. The class is gone by the next frame, so anything
+   scrolled to by hand still reveals normally. */
+.is-jumping [data-reveal],
+.is-jumping .hero [data-enter] { transition: none !important; }
+
 /* ============================================================
    Hero entrance — runs on load rather than on scroll
    ============================================================ */
