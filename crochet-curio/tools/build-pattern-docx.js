@@ -119,6 +119,17 @@ function textOf(fragment) {
    a Hindi voice under Devanagari pronunciation rules is not the word
    a reader is listening for (WCAG 3.1.2 Language of Parts). What the
    page does with a span, the document does with w:lang on the run. */
+/* A span marked aria-hidden is a repeat of what has just been said,
+   kept on the page for the eye: the Latin spelling beside a term
+   written in Devanagari, which is what a yarn band prints. A reader
+   listening has already heard the word, so it comes out here the way
+   the page keeps it from a screen reader. */
+const dropHidden = (fragment) =>
+  fragment.replace(
+    /\s*<span[^>]*aria-hidden="true"[^>]*>[\s\S]*?<\/span>/gi,
+    ""
+  );
+
 function inlineParts(fragment) {
   /* Whitespace is collapsed but not trimmed here. A part trimmed on
      both ends loses the space that separated it from the next one,
@@ -219,7 +230,7 @@ while ((m = re.exec(body))) {
      Without this the Word file would announce itself as 24 point and
      talk about a tagged PDF the reader is not holding. */
   if (/class="on-paper"/.test(attrs)) continue;
-  const inner = m[5];
+  const inner = dropHidden(m[5]);
   const text = textOf(inner);
   if (!text) continue;
 
