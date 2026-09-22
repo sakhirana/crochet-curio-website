@@ -702,7 +702,10 @@ p { text-wrap: pretty; }
     align-items: stretch;
     gap: 0;
     background: var(--background-primary);
-    border-bottom: var(--stroke-width-xs) solid var(--border-section-divider);
+    /* Border/Secondary on all four sides, the same edge the accessibility
+       panel carries. The panel runs the full width, so the side borders land
+       on the viewport edges and only the top and bottom read as lines. */
+    border: var(--stroke-width-xs) solid var(--border-secondary);
     /* Shadow/L4, the same lift the accessibility panel takes. Both are
        overlays dropped from the header onto the page, so they sit at the
        same height above it rather than one reading as a deeper layer. */
