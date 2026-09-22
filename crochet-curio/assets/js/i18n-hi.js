@@ -77,8 +77,8 @@ window.CC_LANG_HI = {
   /* ---------- Home: pattern library ---------- */
   "The pattern library": "पैटर्न लाइब्रेरी",
   "One pattern written, five on the way": "एक पैटर्न लिखा जा चुका, पाँच आने वाले हैं",
-  "Each pattern downloads as a PDF once it is written. The photograph shows what you will make.":
-    "हर पैटर्न लिखे जाने के बाद PDF में डाउनलोड होता है। फ़ोटो दिखाती है कि आप क्या बनाएँगे।",
+  "Each pattern downloads in four formats once it is written. The photograph shows what you will make.":
+    "हर पैटर्न लिखे जाने के बाद चार फ़ॉर्मेट में डाउनलोड होता है। फ़ोटो दिखाती है कि आप क्या बनाएँगे।",
   "Free pattern": "मुफ़्त पैटर्न",
   "Pattern coming soon": "पैटर्न जल्द आ रहा है",
   "This pattern is not written up yet, so there is nothing to buy. The photograph shows the finished piece.":
@@ -104,14 +104,14 @@ window.CC_LANG_HI = {
   /* ---------- Home: process ---------- */
   "Pattern to finished piece, in three steps":
     "पैटर्न से तैयार पीस तक, तीन स्टेप में",
-  "No parcel, no waiting. The file is yours the moment you check out.":
-    "न कोई पार्सल, न इंतज़ार। चेकआउट करते ही फ़ाइल आपकी।",
+  "No parcel, no waiting. The file is yours the moment you pick it.":
+    "न कोई पार्सल, न इंतज़ार। चुनते ही फ़ाइल आपकी।",
   "Pick your project": "अपना प्रोजेक्ट चुनिए",
-  "Every listing shows the skill level, how long it takes, the yarn and hook you need and how many sizes are written in, before you buy.":
-    "हर लिस्टिंग बताती है स्किल लेवल, कितना समय लगेगा, कौन-सा यार्न और हुक चाहिए और कितने साइज़ लिखे हैं, खरीदने से पहले।",
+  "Every listing shows the skill level, how long it takes, the yarn and hook you need and how many sizes are written in, before you download.":
+    "हर लिस्टिंग बताती है स्किल लेवल, कितना समय लगेगा, कौन सा यार्न और हुक चाहिए और कितने साइज़ लिखे हैं, डाउनलोड करने से पहले।",
   "Download the pattern": "पैटर्न डाउनलोड कीजिए",
-  "A PDF with written rows in UK and US terms, stitch charts, step photos and a yarn substitution guide. Standard or large print, plus a Word file and a browser version for screen readers. It lands in Saved patterns straight away.":
-    "एक PDF, जिसमें UK और US टर्म्स में लिखी हुई रो, स्टिच चार्ट, स्टेप फ़ोटो और यार्न बदलने की गाइड है। आम या बड़े अक्षरों वाली, और स्क्रीन रीडर के लिए Word फ़ाइल तथा ब्राउज़र वाला रूप भी। यह तुरंत सेव किए पैटर्न में आ जाती है।",
+  "Written rows in UK and US terms, with a yarn substitution guide. Standard or large print PDF, plus a Word file and a browser version for screen readers. It lands in Saved patterns straight away.":
+    "UK और US टर्म्स में लिखी हुई रो, साथ में यार्न बदलने की गाइड। आम या बड़े अक्षरों वाली PDF, और स्क्रीन रीडर के लिए Word फ़ाइल तथा ब्राउज़र वाला रूप भी। यह तुरंत सेव किए पैटर्न में आ जाती है।",
   "Make it your own": "इसे अपना बनाइए",
   "Your yarn, your colours, your size. Make it as many times as you like. Just keep the file itself to yourself.":
     "आपका यार्न, आपके रंग, आपका साइज़। जितनी बार चाहें बनाइए। बस फ़ाइल खुद किसी को न दें।",
@@ -151,12 +151,12 @@ window.CC_LANG_HI = {
   "Join the list": "लिस्ट में जुड़िए",
   "Get in touch": "संपर्क कीजिए",
   "Stuck on a row? Ask us.": "किसी रो पर अटक गए? हमसे पूछिए।",
-  "Pattern support is part of what you paid for. Send the row number and a photo of where you are, and we will work out what went wrong with you. Want to test-crochet the next release? Say so below.":
-    "पैटर्न सपोर्ट उसी कीमत में शामिल है। रो नंबर और आप कहाँ तक पहुँचे हैं उसकी फ़ोटो भेजिए, हम आपके साथ मिलकर पता लगाएँगे कि कहाँ गड़बड़ हुई। अगली रिलीज़ को टेस्ट-क्रोशे करना चाहते हैं? नीचे बता दीजिए।",
+  "Pattern support comes with every pattern. Send the row number and a photo of where you are, and we will work out what went wrong with you. Want to test-crochet the next release? Say so below.":
+    "पैटर्न सपोर्ट हर पैटर्न के साथ आता है। रो नंबर और आप कहाँ तक पहुँचे हैं उसकी फ़ोटो भेजिए, हम आपके साथ मिलकर पता लगाएँगे कि कहाँ गड़बड़ हुई। अगली रिलीज़ को टेस्ट-क्रोशे करना चाहते हैं? नीचे बता दीजिए।",
   "Email": "ईमेल",
-  "Refunds": "रिफ़ंड",
-  "Digital files cannot be returned once downloaded, but if a pattern does not work, tell us and we will fix it.":
-    "डाउनलोड हो जाने के बाद डिजिटल फ़ाइल वापस नहीं होती, लेकिन अगर पैटर्न काम न करे, तो बताइए, हम उसे ठीक कर देंगे।",
+  "If a pattern is wrong": "अगर पैटर्न में कुछ गलत हो",
+  "Tell us and we will fix it. The corrected file is yours to download again, at no cost.":
+    "हमें बताइए, हम उसे ठीक कर देंगे। ठीक की हुई फ़ाइल आप बिना किसी शुल्क के दोबारा डाउनलोड कर सकते हैं।",
   "Your name": "आपका नाम",
   "Email address": "ईमेल पता",
   "What can we help with?": "हम किस बात में मदद करें?",
@@ -167,11 +167,11 @@ window.CC_LANG_HI = {
   /* ---------- Library ---------- */
   "Your patterns": "आपके पैटर्न",
   "Saved patterns | Crochet Curio": "सेव किए पैटर्न | Crochet Curio",
-  "Everything you have unlocked, ready to download again: a new laptop, a lost file, a second go at the same cardigan.":
-    "आपने जो कुछ अनलॉक किया है, सब दोबारा डाउनलोड के लिए तैयार: नया लैपटॉप, खोई हुई फ़ाइल, या वही कार्डिगन दोबारा बनाना।",
+  "Everything you have taken, ready to download again: a new laptop, a lost file, a second go at the same cardigan.":
+    "आपने जो कुछ लिया है, सब दोबारा डाउनलोड के लिए तैयार: नया लैपटॉप, खोई हुई फ़ाइल, या वही कार्डिगन दोबारा बनाना।",
   "Demonstration library.": "डेमो लाइब्रेरी।",
-  "Your patterns are remembered in this browser only, so they will not follow you to another device. The free pattern opens the studio's real files; a bought one hands over a stand-in text file. Connect an account system and a file store to make this permanent.":
-    "आपके पैटर्न सिर्फ़ इसी ब्राउज़र में याद रखे जाते हैं, इसलिए वे किसी दूसरे डिवाइस पर नहीं जाएँगे। मुफ़्त पैटर्न में स्टूडियो की असली फ़ाइलें खुलती हैं; खरीदे हुए में एक नमूना टेक्स्ट फ़ाइल मिलती है। इसे स्थायी बनाने के लिए अकाउंट सिस्टम और फ़ाइल स्टोर जोड़िए।",
+  "Your patterns are remembered in this browser only, so they will not follow you to another device. Connect an account system to make this permanent.":
+    "आपके पैटर्न सिर्फ़ इसी ब्राउज़र में याद रखे जाते हैं, इसलिए वे किसी दूसरे डिवाइस पर नहीं जाएँगे। इसे स्थायी बनाने के लिए अकाउंट सिस्टम जोड़िए।",
   "Nothing unlocked yet": "अभी कुछ अनलॉक नहीं हुआ",
   "Patterns you download land here, and stay here. Open them as often as you like: a new hook, a new laptop, a lost file.":
     "जो पैटर्न आप डाउनलोड करते हैं, वे यहीं आ जाते हैं और यहीं रहते हैं। जितनी बार चाहें खोलिए: नया हुक, नया लैपटॉप, खोई हुई फ़ाइल।",
@@ -184,7 +184,7 @@ window.CC_LANG_HI = {
     "दोनों हर फ़ाइल में साथ-साथ लिखी हैं। शुरू में एक चुनिए और उसी पर टिके रहिए।",
   "Send the row number and a photo.": "रो नंबर और एक फ़ोटो भेजिए।",
   "Pattern support": "पैटर्न सपोर्ट",
-  "is part of what you paid for.": "उसी कीमत में शामिल है।",
+  "comes with every pattern.": "हर पैटर्न के साथ आता है।",
   "Download pattern": "पैटर्न डाउनलोड कीजिए",
   "Open the pattern": "पैटर्न खोलिए",
   /* The line under a library row's button, once for each format the row
@@ -278,7 +278,7 @@ window.CC_LANG_HI = {
   "English and Hindi": "अंग्रेज़ी और हिन्दी",
   "Sizes written": "लिखे गए साइज़",
   "Pattern length": "पैटर्न की लंबाई",
-  "the moment you check out.": "में चेकआउट करते ही आ जाती है।",
+  "the moment you pick it.": "चुनते ही आपकी हो जाती है।",
   "Materials used":
     "इस्तेमाल किया गया सामान",
   "Yarn": "यार्न",

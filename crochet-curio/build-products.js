@@ -212,7 +212,7 @@ ${header(false)}
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol>
         <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#patterns">Patterns</a></li>
+        <li><a href="index.html#patterns">Pattern library</a></li>
         <li><span aria-current="page">${esc(p.name)}</span></li>
       </ol>
     </nav>
