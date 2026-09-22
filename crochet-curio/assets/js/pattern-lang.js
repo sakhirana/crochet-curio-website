@@ -75,7 +75,7 @@
       href: "pattern-beanie-accessible-hi.html",
       lang: "hi",
       label: "Open in browser, in Hindi",
-      note: "Pattern in your browser, in Hindi. Every direction written out, no abbreviations. Not tested with a screen reader yet."
+      note: "Pattern in your browser, in Hindi. Every direction written out, no abbreviations. Read end to end with NVDA and a Hindi voice."
     }
   };
 
@@ -93,7 +93,7 @@
       href: "assets/patterns/rosie-beanie-pattern-large-print-hi.docx",
       lang: "hi",
       label: "Download Word file, in Hindi",
-      note: "Word file in Hindi for offline use. Every direction written out, no abbreviations. Not tested with a screen reader yet."
+      note: "Word file in Hindi for offline use. Every direction written out, no abbreviations. Read end to end with NVDA and a Hindi voice."
     }
   };
 

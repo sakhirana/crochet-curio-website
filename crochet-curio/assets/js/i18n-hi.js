@@ -241,8 +241,8 @@ window.CC_LANG_HI = {
     "ब्राउज़र में खोलिए, हिन्दी में",
   "Pattern in your browser, compatible with screen readers. Every direction written out, no abbreviations.":
     "पैटर्न आपके ब्राउज़र में, स्क्रीन रीडर के साथ चलता है। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं।",
-  "Pattern in your browser, in Hindi. Every direction written out, no abbreviations. Not tested with a screen reader yet.":
-    "पैटर्न आपके ब्राउज़र में, हिन्दी में। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं। स्क्रीन रीडर से अभी टेस्ट नहीं किया गया।",
+  "Pattern in your browser, in Hindi. Every direction written out, no abbreviations. Read end to end with NVDA and a Hindi voice.":
+    "पैटर्न आपके ब्राउज़र में, हिन्दी में। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं। NVDA और हिन्दी आवाज़ से शुरू से आख़िर तक पढ़कर जाँचा गया।",
   "Download Word file":
     "Word फ़ाइल डाउनलोड कीजिए",
   "Word file":
@@ -251,8 +251,8 @@ window.CC_LANG_HI = {
     "Word फ़ाइल डाउनलोड कीजिए, हिन्दी में",
   "Word file for offline use, compatible with screen readers. Every direction written out, no abbreviations.":
     "बिना इंटरनेट पढ़ने के लिए Word फ़ाइल, स्क्रीन रीडर के साथ चलती है। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं।",
-  "Word file in Hindi for offline use. Every direction written out, no abbreviations. Not tested with a screen reader yet.":
-    "हिन्दी में Word फ़ाइल, बिना इंटरनेट पढ़ने के लिए। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं। स्क्रीन रीडर से अभी टेस्ट नहीं किया गया।",
+  "Word file in Hindi for offline use. Every direction written out, no abbreviations. Read end to end with NVDA and a Hindi voice.":
+    "हिन्दी में Word फ़ाइल, बिना इंटरनेट पढ़ने के लिए। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं। NVDA और हिन्दी आवाज़ से शुरू से आख़िर तक पढ़कर जाँचा गया।",
   "Download large print PDF":
     "बड़े अक्षरों वाली PDF डाउनलोड कीजिए",
   "Download large print PDF, in Hindi":
