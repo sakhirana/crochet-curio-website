@@ -110,8 +110,8 @@ window.CC_LANG_HI = {
   "Every listing shows the skill level, how long it takes, the yarn and hook you need and how many sizes are written in, before you buy.":
     "हर लिस्टिंग बताती है स्किल लेवल, कितना समय लगेगा, कौन-सा यार्न और हुक चाहिए और कितने साइज़ लिखे हैं, खरीदने से पहले।",
   "Download the pattern": "पैटर्न डाउनलोड कीजिए",
-  "A PDF with written rows in UK and US terms, stitch charts, step photos and a yarn substitution guide. It lands in Saved patterns straight away.":
-    "एक PDF, जिसमें UK और US टर्म्स में लिखी हुई रो, स्टिच चार्ट, स्टेप फ़ोटो और यार्न बदलने की गाइड है। यह तुरंत सेव किए पैटर्न में आ जाती है।",
+  "A PDF with written rows in UK and US terms, stitch charts, step photos and a yarn substitution guide. Standard or large print, plus a Word file and a browser version for screen readers. It lands in Saved patterns straight away.":
+    "एक PDF, जिसमें UK और US टर्म्स में लिखी हुई रो, स्टिच चार्ट, स्टेप फ़ोटो और यार्न बदलने की गाइड है। आम या बड़े अक्षरों वाली, और स्क्रीन रीडर के लिए Word फ़ाइल तथा ब्राउज़र वाला रूप भी। यह तुरंत सेव किए पैटर्न में आ जाती है।",
   "Make it your own": "इसे अपना बनाइए",
   "Your yarn, your colours, your size. Make it as many times as you like. Just keep the file itself to yourself.":
     "आपका यार्न, आपके रंग, आपका साइज़। जितनी बार चाहें बनाइए। बस फ़ाइल खुद किसी को न दें।",
