@@ -122,7 +122,7 @@
     padding: var(--space-xs) var(--space-s);
     border-radius: var(--radius-s);
     border: var(--stroke-width-xs) solid var(--border-secondary);
-    background: var(--background-primary);
+    background: var(--surface-l3);
     color: var(--content-primary);
     font-size: var(--text-s-size);
     line-height: var(--text-s-line);
@@ -158,7 +158,7 @@
      dropped from the same edge should not disagree about corners. */
   border-radius: 0;
   border: var(--stroke-width-xs) solid var(--border-secondary);
-  background: var(--background-primary);
+  background: var(--surface-l4);
   box-shadow: var(--shadow-l4);
   /* On a short viewport (a landscape phone at 375px) the panel ran past the
      bottom edge. It is fixed-positioned, so the page cannot be scrolled to

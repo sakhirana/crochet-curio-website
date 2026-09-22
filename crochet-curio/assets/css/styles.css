@@ -243,7 +243,7 @@ p { text-wrap: pretty; }
    floats over content and has to hold its own shape against whatever is
    behind it. The border is inset, so the 48px box stays 48px. */
 .btn-icon--tertiary {
-  background: var(--background-primary);
+  background: var(--surface-l3);
   border: var(--stroke-width-xs) solid var(--border-secondary);
   /* The component draws its stroke inside the frame, so the ring must not
      grow the control. The box is sized by padding here rather than a fixed
@@ -701,7 +701,7 @@ p { text-wrap: pretty; }
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: var(--background-primary);
+    background: var(--surface-l2);
     /* Border/Secondary on all four sides, the same edge the accessibility
        panel carries. The panel runs the full width, so the side borders land
        on the viewport edges and only the top and bottom read as lines. */

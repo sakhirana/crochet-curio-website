@@ -12,7 +12,9 @@
 :root {
   /* ---------- Primitives: Neutral ---------- */
   --neutral-900: #1a1a1a;
+  --neutral-850: #262626;
   --neutral-800: #333333;
+  --neutral-750: #404040;
   --neutral-700: #4d4d4d;
   --neutral-650: #595959;
   --neutral-600: #666666;
@@ -95,8 +97,18 @@
   --content-pill-2: var(--yellow-800);
   --content-pill-3: var(--teal-700);
 
+  /* ---------- Semantic: Surface ----------
+     The fill of anything that leaves the page. In light every step is the
+     same white and the shadow does the separating; in dark a shadow has
+     almost nothing to fall on, so each step lifts instead. Named in both
+     so a rule can ask for a height rather than for a colour. */
+  --surface-l1: var(--primary-white);
+  --surface-l2: var(--primary-white);
+  --surface-l3: var(--primary-white);
+  --surface-l4: var(--primary-white);
+
   /* ---------- Semantic: Background ---------- */
-  --background-primary:        var(--primary-white);
+  --background-primary:        var(--surface-l1);
   /* Background/Secondary — the surface one step off the page, for the tiles
      product photography sits on. The Figma Background group carries no
      Secondary token of its own, so each mode names its primitive outright:
@@ -349,8 +361,15 @@
     --brand-accent-400: #ddafb5;
     --brand-accent-300: #e1b8bd;
 
-    /* Surface/L1 — the only step of the Surface ramp the site draws on. */
+    /* The Surface ramp. A shadow on a near-black page is nearly
+       invisible, so height is carried by the fill instead: each step is
+       one stop lighter than the one beneath it. L3 is Neutral/800, which
+       is also Background/Secondary — a raised control and a tinted panel
+       stand at the same height, which is true of them. */
     --surface-l1: var(--neutral-900);
+    --surface-l2: var(--neutral-850);
+    --surface-l3: var(--neutral-800);
+    --surface-l4: var(--neutral-750);
 
 
     /* ---------- Semantic: Content ---------- */
@@ -439,8 +458,15 @@
     --brand-accent-400: #ddafb5;
     --brand-accent-300: #e1b8bd;
 
-    /* Surface/L1 — the only step of the Surface ramp the site draws on. */
+    /* The Surface ramp. A shadow on a near-black page is nearly
+       invisible, so height is carried by the fill instead: each step is
+       one stop lighter than the one beneath it. L3 is Neutral/800, which
+       is also Background/Secondary — a raised control and a tinted panel
+       stand at the same height, which is true of them. */
     --surface-l1: var(--neutral-900);
+    --surface-l2: var(--neutral-850);
+    --surface-l3: var(--neutral-800);
+    --surface-l4: var(--neutral-750);
 
 
     /* ---------- Semantic: Content ---------- */
