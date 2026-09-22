@@ -900,11 +900,11 @@ p { text-wrap: pretty; }
 }
 /* The photograph is one fixed dark image — it does not restate itself for
    the dark theme the way a token-painted surface does. So the ink on it is
-   the white that reads on that photograph, in both themes, rather than a
-   Content token that would invert to near-black over dark grass. */
+   Content/Static White, which holds in both themes, rather than a Content
+   token that would invert to near-black over dark grass. */
 .hero-banner .hero .eyebrow,
 .hero-banner .hero h1,
-.hero-banner .hero .lede { color: var(--primary-white); }
+.hero-banner .hero .lede { color: var(--content-static-white); }
 /* Heavier than the lede is set anywhere else on the site: this one stands on
    a photograph, and the thicker stroke holds where the pale cardigan comes
    up behind it. */

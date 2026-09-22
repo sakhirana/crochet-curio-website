@@ -76,6 +76,10 @@
   --content-brand-system-inverse: var(--brand-500);
   --content-brand-highlight:      var(--brand-600);
   --content-static-black:            var(--primary-black);
+  /* Static, so it is named once and never restated in a dark block: it
+     paints ink that stands on something fixed rather than on a themed
+     surface, such as the copy over the hero photograph. */
+  --content-static-white:            var(--primary-white);
   /* Content/Link is Blue/600 in the file and Content/Link Hover is Blue/700 —
      the same two steps the semantic tokens name there. 7.52:1 and 10.54:1 on
      Background/Primary. */
