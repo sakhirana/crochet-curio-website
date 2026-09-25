@@ -143,8 +143,31 @@
         return;
       }
 
-      newsletter.reset();
-      announce("newsletterStatus", "Thank you. You are on the list. We will write when the next pattern is ready.");
+      var newsletterButton = newsletter.querySelector("button[type='submit']");
+      if (newsletterButton) { newsletterButton.disabled = true; }
+      announce("newsletterStatus", "Adding you to the list...");
+
+      fetch(newsletter.action, {
+        method: "POST",
+        body: new FormData(newsletter),
+        headers: { Accept: "application/json" }
+      }).then(function (response) {
+        if (response.ok) {
+          newsletter.reset();
+          announce("newsletterStatus", "Thank you. You are on the list. We will write when the next pattern is ready.");
+        } else {
+          return response.json().then(function (data) {
+            var message = data && data.errors && data.errors.length
+              ? data.errors.map(function (e) { return e.message; }).join(" ")
+              : "Something went wrong. Please try again, or email us to be added.";
+            announce("newsletterStatus", message);
+          });
+        }
+      }).catch(function () {
+        announce("newsletterStatus", "We could not reach the server. Check your connection and try again.");
+      }).then(function () {
+        if (newsletterButton) { newsletterButton.disabled = false; }
+      });
     });
   }
 

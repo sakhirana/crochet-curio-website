@@ -313,7 +313,12 @@
           when something new is written, nothing else.
         </p>
 
-        <form class="newsletter-form" id="newsletterForm" novalidate>
+        <form class="newsletter-form" id="newsletterForm" method="POST"
+              action="https://formspree.io/f/xjykolbp" novalidate>
+          <input type="hidden" name="_subject" value="New newsletter signup">
+          <p class="visually-hidden" aria-hidden="true">
+            <label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          </p>
           <div class="field" id="emailField">
             <label for="newsletterEmail">Email address</label>
             <input type="email" id="newsletterEmail" name="email"
