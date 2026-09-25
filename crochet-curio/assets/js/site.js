@@ -182,8 +182,31 @@
         return;
       }
 
-      contact.reset();
-      announce("contactStatus", "Thank you. Your message is on its way. We reply within two working days.");
+      var submitButton = contact.querySelector("button[type='submit']");
+      if (submitButton) { submitButton.disabled = true; }
+      announce("contactStatus", "Sending your message...");
+
+      fetch(contact.action, {
+        method: "POST",
+        body: new FormData(contact),
+        headers: { Accept: "application/json" }
+      }).then(function (response) {
+        if (response.ok) {
+          contact.reset();
+          announce("contactStatus", "Thank you. Your message has been received. We reply within two business days.");
+        } else {
+          return response.json().then(function (data) {
+            var problem = data && data.errors && data.errors.length
+              ? data.errors.map(function (e) { return e.message; }).join(" ")
+              : "Something went wrong sending your message. Please email us directly and we will get back to you.";
+            announce("contactStatus", problem);
+          });
+        }
+      }).catch(function () {
+        announce("contactStatus", "We could not reach the server. Check your connection, or email us directly, and try again.");
+      }).then(function () {
+        if (submitButton) { submitButton.disabled = false; }
+      });
     });
   }
 })();

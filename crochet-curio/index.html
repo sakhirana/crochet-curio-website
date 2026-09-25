@@ -356,7 +356,11 @@
           </dl>
         </div>
 
-        <form class="contact-form" id="contactForm" novalidate>
+        <form class="contact-form" id="contactForm" method="POST"
+              action="https://formspree.io/f/xjykolbp" novalidate>
+          <p class="visually-hidden" aria-hidden="true">
+            <label>Leave this field empty<input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+          </p>
           <div class="field" id="nameField">
             <label for="contactName">Your name</label>
             <input type="text" id="contactName" name="name" autocomplete="name" placeholder=" "

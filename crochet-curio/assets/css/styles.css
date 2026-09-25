@@ -299,8 +299,13 @@ p { text-wrap: pretty; }
 /* ---------- Button, Type=Link (Figma: Button/Desktop, 53:7432) ----------
    A standalone base like .btn-icon, not a .btn modifier: the Link type wears
    no box, so none of the .btn frame applies. Default is Content/Primary with
-   no rule; Hover adds Background/Brand Hover and a 2px underline in that
-   same ink. Carried by the primary nav and the footer columns. */
+   no rule. Hover and Pressed tint the whole label — text and the 2px underline
+   stroke — one ink: Background/Hover on hover, Background/Pressed on press.
+   Both are aliased to the brand ramp on the block below, so the Link keeps the
+   green it is drawn in without disturbing the neutral Background/Hover the
+   button fills carry. Hover is desktop-only: the Tablet & Mobile set has no
+   Hover variant, so a touch device goes straight to Pressed. Carried by the
+   primary nav and the footer columns. */
 .btn-link {
   display: inline-flex;
   align-items: center;
@@ -316,9 +321,23 @@ p { text-wrap: pretty; }
   /* Text/L Regular — the Link type is the one Button type whose label is not
      Semibold, so the weight is stated rather than inherited. */
   font-weight: var(--text-regular);
+  /* The Link stroke names its own hover and pressed inks Background/Hover and
+     Background/Pressed. Scoped here to the brand ramp so the value stays the
+     green the component is drawn in, while the page-level Background/Hover the
+     button fills use stays the neutral it is. */
+  --background-hover:   var(--background-brand-hover);
+  --background-pressed: var(--background-brand-pressed);
 }
-.btn-link:hover {
-  color: var(--background-brand-hover);
+@media (hover: hover) {
+  .btn-link:hover {
+    color: var(--background-hover);
+    text-decoration: underline;
+    text-decoration-thickness: var(--stroke-width-m);
+    text-underline-offset: 4px;
+  }
+}
+.btn-link:active {
+  color: var(--background-pressed);
   text-decoration: underline;
   text-decoration-thickness: var(--stroke-width-m);
   text-underline-offset: 4px;
@@ -657,8 +676,11 @@ p { text-wrap: pretty; }
 .footer-grid ul { display: grid; gap: var(--space-s); }
 /* The footer carries the same Button, Type=Link the primary nav does, so the
    label, colour, height, underline and hover all come from .btn-link. Only
-   the underline sits closer here, against the tighter column rhythm. */
-.footer-grid .btn-link:hover { text-underline-offset: 3px; }
+   the underline sits closer here, against the tighter column rhythm. Gated with
+   the base Hover so it too stays desktop-only. */
+@media (hover: hover) {
+  .footer-grid .btn-link:hover { text-underline-offset: 3px; }
+}
 .footer-bottom {
   margin-top: var(--space-6xl);
   padding-top: var(--space-xl);

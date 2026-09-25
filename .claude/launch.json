@@ -2,11 +2,10 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "crochet-curio",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["crochet-curio/serve.js"],
-      "port": 4173,
-      "autoPort": true
+      "name": "crochet",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", "crochet-curio", "-l", "4321"],
+      "port": 4321
     }
   ]
 }
