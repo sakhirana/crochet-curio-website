@@ -9,6 +9,35 @@
 <meta name="description" content="फोल्ड होने वाली रिब्ड बीनी का क्रोशे पैटर्न, वयस्क मीडियम साइज़ में। एक्सेसिबल एडिशन: सैन्स सेरिफ़, कोई चार्ट नहीं, कोई शॉर्ट फ़ॉर्म नहीं, स्क्रीन रीडर के लिए बनाया गया, और टाइप का साइज़ आप खुद तय कीजिए।">
 
 <!--
+  One thing this page loads from the shop: assets/css/tokens.css, for its
+  colour tokens alone, exactly as the English edition does. Ink, paper and
+  rules point at the design system's semantic colours, so the reader's Light,
+  Dark or System choice is the same set of values the rest of the site uses.
+  No fonts, no layout, no behaviour script. The printed PDF is unaffected:
+  the print block fixes one black-on-white palette.
+-->
+<link rel="stylesheet" href="assets/css/tokens.css">
+<script>
+/* Colour theme, applied before the first paint. Mirrors assets/js/a11y.js
+   and the English edition: the same cc-theme store, absent means follow the
+   device. The buttons are wired once the page has parsed. */
+(function () {
+  "use strict";
+  var KEY = "cc-theme";
+  var root = document.documentElement;
+  var read = function () { try { return window.localStorage.getItem(KEY); } catch (e) { return null; } };
+  var systemDark = function () { return window.matchMedia("(prefers-color-scheme: dark)").matches; };
+  window.__ccThemeChoice = function () { var c = read(); return (c === "dark" || c === "light") ? c : "system"; };
+  window.__ccApplyTheme = function () {
+    var c = window.__ccThemeChoice();
+    var dark = c === "dark" || (c === "system" && systemDark());
+    root.setAttribute("data-theme", dark ? "dark" : "light");
+  };
+  window.__ccApplyTheme();
+})();
+</script>
+
+<!--
   Foldable Ribbed Beanie — accessible edition, Hindi
   =================================================
 
@@ -16,9 +45,10 @@
   counts, same measurements, same section ids — if one is corrected,
   the other has to be corrected with it.
 
-  Standalone, like the English edition: no shop stylesheets, no
-  scripts, no theme switching, no web fonts. Everything a screen
-  reader meets here is the pattern itself.
+  Near-standalone, like the English edition: no shop layout, fonts or
+  behaviour scripts. The one exception is tokens.css above, for colour
+  alone, so the reader's theme choice tracks the design system.
+  Everything a screen reader meets here is the pattern itself.
 
   Two things are deliberately different from the English page:
 
@@ -49,9 +79,13 @@
      edition's 1.5.
      --------------------------------------------------------------- */
   :root {
-    --ink: #000000;
-    --paper: #ffffff;
-    --rule: #000000;
+    /* Mapped onto the design system's semantic colours (tokens.css), the same
+       as the English edition. Light resolves to Content/Primary on
+       Background/Primary; dark carries the dark values through the same
+       names. The hex after each is the light fallback if tokens.css fails. */
+    --ink:   var(--content-primary,    #000000);
+    --paper: var(--background-primary,  #ffffff);
+    --rule:  var(--content-primary,    #000000);
   }
 
   html {
@@ -140,6 +174,47 @@
   .offline p:last-child { margin-bottom: 0.5em; }
 
   /* ---------------------------------------------------------------
+     Colour theme control
+
+     A screen-only choice of Light, Dark or System, the same three the
+     rest of the site offers. Styled from --ink and --paper, so the
+     selected button inverts correctly in either theme. Hidden in print:
+     the PDF keeps one fixed black-on-white palette.
+     --------------------------------------------------------------- */
+  .theme-choice {
+    border: 2px solid var(--rule);
+    padding: 1em 1em 0.75em;
+    margin: 1.5em 0;
+  }
+  .theme-choice__legend {
+    font-weight: 600;
+    padding: 0;
+  }
+  .theme-choice__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.6em;
+  }
+  .theme-choice__btn {
+    font: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    border: 2px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.4em 0.9em;
+    cursor: pointer;
+  }
+  .theme-choice__btn[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .theme-choice__btn:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  /* ---------------------------------------------------------------
      Print
 
      What a reader saves or prints from the browser, and the only place
@@ -148,6 +223,9 @@
      breaks kept out of the middle of a step.
      --------------------------------------------------------------- */
   @media print {
+    /* The PDF is always pure black on white, whatever the reader's on-screen
+       theme or their device setting, so it cannot inherit a dark palette. */
+    :root { --ink: #000000; --paper: #ffffff; --rule: #000000; }
     body {
       max-width: none;
       padding: 0;
@@ -161,7 +239,7 @@
     a { text-decoration: none; }
     /* Screen conveniences. On paper the headings do the same job as
        the contents list, and neither link can be followed. */
-    .contents, .offline, .backlink { display: none; }
+    .contents, .offline, .backlink, .theme-choice { display: none; }
     h1, h2, h3 { break-after: avoid-page; page-break-after: avoid; }
     p, li { break-inside: avoid-page; page-break-inside: avoid; }
     section { break-inside: auto; }
@@ -187,6 +265,21 @@
 <div class="offline">
   <p><a href="assets/patterns/rosie-beanie-pattern-large-print-hi.docx" download>बिना इंटरनेट पढ़ने के लिए इसे वर्ड फ़ाइल के रूप में डाउनलोड कीजिए</a></p>
 </div>
+
+<!--
+  Colour theme. Screen only, so it never prints into the PDF. The buttons
+  set the same cc-theme the rest of the site stores, so a choice made here
+  holds across the site. System follows the device until Light or Dark is
+  chosen.
+-->
+<fieldset class="theme-choice on-screen">
+  <legend class="theme-choice__legend">रंग थीम</legend>
+  <div class="theme-choice__options">
+    <button type="button" class="theme-choice__btn" data-theme-choice="system" aria-pressed="true">सिस्टम डिफ़ॉल्ट</button>
+    <button type="button" class="theme-choice__btn" data-theme-choice="light" aria-pressed="false">हल्का</button>
+    <button type="button" class="theme-choice__btn" data-theme-choice="dark" aria-pressed="false">गहरा</button>
+  </div>
+</fieldset>
 
 <section aria-labelledby="statement">
   <h2 id="statement">एक्सेसिबिलिटी स्टेटमेंट</h2>
@@ -385,6 +478,43 @@
   <p>यह पैटर्न आपके अपने बनाने के लिए है। फ़ाइल खुद आगे मत बेचिए और न ही साझा कीजिए।</p>
   <p class="backlink"><a href="#contents" aria-label="विषय सूची पर वापस जाइए, क्रोशे के शब्दों के बारे में से">विषय सूची पर वापस</a></p>
 </section>
+
+<script>
+/* Wires the colour theme buttons. The head script has already applied the
+   theme and exposed __ccThemeChoice and __ccApplyTheme; this half reflects
+   the choice onto the buttons and records a new one, in the same cc-theme
+   the shop reads. */
+(function () {
+  "use strict";
+  var KEY = "cc-theme";
+  var write = function (v) {
+    try {
+      if (v) { window.localStorage.setItem(KEY, v); }
+      else { window.localStorage.removeItem(KEY); }
+    } catch (e) { /* a locked-down browser simply forgets between pages */ }
+  };
+  var btns = document.querySelectorAll("[data-theme-choice]");
+  var reflect = function () {
+    var choice = window.__ccThemeChoice();
+    btns.forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-theme-choice") === choice ? "true" : "false");
+    });
+  };
+  reflect();
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var value = b.getAttribute("data-theme-choice");
+      write(value === "system" ? null : value);
+      window.__ccApplyTheme();
+      reflect();
+    });
+  });
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  var onSystem = function () { if (window.__ccThemeChoice() === "system") { window.__ccApplyTheme(); } };
+  if (mq.addEventListener) { mq.addEventListener("change", onSystem); }
+  else if (mq.addListener) { mq.addListener(onSystem); }
+})();
+</script>
 
 </body>
 </html>

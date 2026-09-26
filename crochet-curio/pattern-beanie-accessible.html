@@ -9,13 +9,48 @@
 <meta name="description" content="Crochet pattern for a foldable ribbed beanie in adult medium. Accessible edition: sans serif, no charts, no abbreviations, screen reader friendly, and the text size is yours to set.">
 
 <!--
+  One thing this page does load from the shop: assets/css/tokens.css, for its
+  colour tokens alone. The page's ink, paper and rules point at the design
+  system's semantic colours, so a reader's Light, Dark or System choice is
+  the same set of values the rest of the site uses. It pulls in no fonts, no
+  layout and no script — Verdana, the reflow and the structure are all still
+  the page's own. The theme control below is a small inline script, not one
+  of the shop's, and the printed PDF is unaffected: the print block fixes a
+  single black-on-white palette.
+-->
+<link rel="stylesheet" href="assets/css/tokens.css">
+<script>
+/* Colour theme, applied before the first paint so a reader who chose dark
+   does not catch a light frame. Mirrors assets/js/a11y.js: the same cc-theme
+   store, the same order of authority — a stored choice first, then the
+   device. Absent means "follow the device". The buttons are wired once the
+   page has parsed; this half only has to run early. */
+(function () {
+  "use strict";
+  var KEY = "cc-theme";
+  var root = document.documentElement;
+  var read = function () { try { return window.localStorage.getItem(KEY); } catch (e) { return null; } };
+  var systemDark = function () { return window.matchMedia("(prefers-color-scheme: dark)").matches; };
+  window.__ccThemeChoice = function () { var c = read(); return (c === "dark" || c === "light") ? c : "system"; };
+  window.__ccApplyTheme = function () {
+    var c = window.__ccThemeChoice();
+    var dark = c === "dark" || (c === "system" && systemDark());
+    root.setAttribute("data-theme", dark ? "dark" : "light");
+  };
+  window.__ccApplyTheme();
+})();
+</script>
+
+<!--
   Foldable Ribbed Beanie — accessible edition
   ==========================================
 
-  A standalone page. It deliberately loads none of the shop's stylesheets or
-  scripts: no navigation, no animation, no theme switching, no web fonts.
-  Everything a screen reader meets here is the pattern itself, and the page
-  prints to a clean PDF with nothing to strip out afterwards.
+  A near-standalone page. It loads none of the shop's layout, fonts or
+  behaviour scripts: no navigation, no animation, no web fonts. The one
+  exception is tokens.css above, for colour alone, so the reader's theme
+  choice tracks the design system. Everything a screen reader meets here is
+  the pattern itself, and the page prints to a clean PDF with nothing to
+  strip out afterwards.
 
   Formatting follows the Accessible Patterns Index: black sans serif, no
   italics anywhere, every direction written out in full, no charts, no
@@ -48,9 +83,14 @@
      the Index.
      --------------------------------------------------------------- */
   :root {
-    --ink: #000000;
-    --paper: #ffffff;
-    --rule: #000000;
+    /* Mapped onto the design system's semantic colours (tokens.css). In
+       light these resolve to Content/Primary on Background/Primary; in dark,
+       when data-theme or the device flips them, the same names carry the
+       dark values, so this page turns with the rest of the site. The hex
+       after each is the light fallback if tokens.css ever fails to load. */
+    --ink:   var(--content-primary,    #000000);
+    --paper: var(--background-primary,  #ffffff);
+    --rule:  var(--content-primary,    #000000);
   }
 
   html {
@@ -157,6 +197,50 @@
   .on-paper { display: none; }
 
   /* ---------------------------------------------------------------
+     Colour theme control
+
+     A screen-only choice of Light, Dark or System, the same three the
+     rest of the site offers through its accessibility panel. Styled from
+     --ink and --paper, so the selected button inverts correctly in either
+     theme. Hidden in print: the PDF keeps one fixed black-on-white palette.
+     --------------------------------------------------------------- */
+  .theme-choice {
+    border: 2px solid var(--rule);
+    padding: 1em 1em 0.75em;
+    margin: 1.5em 0;
+  }
+  .theme-choice__legend {
+    font-weight: 600;
+    padding: 0;
+  }
+  .theme-choice__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin-top: 0.6em;
+  }
+  .theme-choice__btn {
+    font: inherit;
+    color: var(--ink);
+    background: var(--paper);
+    border: 2px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.4em 0.9em;
+    cursor: pointer;
+  }
+  /* The chosen option is filled with the ink and prints its label in the
+     paper colour: a second cue beyond aria-pressed, and high contrast in
+     both themes without naming a new value. */
+  .theme-choice__btn[aria-pressed="true"] {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .theme-choice__btn:focus-visible {
+    outline: 3px solid var(--ink);
+    outline-offset: 2px;
+  }
+
+  /* ---------------------------------------------------------------
      Print
 
      What the buyer saves as PDF, and the only place a size is fixed:
@@ -165,6 +249,10 @@
      of the middle of a step.
      --------------------------------------------------------------- */
   @media print {
+    /* The PDF is always pure black on white, whatever the reader's on-screen
+       theme or their device setting. Pinned here so the printed file cannot
+       inherit a dark palette from the tokens above. */
+    :root { --ink: #000000; --paper: #ffffff; --rule: #000000; }
     body {
       max-width: none;
       padding: 0;
@@ -180,7 +268,7 @@
        job as the contents list, and neither link can be followed — and
        this page is also what Chrome prints the PDF from, so a download
        link left visible would be printed into the PDF itself. */
-    .contents, .offline, .backlink { display: none; }
+    .contents, .offline, .backlink, .theme-choice { display: none; }
     .on-screen { display: none; }
     .on-paper { display: list-item; }
     p.on-paper { display: block; }
@@ -218,6 +306,21 @@
 <div class="offline">
   <p><a href="assets/patterns/rosie-beanie-pattern-large-print.docx" download>Download it as a Word file for offline use</a></p>
 </div>
+
+<!--
+  Colour theme. Screen only, so it never prints into the PDF. The buttons
+  set the same choice the rest of the site stores under cc-theme, so a
+  reader who picks a theme here keeps it across the site. System follows
+  the device until Light or Dark is chosen.
+-->
+<fieldset class="theme-choice on-screen">
+  <legend class="theme-choice__legend">Colour theme</legend>
+  <div class="theme-choice__options">
+    <button type="button" class="theme-choice__btn" data-theme-choice="system" aria-pressed="true">System default</button>
+    <button type="button" class="theme-choice__btn" data-theme-choice="light" aria-pressed="false">Light</button>
+    <button type="button" class="theme-choice__btn" data-theme-choice="dark" aria-pressed="false">Dark</button>
+  </div>
+</fieldset>
 
 <section aria-labelledby="statement">
   <h2 id="statement">Accessibility statement</h2>
@@ -435,6 +538,44 @@
   <p>The pattern is for your own making. Please do not resell or share the file itself.</p>
   <p class="backlink"><a href="#contents" aria-label="Back to contents, from A note on crochet terms">Back to contents</a></p>
 </section>
+
+<script>
+/* Wires the colour theme buttons. The head script has already applied the
+   theme and exposed __ccThemeChoice and __ccApplyTheme; this half reflects
+   the current choice onto the buttons and records a new one. Writing the
+   same cc-theme the shop reads keeps the choice in step across pages. */
+(function () {
+  "use strict";
+  var KEY = "cc-theme";
+  var write = function (v) {
+    try {
+      if (v) { window.localStorage.setItem(KEY, v); }
+      else { window.localStorage.removeItem(KEY); }
+    } catch (e) { /* a locked-down browser simply forgets between pages */ }
+  };
+  var btns = document.querySelectorAll("[data-theme-choice]");
+  var reflect = function () {
+    var choice = window.__ccThemeChoice();
+    btns.forEach(function (b) {
+      b.setAttribute("aria-pressed", b.getAttribute("data-theme-choice") === choice ? "true" : "false");
+    });
+  };
+  reflect();
+  btns.forEach(function (b) {
+    b.addEventListener("click", function () {
+      var value = b.getAttribute("data-theme-choice");
+      write(value === "system" ? null : value);
+      window.__ccApplyTheme();
+      reflect();
+    });
+  });
+  /* While the choice is System, keep following the device if it changes. */
+  var mq = window.matchMedia("(prefers-color-scheme: dark)");
+  var onSystem = function () { if (window.__ccThemeChoice() === "system") { window.__ccApplyTheme(); } };
+  if (mq.addEventListener) { mq.addEventListener("change", onSystem); }
+  else if (mq.addListener) { mq.addListener(onSystem); }
+})();
+</script>
 
 </body>
 </html>
