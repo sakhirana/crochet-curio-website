@@ -231,14 +231,14 @@ window.CC_LANG_HI = {
     "आम PDF डाउनलोड कीजिए",
   "Download standard PDF, in Hindi":
     "आम PDF डाउनलोड कीजिए, हिन्दी में",
-  "5 pages, 12 point type, standard crochet abbreviations, with diagrams.":
-    "5 पेज, 12 पॉइंट टाइप, आम क्रोशे शॉर्ट फ़ॉर्म, और डायग्राम के साथ।",
-  "5 pages in Hindi, 12 point type, crochet abbreviations kept in English, with diagrams.":
-    "हिन्दी में 5 पेज, 12 पॉइंट टाइप, क्रोशे शॉर्ट फ़ॉर्म अंग्रेज़ी में ही, और डायग्राम के साथ।",
-  "Open in browser":
-    "ब्राउज़र में खोलिए",
-  "Open in browser, in Hindi":
-    "ब्राउज़र में खोलिए, हिन्दी में",
+  "5 pages, 12 point type, with images.":
+    "5 पेज, 12 पॉइंट टाइप, तस्वीरों के साथ।",
+  "5 pages in Hindi, 12 point type, with images.":
+    "हिन्दी में 5 पेज, 12 पॉइंट टाइप, तस्वीरों के साथ।",
+  "Open in browser (opens in a new tab)":
+    "ब्राउज़र में खोलिए (नए टैब में खुलेगा)",
+  "Open in browser (opens in a new tab), in Hindi":
+    "ब्राउज़र में खोलिए (नए टैब में खुलेगा), हिन्दी में",
   "Pattern in your browser, compatible with screen readers. Every direction written out, no abbreviations.":
     "पैटर्न आपके ब्राउज़र में, स्क्रीन रीडर के साथ चलता है। हर स्टेप पूरा लिखा हुआ, कोई शॉर्ट फ़ॉर्म नहीं।",
   "Pattern in your browser, in Hindi. Every direction written out, no abbreviations. Read end to end with NVDA and a Hindi voice.":

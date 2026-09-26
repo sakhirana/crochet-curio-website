@@ -723,7 +723,7 @@ p { text-wrap: pretty; }
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: var(--surface-l2);
+    background: var(--background-primary);
     /* Border/Secondary on all four sides, the same edge the accessibility
        panel carries. The panel runs the full width, so the side borders land
        on the viewport edges and only the top and bottom read as lines. */
@@ -731,7 +731,7 @@ p { text-wrap: pretty; }
     /* Shadow/L4, the same lift the accessibility panel takes. Both are
        overlays dropped from the header onto the page, so they sit at the
        same height above it rather than one reading as a deeper layer. */
-    box-shadow: var(--shadow-l4);
+    box-shadow: var(--shadow-l1);
     /* No side padding on the panel itself: the rows carry it instead, so
        the rule under each link reaches both edges. */
     padding: var(--space-s) 0 var(--space-xl);

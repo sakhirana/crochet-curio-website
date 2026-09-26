@@ -219,25 +219,43 @@
     gap: 0.5em;
     margin-top: 0.6em;
   }
+  /* Type=Secondary states, copied from styles.css since this standalone
+     page does not load it: a Content/Secondary label in a Border/Secondary
+     box that darkens to Content/Primary on hover and press, with the
+     component's own focus ring, and square like every button in the system.
+     The selected state is this control's own — a secondary button has none
+     — and uses the inverse tokens so it reads as on in either theme. */
   .theme-choice__btn {
     font: inherit;
-    color: var(--ink);
-    background: var(--paper);
-    border: 2px solid var(--rule);
-    border-radius: 8px;
-    padding: 0.4em 0.9em;
+    font-weight: var(--text-semibold);
+    min-height: 48px;
+    padding: calc(var(--space-m) - var(--stroke-width-xs))
+             calc(var(--space-m) + var(--space-xs) - var(--stroke-width-xs));
+    background: var(--background-primary);
+    color: var(--content-secondary);
+    border: var(--stroke-width-xs) solid var(--border-secondary);
     cursor: pointer;
+    transition: background-color .18s ease, border-color .18s ease, color .18s ease;
   }
-  /* The chosen option is filled with the ink and prints its label in the
-     paper colour: a second cue beyond aria-pressed, and high contrast in
-     both themes without naming a new value. */
-  .theme-choice__btn[aria-pressed="true"] {
-    background: var(--ink);
-    color: var(--paper);
+  @media (prefers-reduced-motion: reduce) { .theme-choice__btn { transition: none; } }
+  .theme-choice__btn:hover {
+    background: var(--background-hover);
+    border-color: var(--border-primary);
+    color: var(--content-primary);
+  }
+  .theme-choice__btn:active {
+    background: var(--background-pressed);
+    border-color: var(--border-primary);
+    color: var(--content-primary);
   }
   .theme-choice__btn:focus-visible {
-    outline: 3px solid var(--ink);
-    outline-offset: 2px;
+    outline: var(--stroke-width-m) solid var(--border-focus-blue);
+    outline-offset: var(--stroke-width-m);
+  }
+  .theme-choice__btn[aria-pressed="true"] {
+    background: var(--background-inverse);
+    border-color: var(--background-inverse);
+    color: var(--content-primary-inverse);
   }
 
   /* ---------------------------------------------------------------
@@ -304,7 +322,7 @@
   prints that PDF from.
 -->
 <div class="offline">
-  <p><a href="assets/patterns/rosie-beanie-pattern-large-print.docx" download>Download it as a Word file for offline use</a></p>
+  <p><a href="assets/patterns/rosie-beanie-pattern.docx" download>Download it as a Word file for offline use</a></p>
 </div>
 
 <!--
@@ -328,12 +346,12 @@
   <p>This is the accessible edition of this pattern, written for screen reader users and for crocheters with a print disability. It covers this pattern only.</p>
 
   <ul>
-    <li class="on-screen">Set in Verdana, a sans serif face, in black on a white background, at the same size as the standard edition.</li>
+    <li class="on-screen">Set in Verdana, a sans serif face, in black on a white background.</li>
     <li class="on-screen">The text size is yours to set: Ctrl and + in a browser, Word's zoom in the Word file. The text reflows either way.</li>
     <li class="on-paper">Set in 24 point Verdana, a sans serif face, in black on a white background. Headings run from 26 to 32 point.</li>
     <li>No italics are used anywhere.</li>
-    <li>Every direction is written out in full. There are no abbreviations, and there is no abbreviations list to memorise.</li>
-    <li>There are no charts, no stitch diagrams, and no photographs. Nothing in this pattern is carried by an image.</li>
+    <li>Every direction is written out in full. There are no abbreviations.</li>
+    <li>There are no charts, no stitch diagrams, and no photographs.</li>
     <li>No instruction depends on colour, or on telling one side of the fabric from the other.</li>
     <li>Every step gives both a stitch count and a measurement, so the pattern can be followed by counting or by measuring.</li>
     <li>Headings are used in order, and lists are real lists, so a screen reader can move through the pattern by heading.</li>

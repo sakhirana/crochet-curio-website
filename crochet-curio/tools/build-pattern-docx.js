@@ -58,7 +58,7 @@ const HI = process.argv.includes("--hi");
 const EDITION = HI
   ? {
       source: path.join(ROOT, "pattern-beanie-accessible-hi.html"),
-      out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-large-print-hi.docx"),
+      out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-hi.docx"),
       /* Verdana has no Devanagari glyphs. Nirmala UI is the face Windows
          ships for the script and the one the Hindi page asks for first,
          so Word and the browser render the pattern the same way. */
@@ -72,7 +72,7 @@ const EDITION = HI
     }
   : {
       source: path.join(ROOT, "pattern-beanie-accessible.html"),
-      out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-large-print.docx"),
+      out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern.docx"),
       font: "Verdana",
       /* en-GB, so Word does not underline "colour" and "memorise" as
          misspellings and a screen reader gets the right pronunciation

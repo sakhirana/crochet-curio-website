@@ -98,14 +98,10 @@
   --content-pill-3: var(--teal-700);
 
   /* ---------- Semantic: Surface ----------
-     The fill of anything that leaves the page. In light every step is the
-     same white and the shadow does the separating; in dark a shadow has
-     almost nothing to fall on, so each step lifts instead. Named in both
-     so a rule can ask for a height rather than for a colour. */
+     One level now: the page ground that Background/Primary points at. The
+     old L2–L4 ramp is gone — everything that leaves the page shares one
+     shadow and sits on Background/Primary, so height is a yes or no. */
   --surface-l1: var(--primary-white);
-  --surface-l2: var(--primary-white);
-  --surface-l3: var(--primary-white);
-  --surface-l4: var(--primary-white);
 
   /* ---------- Semantic: Background ---------- */
   --background-primary:        var(--surface-l1);
@@ -300,17 +296,13 @@
   --text-semibold: var(--weight-semi-bold);
 
   /* ---------- Elevation ----------
-     Four levels, one per surface that leaves the page. L1 the switch knob,
-     L2 the header dropdown, L3 the to-top button and the accessibility
-     launcher, L4 the accessibility panel. Each step widens the ambient
-     blur and drops the key shadow further, so the order reads as height.
-
-     Being added to the Figma library as an Elevation effect set; until
-     they land there, this block is the source of record. */
-  --shadow-l1: 0 0 2px  rgba(0,0,0,.08), 0 2px  4px  rgba(0,0,0,.08);
-  --shadow-l2: 0 0 4px  rgba(0,0,0,.08), 0 4px  8px  rgba(0,0,0,.10);
-  --shadow-l3: 0 0 6px  rgba(0,0,0,.08), 0 8px  16px rgba(0,0,0,.10);
-  --shadow-l4: 0 0 10px rgba(0,0,0,.08), 0 12px 24px rgba(0,0,0,.10);
+     One shadow, for every surface that leaves the page: the header
+     dropdown, the accessibility panel, the to-top button, the a11y
+     launcher, its tooltip and the switch knob. Read from the Figma
+     Elevation/Shadow L1 effect — X0 Y0, 10px blur, 5px spread, black at
+     8%. The multi-level ramp is gone: height on this site is a yes or no,
+     not a scale. */
+  --shadow-l1: 0 0 10px 5px rgba(0,0,0,.08);
 
   /* ---------- Layout (Figma frames: Desktop/Tablet 1440, Mobile 393) ---------- */
   --layout-max:     1200px;
@@ -365,16 +357,8 @@
     --brand-accent-400: #ddafb5;
     --brand-accent-300: #e1b8bd;
 
-    /* The Surface ramp. A shadow on a near-black page is nearly
-       invisible, so height is carried by the fill instead: each step is
-       one stop lighter than the one beneath it. L3 is Neutral/800, which
-       is also Background/Secondary — a raised control and a tinted panel
-       stand at the same height, which is true of them. */
+    /* One surface level: the page ground behind Background/Primary. */
     --surface-l1: var(--neutral-900);
-    --surface-l2: var(--neutral-850);
-    --surface-l3: var(--neutral-800);
-    --surface-l4: var(--neutral-750);
-
 
     /* ---------- Semantic: Content ---------- */
     --content-primary:           var(--primary-white);
@@ -462,16 +446,8 @@
     --brand-accent-400: #ddafb5;
     --brand-accent-300: #e1b8bd;
 
-    /* The Surface ramp. A shadow on a near-black page is nearly
-       invisible, so height is carried by the fill instead: each step is
-       one stop lighter than the one beneath it. L3 is Neutral/800, which
-       is also Background/Secondary — a raised control and a tinted panel
-       stand at the same height, which is true of them. */
+    /* One surface level: the page ground behind Background/Primary. */
     --surface-l1: var(--neutral-900);
-    --surface-l2: var(--neutral-850);
-    --surface-l3: var(--neutral-800);
-    --surface-l4: var(--neutral-750);
-
 
     /* ---------- Semantic: Content ---------- */
     --content-primary:           var(--primary-white);

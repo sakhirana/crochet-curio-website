@@ -64,8 +64,8 @@ const PATTERNS = [
        twice on purpose: from the top of the page readHref points at, for
        someone already reading who wants it offline, and from the formats
        list on the product page, for someone still choosing. */
-    wordHref: "assets/patterns/rosie-beanie-pattern-large-print.docx",
-    wordHrefHi: "assets/patterns/rosie-beanie-pattern-large-print-hi.docx",
+    wordHref: "assets/patterns/rosie-beanie-pattern.docx",
+    wordHrefHi: "assets/patterns/rosie-beanie-pattern-hi.docx",
     yarn: "100% acrylic yarn, weight 4",
     hook: "5mm",
     notions: "Darning needle, stitch markers or safety pins, measuring tape, scissors.",
@@ -321,7 +321,7 @@ ${p.standardHrefHi ? `
           <ul class="formats">
             <li>
               <a class="btn btn--primary btn--block" data-format="standard-pdf"${p.standardHrefHi ? ` id="patternDownload"` : ``} href="${p.standardHref}" download${p.standardHrefHi ? ` hreflang="en"` : ``}>Download standard PDF</a>
-              <p class="formats__note"${p.standardHrefHi ? ` id="patternNote"` : ``}>${p.standardPages} pages, 12 point type, standard crochet abbreviations, with diagrams.</p>
+              <p class="formats__note"${p.standardHrefHi ? ` id="patternNote"` : ``}>${p.standardPages} pages, 12 point type, with images.</p>
             </li>
           </ul>
 
@@ -341,7 +341,7 @@ ${p.standardHrefHi ? `
 
           <ul class="formats">
             <li>
-              <a class="btn btn--secondary btn--block" data-format="browser"${p.readHrefHi ? ` id="largePrintRead" hreflang="en"` : ``} href="${p.readHref}">Open in browser</a>
+              <a class="btn btn--secondary btn--block" data-format="browser"${p.readHrefHi ? ` id="largePrintRead" hreflang="en"` : ``} href="${p.readHref}" target="_blank" rel="noopener">Open in browser (opens in a new tab)</a>
               <p class="formats__note"${p.readHrefHi ? ` id="largePrintReadNote"` : ``}>Pattern in your browser, compatible with screen readers. Every direction written out, no abbreviations.</p>
             </li>${p.wordHref ? `
             <li>

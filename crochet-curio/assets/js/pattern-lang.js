@@ -51,20 +51,20 @@
       href: "assets/patterns/rosie-beanie-pattern-standard.pdf",
       lang: "en",
       label: null,
-      note: "5 pages, 12 point type, standard crochet abbreviations, with diagrams."
+      note: "5 pages, 12 point type, with images."
     },
     hi: {
       href: "assets/patterns/rosie-beanie-pattern-standard-hi.pdf",
       lang: "hi",
       label: "Download standard PDF, in Hindi",
-      note: "5 pages in Hindi, 12 point type, crochet abbreviations kept in English, with diagrams."
+      note: "5 pages in Hindi, 12 point type, with images."
     }
   };
 
   var LARGE_PRINT = {
     link: "largePrintRead",
     note: "largePrintReadNote",
-    text: "Open in browser",
+    text: "Open in browser (opens in a new tab)",
     en: {
       href: "pattern-beanie-accessible.html",
       lang: "en",
@@ -74,7 +74,7 @@
     hi: {
       href: "pattern-beanie-accessible-hi.html",
       lang: "hi",
-      label: "Open in browser, in Hindi",
+      label: "Open in browser (opens in a new tab), in Hindi",
       note: "Pattern in your browser, in Hindi. Every direction written out, no abbreviations. Read end to end with NVDA and a Hindi voice."
     }
   };
@@ -84,13 +84,13 @@
     note: "largePrintWordNote",
     text: "Download Word file",
     en: {
-      href: "assets/patterns/rosie-beanie-pattern-large-print.docx",
+      href: "assets/patterns/rosie-beanie-pattern.docx",
       lang: "en",
       label: null,
       note: "Word file for offline use, compatible with screen readers. Every direction written out, no abbreviations."
     },
     hi: {
-      href: "assets/patterns/rosie-beanie-pattern-large-print-hi.docx",
+      href: "assets/patterns/rosie-beanie-pattern-hi.docx",
       lang: "hi",
       label: "Download Word file, in Hindi",
       note: "Word file in Hindi for offline use. Every direction written out, no abbreviations. Read end to end with NVDA and a Hindi voice."
@@ -147,6 +147,11 @@
        the two drifting apart. */
     if (file.label) { next.setAttribute("aria-label", file.label); }
     if (link.hasAttribute("download")) { next.setAttribute("download", ""); }
+    /* A link that opens in a new tab keeps doing so after the swap. The
+       browser link carries target and rel; without copying them the fresh
+       anchor would fall back to opening in the same tab. */
+    if (link.target) { next.setAttribute("target", link.target); }
+    if (link.rel)    { next.setAttribute("rel", link.rel); }
     /* Which format this link is, which shop.js records when the file is
        taken. It describes the link rather than the language, so it has
        to survive the swap — without it the library row knows a pattern
