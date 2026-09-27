@@ -8,13 +8,13 @@
    Word 68.9 per cent, PDF 12.9. Preference runs the same way, Word
    60.6 against PDF 17.3.
 
-   Reflow is the other reason. This file is set at the same size as the
-   standard edition, not at a fixed large one, because a reader who
-   needs bigger type is better served by raising it themselves than by
-   being handed one size somebody else chose. Word reflows when they
-   do. Enlarging a fixed-layout PDF instead means scrolling sideways as
-   well as down, and a quarter of low vision users magnify to 400 per
-   cent or more. The large print PDF is still there for paper.
+   Reflow is the other reason. This file is set at a normal reading size
+   rather than a fixed large one, because a reader who needs bigger type
+   is better served by raising it themselves than by being handed one
+   size somebody else chose. Word reflows when they do. Enlarging a
+   fixed-layout PDF instead means scrolling sideways as well as down, and
+   a quarter of low vision users magnify to 400 per cent or more. The
+   large print PDF is still there for paper.
 
    It is built from pattern-beanie-accessible.html, the same source
    the PDF comes from, so the wording cannot drift between them.
