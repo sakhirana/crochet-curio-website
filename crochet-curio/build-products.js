@@ -173,6 +173,8 @@ function head(title, description) {
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
@@ -199,7 +201,7 @@ function patternPage(p, index) {
      studio's standard list. */
 
   return head(
-    `${p.name} — crochet pattern — Crochet Curio`,
+    `${p.name} | crochet pattern`,
     p.free
       ? `Free crochet pattern. ${p.tagline} ${p.difficulty} level, written out in full and free to download.`
       : `Digital crochet pattern. ${p.tagline} ${p.difficulty} level, ${p.pages}-page PDF, instant download.`
