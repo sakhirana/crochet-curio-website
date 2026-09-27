@@ -236,7 +236,14 @@ while ((m = re.exec(body))) {
      dropped here the way the print stylesheet drops the screen copy.
      Without this the Word file would announce itself as 24 point and
      talk about a tagged PDF the reader is not holding. */
-  if (/class="on-paper"/.test(attrs)) continue;
+  /* Matched as a class token, not the whole attribute, so an element that
+     carries other classes too (e.g. the theme control's label) is still
+     dropped. */
+  if (/class="[^"]*\bon-paper\b/.test(attrs)) continue;
+  /* A .on-web element is browser-only — a control, or a line naming a browser
+     shortcut (Ctrl and +) that means nothing in Word — so it is dropped the
+     same way as the paper copy. */
+  if (/class="[^"]*\bon-web\b/.test(attrs)) continue;
   const inner = dropHidden(m[5]);
   const text = textOf(inner);
   if (!text) continue;

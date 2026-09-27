@@ -6,7 +6,7 @@
 <title>Foldable Ribbed Beanie, Adult Medium, accessible edition | Crochet Curio</title>
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-<meta name="description" content="Crochet pattern for a foldable ribbed beanie in adult medium. Accessible edition: sans serif, no charts, no abbreviations, screen reader friendly, and the text size is yours to set.">
+<meta name="description" content="Crochet pattern for a foldable ribbed beanie in adult medium. Accessible edition: sans serif, no charts, no abbreviations, written and structured for screen readers.">
 
 <!--
   One thing this page does load from the shop: assets/css/tokens.css, for its
@@ -181,18 +181,19 @@
   .offline p:last-child { margin-bottom: 0.5em; }
 
   /* ---------------------------------------------------------------
-     Screen and paper wording
+     Per-medium wording
 
-     Two sentences in the accessibility statement are true of one
-     medium and false of the other. On screen the size is the reader's
-     to set; in the PDF it is fixed at 24 point, and the Accessible
-     Patterns Index needs that number stated. The NVDA claim has the
-     same problem in reverse: in the PDF it describes two files the
-     reader is not holding.
+     Several lines in the accessibility statement are true of one medium
+     and not another, so each exists per medium and the others are hidden.
+     The print copy (.on-paper) states the fixed 24 point the Accessible
+     Patterns Index needs and frames the file as large print; the screen
+     copy (.on-screen) frames it as the screen reader edition and names
+     the NVDA testing, which describes files the PDF reader is not holding.
+     Browser-only lines and controls take .on-web, which the Word build
+     drops as well.
 
-     So those lines exist twice, and each medium hides the other's
-     copy. Nothing structural is hidden either way, so the reading
-     order and the tag tree are the same in both.
+     Nothing structural is hidden any way, so the reading order and the
+     tag tree match across all three.
      --------------------------------------------------------------- */
   .on-paper { display: none; }
 
@@ -288,7 +289,7 @@
        this page is also what Chrome prints the PDF from, so a download
        link left visible would be printed into the PDF itself. */
     .contents, .offline, .backlink, .theme-choice { display: none; }
-    .on-screen { display: none; }
+    .on-screen, .on-web { display: none; }
     .on-paper { display: list-item; }
     p.on-paper { display: block; }
     h1, h2, h3 { break-after: avoid-page; page-break-after: avoid; }
@@ -332,8 +333,8 @@
   reader who picks a theme here keeps it across the site. System follows
   the device until Light or Dark is chosen.
 -->
-<div class="theme-choice on-screen">
-  <p class="theme-choice__legend">Colour theme</p>
+<div class="theme-choice on-web">
+  <p class="theme-choice__legend on-web">Colour theme</p>
   <div class="theme-choice__options">
     <button type="button" class="theme-choice__btn" data-theme-choice="system" aria-pressed="true">System default</button>
     <button type="button" class="theme-choice__btn" data-theme-choice="light" aria-pressed="false">Light</button>
@@ -349,7 +350,6 @@
 
   <ul>
     <li class="on-screen">Set in Verdana, a sans serif face, in black on a white background.</li>
-    <li class="on-screen">The text size is yours to set: Ctrl and + in a browser, Word's zoom in the Word file. The text reflows either way.</li>
     <li class="on-paper">Set in 24 point Verdana, a sans serif face, in black on a white background. Headings run from 26 to 32 point.</li>
     <li>No italics are used anywhere.</li>
     <li>Every direction is written out in full. There are no abbreviations.</li>
