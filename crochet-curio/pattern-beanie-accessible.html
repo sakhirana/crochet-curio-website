@@ -343,7 +343,8 @@
 <section aria-labelledby="statement">
   <h2 id="statement">Accessibility statement</h2>
 
-  <p>This is the accessible edition of this pattern, written for screen reader users and for crocheters with a print disability. It covers this pattern only.</p>
+  <p class="on-screen">This is the accessible edition of this pattern, written for screen reader users and for crocheters with a print disability. It covers this pattern only.</p>
+  <p class="on-paper">This is the large print edition of this pattern, written for readers with low vision or a print disability. It covers this pattern only.</p>
 
   <ul>
     <li class="on-screen">Set in Verdana, a sans serif face, in black on a white background.</li>
@@ -354,30 +355,17 @@
     <li>There are no charts, no stitch diagrams, and no photographs.</li>
     <li>No instruction depends on colour, or on telling one side of the fabric from the other.</li>
     <li>Every step gives both a stitch count and a measurement, so the pattern can be followed by counting or by measuring.</li>
-    <li>Headings are used in order, and lists are real lists, so a screen reader can move through the pattern by heading.</li>
+    <li class="on-screen">Headings are used in order, and lists are real lists, so a screen reader can move through the pattern by heading.</li>
+    <li class="on-paper">Headings are used in order and set larger than the text, so each section can be found at a glance.</li>
   </ul>
 
   <!--
-    This line is a claim about a specific artefact, so it has to name
-    which one, and it may only claim what has actually been done: both
-    editions named on screen have been read end to end with NVDA, by a
-    person.
-
-    On screen it says nothing about the PDF. Which format to choose is
-    a decision made on the product page, before anything is opened. A
-    reader who is already inside the web page has made that choice, and
-    a warning about a file they are not reading is noise in the middle
-    of an accessibility statement.
-
-    In the PDF the same reasoning runs the other way. There the reader
-    is holding the one file that has not been listened to by a person,
-    and the product page is behind them, so the statement has to say so
-    and name the two formats that have. It does not claim the file is
-    unusable: it is tagged and machine verified, and no reader other
-    than NVDA has been tried on it. It points at what is known to work.
+    Screen-only, so it names just the two artefacts it can claim: the web
+    and Word editions have been read end to end with NVDA by a person. The
+    large print PDF carries no testing line of its own — it is not a screen
+    reader format, so a screen reader note would be out of place in it.
   -->
   <p class="on-screen">Screen reader testing: the web edition and the Word edition have both been read from beginning to end with NVDA, and read correctly throughout.</p>
-  <p class="on-paper">Screen reader testing: this PDF is tagged and its reading order has been checked by machine, but it has not yet been listened to from beginning to end by a person. The web page and the Word file have both been read end to end with NVDA and read correctly. If you use a screen reader, those are the two to reach for. This PDF is the format for print and for large print reading.</p>
 
   <!--
     The aria-label is the wording that becomes the link's alternative
@@ -385,7 +373,8 @@
     build-pattern.js copies this across; keeping it here means the
     wording lives with the pattern rather than inside a binary.
   -->
-  <p>If anything in this pattern is wrong, unclear, or does not read properly with your screen reader, please write to <a href="mailto:crochetcurioo@gmail.com" aria-label="Email Crochet Curio at crochetcurioo@gmail.com">crochetcurioo@gmail.com</a> and it will be corrected.</p>
+  <p class="on-screen">If anything in this pattern is wrong, unclear, or does not read properly with your screen reader, please write to <a href="mailto:crochetcurioo@gmail.com" aria-label="Email Crochet Curio at crochetcurioo@gmail.com">crochetcurioo@gmail.com</a> and it will be corrected.</p>
+  <p class="on-paper">If anything in this pattern is wrong, unclear, or hard to read, please write to <a href="mailto:crochetcurioo@gmail.com" aria-label="Email Crochet Curio at crochetcurioo@gmail.com">crochetcurioo@gmail.com</a> and it will be corrected.</p>
 </section>
 
 <nav class="contents" aria-labelledby="contents">

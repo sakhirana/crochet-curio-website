@@ -77,7 +77,7 @@ const TARGETS = {
   },
   accessible: {
     source: path.join(ROOT, "pattern-beanie-accessible.html"),
-    out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern.pdf"),
+    out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-large-print-edition.pdf"),
   },
   /* The large print edition in Hindi. Same pipeline, same checks. Its
      text layer carries Chrome's Devanagari reordering, so the page and
@@ -85,7 +85,7 @@ const TARGETS = {
      is the one to print. */
   "accessible-hi": {
     source: path.join(ROOT, "pattern-beanie-accessible-hi.html"),
-    out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-hi.pdf"),
+    out: path.join(ROOT, "assets", "patterns", "rosie-beanie-pattern-large-print-edition-hi.pdf"),
   },
 };
 

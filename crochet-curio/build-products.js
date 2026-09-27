@@ -22,7 +22,7 @@ const PATTERNS = [
        source: 24pt type, no charts, no abbreviations, tagged for screen
        readers. */
     free: true,
-    patternHref: "assets/patterns/rosie-beanie-pattern.pdf",
+    patternHref: "assets/patterns/rosie-beanie-pattern-large-print-edition.pdf",
     /* Two editions of the same hat, and a page you can read without
        downloading anything. `patternHref` is the large print edition:
        the file the Accessible Patterns Index links to, and the one that
@@ -47,7 +47,7 @@ const PATTERNS = [
     /* The same large print edition in Hindi: the page, the Word file
        linked from inside it, and the printable PDF. */
     readHrefHi: "pattern-beanie-accessible-hi.html",
-    patternHrefHi: "assets/patterns/rosie-beanie-pattern-hi.pdf",
+    patternHrefHi: "assets/patterns/rosie-beanie-pattern-large-print-edition-hi.pdf",
     badge: "Free pattern",
     tile: "neutral",
     span: "normal",

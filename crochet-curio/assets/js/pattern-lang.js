@@ -102,7 +102,7 @@
     note: "largePrintDownloadNote",
     text: "Download large print PDF",
     en: {
-      href: "assets/patterns/rosie-beanie-pattern.pdf",
+      href: "assets/patterns/rosie-beanie-pattern-large-print-edition.pdf",
       lang: "en",
       label: null,
       /* "Best for printing" is the steer, and it is put positively.
@@ -114,7 +114,7 @@
       note: "24 point font, black on white. Every direction written out, no abbreviations. Best for printing."
     },
     hi: {
-      href: "assets/patterns/rosie-beanie-pattern-hi.pdf",
+      href: "assets/patterns/rosie-beanie-pattern-large-print-edition-hi.pdf",
       lang: "hi",
       label: "Download large print PDF, in Hindi",
       note: "24 point font in Hindi, black on white. Every direction written out, no abbreviations. Best for printing."

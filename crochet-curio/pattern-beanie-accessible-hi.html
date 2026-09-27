@@ -236,6 +236,18 @@
   }
 
   /* ---------------------------------------------------------------
+     Screen and paper wording
+
+     A few lines are true of one medium and false of the other: on screen
+     the reader sets the size and it is a screen reader edition; the large
+     print PDF fixes the size and is not a screen reader format. Each such
+     line exists twice, and each medium hides the other's copy. The print
+     block below shows on-paper and hides on-screen; here on-paper is
+     hidden so only the screen copy shows.
+     --------------------------------------------------------------- */
+  .on-paper { display: none; }
+
+  /* ---------------------------------------------------------------
      Print
 
      What a reader saves or prints from the browser, and the only place
@@ -260,7 +272,9 @@
     a { text-decoration: none; }
     /* Screen conveniences. On paper the headings do the same job as
        the contents list, and neither link can be followed. */
-    .contents, .offline, .backlink, .theme-choice { display: none; }
+    .contents, .offline, .backlink, .theme-choice, .on-screen { display: none; }
+    .on-paper { display: list-item; }
+    p.on-paper { display: block; }
     h1, h2, h3 { break-after: avoid-page; page-break-after: avoid; }
     p, li { break-inside: avoid-page; page-break-inside: avoid; }
     section { break-inside: auto; }
@@ -305,17 +319,20 @@
 <section aria-labelledby="statement">
   <h2 id="statement">एक्सेसिबिलिटी स्टेटमेंट</h2>
 
-  <p>यह इस पैटर्न का एक्सेसिबल एडिशन है, जो स्क्रीन रीडर इस्तेमाल करने वालों और प्रिंट डिसेबिलिटी वाले क्रोशे करने वालों के लिए लिखा गया है। यह सिर्फ़ इसी पैटर्न के बारे में है।</p>
+  <p class="on-screen">यह इस पैटर्न का एक्सेसिबल एडिशन है, जो स्क्रीन रीडर इस्तेमाल करने वालों और प्रिंट डिसेबिलिटी वाले क्रोशे करने वालों के लिए लिखा गया है। यह सिर्फ़ इसी पैटर्न के बारे में है।</p>
+  <p class="on-paper">यह इस पैटर्न का बड़े अक्षरों वाला (लार्ज प्रिंट) एडिशन है, जो कम दृष्टि (लो विज़न) या प्रिंट डिसेबिलिटी वाले पढ़ने वालों के लिए है। यह सिर्फ़ इसी पैटर्न के बारे में है।</p>
 
   <ul>
-    <li>सैन्स सेरिफ़ टाइप में, सफ़ेद बैकग्राउंड पर काले अक्षरों में।</li>
-    <li>टाइप का साइज़ आपके हाथ में है: ब्राउज़र में कंट्रोल और +, वर्ड फ़ाइल में वर्ड का ज़ूम। दोनों में टेक्स्ट अपने आप दोबारा सज जाता है।</li>
+    <li class="on-screen">सैन्स सेरिफ़ टाइप में, सफ़ेद बैकग्राउंड पर काले अक्षरों में।</li>
+    <li class="on-screen">टाइप का साइज़ आपके हाथ में है: ब्राउज़र में कंट्रोल और +, वर्ड फ़ाइल में वर्ड का ज़ूम। दोनों में टेक्स्ट अपने आप दोबारा सज जाता है।</li>
+    <li class="on-paper">24 पॉइंट सैन्स सेरिफ़ टाइप में, सफ़ेद बैकग्राउंड पर काले अक्षरों में। हेडिंग 26 से 32 पॉइंट तक।</li>
     <li>कहीं भी इटैलिक अक्षर इस्तेमाल नहीं किए गए हैं।</li>
     <li>हर निर्देश पूरा लिखा गया है। कोई शॉर्ट फ़ॉर्म नहीं है।</li>
     <li>कोई चार्ट, कोई स्टिच डायग्राम और कोई फ़ोटो नहीं है।</li>
     <li>कोई निर्देश रंग पर, या कपड़े का एक तरफ़ दूसरे से पहचानने पर निर्भर नहीं है।</li>
     <li>हर स्टेप में स्टिच की गिनती भी है और नाप भी, ताकि पैटर्न गिनकर भी और नापकर भी फ़ॉलो किया जा सके।</li>
-    <li>हेडिंग क्रम से इस्तेमाल हुई हैं और सूचियाँ असली सूचियाँ हैं, इसलिए स्क्रीन रीडर हेडिंग के सहारे पैटर्न में आगे और पीछे जा सकता है।</li>
+    <li class="on-screen">हेडिंग क्रम से इस्तेमाल हुई हैं और सूचियाँ असली सूचियाँ हैं, इसलिए स्क्रीन रीडर हेडिंग के सहारे पैटर्न में आगे और पीछे जा सकता है।</li>
+    <li class="on-paper">हेडिंग क्रम से इस्तेमाल हुई हैं और टेक्स्ट से बड़ी रखी गई हैं, ताकि हर सेक्शन एक नज़र में मिल जाए।</li>
     <li>क्रोशे की तकनीक के नाम देवनागरी में लिखे हैं, सिंगल क्रोशे, स्लिप स्टिच, चेन, क्योंकि हिन्दी में यह कला इन्हीं नामों से सिखाई जाती है।</li>
   </ul>
 
@@ -326,9 +343,13 @@
     layer carries Chrome's Devanagari reordering, so it is named here
     as the print format rather than left to be found out by ear.
   -->
-  <p>स्क्रीन रीडर टेस्टिंग: इस पैटर्न का हिन्दी वेब एडिशन और हिन्दी वर्ड एडिशन, दोनों <span lang="en">NVDA</span> से हिन्दी आवाज़ के साथ शुरू से आख़िर तक पढ़े गए हैं और सही पढ़े गए। पढ़ने के लिए आपके स्क्रीन रीडर में हिन्दी आवाज़ इंस्टॉल होनी चाहिए। बड़े अक्षरों वाली हिन्दी PDF प्रिंट के लिए है: सुनकर पढ़ने के लिए यह वेब एडिशन या वर्ड फ़ाइल लीजिए।</p>
+  <!-- Screen only: a screen reader note has no place in the large print PDF,
+       which is not a screen reader format. It stays in the web page and the
+       Word file, and the print block below hides it. -->
+  <p class="on-screen">स्क्रीन रीडर टेस्टिंग: इस पैटर्न का हिन्दी वेब एडिशन और हिन्दी वर्ड एडिशन, दोनों <span lang="en">NVDA</span> से हिन्दी आवाज़ के साथ शुरू से आख़िर तक पढ़े गए हैं और सही पढ़े गए। पढ़ने के लिए आपके स्क्रीन रीडर में हिन्दी आवाज़ इंस्टॉल होनी चाहिए। बड़े अक्षरों वाली हिन्दी PDF प्रिंट के लिए है: सुनकर पढ़ने के लिए यह वेब एडिशन या वर्ड फ़ाइल लीजिए।</p>
 
-  <p>अगर इस पैटर्न में कुछ गलत है, समझ से बाहर है, या आपके स्क्रीन रीडर पर ठीक से नहीं पढ़ा जाता, तो कृपया <a href="mailto:crochetcurioo@gmail.com" lang="en" aria-label="Email Crochet Curio at crochetcurioo@gmail.com">crochetcurioo@gmail.com</a> पर लिखिए, उसे ठीक कर दिया जाएगा।</p>
+  <p class="on-screen">अगर इस पैटर्न में कुछ गलत है, समझ से बाहर है, या आपके स्क्रीन रीडर पर ठीक से नहीं पढ़ा जाता, तो कृपया <a href="mailto:crochetcurioo@gmail.com" lang="en" aria-label="Email Crochet Curio at crochetcurioo@gmail.com">crochetcurioo@gmail.com</a> पर लिखिए, उसे ठीक कर दिया जाएगा।</p>
+  <p class="on-paper">अगर इस पैटर्न में कुछ गलत है, समझ से बाहर है, या पढ़ने में मुश्किल है, तो कृपया <a href="mailto:crochetcurioo@gmail.com" lang="en" aria-label="Email Crochet Curio at crochetcurioo@gmail.com">crochetcurioo@gmail.com</a> पर लिखिए, उसे ठीक कर दिया जाएगा।</p>
 </section>
 
 <nav class="contents" aria-labelledby="contents">
