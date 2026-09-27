@@ -189,6 +189,7 @@
   .theme-choice__legend {
     font-weight: 600;
     padding: 0;
+    margin: 0;
   }
   .theme-choice__options {
     display: flex;
@@ -307,14 +308,14 @@
   holds across the site. System follows the device until Light or Dark is
   chosen.
 -->
-<fieldset class="theme-choice on-screen">
-  <legend class="theme-choice__legend">रंग थीम</legend>
+<div class="theme-choice on-screen">
+  <p class="theme-choice__legend">रंग थीम</p>
   <div class="theme-choice__options">
     <button type="button" class="theme-choice__btn" data-theme-choice="system" aria-pressed="true">सिस्टम डिफ़ॉल्ट</button>
     <button type="button" class="theme-choice__btn" data-theme-choice="light" aria-pressed="false">हल्का</button>
     <button type="button" class="theme-choice__btn" data-theme-choice="dark" aria-pressed="false">गहरा</button>
   </div>
-</fieldset>
+</div>
 
 <section>
   <h2 id="statement">एक्सेसिबिलिटी स्टेटमेंट</h2>

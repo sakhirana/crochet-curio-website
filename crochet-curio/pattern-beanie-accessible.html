@@ -212,6 +212,7 @@
   .theme-choice__legend {
     font-weight: 600;
     padding: 0;
+    margin: 0;
   }
   .theme-choice__options {
     display: flex;
@@ -331,14 +332,14 @@
   reader who picks a theme here keeps it across the site. System follows
   the device until Light or Dark is chosen.
 -->
-<fieldset class="theme-choice on-screen">
-  <legend class="theme-choice__legend">Colour theme</legend>
+<div class="theme-choice on-screen">
+  <p class="theme-choice__legend">Colour theme</p>
   <div class="theme-choice__options">
     <button type="button" class="theme-choice__btn" data-theme-choice="system" aria-pressed="true">System default</button>
     <button type="button" class="theme-choice__btn" data-theme-choice="light" aria-pressed="false">Light</button>
     <button type="button" class="theme-choice__btn" data-theme-choice="dark" aria-pressed="false">Dark</button>
   </div>
-</fieldset>
+</div>
 
 <section>
   <h2 id="statement">Accessibility statement</h2>
