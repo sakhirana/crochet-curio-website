@@ -244,15 +244,17 @@
   --weight-semi-bold: 600;
 
   /* ---------- Heading scale, semantic ----------
-     Seven levels. The values here are the Desktop mode; the L, M and S
-     modes live in the breakpoint blocks at the foot of styles.css, which
-     re-point these same names at smaller primitives. An element names its
-     level once and never restates it at a breakpoint.
+     Six levels. The site's largest heading is 2XL — the Figma 3XL step is
+     not used on any page, so it is not carried here. The values below are
+     the Desktop mode; the L, M and S modes live in the breakpoint blocks at
+     the foot of styles.css, which re-point these same names at smaller
+     primitives. An element names its level once and never restates it at a
+     breakpoint.
 
      Weight and letter spacing vary by neither level nor breakpoint. They
      are named here anyway so all four rows of the Figma semantic
      collection have somewhere to land. */
-  --heading-3xl-size: var(--size-56);  --heading-3xl-line: var(--line-64);
+  --heading-2xl-size: var(--size-48);  --heading-2xl-line: var(--line-56);
   --heading-xl-size:  var(--size-40);  --heading-xl-line:  var(--line-48);
   --heading-l-size:   var(--size-32);  --heading-l-line:   var(--line-40);
   --heading-m-size:   var(--size-24);  --heading-m-line:   var(--line-32);

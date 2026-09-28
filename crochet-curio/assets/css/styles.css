@@ -380,8 +380,8 @@ p { text-wrap: pretty; }
   gap: var(--space-10xl);
 }
 .hero h1 {
-  font-size: var(--heading-3xl-size);
-  line-height: var(--heading-3xl-line);
+  font-size: var(--heading-2xl-size);
+  line-height: var(--heading-2xl-line);
   margin-bottom: var(--space-xl);
   /* even up the two lines rather than leaving a stub — ignored where
      unsupported, which just falls back to the normal greedy break */
@@ -703,11 +703,11 @@ p { text-wrap: pretty; }
   :root {
     --layout-margin: var(--space-6xl); --layout-section: var(--space-10xl);
 
-    /* Heading scale, L mode. Only the two largest levels step: below 3XL
+    /* Heading scale, L mode. Only the two largest levels step: below 2XL
        the desktop values still fit the narrower measure. Nothing restates
        a level it does not change — max-width queries stack, so a level set
        here stays set at M and S unless one of those blocks moves it. */
-    --heading-3xl-size: var(--size-48);  --heading-3xl-line: var(--line-56);
+    --heading-2xl-size: var(--size-40);  --heading-2xl-line: var(--line-48);
   }
 
   /* The seven links plus the language selector need about 940px of their own.
@@ -770,11 +770,11 @@ p { text-wrap: pretty; }
   :root {
     --layout-margin: var(--space-2xl); --layout-section: var(--space-8xl);
 
-    /* Heading scale, M mode. One column wide from here down, so the four
-       largest levels each drop a step. 3XL and 2XL land on the same value
-       as XL and L respectively — the scale compresses towards the bottom
-       rather than keeping seven distinct sizes on a tablet. */
-    --heading-3xl-size: var(--size-40);  --heading-3xl-line: var(--line-48);
+    /* Heading scale, M mode. One column wide from here down, so the largest
+       levels each drop a step. 2XL lands on the same value as XL — the scale
+       compresses towards the bottom rather than keeping every distinct size
+       on a tablet. */
+    --heading-2xl-size: var(--size-32);  --heading-2xl-line: var(--line-40);
     --heading-xl-size:  var(--size-32);  --heading-xl-line:  var(--line-40);
     --heading-l-size:   var(--size-24);  --heading-l-line:   var(--line-32);
   }
@@ -800,10 +800,9 @@ p { text-wrap: pretty; }
   :root {
     --layout-margin: var(--space-xl); --layout-section: var(--space-6xl);
 
-    /* Heading scale, S mode. 3XL takes the last step it has to give, and M
-       joins S at 20px. Every level at or under 20px holds: shrinking those
-       buys a few pixels of width and costs more than it buys. */
-    --heading-3xl-size: var(--size-32);  --heading-3xl-line: var(--line-40);
+    /* Heading scale, S mode. 2XL holds at its M value (32), so it is not
+       restated here; M joins S at 20px. Every level at or under 20px holds:
+       shrinking those buys a few pixels of width and costs more than it buys. */
     --heading-m-size:   var(--size-20);  --heading-m-line:   var(--line-28);
   }
 
