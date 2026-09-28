@@ -169,9 +169,6 @@ window.CC_LANG_HI = {
   "Saved patterns | Crochet Curio": "सेव किए पैटर्न | Crochet Curio",
   "Everything you have taken, ready to download again: a new laptop, a lost file, a second go at the same cardigan.":
     "आपने जो कुछ लिया है, सब दोबारा डाउनलोड के लिए तैयार: नया लैपटॉप, खोई हुई फ़ाइल, या वही कार्डिगन दोबारा बनाना।",
-  "Demonstration library.": "डेमो लाइब्रेरी।",
-  "Your patterns are remembered in this browser only, so they will not follow you to another device. Connect an account system to make this permanent.":
-    "आपके पैटर्न सिर्फ़ इसी ब्राउज़र में याद रखे जाते हैं, इसलिए वे किसी दूसरे डिवाइस पर नहीं जाएँगे। इसे स्थायी बनाने के लिए अकाउंट सिस्टम जोड़िए।",
   "Nothing unlocked yet": "अभी कुछ अनलॉक नहीं हुआ",
   "Patterns you download land here, and stay here. Open them as often as you like: a new hook, a new laptop, a lost file.":
     "जो पैटर्न आप डाउनलोड करते हैं, वे यहीं आ जाते हैं और यहीं रहते हैं। जितनी बार चाहें खोलिए: नया हुक, नया लैपटॉप, खोई हुई फ़ाइल।",

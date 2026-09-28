@@ -227,7 +227,6 @@
      t-shirt labels that collection uses. Nothing in the site points at
      these directly: the semantic levels below do, and the breakpoint
      blocks in styles.css re-point those. Each value is written once. */
-  --size-12: 0.75rem;   --line-16: 1rem;
   --size-14: 0.875rem;  --line-20: 1.25rem;
   --size-16: 1rem;      --line-24: 1.5rem;
   --size-20: 1.25rem;   --line-28: 1.75rem;
@@ -244,22 +243,20 @@
   --weight-semi-bold: 600;
 
   /* ---------- Heading scale, semantic ----------
-     Six levels. The site's largest heading is 2XL — the Figma 3XL step is
-     not used on any page, so it is not carried here. The values below are
-     the Desktop mode; the L, M and S modes live in the breakpoint blocks at
-     the foot of styles.css, which re-point these same names at smaller
-     primitives. An element names its level once and never restates it at a
-     breakpoint.
+     Four levels (XL, L, M, S). The site's largest heading is XL at 48px — the
+     Figma scale runs larger (2XL, 3XL) but those steps are not used on any
+     page, so they are not carried here, and the names are shifted down to end
+     at S rather than leaving the ladder stranded at the top. The Desktop values
+     are below; the smaller modes live in the breakpoint blocks at the foot of
+     styles.css, which re-point these same names at smaller primitives. An
+     element names its level once and never restates it at a breakpoint.
 
      Weight and letter spacing vary by neither level nor breakpoint. They
-     are named here anyway so all four rows of the Figma semantic
-     collection have somewhere to land. */
-  --heading-2xl-size: var(--size-48);  --heading-2xl-line: var(--line-56);
-  --heading-xl-size:  var(--size-40);  --heading-xl-line:  var(--line-48);
-  --heading-l-size:   var(--size-32);  --heading-l-line:   var(--line-40);
-  --heading-m-size:   var(--size-24);  --heading-m-line:   var(--line-32);
-  --heading-s-size:   var(--size-20);  --heading-s-line:   var(--line-28);
-  --heading-xs-size:  var(--size-16);  --heading-xs-line:  var(--line-24);
+     are named here anyway so the Figma semantic rows have somewhere to land. */
+  --heading-xl-size: var(--size-48);  --heading-xl-line: var(--line-56);
+  --heading-l-size:  var(--size-40);  --heading-l-line:  var(--line-48);
+  --heading-m-size:  var(--size-32);  --heading-m-line:  var(--line-40);
+  --heading-s-size:  var(--size-24);  --heading-s-line:  var(--line-32);
   --heading-tracking: var(--tracking-xs);
   --heading-weight:   var(--weight-semi-bold);
 
@@ -282,16 +279,16 @@
   --display-hero-line: 1.02;
 
   /* ---------- Body scale, semantic ----------
-     Four levels, and unlike the headings they hold one value at every
-     breakpoint. Body copy that shrinks on a phone is a legibility loss
-     rather than a responsive gain, so Text/L stays 16px throughout — which
-     is also what keeps a focused form field from zooming the page on iOS.
-     Where a component genuinely needs less room on a narrow screen it names
-     a smaller level for itself. */
-  --text-xl-size: var(--size-20);  --text-xl-line: var(--line-28);
-  --text-l-size:  var(--size-16);  --text-l-line:  var(--line-24);
-  --text-m-size:  var(--size-14);  --text-m-line:  var(--line-20);
-  --text-s-size:  var(--size-12);  --text-s-line:  var(--line-16);
+     Three levels (L, M, S), and unlike the headings they hold one value at
+     every breakpoint. Body copy that shrinks on a phone is a legibility loss
+     rather than a responsive gain, so the 16px base (Text/M) stays put
+     throughout, which is also what keeps a focused form field from zooming the
+     page on iOS. Text/L is the step above at 20px; Text/S the step below at
+     14px. The old 12px step was dropped for readability, so nothing on the site
+     sets body copy below 14px. */
+  --text-l-size:  var(--size-20);  --text-l-line:  var(--line-28);
+  --text-m-size:  var(--size-16);  --text-m-line:  var(--line-24);
+  --text-s-size:  var(--size-14);  --text-s-line:  var(--line-20);
   --text-tracking: var(--tracking-none);
   --text-regular:  var(--weight-regular);
   --text-semibold: var(--weight-semi-bold);

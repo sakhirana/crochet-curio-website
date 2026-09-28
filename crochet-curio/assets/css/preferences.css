@@ -179,8 +179,8 @@
 }
 .a11y__title {
   margin: 0;
-  font-size: var(--text-l-size);
-  line-height: var(--text-l-line);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
   font-weight: var(--text-semibold);
   color: var(--content-primary);
 }
@@ -206,8 +206,8 @@
   padding-block: var(--space-s);
 }
 .a11y__label {
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   color: var(--content-primary);
 }
 
@@ -314,12 +314,23 @@
    wrapper and needs saying separately. */
 .no-motion .shape--hat { display: none !important; }
 
-/* A card whose pattern is not written yet leads nowhere, so it does not answer
-   the pointer. shop.css already says so for the image scale, but the card lift
-   lives in a prefers-reduced-motion: no-preference block, which this switch
-   does not reach — so with movement off the card still jumped on hover. */
-.no-motion .shop-card--soon:hover,
-.no-motion .shop-card--soon:focus-within { transform: none !important; }
+/* The card lift lives in a prefers-reduced-motion: no-preference block, which
+   this in-app switch does not reach, so with movement off the shop cards still
+   rose on hover. Hold every card flat here — this also covers the --soon card,
+   whose pattern is not written yet and so leads nowhere. */
+.no-motion .shop-card:hover,
+.no-motion .shop-card:focus-within { transform: none !important; }
+/* The beanie image also scales up in that same no-preference block, so with
+   movement off it still zoomed on hover. Hold it still too — the card's link
+   hover (the underlined title) is the only feedback left. */
+.no-motion .shop-card:hover .shop-card__media img,
+.no-motion .shop-card:focus-within .shop-card__media img { transform: none !important; }
+
+/* Same story for the button lift: the -2px rise on hover lives in a
+   prefers-reduced-motion: no-preference block, which this in-app switch does
+   not reach, so with movement off the buttons still rose. Hold them flat. */
+.no-motion .btn:hover,
+.no-motion .btn:active { transform: none !important; }
 
 /* ------------------------------------------------------------
    The three phrases, with movement off
@@ -372,8 +383,10 @@
 }
 
 /* Below L the phrases stack again at full size rather than shrink (1.4.10),
-   which means handing back the three values motion.css sets on .manifesto__line
-   and dropping the rule between them. */
+   which means handing back the three values motion.css sets on .manifesto__line.
+   The rule between neighbours turns with them: the vertical stroke that told
+   the columns apart becomes a horizontal one above each phrase after the first,
+   so the stacked phrases read as separated the same way the columns did. */
 @media (max-width: 1024px) {
   .no-motion .manifesto__stage { grid-template-columns: 1fr; }
   .no-motion .manifesto__line {
@@ -384,6 +397,8 @@
   .no-motion .manifesto__line + .manifesto__line {
     border-inline-start: 0;
     padding-inline-start: 0;
+    border-block-start: var(--stroke-width-xs) solid var(--content-brand);
+    padding-block-start: var(--space-2xl);
   }
 }
 

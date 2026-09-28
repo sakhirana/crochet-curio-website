@@ -93,6 +93,8 @@
 .shop-card h3 {
   font-size: var(--heading-s-size);
   line-height: var(--heading-s-line);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
   margin-bottom: var(--space-xs);
 }
 .shop-card h3 a { color: inherit; text-decoration: none; }
@@ -169,7 +171,7 @@
       - max(var(--layout-margin), (100vw - var(--layout-max)) / 2)
     )
   );
-  font-size: var(--text-m-size);
+  font-size: var(--text-s-size);
 }
 .breadcrumb li + li::before {
   content: "/";
@@ -232,13 +234,13 @@
 
 .product__info > .badge { margin-bottom: var(--space-m); }
 .product__info h1 {
-  font-size: var(--heading-xl-size);
-  line-height: var(--heading-xl-line);
+  font-size: var(--heading-l-size);
+  line-height: var(--heading-l-line);
   margin-bottom: var(--space-m);
 }
 .product__tagline {
-  font-size: var(--text-xl-size);
-  line-height: var(--text-xl-line);
+  font-size: var(--text-l-size);
+  line-height: var(--text-l-line);
   color: var(--content-secondary);
   margin-bottom: var(--space-xl);
 }
@@ -282,8 +284,8 @@ ul.spec-strip__formats {
   padding-left: 1.1em;
   display: grid;
   gap: var(--space-2xs);
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   font-weight: var(--text-semibold);
   color: var(--content-primary);
 }
@@ -299,8 +301,8 @@ ul.spec-strip__formats {
   color: var(--content-tertiary);
 }
 .spec-strip__value {
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   font-weight: var(--text-semibold);
   color: var(--content-primary);
 }
@@ -318,8 +320,8 @@ ul.spec-strip__formats {
    inside the buy box rather than a new part of the page. */
 .formats__title {
   margin: var(--space-xl) 0 var(--space-m);
-  font-size: var(--text-l-size);
-  line-height: var(--text-l-line);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
   font-weight: var(--text-semibold);
   color: var(--content-primary);
 }
@@ -335,8 +337,8 @@ ul.spec-strip__formats {
   margin-bottom: var(--space-l);
 }
 .formats__langLabel {
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   color: var(--content-secondary);
 }
 .formats__langSelect {
@@ -353,8 +355,8 @@ ul.spec-strip__formats {
   background-position: right var(--space-m) center;
   background-size: 12px 12px;
   color: var(--content-primary);
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   cursor: pointer;
 }
 .formats__langSelect:hover { border-color: var(--border-primary); }
@@ -374,15 +376,15 @@ ul.spec-strip__formats {
   margin-top: var(--space-s);
   /* the same size as every other note on the page — shrinking the text
      that explains the accessible option would be a poor joke */
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   color: var(--content-secondary);
 }
 
 .owned-note {
   margin-top: var(--space-l);
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   color: var(--content-positive);
   font-weight: var(--text-semibold);
 }
@@ -429,6 +431,8 @@ ul.spec-strip__formats {
 .product__detailsTitle {
   font-size: var(--heading-s-size);
   line-height: var(--heading-s-line);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
   margin: var(--space-2xl) 0 var(--space-l);
 }
 .product__details { display: grid; gap: var(--space-l); margin: 0; }
@@ -447,8 +451,8 @@ ul.spec-strip__formats {
    ============================================================ */
 .page-head { padding-block: var(--space-6xl) var(--space-4xl); }
 .page-head h1 {
-  font-size: var(--heading-xl-size);
-  line-height: var(--heading-xl-line);
+  font-size: var(--heading-l-size);
+  line-height: var(--heading-l-line);
   margin-bottom: var(--space-m);
 }
 
@@ -503,9 +507,11 @@ ul.spec-strip__formats {
 .library-card__info h2 {
   font-size: var(--heading-s-size);
   line-height: var(--heading-s-line);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
   margin-bottom: var(--space-xs);
 }
-.library-card__info p { font-size: var(--text-m-size); margin-bottom: var(--space-xs); }
+.library-card__info p { font-size: var(--text-s-size); margin-bottom: var(--space-xs); }
 .library-card__meta { margin-bottom: var(--space-l); }
 .library-card__actions {
   display: flex;
@@ -536,21 +542,13 @@ ul.spec-strip__formats {
   gap: var(--space-2xl);
 }
 .library-help h3 {
-  font-size: var(--heading-xs-size);
-  line-height: var(--heading-xs-line);
+  font-size: var(--heading-s-size);
+  line-height: var(--heading-s-line);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
   margin-bottom: var(--space-s);
 }
-.library-help p { font-size: var(--text-m-size); color: var(--content-secondary); }
-
-.demo-note {
-  background: var(--background-hover);
-  border-left: var(--stroke-width-m) solid var(--content-brand);
-  border-radius: var(--radius-xs);
-  padding: var(--space-l) var(--space-xl);
-  font-size: var(--text-m-size);
-  color: var(--content-secondary);
-  margin-bottom: var(--space-2xl);
-}
+.library-help p { font-size: var(--text-s-size); color: var(--content-secondary); }
 
 /* ============================================================
    Responsive

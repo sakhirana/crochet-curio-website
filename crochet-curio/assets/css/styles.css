@@ -24,8 +24,8 @@ button, input, textarea, select { font: inherit; color: inherit; }
 /* ---------- Base ---------- */
 body {
   font-family: var(--family-poppins);
-  font-size: var(--text-l-size);
-  line-height: var(--text-l-line);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
   font-weight: var(--text-regular);
   color: var(--content-secondary);
   background: var(--background-primary);
@@ -73,7 +73,7 @@ p { text-wrap: pretty; }
   color: var(--content-primary-inverse);
   padding: var(--space-m) var(--space-xl);
   text-decoration: none;
-  font-size: var(--text-m-size);
+  font-size: var(--text-s-size);
 }
 .skip-link:focus { transform: translateY(0); }
 
@@ -112,8 +112,8 @@ p { text-wrap: pretty; }
    so the level's own tracking applies and the label loses the opening-up
    that uppercase usually gets. The weight carries the emphasis instead. */
 .eyebrow {
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   letter-spacing: var(--text-tracking);
   text-transform: uppercase;
   color: var(--content-brand);
@@ -121,8 +121,8 @@ p { text-wrap: pretty; }
   margin-bottom: var(--space-l);
 }
 .lede {
-  font-size: var(--heading-m-size);
-  line-height: var(--heading-m-line);
+  font-size: var(--heading-s-size);
+  line-height: var(--heading-s-line);
   color: var(--content-secondary);
   max-width: 60ch;
 }
@@ -153,8 +153,8 @@ p { text-wrap: pretty; }
      spacing or at 200% zoom (1.4.12, 1.4.4) */
   min-height: 48px;          /* Size=L */
   min-width: 48px;           /* 2.5.8 Target Size — well past the 24px floor */
-  font-size: var(--text-l-size);
-  line-height: var(--text-l-line);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
   font-weight: var(--text-semibold);
   border: var(--stroke-width-xs) solid transparent;
   text-decoration: none;
@@ -315,8 +315,8 @@ p { text-wrap: pretty; }
   padding-block: var(--space-m);
   padding-inline: var(--space-xs);
   color: var(--content-primary);
-  font-size: var(--text-l-size);
-  line-height: var(--text-l-line);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
   text-decoration: none;
   /* Text/L Regular — the Link type is the one Button type whose label is not
      Semibold, so the weight is stated rather than inherited. */
@@ -380,8 +380,8 @@ p { text-wrap: pretty; }
   gap: var(--space-10xl);
 }
 .hero h1 {
-  font-size: var(--heading-2xl-size);
-  line-height: var(--heading-2xl-line);
+  font-size: var(--heading-xl-size);
+  line-height: var(--heading-xl-line);
   margin-bottom: var(--space-xl);
   /* even up the two lines rather than leaving a stub — ignored where
      unsupported, which just falls back to the normal greedy break */
@@ -422,8 +422,8 @@ p { text-wrap: pretty; }
   margin-bottom: var(--space-6xl);
 }
 .section-head h2 {
-  font-size: var(--heading-xl-size);
-  line-height: var(--heading-xl-line);
+  font-size: var(--heading-l-size);
+  line-height: var(--heading-l-line);
 }
 
 .price { font-weight: var(--text-semibold); color: var(--content-primary); }
@@ -449,8 +449,8 @@ p { text-wrap: pretty; }
   align-items: center;
 }
 .split h2 {
-  font-size: var(--heading-xl-size);
-  line-height: var(--heading-xl-line);
+  font-size: var(--heading-l-size);
+  line-height: var(--heading-l-line);
   margin-bottom: var(--space-xl);
 }
 .split__art {
@@ -490,6 +490,8 @@ p { text-wrap: pretty; }
 .step h3 {
   font-size: var(--heading-s-size);
   line-height: var(--heading-s-line);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
   margin-bottom: var(--space-s);
 }
 
@@ -526,8 +528,8 @@ p { text-wrap: pretty; }
 
 /* ---------- Forms ---------- */
 .field { display: flex; flex-direction: column; gap: var(--space-s); }
-.field label { font-size: var(--text-m-size); font-weight: var(--text-semibold); }
-.field .hint { font-size: var(--text-m-size); color: var(--content-tertiary); }
+.field label { font-size: var(--text-s-size); font-weight: var(--text-semibold); }
+.field .hint { font-size: var(--text-s-size); color: var(--content-tertiary); }
 /* Idle the field draws in Border/Primary. It steps to Border/Secondary once
    the reader is in it, and stays there once it holds a value — so a completed
    field reads differently from an untouched one without relying on colour
@@ -561,7 +563,7 @@ p { text-wrap: pretty; }
   display: flex;
   align-items: flex-start;
   gap: var(--space-s);
-  font-size: var(--text-m-size);
+  font-size: var(--text-s-size);
   color: var(--content-negative);
   font-weight: var(--text-semibold);
 }
@@ -630,7 +632,7 @@ p { text-wrap: pretty; }
 
 .form-status {
   margin-top: var(--space-l);
-  font-size: var(--text-m-size);
+  font-size: var(--text-s-size);
   font-weight: var(--text-semibold);
 }
 
@@ -665,8 +667,8 @@ p { text-wrap: pretty; }
 }
 /* Text/M Semibold, the same as .eyebrow above. */
 .footer-grid h2 {
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   letter-spacing: var(--text-tracking);
   text-transform: uppercase;
   color: var(--content-tertiary);
@@ -689,7 +691,7 @@ p { text-wrap: pretty; }
   flex-wrap: wrap;
   gap: var(--space-l);
   justify-content: space-between;
-  font-size: var(--text-m-size);
+  font-size: var(--text-s-size);
   color: var(--content-tertiary);
 }
 
@@ -703,11 +705,11 @@ p { text-wrap: pretty; }
   :root {
     --layout-margin: var(--space-6xl); --layout-section: var(--space-10xl);
 
-    /* Heading scale, L mode. Only the two largest levels step: below 2XL
-       the desktop values still fit the narrower measure. Nothing restates
-       a level it does not change — max-width queries stack, so a level set
-       here stays set at M and S unless one of those blocks moves it. */
-    --heading-2xl-size: var(--size-40);  --heading-2xl-line: var(--line-48);
+    /* Heading scale, L mode. Only the largest level steps: below XL the
+       desktop values still fit the narrower measure. Nothing restates a level
+       it does not change — max-width queries stack, so a level set here stays
+       set at M and S unless one of those blocks moves it. */
+    --heading-xl-size: var(--size-40);  --heading-xl-line: var(--line-48);
   }
 
   /* The seven links plus the language selector need about 940px of their own.
@@ -770,13 +772,12 @@ p { text-wrap: pretty; }
   :root {
     --layout-margin: var(--space-2xl); --layout-section: var(--space-8xl);
 
-    /* Heading scale, M mode. One column wide from here down, so the largest
-       levels each drop a step. 2XL lands on the same value as XL — the scale
-       compresses towards the bottom rather than keeping every distinct size
-       on a tablet. */
-    --heading-2xl-size: var(--size-32);  --heading-2xl-line: var(--line-40);
-    --heading-xl-size:  var(--size-32);  --heading-xl-line:  var(--line-40);
-    --heading-l-size:   var(--size-24);  --heading-l-line:   var(--line-32);
+    /* Heading scale, M mode. One column wide from here down, so the two
+       largest levels each drop a step. XL lands on the same value as L —
+       the scale compresses towards the bottom rather than keeping every
+       distinct size on a tablet. */
+    --heading-xl-size: var(--size-32);  --heading-xl-line: var(--line-40);
+    --heading-l-size:  var(--size-32);  --heading-l-line:  var(--line-40);
   }
 
   .hero {
@@ -800,10 +801,11 @@ p { text-wrap: pretty; }
   :root {
     --layout-margin: var(--space-xl); --layout-section: var(--space-6xl);
 
-    /* Heading scale, S mode. 2XL holds at its M value (32), so it is not
-       restated here; M joins S at 20px. Every level at or under 20px holds:
-       shrinking those buys a few pixels of width and costs more than it buys. */
-    --heading-m-size:   var(--size-20);  --heading-m-line:   var(--line-28);
+    /* Heading scale, S mode. XL and L hold at their tablet value (32), so they
+       are not restated here; M drops to 24, joining S. Every level at or under
+       24px holds: shrinking those buys a few pixels of width and costs more
+       than it buys. */
+    --heading-m-size:   var(--size-24);  --heading-m-line:   var(--line-32);
   }
 
   .hero { padding-block: var(--space-2xl) var(--space-6xl); }
@@ -1008,8 +1010,8 @@ p { text-wrap: pretty; }
 }
 .lang__label {
   /* Text/L, the size the nav links beside it are set at */
-  font-size: var(--text-l-size);
-  line-height: var(--text-l-line);
+  font-size: var(--text-m-size);
+  line-height: var(--text-m-line);
   color: var(--content-secondary);
   white-space: nowrap;
 }
@@ -1028,8 +1030,8 @@ p { text-wrap: pretty; }
   background-position: right var(--space-m) center;
   background-size: 12px 12px;
   color: var(--content-primary);
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
+  font-size: var(--text-s-size);
+  line-height: var(--text-s-line);
   cursor: pointer;
 }
 .lang__select:hover { border-color: var(--border-primary); }
