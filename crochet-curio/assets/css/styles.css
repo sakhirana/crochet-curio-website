@@ -497,7 +497,7 @@ p { text-wrap: pretty; }
 .newsletter {
   /* Background/Newsletter — Brand accent/100 in light, Brand/700 in dark.
      Both values live on the token, so the panel names it once. */
-  background: var(--background-newsletter);
+  background: var(--background-highlight);
   color: var(--content-primary-inverse);
   border-radius: var(--radius-l);
   padding: var(--space-10xl) var(--space-8xl);
@@ -869,7 +869,7 @@ p { text-wrap: pretty; }
 .hero-banner {
   position: relative;
   isolation: isolate;
-  background: var(--background-brand-system-inverse);
+  background: var(--background-brand-inverse);
   padding: clamp(var(--space-xl), 3.2vw, var(--space-5xl));
 }
 

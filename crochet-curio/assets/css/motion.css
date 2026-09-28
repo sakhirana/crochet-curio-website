@@ -82,7 +82,7 @@
 .manifesto {
   /* Background/Brand System Inverse — Brand accent/100 in light, Brand/500
      in dark. The two inks on it invert with it: see tokens.css. */
-  background: var(--background-brand-system-inverse);
+  background: var(--background-brand-inverse);
   overflow: clip;
 }
 
@@ -105,14 +105,15 @@
   line-height: var(--display-hero-line);
   font-weight: var(--heading-weight);
   letter-spacing: var(--heading-tracking);
-  /* Content/Brand System Inverse — Brand/500 for display text on the accent
-     band: 3.81:1 on the light band, 4.07:1 on the dark one. */
-  color: var(--content-brand-system-inverse);
+  /* Content/Brand — Brand/500 in light, Brand accent/400 in dark, for
+     display text on the accent band: 4.09:1 on the light band, 3.23:1 on
+     the dark one. Both clear the 3:1 floor these display sizes answer to. */
+  color: var(--content-brand);
   text-wrap: balance;
 }
 /* The three words the phrase turns on, held a couple of steps darker than
    the rest of the line. Colour only — nothing here touches the type. */
-.manifesto__accent { color: var(--content-brand-highlight); }
+.manifesto__accent { color: var(--content-brand-strong); }
 
 .manifesto__shapes { display: none; }
 

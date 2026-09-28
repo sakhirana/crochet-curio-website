@@ -74,9 +74,8 @@
      a pink band with green ink in light, a green band with pink and white
      ink in dark. 3.81:1 and 5.6:1 here; 3.81:1 and 5.81:1 there. Both light
      inks are display type at 24px and up, so the 3:1 floor applies. */
-  --background-brand-system-inverse: var(--brand-accent-100);
-  --content-brand-system-inverse: var(--brand-500);
-  --content-brand-highlight:      var(--brand-600);
+  --background-brand-inverse: var(--brand-accent-100);
+  --content-brand-strong:      var(--brand-600);
   /* Static, so it is named once and never restated in a dark block: it
      paints ink that stands on something fixed rather than on a themed
      surface, such as the copy over the hero photograph. */
@@ -93,9 +92,9 @@
      cue behind the word itself, never the only one (1.4.1). The file's own
      light values: 6.02:1, 7.58:1 and 5.17:1 on Background/Primary, all clear
      of the 4.5:1 floor the 12px pill answers to (1.4.3). */
-  --content-pill-1: var(--violet-600);
-  --content-pill-2: var(--yellow-800);
-  --content-pill-3: var(--teal-700);
+  --content-badge-beginner: var(--violet-600);
+  --content-badge-easy: var(--yellow-800);
+  --content-badge-intermediate: var(--teal-700);
 
   /* ---------- Semantic: Surface ----------
      One level now: the page ground that Background/Primary points at. The
@@ -134,7 +133,7 @@
      in light, Brand/700 in dark. It carries its own token rather than sharing
      Background/Brand System Inverse, because that one is the manifesto band's
      and the band stays Brand/500 in dark. */
-  --background-newsletter:     var(--brand-accent-100);
+  --background-highlight:     var(--brand-accent-100);
 
   /* ---------- Semantic: Border ---------- */
   --border-primary:   var(--neutral-600);
@@ -373,10 +372,9 @@
     /* The manifesto band is green here, so its two inks invert: the phrase
        takes Brand accent/100 (3.81:1) and the words it turns on take white
        (5.81:1). Both clear the 3:1 floor the display sizes answer to. */
-    --background-brand-system-inverse: var(--brand-500);
-    --background-newsletter:     var(--brand-700);
-    --content-brand-system-inverse: var(--brand-accent-100);
-    --content-brand-highlight:      var(--primary-white);
+    --background-brand-inverse: var(--brand-500);
+    --background-highlight:     var(--brand-700);
+    --content-brand-strong:      var(--primary-white);
     /* Content/Link is Blue/300 on a dark page and Content/Link Hover is
        Blue/200 — both the file's own dark values. 9.39:1 and 11.08:1 on
        Background/Primary. */
@@ -399,9 +397,9 @@
        pill sits on Background/Secondary in .spec-strip, under the 4.5:1 that
        1.4.3 asks of 12px text. The 300 step gives 5.21:1 there and 7.18:1 on
        Background/Primary. */
-    --content-pill-1: var(--violet-300);
-    --content-pill-2: var(--yellow-400);
-    --content-pill-3: var(--teal-400);
+    --content-badge-beginner: var(--violet-300);
+    --content-badge-easy: var(--yellow-400);
+    --content-badge-intermediate: var(--teal-400);
 
     /* ---------- Semantic: Background ---------- */
     --background-primary:        var(--surface-l1);
@@ -462,10 +460,9 @@
     /* The manifesto band is green here, so its two inks invert: the phrase
        takes Brand accent/100 (3.81:1) and the words it turns on take white
        (5.81:1). Both clear the 3:1 floor the display sizes answer to. */
-    --background-brand-system-inverse: var(--brand-500);
-    --background-newsletter:     var(--brand-700);
-    --content-brand-system-inverse: var(--brand-accent-100);
-    --content-brand-highlight:      var(--primary-white);
+    --background-brand-inverse: var(--brand-500);
+    --background-highlight:     var(--brand-700);
+    --content-brand-strong:      var(--primary-white);
     /* Content/Link is Blue/300 on a dark page and Content/Link Hover is
        Blue/200 — both the file's own dark values. 9.39:1 and 11.08:1 on
        Background/Primary. */
@@ -488,9 +485,9 @@
        pill sits on Background/Secondary in .spec-strip, under the 4.5:1 that
        1.4.3 asks of 12px text. The 300 step gives 5.21:1 there and 7.18:1 on
        Background/Primary. */
-    --content-pill-1: var(--violet-300);
-    --content-pill-2: var(--yellow-400);
-    --content-pill-3: var(--teal-400);
+    --content-badge-beginner: var(--violet-300);
+    --content-badge-easy: var(--yellow-400);
+    --content-badge-intermediate: var(--teal-400);
 
     /* ---------- Semantic: Background ---------- */
     --background-primary:        var(--surface-l1);

@@ -133,9 +133,9 @@
   border-radius: var(--radius-circle);
   background: currentColor;
 }
-.level--beginner            { color: var(--content-pill-1); }
-.level--confident-beginner  { color: var(--content-pill-2); }
-.level--intermediate        { color: var(--content-pill-3); }
+.level--beginner            { color: var(--content-badge-beginner); }
+.level--confident-beginner  { color: var(--content-badge-easy); }
+.level--intermediate        { color: var(--content-badge-intermediate); }
 
 /* In the skill-levels section the pill stands in for the step number */
 .step > .level { margin-bottom: var(--space-l); }
