@@ -179,9 +179,10 @@
 }
 .a11y__title {
   margin: 0;
-  font-size: var(--text-m-size);
-  line-height: var(--text-m-line);
-  font-weight: var(--text-semibold);
+  font-size: var(--heading-s-size);
+  line-height: var(--heading-s-line);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
   color: var(--content-primary);
 }
 /* Button Icon, Size=S, Type=Secondary, holding Icon/X/16 — the component
@@ -391,8 +392,8 @@
   .no-motion .manifesto__stage { grid-template-columns: 1fr; }
   .no-motion .manifesto__line {
     max-width: 16ch;
-    font-size: clamp(var(--display-hero-min), 9vw, var(--display-hero-max));
-    line-height: var(--display-hero-line);
+    font-size: clamp(var(--display-headline-min), 9vw, var(--display-headline-max));
+    line-height: var(--display-headline-line);
   }
   .no-motion .manifesto__line + .manifesto__line {
     border-inline-start: 0;

@@ -101,8 +101,8 @@
   /* Fluid, not stepped: 9vw between the two ends, so the line grows with the
      window rather than snapping. Held in one place — preferences.css hands these
      same two tokens back to the no-motion fallback. */
-  font-size: clamp(var(--display-hero-min), 9vw, var(--display-hero-max));
-  line-height: var(--display-hero-line);
+  font-size: clamp(var(--display-headline-min), 9vw, var(--display-headline-max));
+  line-height: var(--display-headline-line);
   font-weight: var(--heading-weight);
   letter-spacing: var(--heading-tracking);
   /* Content/Brand — Brand/500 in light, Brand accent/400 in dark, for

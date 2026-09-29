@@ -121,8 +121,9 @@ p { text-wrap: pretty; }
   margin-bottom: var(--space-l);
 }
 .lede {
-  font-size: var(--heading-s-size);
-  line-height: var(--heading-s-line);
+  font-size: var(--text-l-size);
+  line-height: var(--text-l-line);
+  font-weight: var(--text-semibold);
   color: var(--content-secondary);
   max-width: 60ch;
 }

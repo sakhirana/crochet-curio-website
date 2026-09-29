@@ -274,9 +274,9 @@
      the whole range, with no step down into it, removes that.
 
      Line height is a ratio, so one value serves every size on the ramp. */
-  --display-hero-min:  var(--size-48);
-  --display-hero-max:  var(--size-96);
-  --display-hero-line: 1.02;
+  --display-headline-min:  var(--size-48);
+  --display-headline-max:  var(--size-96);
+  --display-headline-line: 1.02;
 
   /* ---------- Body scale, semantic ----------
      Three levels (L, M, S), and unlike the headings they hold one value at
