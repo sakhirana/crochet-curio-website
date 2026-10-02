@@ -80,6 +80,7 @@ window.CC_LANG_HI = {
   "Each pattern downloads in four formats once it is written. The photograph shows what you will make.":
     "हर पैटर्न लिखे जाने के बाद चार फ़ॉर्मेट में डाउनलोड होता है। फ़ोटो दिखाती है कि आप क्या बनाएँगे।",
   "Free pattern": "मुफ़्त पैटर्न",
+  "Available": "उपलब्ध",
   "Pattern coming soon": "पैटर्न जल्द आ रहा है",
   "This pattern is not written up yet, so there is nothing to buy. The photograph shows the finished piece.":
     "यह पैटर्न अभी लिखा नहीं गया है, इसलिए अभी खरीदने के लिए कुछ नहीं है। फ़ोटो तैयार पीस दिखाती है।",

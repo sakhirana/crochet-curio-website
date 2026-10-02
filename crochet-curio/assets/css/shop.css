@@ -50,6 +50,7 @@
   border-radius: var(--radius-l);
   overflow: hidden;
   margin-bottom: var(--space-l);
+  box-shadow: var(--shadow-l1);
 }
 .shop-card--feature .shop-card__media { aspect-ratio: 1 / 1; }
 .shop-card--tall    .shop-card__media { aspect-ratio: 1 / 1; }
