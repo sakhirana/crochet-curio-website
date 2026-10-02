@@ -534,6 +534,11 @@ p { text-wrap: pretty; }
 .newsletter :focus-visible { outline-color: var(--border-focus-blue); }
 
 /* ---------- Forms ---------- */
+/* iOS Safari rounds text fields and selects by default. The design draws
+   them square at every size. */
+input:not([type="checkbox"]):not([type="radio"]), textarea, select {
+  border-radius: 0;
+}
 .field { display: flex; flex-direction: column; gap: var(--space-s); }
 .field label { font-size: var(--text-s-size); font-weight: var(--text-semibold); }
 .field .hint { font-size: var(--text-s-size); color: var(--content-tertiary); }
@@ -944,14 +949,14 @@ p { text-wrap: pretty; }
 .hero-banner .hero .lede { color: var(--content-static-white); }
 /* Text/L Regular. */
 .hero-banner .hero .lede { font-weight: var(--text-regular); }
-/* One 12px gap between eyebrow, heading, lede and buttons at every
+/* 12px between eyebrow, heading and lede, 16px above the buttons, at every
    breakpoint, so none of the steps above re-space them. */
 .hero-banner .hero .eyebrow,
 .hero-banner .hero h1,
 .hero-banner .hero .lede   { margin-bottom: 0; }
 .hero-banner .hero .eyebrow { margin-bottom: var(--space-m); }
 .hero-banner .hero h1       { margin-bottom: var(--space-m); }
-.hero-banner .hero__actions { margin-top: var(--space-m); }
+.hero-banner .hero__actions { margin-top: var(--space-l); }
 /* 34rem, not the 38rem the copy takes elsewhere. The cap used to be 29rem,
    the widest measure that broke the lede before it reached the cardigan's
    cuff. The scrim above answers the contrast that cap was holding, so the
