@@ -216,10 +216,12 @@
     transition: background-color .18s ease, border-color .18s ease, color .18s ease;
   }
   @media (prefers-reduced-motion: reduce) { .theme-choice__btn { transition: none; } }
-  .theme-choice__btn:hover {
-    background: var(--background-hover);
-    border-color: var(--border-primary);
-    color: var(--content-primary);
+  @media (hover: hover) {
+    .theme-choice__btn:hover {
+      background: var(--background-hover);
+      border-color: var(--border-primary);
+      color: var(--content-primary);
+    }
   }
   .theme-choice__btn:active {
     background: var(--background-pressed);
@@ -528,6 +530,8 @@
    the choice onto the buttons and records a new one, in the same cc-theme
    the shop reads. */
 (function () {
+  /* Lets iOS Safari show :active only while a finger is down. */
+  document.addEventListener("touchstart", function () {}, { passive: true });
   "use strict";
   var KEY = "cc-theme";
   var write = function (v) {

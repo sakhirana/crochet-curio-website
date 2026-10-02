@@ -6,6 +6,11 @@
 (function () {
   "use strict";
 
+  /* iOS Safari only applies :active while a finger is down if the page
+     listens for touches, so the Pressed state shows on press and clears on
+     release. */
+  document.addEventListener("touchstart", function () {}, { passive: true });
+
   /* ---------- Mobile navigation disclosure ---------- */
   var toggle = document.getElementById("navToggle");
   var navList = document.getElementById("navList");

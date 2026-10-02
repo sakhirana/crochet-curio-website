@@ -164,6 +164,8 @@
       current = e.target.value === "hi" ? "hi" : "en";
       write(current);
       apply();
+      /* Lets pattern-lang.js follow the site language without a reload. */
+      document.dispatchEvent(new CustomEvent("cc:langchange", { detail: current }));
     });
   }
 

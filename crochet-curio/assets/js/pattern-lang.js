@@ -121,10 +121,23 @@
     }
   };
 
-  /* The site's own language, written by i18n.js. Only a starting
-     point — the select overrides it and nothing writes back. */
+  /* The site's own language, written by i18n.js, is the default. A
+     choice made in this select is kept under its own key and wins over
+     the site language from then on, in either direction. */
   var siteLang = function () {
     try { return window.localStorage.getItem("cc-lang"); } catch (e) { return null; }
+  };
+  var PICK_KEY = "cc-pattern-lang";
+  var pickedLang = function () {
+    try { return window.localStorage.getItem(PICK_KEY); } catch (e) { return null; }
+  };
+  var savePick = function (v) {
+    try { window.localStorage.setItem(PICK_KEY, v); } catch (e) { /* nothing to do */ }
+  };
+  var startLang = function () {
+    var picked = pickedLang();
+    if (picked === "hi" || picked === "en") { return picked; }
+    return siteLang() === "hi" ? "hi" : "en";
   };
 
   var applyTo = function (spec, code) {
@@ -172,10 +185,29 @@
     applyTo(LARGE_PRINT_PDF, code);
   };
 
-  if (siteLang() === "hi") { select.value = "hi"; }
-  apply(select.value === "hi" ? "hi" : "en");
+  var set = function (code) {
+    select.value = code;
+    apply(code);
+  };
+
+  set(startLang());
 
   select.addEventListener("change", function () {
-    apply(select.value === "hi" ? "hi" : "en");
+    var code = select.value === "hi" ? "hi" : "en";
+    savePick(code);
+    apply(code);
+  });
+
+  /* The nav bar language changed on this page. Follow it unless the
+     pattern language was chosen here. */
+  document.addEventListener("cc:langchange", function () {
+    if (pickedLang()) { return; }
+    set(startLang());
+  });
+
+  /* Coming back through the history cache skips the script, so the
+     select is set again from what is stored. */
+  window.addEventListener("pageshow", function (e) {
+    if (e.persisted) { set(startLang()); }
   });
 })();

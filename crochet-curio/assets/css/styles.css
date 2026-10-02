@@ -169,7 +169,9 @@ p { text-wrap: pretty; }
   background: var(--background-brand);
   color: var(--content-primary-inverse);
 }
-.btn--primary:hover  { background: var(--background-brand-hover); }
+@media (hover: hover) {
+  .btn--primary:hover  { background: var(--background-brand-hover); }
+}
 .btn--primary:active { background: var(--background-brand-pressed); }
 
 /* Type=Secondary — the label darkens to Content/Primary on hover and press */
@@ -178,7 +180,9 @@ p { text-wrap: pretty; }
   color: var(--content-secondary);
   border-color: var(--border-secondary);
 }
-.btn--secondary:hover  { background: var(--background-hover);   border-color: var(--border-primary); color: var(--content-primary); }
+@media (hover: hover) {
+  .btn--secondary:hover  { background: var(--background-hover);   border-color: var(--border-primary); color: var(--content-primary); }
+}
 .btn--secondary:active { background: var(--background-pressed); border-color: var(--border-primary); color: var(--content-primary); }
 
 /* The component set has no disabled variant, but the tokens for one exist and
@@ -191,7 +195,9 @@ p { text-wrap: pretty; }
   cursor: not-allowed;
 }
 .btn:disabled:hover,
-.btn[aria-disabled="true"]:hover {
+.btn[aria-disabled="true"]:hover,
+.btn:disabled:active,
+.btn[aria-disabled="true"]:active {
   background: var(--background-disabled);
   border-color: var(--border-disabled);
   color: var(--content-disabled);
@@ -936,10 +942,16 @@ p { text-wrap: pretty; }
 .hero-banner .hero .eyebrow,
 .hero-banner .hero h1,
 .hero-banner .hero .lede { color: var(--content-static-white); }
-/* Heavier than the lede is set anywhere else on the site: this one stands on
-   a photograph, and the thicker stroke holds where the pale cardigan comes
-   up behind it. */
-.hero-banner .hero .lede { font-weight: var(--text-semibold); }
+/* Text/L Regular. */
+.hero-banner .hero .lede { font-weight: var(--text-regular); }
+/* One 12px gap between eyebrow, heading, lede and buttons at every
+   breakpoint, so none of the steps above re-space them. */
+.hero-banner .hero .eyebrow,
+.hero-banner .hero h1,
+.hero-banner .hero .lede   { margin-bottom: 0; }
+.hero-banner .hero .eyebrow { margin-bottom: var(--space-m); }
+.hero-banner .hero h1       { margin-bottom: var(--space-m); }
+.hero-banner .hero__actions { margin-top: var(--space-m); }
 /* 34rem, not the 38rem the copy takes elsewhere. The cap used to be 29rem,
    the widest measure that broke the lede before it reached the cardigan's
    cuff. The scrim above answers the contrast that cap was holding, so the
